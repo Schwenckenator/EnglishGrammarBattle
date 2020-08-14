@@ -15,3 +15,7 @@ canvas {
     bottom: 0;
     width: 100%;
 }
+
+.middle {
+    text-align: center;
+}

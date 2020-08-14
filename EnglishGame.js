@@ -107,6 +107,11 @@ function Init(){
 function StartGame(){
     if(isStart){
         //First time
+        music.setVolume(0.4);
+        correctSound.setVolume(0.3);
+        wrongSound.setVolume(0.3);
+        explosionSound.setVolume(0.3);
+
         music.play();
         music.sound.loop = true;
     }
@@ -643,6 +648,9 @@ function sound(src) {
     }
     this.stop = function(){
         this.sound.pause();
+    }
+    this.setVolume = function(volume){
+        this.sound.volume = volume;
     }
   }
 
