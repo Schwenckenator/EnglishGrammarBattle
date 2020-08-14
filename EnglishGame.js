@@ -9,6 +9,8 @@ const uiColour = "#EEEEEE";
 const textFlashColour = "#FF0000";
 const backgroundColour = "#000936"
 
+const heart = "\u200D\u2764\uFE0F\u200D";
+
 var data;
 
 var sentenceStartY = -10;
@@ -33,6 +35,7 @@ var answerY = canvas.height - 30;
 
 var score = 0;
 var lives = 3;
+var livesStr;
 
 var sentence = {
     text: "",
@@ -120,6 +123,7 @@ function StartGame(){
     isGameOver = false;
     score = 0;
     lives = 3;
+    livesStr = getLivesString(lives);
      
     sentence.x = canvas.width/2;
     sentence.y = sentenceStartY;
@@ -181,6 +185,7 @@ function Game(){
     
     if(sentence.y > canvas.height - 60){
         lives -= 1;
+        livesStr = getLivesString(lives);
         CalculateDy();
         canAnswer = true;
         gotWrongAnswer = false;
@@ -189,6 +194,7 @@ function Game(){
         let y =  sentence.y - 50;
         explosion.StartExp(x,y, 5, 5);
         explosionSound.playFromStart();
+       
         
         if(GameOverCheck()){
             GameOver();
@@ -427,10 +433,10 @@ function drawUI(){
     ctx.stroke();
     ctx.closePath();
 
-    ctx.font = "16px Arial";
+    ctx.font = "24px Arial";
     ctx.fillStyle = uiColour;
-    ctx.fillText("Score: "+score, 8, 20);
-    ctx.fillText("Lives: "+lives, 8, 40);
+    ctx.fillText("Score: "+score, 8, 25);
+    ctx.fillText("Lives: "+livesStr, 8, 55);
     
 }
 
@@ -494,6 +500,14 @@ function drawExplosion(){
 
 function centreX(text, x){
     return x - (ctx.measureText(text).width/2);
+}
+
+function getLivesString(livesLeft){
+    let str = "";
+    for(let i=0; i < lives; i++){
+        str += heart;
+    }
+    return str;
 }
 
 //#endregion
