@@ -1,15 +1,16 @@
-var canvas = document.getElementById("gameCanvas");
-var ctx = canvas.getContext("2d");
-var explosionSheet = document.getElementById("explosion");
-var nightSky = document.getElementById("nightSky");
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+const explosionSheet = document.getElementById("explosion");
+const nightSky = document.getElementById("nightSky");
 const explSpriteSize = 64;
 const expColNum = 4;
 const textColour = "#EEEEEE";
 const uiColour = "#EEEEEE";
 const textFlashColour = "#FF0000";
-const backgroundColour = "#000936"
+const backgroundColour = "#000936";
 
 const heart = "\u200D\u2764\uFE0F\u200D";
+
 
 var data;
 
@@ -104,6 +105,10 @@ function Init(){
         data = JSON.parse(response);
         updateLoop = setInterval(Update, 10);
     });
+     
+    // Set canvas dimensions
+    // canvas.height = window.innerHeight - (window.innerHeight / 10);
+    // canvas.width = Math.min(window.innerWidth, canvas.height * 0.75);
     
 }
 
@@ -324,6 +329,7 @@ function SetAnswerDxDy(ansX, ansY, senX, senY, moveTime){
 function Draw(){
     ctx.clearRect(0,0, canvas.width, canvas.height);
     ctx.drawImage(nightSky, 0, 0);
+    ctx.drawImage(nightSky, 0, 320);
 
     if(isStart){
         DrawStartMenu();

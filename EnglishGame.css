@@ -5,8 +5,10 @@
 
 canvas {
     background: #eee; 
-    display: block; 
-    margin: 0 auto;
+    height: 90vh;
+    width: 67.5vh;
+    margin: 0 auto 10px;
+    display: block;
 }
 
 .footer {
@@ -18,4 +20,5 @@ canvas {
 
 .middle {
     text-align: center;
+    display: block;
 }
