@@ -11,6 +11,7 @@ const backgroundColour = "#000936";
 
 const heart = "\u200D\u2764\uFE0F\u200D";
 
+const output = document.getElementById("output");
 
 var data;
 
@@ -571,7 +572,8 @@ document.addEventListener("touchstart", touchHandler, false);
 //document.addEventListener("touchmove", touchMove, false);
 
 function touchHandler(e){
-    if(e.touches) {
+    
+    if(e.touches && e.target == canvas) {
         
         if(isStart || isGameOver){
             e.preventDefault();
@@ -585,12 +587,21 @@ function touchHandler(e){
         }
 
 
+        touchX = e.touches[0].pageX;
+        touchY = e.touches[0].pageY;
         
-        // playerX = e.touches[0].pageX - canvas.offsetLeft - playerWidth / 2;
-        // playerY = e.touches[0].pageY - canvas.offsetTop - playerHeight / 2;
-        // output.innerHTML = "Touch: "+ " x: " + playerX + ", y: " + playerY;
+        touchX = (e.touches[0].pageX - canvas.offsetLeft) / canvas.style.width;
+        touchY = (e.touches[0].pageY - canvas.offsetTop) / canvas.style.height;
+        
+        output.innerHTML = "Touch: "+ " x: " + touchX + ", y: " + touchY;
+        //output.innerHTML = "Canvas width = "+canvas.style.width+", Canvas height = "+canvas.style.height;
+
+
         e.preventDefault();
     }
+
+    //output.innerHTML = "Canvas width = "+canvas.style.width+", Canvas height = "+canvas.style.height;
+    //output.innerHTML = "Canvas style = "+canvas.style.margin;
 }
 
 //#endregion
