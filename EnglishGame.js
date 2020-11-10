@@ -569,6 +569,7 @@ function keyUpHandler(e){
 }
 
 document.addEventListener("touchstart", touchHandler, false);
+document.addEventListener("touchend", touchEndHandler, false);
 //document.addEventListener("touchmove", touchMove, false);
 
 function touchHandler(e){
@@ -590,18 +591,38 @@ function touchHandler(e){
         touchX = e.touches[0].pageX;
         touchY = e.touches[0].pageY;
         
-        touchX = (e.touches[0].pageX - canvas.offsetLeft) / canvas.style.width;
-        touchY = (e.touches[0].pageY - canvas.offsetTop) / canvas.style.height;
+        touchX = (e.touches[0].pageX - canvas.offsetLeft) / (window.innerHeight * .675);
+        touchY = (e.touches[0].pageY - canvas.offsetTop) / (window.innerHeight * .9);
         
         output.innerHTML = "Touch: "+ " x: " + touchX + ", y: " + touchY;
         //output.innerHTML = "Canvas width = "+canvas.style.width+", Canvas height = "+canvas.style.height;
 
-
-        e.preventDefault();
+        if(touchY > .8){
+            if(touchX < 0.5){
+                leftPressed = true;
+                e.preventDefault();
+                return;
+            }else{
+                rightPressed = true;
+                e.preventDefault();
+                return;
+            }
+        }else{
+            e.preventDefault();
+            TogglePause();
+            return;
+        }
     }
 
     //output.innerHTML = "Canvas width = "+canvas.style.width+", Canvas height = "+canvas.style.height;
     //output.innerHTML = "Canvas style = "+canvas.style.margin;
+}
+
+function touchEndHandler(e){
+    leftPressed = false;
+    rightPressed = false;
+    leftWasPressed = false;
+    rightWasPressed = false;
 }
 
 //#endregion
