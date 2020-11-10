@@ -67,10 +67,8 @@ var updateLoop;
 var isGameOver = false;
 
 var canAnswer = true;
-var isLaser = 0;
-var laserColour = "green";
-var laserX;
-var laserY;
+var explosionX;
+var explosionY;
 
 var explosion = {
     isExplosion: false,
@@ -278,18 +276,13 @@ function GetKeys(){
             chosenAnswerIndex = 1;
         }
 
-        //isLaser = freezeTicks;
-        laserX = sentence.x + sentence.xOffset + ctx.measureText(sentence.text).width/2;
-        laserY = sentence.y;
+        explosionX = sentence.x + sentence.xOffset + ctx.measureText(sentence.text).width/2;
+        explosionY = sentence.y;
 
         let senX = sentence.x+sentence.xOffset + ctx.measureText(sentence.text).width/2
 
         SetAnswerDxDy(chosenAnswer.x, chosenAnswer.y, senX, sentence.y, answerMoveTime);
         isMoveAnswer = true;
-
-
-        console.log("Laser X: "+laserX+"; Laser Y: "+laserY);
-
     }
 
 }
@@ -297,7 +290,7 @@ function GetKeys(){
 function CheckAnswer(){
     if(chosenAnswer.text === correctAnswer){
         Correct();
-        explosion.StartExp(laserX, laserY);
+        explosion.StartExp(explosionX, explosionY);
     }else{
         Incorrect();
     }
@@ -305,7 +298,6 @@ function CheckAnswer(){
 
 function Correct(){
     score += 1;
-    laserColour = "green";
     isFrozen = true;
     freezeRemaining = freezeTicks;
     correctSound.playFromStart();
@@ -314,7 +306,6 @@ function Correct(){
 }
 
 function Incorrect(){
-    laserColour = "red";
     canAnswer = false;
     gotWrongAnswer = true;
     sentence.dy = 0.5;
@@ -344,7 +335,6 @@ function GameOver(){
     isGameOver = true;
     lives = 0;
     sentence.y = -30;
-    isLaser = 0;
 }
 
 function GetSentence(){
@@ -392,8 +382,6 @@ function Draw(){
         return;
     }
 
-
-
     if(isGameOver){
         DrawGameOver();
         if(explosion.isExplosion){
@@ -405,10 +393,6 @@ function Draw(){
     drawSentence();
     drawUI();
     drawAnswers();
-    if(isLaser > 0){
-        isLaser--;
-        drawLaser();
-    }
     if(explosion.isExplosion){
         drawExplosion();
     }
@@ -517,21 +501,6 @@ function drawAnswers(){
     x = centreX(answerRight.text, answerRight.x);
     ctx.fillText(answerRight.text, x, answerRight.y);
 
-}
-
-function drawLaser(){
-    
-
-    ctx.beginPath();
-    ctx.strokeStyle = laserColour;
-    //ctx.rect(canvas.width/2 - 50, canvas.height/2- 50, 100, 100);
-    ctx.lineWidth = 5;
-    ctx.moveTo(answerX[chosenAnswerIndex], answerY);
-    ctx.lineTo(laserX, laserY);
-    
-    //ctx.fill();
-    ctx.stroke();
-    ctx.closePath();
 }
 
 function drawExplosion(){
