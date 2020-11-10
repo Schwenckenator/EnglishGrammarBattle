@@ -568,10 +568,10 @@ function keyUpHandler(e){
     }
 }
 
-document.addEventListener("touchstart", touchHandler, false);
-document.addEventListener("touchend", touchEndHandler, false);
-document.addEventListener("mousedown", mouseDownHandler, false);
-document.addEventListener("mouseup", mouseUpHandler, false);
+document.addEventListener("touchstart", touchHandler, {passive: false});
+document.addEventListener("touchend", touchEndHandler, {passive: false});
+document.addEventListener("mousedown", mouseDownHandler, {passive: false});
+document.addEventListener("mouseup", mouseUpHandler, {passive: false});
 //document.addEventListener("touchmove", touchMove, false);
 
 function touchHandler(e){
@@ -617,6 +617,7 @@ function mouseUpHandler(e){
 }
 
 function clickHandler(x, y){
+    
     if(isStart || isGameOver){
         StartGame();
         return;
