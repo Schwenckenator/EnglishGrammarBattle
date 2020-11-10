@@ -1,3 +1,5 @@
+//#region Globals
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const explosionSheet = document.getElementById("explosion");
@@ -100,6 +102,53 @@ var music = new sound("edm-detection-mode-by-kevin-macleod-from-filmmusic-io.mp3
 
 var isPaused = false;
 var isStart = true;
+
+//#endregion
+
+//#region Constructors
+
+function sound(src) {
+    
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.playFromStart = function () {
+        this.sound.currentTime = 0;
+        this.sound.play();
+        console.log("Play sound from start" + this.sound.src);
+    };
+    this.play = function () {
+        this.sound.play();
+        console.log("Play sound " + this.sound.src);
+    };
+    this.stop = function () {
+        this.sound.pause();
+    };
+    this.setVolume = function (volume) {
+        this.sound.volume = volume;
+    };
+    
+}
+
+function answer(txt, pos){
+    console.log("Answer function called");
+    let ans = {
+        text: txt,
+        baseX: canvas.width * (0.25 + 0.5*pos),
+        baseY: canvas.height - 30,
+        x: canvas.width * (0.25 + 0.5*pos),
+        y: canvas.height - 30,
+        dx: 0,
+        dy: 0
+    }
+    console.log(ans);
+    return ans;
+}
+
+//#endregion
 
 function Init(){
     loadJSON(function(response){
@@ -268,6 +317,7 @@ function Incorrect(){
     laserColour = "red";
     canAnswer = false;
     gotWrongAnswer = true;
+    sentence.dy = 0.5;
     wrongSound.playFromStart();
 }
 
@@ -695,53 +745,30 @@ function ProcessText(text){
     
 }
 
+/**
+ * @param {String} correct
+ * @param {String} wrong 
+ */ 
+function IsAmbiguity(correct, wrong){
+    
+    for(const partOfSpeech of data.partsOfSpeech){
+        if(correct)
+        console.log(partOfSpeech.name);
+        if(wildCard == partOfSpeech.keyword){
+            console.log("Found keyword "+partOfSpeech.keyword);
+            replacement = partOfSpeech.words[RandIndex(partOfSpeech.words.length)];
+            break;
+        }
+    }
+    
+    return false;
+}
+
 function RandIndex(max){
     return Math.floor(Math.random() * max);
 }
 
 //#endregion
 
-//#region Constructors
-
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.playFromStart = function(){
-        this.sound.currentTime = 0;
-        this.sound.play();
-        console.log("Play sound from start"+this.sound.src);
-    }
-    this.play = function(){
-        this.sound.play();
-        console.log("Play sound "+this.sound.src);
-    }
-    this.stop = function(){
-        this.sound.pause();
-    }
-    this.setVolume = function(volume){
-        this.sound.volume = volume;
-    }
-  }
-
-function answer(txt, pos){
-    console.log("Answer function called");
-    let ans = {
-        text: txt,
-        baseX: canvas.width * (0.25 + 0.5*pos),
-        baseY: canvas.height - 30,
-        x: canvas.width * (0.25 + 0.5*pos),
-        y: canvas.height - 30,
-        dx: 0,
-        dy: 0
-    }
-    console.log(ans);
-    return ans;
-}
-
-//#endregion
 
 Init();
