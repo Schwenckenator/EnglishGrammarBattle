@@ -570,26 +570,18 @@ function keyUpHandler(e){
 
 document.addEventListener("touchstart", touchHandler, false);
 document.addEventListener("touchend", touchEndHandler, false);
+document.addEventListener("mousedown", mouseDownHandler, false);
+document.addEventListener("mouseup", mouseUpHandler, false);
 //document.addEventListener("touchmove", touchMove, false);
 
 function touchHandler(e){
     
     if(e.touches && e.target == canvas) {
         
-        if(isStart || isGameOver){
-            e.preventDefault();
-            StartGame();
-            return;
-        }
-        if(isPaused){
-            e.preventDefault();
-            TogglePause();
-            return;
-        }
+        e.preventDefault();
 
-
-        touchX = e.touches[0].pageX;
-        touchY = e.touches[0].pageY;
+        // touchX = e.touches[0].pageX;
+        // touchY = e.touches[0].pageY;
         
         touchX = (e.touches[0].pageX - canvas.offsetLeft) / (window.innerHeight * .675);
         touchY = (e.touches[0].pageY - canvas.offsetTop) / (window.innerHeight * .9);
@@ -597,21 +589,7 @@ function touchHandler(e){
         output.innerHTML = "Touch: "+ " x: " + touchX + ", y: " + touchY;
         //output.innerHTML = "Canvas width = "+canvas.style.width+", Canvas height = "+canvas.style.height;
 
-        if(touchY > .8){
-            if(touchX < 0.5){
-                leftPressed = true;
-                e.preventDefault();
-                return;
-            }else{
-                rightPressed = true;
-                e.preventDefault();
-                return;
-            }
-        }else{
-            e.preventDefault();
-            TogglePause();
-            return;
-        }
+        clickHandler(touchX, touchY);
     }
 
     //output.innerHTML = "Canvas width = "+canvas.style.width+", Canvas height = "+canvas.style.height;
@@ -619,6 +597,48 @@ function touchHandler(e){
 }
 
 function touchEndHandler(e){
+    clickUpHandler();
+}
+
+function mouseDownHandler(e){
+    if(e.target == canvas){
+        e.preventDefault();
+
+        mouseX = (e.clientX - canvas.offsetLeft) / (window.innerHeight * .675);
+        mouseY = (e.clientY - canvas.offsetTop) / (window.innerHeight * .9);
+
+        output.innerHTML = "Click: "+ " x: " + mouseX + ", y: " + mouseY;
+
+        clickHandler(mouseX, mouseY);
+    }
+}
+function mouseUpHandler(e){
+    clickUpHandler();
+}
+
+function clickHandler(x, y){
+    if(isStart || isGameOver){
+        StartGame();
+        return;
+    }
+    if(isPaused){
+        TogglePause();
+        return;
+    }
+    if(y > .8){
+        if(x < 0.5){
+            leftPressed = true;
+            return;
+        }else{
+            rightPressed = true;
+            return;
+        }
+    }else{
+        TogglePause();
+        return;
+    }
+}
+function clickUpHandler(){
     leftPressed = false;
     rightPressed = false;
     leftWasPressed = false;
