@@ -1,17 +1,6 @@
 //#region Globals
 
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-const explosionSheet = document.getElementById("explosion");
-const nightSky = document.getElementById("nightSky");
-const explSpriteSize = 64;
-const expColNum = 4;
-const textColour = "#EEEEEE";
-const uiColour = "#EEEEEE";
-const textFlashColour = "#FF0000";
-const backgroundColour = "#000936";
-
-const heart = "\u200D\u2764\uFE0F\u200D";
+window.game = window.game || { };
 
 const output = document.getElementById("output");
 
@@ -148,18 +137,6 @@ function answer(txt, pos){
 
 //#endregion
 
-function Init(){
-    loadJSON(function(response){
-        data = JSON.parse(response);
-        updateLoop = setInterval(Update, 10);
-    });
-     
-    // Set canvas dimensions
-    // canvas.height = window.innerHeight - (window.innerHeight / 10);
-    // canvas.width = Math.min(window.innerWidth, canvas.height * 0.75);
-    
-}
-
 function StartGame(){
     if(isStart){
         //First time
@@ -187,16 +164,13 @@ function StartGame(){
     GetSentence();
 }
 
-function Update(){
-    Draw();
-    if(!isStart && !isGameOver){
-        Game();
-    }
-}
+
 
 //#region Game
 
 function Game(){
+    if(isStart || isGameOver) return;
+    
     if(isPaused) return;
 
     if(isFrozen){
@@ -365,208 +339,6 @@ function SetAnswerDxDy(ansX, ansY, senX, senY, moveTime){
 
 //#endregion
 
-//#region Draw
-
-function Draw(){
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-    ctx.drawImage(nightSky, 0, 0);
-    ctx.drawImage(nightSky, 0, 320);
-
-    if(isStart){
-        DrawStartMenu();
-        return;
-    }
-
-    if(isPaused){
-        DrawPaused();
-        return;
-    }
-
-    if(isGameOver){
-        DrawGameOver();
-        if(explosion.isExplosion){
-            drawExplosion();
-        }
-        return;
-    }
-
-    drawSentence();
-    drawUI();
-    drawAnswers();
-    if(explosion.isExplosion){
-        drawExplosion();
-    }
-}
-
-function DrawPaused(){
-
-    ctx.font = "48px Arial";
-    ctx.fillStyle = textColour;
-    let txt = "PAUSED";
-    x = centreX(txt, canvas.width/2);
-    ctx.fillText(txt,x,canvas.height/2 - 40);
-
-    ctx.font = "24px Arial"
-    txt = "Press Escape to continue.";
-    x = centreX(txt, canvas.width/2);
-    ctx.fillText(txt,x,canvas.height/2);
-}
-
-function DrawGameOver(){
-    
-    ctx.font = "48px Arial";
-    ctx.fillStyle = textColour;
-    let txt = "GAME OVER";
-    x = centreX(txt, canvas.width/2);
-    ctx.fillText(txt,x,canvas.height/2 - 40);
-    ctx.font = "24px Arial"
-    txt = "Final Score: "+score;
-    x = centreX(txt, canvas.width/2);
-    ctx.fillText(txt,x,canvas.height/2);
-    ctx.font = "24px Arial"
-    txt = "Press Enter to restart.";
-    x = centreX(txt, canvas.width/2);
-    ctx.fillText(txt,x,canvas.height/2 + 40);
-}
-
-function DrawStartMenu(){
-    let txt;
-
-    ctx.font = "48px Arial";
-    ctx.fillStyle = uiColour;
-    txt = "ENGLISH";
-    x = centreX(txt, canvas.width/2);
-    ctx.fillText(txt,x,canvas.height/2 - 40);
-
-    txt = "GRAMMAR BATTLE";
-    x = centreX(txt, canvas.width/2);
-    ctx.fillText(txt,x,canvas.height/2 + 5);
-
-    ctx.font = "24px Arial"
-    txt = "Press Enter to start.";
-    x = centreX(txt, canvas.width/2);
-    ctx.fillText(txt,x,canvas.height/2 + 40);
-}
-
-function drawUI(){
-    ctx.beginPath();
-
-    ctx.fillStyle = backgroundColour;
-    ctx.rect(0, canvas.height - 60, canvas.width, 60);
-    ctx.fill();
-
-    ctx.strokeStyle = uiColour;
-    ctx.lineWidth = "3";
-    
-    let x1 = 0;
-    let x2 = canvas.width;
-    let y = canvas.height - 60;
-    
-    ctx.moveTo(x1, y);
-    ctx.lineTo(x2, y);
-
-    let x= canvas.width/2;
-    let y1 = y;
-    let y2 = canvas.height;
-
-    ctx.moveTo(x, y1);
-    ctx.lineTo(x, y2);
-    ctx.stroke();
-    ctx.closePath();
-
-    ctx.font = "24px Arial";
-    ctx.fillStyle = uiColour;
-    ctx.fillText("Score: "+score, 8, 25);
-    ctx.fillText("Lives: "+livesStr, 8, 55);
-    
-}
-
-function drawSentence(){
-    ctx.font = "24px Arial";
-    ctx.fillStyle = textColour;
-    sentence.x = centreX(sentence.text, canvas.width/2);
-    ctx.fillText(sentence.text, sentence.x+sentence.xOffset, sentence.y);
-}
-
-function drawAnswers(){
-    if(isGameOver) return;
-
-    ctx.font = "24px Arial";
-    ctx.fillStyle = textColour;
-    let x = centreX(answerLeft.text, answerLeft.x);
-    ctx.fillText(answerLeft.text, x, answerLeft.y);
-    
-    ctx.font = "24px Arial";
-    ctx.fillStyle = textColour;
-    x = centreX(answerRight.text, answerRight.x);
-    ctx.fillText(answerRight.text, x, answerRight.y);
-
-}
-
-function drawExplosion(){
-    let coords = explosion.GetFrameCrop(explosion.frameNumber);
-    
-    ctx.drawImage(
-        explosionSheet, 
-        coords.x, 
-        coords.y, 
-        explSpriteSize, 
-        explSpriteSize, 
-        explosion.pos.x, 
-        explosion.pos.y, 
-        explSpriteSize * explosion.scale.x, 
-        explSpriteSize * explosion.scale.x
-    );
-    
-    explosion.frameNumber += 0.5; //Play at half speed
-    if(explosion.frameNumber >= explosion.totalFrames){
-        explosion.isExplosion = false;
-    }
-}
-
-function centreX(text, x){
-    return x - (ctx.measureText(text).width/2);
-}
-
-function getLivesString(livesLeft){
-    let str = "";
-    for(let i=0; i < lives; i++){
-        str += heart;
-    }
-    return str;
-}
-
-//#endregion
-
-//#region Input
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
-function keyDownHandler(e){
-    console.log("Key down handler");
-
-    if(e.key == "Escape" || e.key == "Esc"){
-        console.log("Escape pressed");
-        if(!isStart){
-            TogglePause();
-        }
-    }
-    if(isPaused) return;
-    
-    if(e.key == "Right" || e.key == "ArrowRight"){
-        console.log("Right pressed");
-        rightPressed = true;
-    }
-    if(e.key == "Left" || e.key == "ArrowLeft"){
-        console.log("Left pressed");
-        leftPressed = true;
-    }
-    if(e.key == "Enter" && (isGameOver || isStart)){
-        StartGame();
-    }
-
-}
-
 function TogglePause(){
     isPaused = !isPaused;
     if(isPaused){
@@ -575,97 +347,6 @@ function TogglePause(){
         music.play();
     }
 }
-
-function keyUpHandler(e){
-    if(e.key == "Right" || e.key == "ArrowRight"){
-        rightPressed = false;
-        rightWasPressed = false;
-    }
-    if(e.key == "Left" || e.key == "ArrowLeft"){
-        leftPressed = false;
-        leftWasPressed = false;
-    }
-}
-
-document.addEventListener("touchstart", touchHandler, {passive: false});
-document.addEventListener("touchend", touchEndHandler, {passive: false});
-document.addEventListener("mousedown", mouseDownHandler, {passive: false});
-document.addEventListener("mouseup", mouseUpHandler, {passive: false});
-//document.addEventListener("touchmove", touchMove, false);
-
-function touchHandler(e){
-    
-    if(e.touches && e.target == canvas) {
-        
-        e.preventDefault();
-
-        // touchX = e.touches[0].pageX;
-        // touchY = e.touches[0].pageY;
-        
-        touchX = (e.touches[0].pageX - canvas.offsetLeft) / (window.innerHeight * .675);
-        touchY = (e.touches[0].pageY - canvas.offsetTop) / (window.innerHeight * .9);
-        
-        output.innerHTML = "Touch: "+ " x: " + touchX + ", y: " + touchY;
-        //output.innerHTML = "Canvas width = "+canvas.style.width+", Canvas height = "+canvas.style.height;
-
-        clickHandler(touchX, touchY);
-    }
-
-    //output.innerHTML = "Canvas width = "+canvas.style.width+", Canvas height = "+canvas.style.height;
-    //output.innerHTML = "Canvas style = "+canvas.style.margin;
-}
-
-function touchEndHandler(e){
-    clickUpHandler();
-}
-
-function mouseDownHandler(e){
-    if(e.target == canvas){
-        e.preventDefault();
-
-        mouseX = (e.clientX - canvas.offsetLeft) / (window.innerHeight * .675);
-        mouseY = (e.clientY - canvas.offsetTop) / (window.innerHeight * .9);
-
-        output.innerHTML = "Click: "+ " x: " + mouseX + ", y: " + mouseY;
-
-        clickHandler(mouseX, mouseY);
-    }
-}
-function mouseUpHandler(e){
-    clickUpHandler();
-}
-
-function clickHandler(x, y){
-    
-    if(isStart || isGameOver){
-        StartGame();
-        return;
-    }
-    if(isPaused){
-        TogglePause();
-        return;
-    }
-    if(y > .8){
-        if(x < 0.5){
-            leftPressed = true;
-            return;
-        }else{
-            rightPressed = true;
-            return;
-        }
-    }else{
-        TogglePause();
-        return;
-    }
-}
-function clickUpHandler(){
-    leftPressed = false;
-    rightPressed = false;
-    leftWasPressed = false;
-    rightWasPressed = false;
-}
-
-//#endregion
 
 //#region Processing
 
@@ -738,6 +419,3 @@ function RandIndex(max){
 }
 
 //#endregion
-
-
-Init();
