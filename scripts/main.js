@@ -10,7 +10,7 @@ function Init(){
 function Update(){
     canvas.Draw();
     Game();
-
+    
 }
 
 

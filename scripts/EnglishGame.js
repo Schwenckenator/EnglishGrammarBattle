@@ -28,7 +28,6 @@ var answerY = canvas.height - 30;
 
 var score = 0;
 var lives = 3;
-var livesStr;
 
 var sentence = {
     text: "",
@@ -89,7 +88,7 @@ var music = new sound("edm-detection-mode-by-kevin-macleod-from-filmmusic-io.mp3
 
 var isPaused = false;
 var isStart = true;
-
+console.log("isStart = " + isStart);
 //#endregion
 
 //#region Constructors
@@ -287,6 +286,7 @@ function Incorrect(){
 }
 
 function NextSentence(){
+    console.log("NextSentence");
     sentence.y = sentenceStartY;
     sentence.xOffset = 0;
     tick = 0;
@@ -312,6 +312,7 @@ function GameOver(){
 }
 
 function GetSentence(){
+    console.log("GetSentence");
     let index = RandIndex(data.sentences.length);
     let text = ProcessText(data.sentences[index].text);
 
