@@ -29,8 +29,14 @@ var answerY = canvas.height - 30;
 var score = 0;
 var lives = 3;
 
-var answerLeft = new answer("", 0);
-var answerRight = new answer("", 1);
+//var answerLeft = new answer("", 0);
+//var answerRight = new answer("", 1);
+var answers = [
+    new answer("", 0),
+    new answer("", 1),
+    new answer("", 2),
+    new answer("", 3)
+];
 var correctAnswer;
 var isMoveAnswer = false;
 var answerMoveTime = 50; //ticks
@@ -191,21 +197,36 @@ function Game(){
 }
 
 function GetKeys(){
-    
-    if((leftPressed && !leftWasPressed) || (rightPressed && !rightWasPressed)){
-        
+    console.log("Get keys");
+    if(input.hasInput){
+        console.log("Has Input");
         //let chosenAnswer;
         //Left pressed
-        if(leftPressed){
+        if(input.left){
+            console.log("Input Left: "+input.left+", Left pressed: "+leftPressed+", was pressed: "+leftWasPressed);
+            
             leftWasPressed = true; 
-            chosenAnswer = answerLeft;
+            chosenAnswer = answers[0];
             chosenAnswerIndex = 0;
         }
         //Right pressed
-        if(rightPressed){
+        if(input.right){
+            console.log("Right pressed");
             rightWasPressed = true;
-            chosenAnswer = answerRight;
+            chosenAnswer = answers[1];
             chosenAnswerIndex = 1;
+        }
+        if(input.up){
+            console.log("Up pressed");
+            rightWasPressed = true;
+            chosenAnswer = answers[2];
+            chosenAnswerIndex = 2;
+        }
+        if(input.down){
+            console.log("Down pressed");
+            rightWasPressed = true;
+            chosenAnswer = answers[3];
+            chosenAnswerIndex = 3;
         }
 
         let senX = sentence.x + sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2
@@ -277,16 +298,30 @@ function GetSentence(){
     sentence.text = text[0].toUpperCase() + text.slice(1);
 
     correctAnswer = ProcessText(data.sentences[index].correctAnswer);
-    wrongAnswer = ProcessText(data.sentences[index].wrongAnswer);
+    //wrongAnswer = ProcessText(data.sentences[index].wrongAnswer);
     //Randomly order the answers
-    let isLeftCorrect = Math.random() >= 0.5;
-    if(isLeftCorrect){
-        answerLeft = new answer(correctAnswer, 0);
-        answerRight = new answer(wrongAnswer, 1);
-    }else{
-        answerLeft = new answer(wrongAnswer, 0);
-        answerRight = new answer(correctAnswer, 1);
+    //let isLeftCorrect = Math.random() >= 0.5;
+    
+    let correctIndex = RandIndex(4);
+
+    for(let i=0; i<4; i++){
+        let ans;
+        if(i===correctIndex){
+            ans = correctAnswer;
+        }else{
+            ans = ProcessText(data.sentences[index].wrongAnswer);
+        }
+
+        answers[i] = new answer(ans, i);
+        
     }
+    // if(isLeftCorrect){
+    //     answerLeft = new answer(correctAnswer, 0);
+    //     answerRight = new answer(wrongAnswer, 1);
+    // }else{
+    //     answerLeft = new answer(wrongAnswer, 0);
+    //     answerRight = new answer(correctAnswer, 1);
+    // }
 }
 
 function SetAnswerDxDy(ansX, ansY, senX, senY, moveTime){

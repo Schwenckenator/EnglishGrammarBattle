@@ -9,7 +9,28 @@ var rightPressed = false;
 var leftPressed = false;
 var rightWasPressed = false;
 var leftWasPressed = false;
+var upPressed = false;
+var upWasPressed = false;
+var downPressed = false;
+var downWasPressed = false;
 
+var input = {
+    hasInput: () => {
+        return input.right || input.left || input.up || input.down;
+    },
+    right: () => {
+        rightPressed && !rightWasPressed;
+    },
+    left: () =>{
+        leftPressed && !leftWasPressed;
+    }, 
+    up: () => {
+        upPressed && !upWasPressed;
+    },
+    down: () => {    
+        downPressed && !downWasPressed;
+    }
+}
 
 
 function keyDownHandler(e){
