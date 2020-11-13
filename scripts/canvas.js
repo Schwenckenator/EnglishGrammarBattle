@@ -36,7 +36,7 @@ const canvas = {
         if(isGameOver){
             canvas.drawGameOver();
             if(explosion.isExplosion){
-                canvas.drawExplosion();
+                canvas.drawExplosion(explosion);
             }
             return;
         }
@@ -45,7 +45,7 @@ const canvas = {
         canvas.drawUI();
         canvas.drawAnswers();
         if(explosion.isExplosion){
-            canvas.drawExplosion();
+            canvas.drawExplosion(explosion);
         }
     },
     drawText: (txt, font, colour, xPos, yPos) => {
@@ -119,24 +119,24 @@ const canvas = {
         canvas.ctx.fillText(answerRight.text, x, answerRight.y);
     },
     
-    drawExplosion: () => {
-        let coords = explosion.GetFrameCrop(explosion.frameNumber);
+    drawExplosion: (exp) => {
+        let coords = exp.GetFrameCrop(exp.frameNumber);
     
         canvas.ctx.drawImage(
-            explosion.explosionSheet, 
+            exp.explosionSheet, 
             coords.x, 
             coords.y, 
-            explosion.explSpriteSize, 
-            explosion.explSpriteSize, 
-            explosion.pos.x, 
-            explosion.pos.y, 
-            explosion.explSpriteSize * explosion.scale.x, 
-            explosion.explSpriteSize * explosion.scale.x
+            exp.explSpriteSize, 
+            exp.explSpriteSize, 
+            exp.pos.x, 
+            exp.pos.y, 
+            exp.explSpriteSize * exp.scale.x, 
+            exp.explSpriteSize * exp.scale.x
         );
         
-        explosion.frameNumber += 0.5; //Play at half speed
-        if(explosion.frameNumber >= explosion.totalFrames){
-            explosion.isExplosion = false;
+        exp.frameNumber += 0.5; //Play at half speed
+        if(exp.frameNumber >= exp.totalFrames){
+            exp.isExplosion = false;
         }
     },
     

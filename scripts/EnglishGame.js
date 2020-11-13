@@ -29,15 +29,6 @@ var answerY = canvas.height - 30;
 var score = 0;
 var lives = 3;
 
-var sentence = {
-    text: "",
-    x: 0,
-    y: 0,
-    dx: 0,
-    dy: 0,
-    xOffset: 0
-};
-
 var answerLeft = new answer("", 0);
 var answerRight = new answer("", 1);
 var correctAnswer;
@@ -45,45 +36,11 @@ var isMoveAnswer = false;
 var answerMoveTime = 50; //ticks
 var answerMoveTicksRemaining = 50;
 
-var rightPressed = false;
-var leftPressed = false;
-var rightWasPressed = false;
-var leftWasPressed = false;
-
 var updateLoop;
 
 var isGameOver = false;
 
 var canAnswer = true;
-var explosionX;
-var explosionY;
-
-var explosion = {
-
-    isExplosion: false,
-    frameNumber: 0,
-    totalFrames: 16,
-    pos: { x:0, y:0 },
-    scale: { x:1, y:1 },
-    explSpriteSize: 64,
-    expColNum: 4,
-    explosionSheet: document.getElementById("explosion"),
-    GetFrameCrop: function(num){
-        num = Math.floor(num);
-        let x = (num % explosion.expColNum) * explosion.explSpriteSize;
-        let y = Math.floor(num / explosion.expColNum) * explosion.explSpriteSize;
-        return { x:x, y:y };
-    },
-    StartExp: function(x, y, sx=2, sy=2){
-        this.frameNumber = 0;
-        this.isExplosion = true;
-        this.scale.x = sx;
-        this.scale.y = sy;
-        this.pos.x = x - (explosion.explSpriteSize / 2) * sx;
-        this.pos.y = y - (explosion.explSpriteSize / 2) * sy;
-
-    }
-}
 
 var correctSound = new sound("laser_shot_correct.mp3");
 var wrongSound = new sound("laser_shot_incorrect.wav");
@@ -92,7 +49,6 @@ var music = new sound("edm-detection-mode-by-kevin-macleod-from-filmmusic-io.mp3
 
 var isPaused = false;
 var isStart = true;
-console.log("isStart = " + isStart);
 //#endregion
 
 //#region Constructors
@@ -173,10 +129,7 @@ function StartGame(){
 //#region Game
 
 function Game(){
-    if(isStart || isGameOver) return;
-    
-    if(isPaused) return;
-
+    if(isStart || isGameOver || isPaused) return;
     if(isFrozen){
         if(freezeRemaining <= 0){
             NextSentence();
@@ -255,10 +208,7 @@ function GetKeys(){
             chosenAnswerIndex = 1;
         }
 
-        explosionX = sentence.x + sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2;
-        explosionY = sentence.y;
-
-        let senX = sentence.x+sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2
+        let senX = sentence.x + sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2
 
         SetAnswerDxDy(chosenAnswer.x, chosenAnswer.y, senX, sentence.y, answerMoveTime);
         isMoveAnswer = true;
@@ -268,8 +218,10 @@ function GetKeys(){
 
 function CheckAnswer(){
     if(chosenAnswer.text === correctAnswer){
+        let x = sentence.x + sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2;
+        let y = sentence.y;
+        explosion.StartExp(x, y);
         Correct();
-        explosion.StartExp(explosionX, explosionY);
     }else{
         Incorrect();
     }

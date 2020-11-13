@@ -1,4 +1,3 @@
-
 function Init(){
     loadJSON(function(response){
         data = JSON.parse(response);
@@ -10,8 +9,6 @@ function Init(){
 function Update(){
     canvas.render();
     Game();
-    
 }
-
 
 Init();

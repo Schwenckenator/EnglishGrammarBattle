@@ -5,6 +5,13 @@ document.addEventListener("touchend", touchEndHandler, {passive: false});
 document.addEventListener("mousedown", mouseDownHandler, {passive: false});
 document.addEventListener("mouseup", mouseUpHandler, {passive: false});
 
+var rightPressed = false;
+var leftPressed = false;
+var rightWasPressed = false;
+var leftWasPressed = false;
+
+
+
 function keyDownHandler(e){
     console.log("Key down handler");
 
