@@ -43,12 +43,12 @@ function keyUpHandler(e){
 
 function touchHandler(e){
     
-    if(e.touches && e.target == canvas) {
+    if(e.touches && e.target == canvas.gameCanvas) {
         
         e.preventDefault();
         
-        touchX = (e.touches[0].pageX - canvas.offsetLeft) / (window.innerHeight * .675);
-        touchY = (e.touches[0].pageY - canvas.offsetTop) / (window.innerHeight * .9);
+        touchX = (e.touches[0].pageX - canvas.gameCanvas.offsetLeft) / (window.innerHeight * .675);
+        touchY = (e.touches[0].pageY - canvas.gameCanvas.offsetTop) / (window.innerHeight * .9);
         
         output.innerHTML = "Touch: "+ " x: " + touchX + ", y: " + touchY;
 
@@ -61,14 +61,15 @@ function touchEndHandler(e){
 }
 
 function mouseDownHandler(e){
-    if(e.target == canvas){
+    console.log("Mouse Down");
+    if(e.target == canvas.gameCanvas){
         e.preventDefault();
 
-        mouseX = (e.clientX - canvas.offsetLeft) / (window.innerHeight * .675);
-        mouseY = (e.clientY - canvas.offsetTop) / (window.innerHeight * .9);
+        mouseX = (e.clientX - canvas.gameCanvas.offsetLeft) / (window.innerHeight * .675);
+        mouseY = (e.clientY - canvas.gameCanvas.offsetTop) / (window.innerHeight * .9);
 
-        output.innerHTML = "Click: "+ " x: " + mouseX + ", y: " + mouseY;
-
+        //output.innerHTML = "Click: "+ " x: " + mouseX + ", y: " + mouseY;
+        console.log("Mouse Down at " + mouseX + ", " + mouseY);
         clickHandler(mouseX, mouseY);
     }
 }

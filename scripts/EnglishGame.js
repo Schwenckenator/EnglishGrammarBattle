@@ -59,15 +59,19 @@ var explosionX;
 var explosionY;
 
 var explosion = {
+
     isExplosion: false,
     frameNumber: 0,
     totalFrames: 16,
     pos: { x:0, y:0 },
     scale: { x:1, y:1 },
+    explSpriteSize: 64,
+    expColNum: 4,
+    explosionSheet: document.getElementById("explosion"),
     GetFrameCrop: function(num){
         num = Math.floor(num);
-        let x = (num % expColNum) * explSpriteSize;
-        let y = Math.floor(num / expColNum) * explSpriteSize;
+        let x = (num % explosion.expColNum) * explosion.explSpriteSize;
+        let y = Math.floor(num / explosion.expColNum) * explosion.explSpriteSize;
         return { x:x, y:y };
     },
     StartExp: function(x, y, sx=2, sy=2){
@@ -75,8 +79,8 @@ var explosion = {
         this.isExplosion = true;
         this.scale.x = sx;
         this.scale.y = sy;
-        this.pos.x = x - (explSpriteSize / 2) * sx;
-        this.pos.y = y - (explSpriteSize / 2) * sy;
+        this.pos.x = x - (explosion.explSpriteSize / 2) * sx;
+        this.pos.y = y - (explosion.explSpriteSize / 2) * sy;
 
     }
 }
@@ -152,7 +156,8 @@ function StartGame(){
     isGameOver = false;
     score = 0;
     lives = 3;
-    livesStr = getLivesString(lives);
+    canvas.setLivesString(lives);
+    // livesStr = getLivesString(lives);
      
     sentence.x = canvas.width/2;
     sentence.y = sentenceStartY;
@@ -211,12 +216,13 @@ function Game(){
     
     if(sentence.y > canvas.height - 60){
         lives -= 1;
-        livesStr = getLivesString(lives);
+        canvas.setLivesString(lives);
+        //livesStr = getLivesString(lives);
         CalculateDy();
         canAnswer = true;
         gotWrongAnswer = false;
 
-        let x = sentence.x + sentence.xOffset + ctx.measureText(sentence.text).width/2;
+        let x = sentence.x + sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2;
         let y =  sentence.y - 50;
         explosion.StartExp(x,y, 5, 5);
         explosionSound.playFromStart();
@@ -249,10 +255,10 @@ function GetKeys(){
             chosenAnswerIndex = 1;
         }
 
-        explosionX = sentence.x + sentence.xOffset + ctx.measureText(sentence.text).width/2;
+        explosionX = sentence.x + sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2;
         explosionY = sentence.y;
 
-        let senX = sentence.x+sentence.xOffset + ctx.measureText(sentence.text).width/2
+        let senX = sentence.x+sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2
 
         SetAnswerDxDy(chosenAnswer.x, chosenAnswer.y, senX, sentence.y, answerMoveTime);
         isMoveAnswer = true;
