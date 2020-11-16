@@ -69,29 +69,29 @@ const canvas = {
         canvas.ctx.strokeStyle = canvas.uiColour;
         canvas.ctx.lineWidth = "3";
         
-        let x0, x12, xw,  y0, y1, y2, y3;
+        let x0, x1, x2, x3, xw, y0, y1;
 
         x0 = 0;
-        x12= canvas.width/2;
+        x1 = canvas.width/4;
+        x2 = canvas.width/2;
+        x3 = 3*canvas.width/4;
         xw = canvas.width;
 
         y0 = canvas.height;
         y1 = canvas.height - 60;
-        y2 = canvas.height - 120;
-        y3 = canvas.height - 180;
         
         canvas.ctx.moveTo(x0, y1);
         canvas.ctx.lineTo(xw, y1);
 
-        canvas.ctx.moveTo(x0, y2);
-        canvas.ctx.lineTo(xw, y2);
-        
-        canvas.ctx.moveTo(x0, y3);
-        canvas.ctx.lineTo(xw, y3);
+        canvas.ctx.moveTo(x1, y0);
+        canvas.ctx.lineTo(x1, y1);
 
-        canvas.ctx.moveTo(x12, y2);
-        canvas.ctx.lineTo(x12, y1);
-        
+        canvas.ctx.moveTo(x2, y0);
+        canvas.ctx.lineTo(x2, y1);
+
+        canvas.ctx.moveTo(x3, y0);
+        canvas.ctx.lineTo(x3, y1);
+
         canvas.ctx.stroke();
         canvas.ctx.closePath();
 
@@ -124,13 +124,6 @@ const canvas = {
             let x = canvas.centreX(answers[i].text, answers[i].x);
             canvas.ctx.fillText(answers[i].text, x, answers[i].y);
         }
-        // let x = canvas.centreX(answerLeft.text, answerLeft.x);
-        // canvas.ctx.fillText(answerLeft.text, x, answerLeft.y);
-        
-        // canvas.ctx.font = canvas.sizeMed;
-        // canvas.ctx.fillStyle = canvas.textColour;
-        // x = canvas.centreX(answerRight.text, answerRight.x);
-        // canvas.ctx.fillText(answerRight.text, x, answerRight.y);
     },
     
     drawExplosion: (exp) => {
@@ -166,5 +159,5 @@ const canvas = {
             str += canvas.heart;
         }
         return str;
-    }
+    },
 };

@@ -16,19 +16,20 @@ var downWasPressed = false;
 
 var input = {
     hasInput: () => {
-        return input.right || input.left || input.up || input.down;
+        return input.right() || input.left() || input.up() || input.down();
     },
     right: () => {
-        rightPressed && !rightWasPressed;
+        //console.log(`Input.right called. Pressed = ${rightPressed}, WasPressed = ${rightWasPressed}.`);
+        return rightPressed && !rightWasPressed;
     },
     left: () =>{
-        leftPressed && !leftWasPressed;
+        return leftPressed && !leftWasPressed;
     }, 
     up: () => {
-        upPressed && !upWasPressed;
+        return upPressed && !upWasPressed;
     },
     down: () => {    
-        downPressed && !downWasPressed;
+        return downPressed && !downWasPressed;
     }
 }
 
@@ -52,6 +53,14 @@ function keyDownHandler(e){
         console.log("Left pressed");
         leftPressed = true;
     }
+    if(e.key == "Up" || e.key == "ArrowUp"){
+        console.log("Up pressed");
+        upPressed = true;
+    }
+    if(e.key == "Down" || e.key == "ArrowDown"){
+        console.log("Down pressed");
+        downPressed = true;
+    }
     if(e.key == "Enter" && (isGameOver || isStart)){
         StartGame();
     }
@@ -66,6 +75,14 @@ function keyUpHandler(e){
     if(e.key == "Left" || e.key == "ArrowLeft"){
         leftPressed = false;
         leftWasPressed = false;
+    }
+    if(e.key == "Up" || e.key == "ArrowUp"){
+        upPressed = false;
+        upWasPressed = false;
+    }
+    if(e.key == "Down" || e.key == "ArrowDown"){
+        downPressed = false;
+        downWasPressed = false;
     }
 }
 
@@ -116,8 +133,14 @@ function clickHandler(x, y){
         return;
     }
     if(y > .8){
-        if(x < 0.5){
+        if(x < 0.25){
             leftPressed = true;
+            return;
+        }else if(x < 0.5){
+            upPressed = true;
+            return;
+        }else if(x < 0.75){
+            downPressed = true;
             return;
         }else{
             rightPressed = true;
@@ -133,4 +156,8 @@ function clickUpHandler(){
     rightPressed = false;
     leftWasPressed = false;
     rightWasPressed = false;
+    upPressed = false;
+    upWasPressed = false;
+    downPressed = false;
+    downWasPressed = false;
 }

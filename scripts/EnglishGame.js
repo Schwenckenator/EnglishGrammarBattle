@@ -22,21 +22,19 @@ var changeFreq = 0.001;
 var freq = baseFreq;
 
 var chosenAnswerIndex = 0;
-var chosenAnswer;
-var answerX = [canvas.width * 0.25, canvas.width * 0.75];
-var answerY = canvas.height - 30;
+
 
 var score = 0;
 var lives = 3;
 
-//var answerLeft = new answer("", 0);
-//var answerRight = new answer("", 1);
+
 var answers = [
     new answer("", 0),
     new answer("", 1),
     new answer("", 2),
     new answer("", 3)
 ];
+
 var correctAnswer;
 var isMoveAnswer = false;
 var answerMoveTime = 50; //ticks
@@ -89,9 +87,9 @@ function answer(txt, pos){
     console.log("Answer function called");
     let ans = {
         text: txt,
-        baseX: canvas.width * (0.25 + 0.5*pos),
+        baseX: canvas.width * (0.125 + 0.25*pos),
         baseY: canvas.height - 30,
-        x: canvas.width * (0.25 + 0.5*pos),
+        x: canvas.width * (0.125 + 0.25*pos),
         y: canvas.height - 30,
         dx: 0,
         dy: 0
@@ -146,13 +144,13 @@ function Game(){
         return;
     }
     if(isMoveAnswer){
-        chosenAnswer.x += chosenAnswer.dx;
-        chosenAnswer.y += chosenAnswer.dy;
+        answers[chosenAnswerIndex].x += answers[chosenAnswerIndex].dx;
+        answers[chosenAnswerIndex].y += answers[chosenAnswerIndex].dy;
         if(answerMoveTicksRemaining-- <= 0){
-            CheckAnswer();
+            CheckAnswer(chosenAnswerIndex);
             isMoveAnswer = false;
-            chosenAnswer.dy = 0;
-            chosenAnswer.dx = 0;
+            answers[chosenAnswerIndex].dy = 0;
+            answers[chosenAnswerIndex].dx = 0;
         }
         return;
     }
@@ -160,8 +158,8 @@ function Game(){
 
     if(gotWrongAnswer){
         sentence.dy += wrongSentenceDdy;
-        chosenAnswer.dy += wrongSentenceDdy;
-        chosenAnswer.y += chosenAnswer.dy;
+        answers[chosenAnswerIndex].dy += wrongSentenceDdy;
+        answers[chosenAnswerIndex].y += answers[chosenAnswerIndex].dy;
     }else{
         let amp = 50;
         sentence.xOffset = amp*(Math.sin(freq*tick + sinOffset));
@@ -176,7 +174,6 @@ function Game(){
     if(sentence.y > canvas.height - 60){
         lives -= 1;
         canvas.setLivesString(lives);
-        //livesStr = getLivesString(lives);
         CalculateDy();
         canAnswer = true;
         gotWrongAnswer = false;
@@ -197,48 +194,46 @@ function Game(){
 }
 
 function GetKeys(){
-    console.log("Get keys");
-    if(input.hasInput){
-        console.log("Has Input");
-        //let chosenAnswer;
-        //Left pressed
-        if(input.left){
-            console.log("Input Left: "+input.left+", Left pressed: "+leftPressed+", was pressed: "+leftWasPressed);
-            
-            leftWasPressed = true; 
-            chosenAnswer = answers[0];
-            chosenAnswerIndex = 0;
-        }
-        //Right pressed
-        if(input.right){
-            console.log("Right pressed");
-            rightWasPressed = true;
-            chosenAnswer = answers[1];
-            chosenAnswerIndex = 1;
-        }
-        if(input.up){
-            console.log("Up pressed");
-            rightWasPressed = true;
-            chosenAnswer = answers[2];
-            chosenAnswerIndex = 2;
-        }
-        if(input.down){
-            console.log("Down pressed");
-            rightWasPressed = true;
-            chosenAnswer = answers[3];
-            chosenAnswerIndex = 3;
-        }
-
-        let senX = sentence.x + sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2
-
-        SetAnswerDxDy(chosenAnswer.x, chosenAnswer.y, senX, sentence.y, answerMoveTime);
-        isMoveAnswer = true;
+    let hadInput = false;
+    if(input.left()){
+        console.log("Left pressed");
+        
+        leftWasPressed = true; 
+        chosenAnswerIndex = 0;
+        hadInput = true;
     }
+    if(input.up()){
+        console.log("Up pressed");
+        upWasPressed = true;
+        chosenAnswerIndex = 1;
+        hadInput = true;
+    }
+    if(input.down()){
+        console.log("Down pressed");
+        downWasPressed = true;
+        chosenAnswerIndex = 2;
+        hadInput = true;
+    }
+    if(input.right()){
+        console.log("Right pressed");
+        rightWasPressed = true;
+        chosenAnswerIndex = 3;
+        hadInput = true;
+    }
+
+    if(!hadInput){
+        return;
+    }
+
+    let senX = sentence.x + sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2
+
+    SetAnswerDxDy(answers[chosenAnswerIndex].x, answers[chosenAnswerIndex].y, senX, sentence.y, answerMoveTime);
+    isMoveAnswer = true;
 
 }
 
-function CheckAnswer(){
-    if(chosenAnswer.text === correctAnswer){
+function CheckAnswer(ansIndex){
+    if(answers[ansIndex].text === correctAnswer){
         let x = sentence.x + sentence.xOffset + canvas.ctx.measureText(sentence.text).width/2;
         let y = sentence.y;
         explosion.StartExp(x, y);
@@ -254,7 +249,8 @@ function Correct(){
     freezeRemaining = freezeTicks;
     correctSound.playFromStart();
     sentence.y = sentenceStartY;
-    chosenAnswer.y = sentenceStartY;
+    answers[chosenAnswerIndex] = sentenceStartY;
+    chosenAnswerIndex = -1;
 }
 
 function Incorrect(){
@@ -298,10 +294,8 @@ function GetSentence(){
     sentence.text = text[0].toUpperCase() + text.slice(1);
 
     correctAnswer = ProcessText(data.sentences[index].correctAnswer);
-    //wrongAnswer = ProcessText(data.sentences[index].wrongAnswer);
-    //Randomly order the answers
-    //let isLeftCorrect = Math.random() >= 0.5;
-    
+
+    //Randomly choose correct place
     let correctIndex = RandIndex(4);
 
     for(let i=0; i<4; i++){
@@ -315,18 +309,11 @@ function GetSentence(){
         answers[i] = new answer(ans, i);
         
     }
-    // if(isLeftCorrect){
-    //     answerLeft = new answer(correctAnswer, 0);
-    //     answerRight = new answer(wrongAnswer, 1);
-    // }else{
-    //     answerLeft = new answer(wrongAnswer, 0);
-    //     answerRight = new answer(correctAnswer, 1);
-    // }
 }
 
 function SetAnswerDxDy(ansX, ansY, senX, senY, moveTime){
-    chosenAnswer.dx = (senX - ansX) / moveTime;
-    chosenAnswer.dy = (senY - ansY) / moveTime;
+    answers[chosenAnswerIndex].dx = (senX - ansX) / moveTime;
+    answers[chosenAnswerIndex].dy = (senY - ansY) / moveTime;
     answerMoveTicksRemaining = moveTime;
 }
 
