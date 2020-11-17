@@ -297,13 +297,15 @@ function GetSentence(){
 
     //Randomly choose correct place
     let correctIndex = RandIndex(4);
+    let indices = ['c',0,1,2];
+    shuffle(indices);
 
     for(let i=0; i<4; i++){
         let ans;
-        if(i===correctIndex){
+        if(indices[i]==='c'){
             ans = correctAnswer;
         }else{
-            ans = ProcessText(data.sentences[index].wrongAnswer);
+            ans = ProcessText(data.sentences[index].wrongAnswer[indices[i]]);
         }
 
         answers[i] = new answer(ans, i);
@@ -315,6 +317,19 @@ function SetAnswerDxDy(ansX, ansY, senX, senY, moveTime){
     answers[chosenAnswerIndex].dx = (senX - ansX) / moveTime;
     answers[chosenAnswerIndex].dy = (senY - ansY) / moveTime;
     answerMoveTicksRemaining = moveTime;
+}
+
+function shuffle(array){
+    let currentIndex = array.length, temp, randomIndex;
+    while (0 !== currentIndex){
+        randomIndex = RandIndex(currentIndex);
+        currentIndex -= 1;
+
+        temp = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temp;
+    }
+    return array;
 }
 
 

@@ -3,87 +3,138 @@
         {
             "text":             "%PRO_NOM_3S% is ______ %NOUNS%.",
             "correctAnswer":    "%VERBING_T%",
-            "wrongAnswer":      "%VERB_T%"
+            "wrongAnswer":[     "%VERB_T%",
+                                "%VERB_I%",
+                                "%VERB_TS%"
+            ]
         },
         {
             "text":             "%PRO_NOM_3S% is ______ a %NOUN%.",
             "correctAnswer":    "%VERBING_T%",
-            "wrongAnswer":      "%VERB_T%"
+            "wrongAnswer":[     "%VERB_T%",
+                                "%VERB_I%",
+                                "%VERB_TS%"
+            ]           
         },
         {
             "text":             "%PRO_NOM_3S% is ______ the %NOUN%.",
             "correctAnswer":    "%VERBING_T%",
-            "wrongAnswer":      "%VERB_T%"
+            "wrongAnswer":[     "%VERB_T%",
+                                "%VERB_I%",
+                                "%VERB_TS%"
+            ]
         },
         {
             "text":             "%PRO_NOM_3S% is ______ the %NOUNS%.",
             "correctAnswer":    "%VERBING_T%",
-            "wrongAnswer":      "%VERB_T%"
+            "wrongAnswer":[     "%VERB_T%",
+                                "%VERB_I%",
+                                "%VERB_TS%"
+            ] 
         },
         {
             "text":             "%PRO_NOM_3S% is ______ some %NOUNS%.",
             "correctAnswer":    "%VERBING_T%",
-            "wrongAnswer":      "%VERB_T%"
+            "wrongAnswer":[     "%VERB_T%",
+                                "%VERB_I%",
+                                "%VERB_TS%"
+            ] 
         },
         {
             "text":             "%PRO_NOM_3S% is ______ with a %NOUN%.",
             "correctAnswer":    "%VERBING_I%",
-            "wrongAnswer":      "%VERB_I%"
+            "wrongAnswer":[     "%VERB_I%",
+                                "%VERB_T%",
+                                "%VERB_IS%"
+            ] 
         },
         {
             "text":             "%PRO_NOM_3S% is ______ with %NOUNS%.",
             "correctAnswer":    "%VERBING_I%",
-            "wrongAnswer":      "%VERB_I%"
+            "wrongAnswer":[     "%VERB_I%",
+                                "%VERB_T%",
+                                "%VERB_IS%"
+            ] 
         },
         {
             "text":             "Hello, my name ___ %NOUN%.",
             "correctAnswer":    "is",
-            "wrongAnswer":      "are"
+            "wrongAnswer":[     "are",
+                                "be",
+                                "am"
+            ]
         },
         {
             "text":             "You ___ a %NOUN%.",
             "correctAnswer":    "are",
-            "wrongAnswer":      "is"
+            "wrongAnswer":[     "is",
+                                "be",
+                                "am"
+            ]
         },
         {
             "text":             "They ___ %NOUNS%.",
             "correctAnswer":    "are",
-            "wrongAnswer":      "am"
+            "wrongAnswer":[     "is",
+                                "be",
+                                "am"
+            ]
         },
         {
             "text":             "%PRO_NOM_123P% like ____.",
             "correctAnswer":    "%VERBING_I%",
-            "wrongAnswer":      "%VERB_I%"
+            "wrongAnswer":[     "%VERB_I%",
+                                "%VERB_IS%",
+                                "%VERB_T%"
+            ] 
         },
         {
             "text":             "%PRO_NOM_123P% like ____.",
             "correctAnswer":    "%NOUNS%",
-            "wrongAnswer":      "%VERB_I%"
+            "wrongAnswer":[     "%VERB_I%",
+                                "%VERB_T%",
+                                "%VERB_IS%"
+            ] 
         },
         {
             "text":             "%PRO_NOM_123P% want a _____ %NOUN%.",
             "correctAnswer":    "%ADJ%",
-            "wrongAnswer":      "%VERB_T%"
+            "wrongAnswer":[     "%NOUN%",
+                                "%PRO_NOM_123P%",
+                                 "%VERB_T%"
+            ] 
         }, 
         {
             "text":             "%NOUNS% can ____ %ADV%.",
             "correctAnswer":    "%VERB_I%",
-            "wrongAnswer":      "%VERBING_I%"
+            "wrongAnswer":[     "%VERBING_T%",
+                                "%VERBING_I%",
+                                "%ADJ%"
+            ] 
         },
         {
             "text":             "%NOUNS% can ____.",
             "correctAnswer":    "%VERB_I%",
-            "wrongAnswer":      "%VERBING_I%"
+            "wrongAnswer":[     "%VERBING_T%",
+                                "%VERBING_I%",
+                                "%ADJ%"
+            ] 
         },
         {
             "text":             "%PRO_NOM_3S% ____ %NOUNS%.",
             "correctAnswer":    "%VERB_TS%",
-            "wrongAnswer":      "%VERB_T%"
+            "wrongAnswer":[     "%VERB_T%",
+                                "%VERB_I%",
+                                "%VERBING_T%"
+            ] 
         },
         {
             "text":             "How ___ you?",
             "correctAnswer":    "are",
-            "wrongAnswer":      "is"
+            "wrongAnswer":[     "is",
+                                "am",
+                                "be"
+            ] 
         }
     ],
 
