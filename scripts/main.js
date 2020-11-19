@@ -1,13 +1,12 @@
 
 var mainMenu = {
-    menu: mainMenu.startMenu,
-    
+       
     run: () => {
         canvas.ctx.clearRect(0,0, canvas.width, canvas.height);
         canvas.ctx.drawImage(canvas.nightSky, 0, 0);
         canvas.ctx.drawImage(canvas.nightSky, 0, 320);
         
-        menu();
+        mainMenu.menu();
 
         if(input.enter()){
             menu = mainMenu.mainMenu;
@@ -36,6 +35,7 @@ function Init(){
         updateLoop = setInterval(Update, 10);
     });
     canvas.init();
+    mainMenu.menu = mainMenu.startMenu;
 }
 
 function Update(){
