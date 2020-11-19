@@ -13,6 +13,8 @@ var upPressed = false;
 var upWasPressed = false;
 var downPressed = false;
 var downWasPressed = false;
+var enterPressed = false;
+var enterWasPressed = false;
 
 var input = {
     hasInput: () => {
@@ -30,6 +32,9 @@ var input = {
     },
     down: () => {    
         return downPressed && !downWasPressed;
+    },
+    enter: () => {
+        return enterPressed && !enterWasPressed;
     }
 }
 
@@ -61,8 +66,14 @@ function keyDownHandler(e){
         console.log("Down pressed");
         downPressed = true;
     }
-    if(e.key == "Enter" && (isGameOver || isStart)){
-        StartGame();
+    if(e.key == "Enter"){ // && (isGameOver || isStart)
+        //StartGame();
+        if(enterPressed === true){
+            enterWasPressed = true;
+        }else{
+            enterPressed = true;
+        }
+        
     }
 
 }
@@ -83,6 +94,11 @@ function keyUpHandler(e){
     if(e.key == "Down" || e.key == "ArrowDown"){
         downPressed = false;
         downWasPressed = false;
+    }
+    if(e.key == "Enter"){
+        //StartGame();
+        enterPressed = false;
+        enterWasPressed = false;
     }
 }
 
