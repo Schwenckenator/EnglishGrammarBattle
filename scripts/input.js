@@ -7,53 +7,62 @@ document.addEventListener("mouseup", mouseUpHandler, {passive: false});
 
 var rightPressed = false;
 var leftPressed = false;
-var rightWasPressed = false;
-var leftWasPressed = false;
 var upPressed = false;
-var upWasPressed = false;
 var downPressed = false;
-var downWasPressed = false;
 var enterPressed = false;
-var enterWasPressed = false;
+var escapePressed = false;
 
 var input = {
     hasInput: () => {
         return input.right() || input.left() || input.up() || input.down();
     },
     right: () => {
-        if(rightWasPressed) return false;
         if(rightPressed){
-            rightWasPressed = true;
+            rightPressed = false;
             return true;
-        }   
+        } else{
+            return false;
+        }
     },
     left: () =>{
-        if(leftWasPressed) return false;
         if(leftPressed){
-            leftWasPressed = true;
+            leftPressed = false;
             return true;
-        }   
+        } else{
+            return false;
+        } 
     }, 
     up: () => {
-        if(leftWasPressed) return false;
         if(upPressed){
-            leftWasPressed = true;
+            upPressed = false;
             return true;
+        } else{
+            return false;
         }   
     },
     down: () => {
-        if(downWasPressed) return false;
         if(downPressed){
-            downWasPressed = true;
+            downPressed = false;
             return true;
-        }    
+        } else{
+            return false;
+        }   
     },
     enter: () => {
-        if(enterWasPressed) return false;
         if(enterPressed){
-            enterWasPressed = true;
+            enterPressed = false;
             return true;
+        } else{
+            return false;
         }   
+    },
+    escape: () => {
+        if(escapePressed){
+            escapePressed = false;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
@@ -63,11 +72,12 @@ function keyDownHandler(e){
 
     if(e.key == "Escape" || e.key == "Esc"){
         console.log("Escape pressed");
-        if(!isStart){
-            TogglePause();
-        }
+        escapePressed = true;
+        // if(!isStart){
+        //     TogglePause();
+        // }
     }
-    if(isPaused) return;
+    // if(isPaused) return;
     
     if(e.key == "Right" || e.key == "ArrowRight"){
         console.log("Right pressed");
@@ -86,13 +96,8 @@ function keyDownHandler(e){
         downPressed = true;
     }
     if(e.key == "Enter"){ // && (isGameOver || isStart)
-        //StartGame();
-        if(enterPressed === true){
-            enterWasPressed = true;
-        }else{
-            enterPressed = true;
-        }
-        
+        console.log("Enter pressed");
+        enterPressed = true;
     }
 
 }
@@ -100,24 +105,22 @@ function keyDownHandler(e){
 function keyUpHandler(e){
     if(e.key == "Right" || e.key == "ArrowRight"){
         rightPressed = false;
-        rightWasPressed = false;
     }
     if(e.key == "Left" || e.key == "ArrowLeft"){
         leftPressed = false;
-        leftWasPressed = false;
     }
     if(e.key == "Up" || e.key == "ArrowUp"){
         upPressed = false;
-        upWasPressed = false;
     }
     if(e.key == "Down" || e.key == "ArrowDown"){
         downPressed = false;
-        downWasPressed = false;
     }
     if(e.key == "Enter"){
         //StartGame();
         enterPressed = false;
-        enterWasPressed = false;
+    }
+    if(e.key == "Escape" || e.key == "Esc"){
+        escapePressed = false;
     }
 }
 
@@ -189,10 +192,6 @@ function clickHandler(x, y){
 function clickUpHandler(){
     leftPressed = false;
     rightPressed = false;
-    leftWasPressed = false;
-    rightWasPressed = false;
     upPressed = false;
-    upWasPressed = false;
     downPressed = false;
-    downWasPressed = false;
 }
