@@ -21,20 +21,39 @@ var input = {
         return input.right() || input.left() || input.up() || input.down();
     },
     right: () => {
-        //console.log(`Input.right called. Pressed = ${rightPressed}, WasPressed = ${rightWasPressed}.`);
-        return rightPressed && !rightWasPressed;
+        if(rightWasPressed) return false;
+        if(rightPressed){
+            rightWasPressed = true;
+            return true;
+        }   
     },
     left: () =>{
-        return leftPressed && !leftWasPressed;
+        if(leftWasPressed) return false;
+        if(leftPressed){
+            leftWasPressed = true;
+            return true;
+        }   
     }, 
     up: () => {
-        return upPressed && !upWasPressed;
+        if(leftWasPressed) return false;
+        if(upPressed){
+            leftWasPressed = true;
+            return true;
+        }   
     },
-    down: () => {    
-        return downPressed && !downWasPressed;
+    down: () => {
+        if(downWasPressed) return false;
+        if(downPressed){
+            downWasPressed = true;
+            return true;
+        }    
     },
     enter: () => {
-        return enterPressed && !enterWasPressed;
+        if(enterWasPressed) return false;
+        if(enterPressed){
+            enterWasPressed = true;
+            return true;
+        }   
     }
 }
 

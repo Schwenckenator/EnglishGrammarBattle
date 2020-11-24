@@ -9,7 +9,7 @@ var mainMenu = {
         mainMenu.menu();
 
         if(input.enter()){
-            menu = mainMenu.mainMenu;
+            mainMenu.menu = mainMenu.mainMenu;
         }
     },
 
@@ -20,14 +20,33 @@ var mainMenu = {
     },
 
     mainMenu: () => {
-        canvas.drawText("Choose game.", canvas.sizeMed, canvas.textColour, canvas.width/2, canvas.height/2 - 40);
-        canvas.drawText("GRAMMAR FALLS", canvas.sizeBig, canvas.textColour, canvas.width/2, canvas.height/2 + 5);
+        let xPos = canvas.width / 2;
+        let yTitlePos = canvas.height/2 - 160;
+        
+        let yOffset = 60;
+        let yPos = canvas.height/2 - yOffset;
+        
+        canvas.drawText("Choose game.", canvas.sizeMed, canvas.textColour, xPos, yTitlePos);
+        canvas.drawText("SPELLING SPIN", canvas.sizeBig, canvas.textColour, xPos, yPos);
+        canvas.drawText("GRAMMAR FALLS", canvas.sizeBig, canvas.textColour, xPos, yPos + yOffset);
+        canvas.drawText("TEXT TROUBLE", canvas.sizeBig, canvas.textColour, xPos, yPos + 2 * yOffset);
+
+        canvas.drawRect(25, yPos - 48 +(mainMenu.selected * yOffset), canvas.width - 50, 60, 3, canvas.uiColour);
+
+
+        if(input.down()){
+            mainMenu.selected++;
+            mainMenu.selected %= 3;
+        }else if(input.up()){
+            mainMenu.selected--;
+            mainMenu.selected %= 3;
+        }
     },
 
     
 }
 
-var currentGame = mainMenu;
+var currentState = mainMenu;
 
 function Init(){
     loadJSON(function(response){
@@ -36,13 +55,14 @@ function Init(){
     });
     canvas.init();
     mainMenu.menu = mainMenu.startMenu;
+    mainMenu.selected = 0;
 }
 
 function Update(){
     //canvas.render();
     //Game();
 
-    currentGame.run();
+    currentState.run();
 }
 
 Init();
