@@ -132,8 +132,44 @@ function StartGame(){
 
 //#region Game
 
-function Game(){
-    if(isStart || isGameOver || isPaused) return;
+function GrammarFallsGame(){
+
+
+    if(isStart){
+        canvas.drawStartMenu();
+        if(input.enter()){
+            StartGame();
+        }
+        return;
+    }
+
+    if(input.escape()){
+        TogglePause();
+    }
+
+    if(isPaused){
+        canvas.drawPaused();
+        return;
+    }
+
+    if(isGameOver){
+        canvas.drawGameOver();
+        if(explosion.isExplosion){
+            canvas.drawExplosion(explosion);
+        }
+        if(input.enter()){
+            StartGame();
+        }
+        return;
+    }
+
+    canvas.drawSentence();
+    canvas.drawUI();
+    canvas.drawAnswers();
+    if(explosion.isExplosion){
+        canvas.drawExplosion(explosion);
+    }
+
     if(isFrozen){
         if(freezeRemaining <= 0){
             NextSentence();
@@ -198,25 +234,21 @@ function GetKeys(){
     if(input.left()){
         console.log("Left pressed");
         
-        leftWasPressed = true; 
         chosenAnswerIndex = 0;
         hadInput = true;
     }
     if(input.up()){
         console.log("Up pressed");
-        upWasPressed = true;
         chosenAnswerIndex = 1;
         hadInput = true;
     }
     if(input.down()){
         console.log("Down pressed");
-        downWasPressed = true;
         chosenAnswerIndex = 2;
         hadInput = true;
     }
     if(input.right()){
         console.log("Right pressed");
-        rightWasPressed = true;
         chosenAnswerIndex = 3;
         hadInput = true;
     }

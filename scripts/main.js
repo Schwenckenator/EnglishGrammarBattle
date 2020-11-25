@@ -2,10 +2,6 @@
 var mainMenu = {
        
     run: () => {
-        canvas.ctx.clearRect(0,0, canvas.width, canvas.height);
-        canvas.ctx.drawImage(canvas.nightSky, 0, 0);
-        canvas.ctx.drawImage(canvas.nightSky, 0, 320);
-        
         mainMenu.menu();
     },
 
@@ -52,6 +48,11 @@ var mainMenu = {
         if(input.escape()){
             mainMenu.menu = mainMenu.startMenu;
         }
+        if(input.enter()){
+            console.log("Game selected.");
+            currentState = gameList[mainMenu.selected].instance;
+            console.log(`Current state now: ${currentState}`);
+        }
     },
 
     
@@ -70,10 +71,16 @@ function Init(){
 }
 
 function Update(){
-    //canvas.render();
-    //Game();
+
+    drawBackground();
 
     currentState.run();
+}
+
+function drawBackground(){
+    canvas.ctx.clearRect(0,0, canvas.width, canvas.height);
+    canvas.ctx.drawImage(canvas.nightSky, 0, 0);
+    canvas.ctx.drawImage(canvas.nightSky, 0, 320);
 }
 
 Init();
