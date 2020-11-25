@@ -11,6 +11,10 @@ canvas {
     display: block;
 }
 
+.floating {
+    display: inline;
+}
+
 .footer {
     padding: 5px;
     position: fixed;

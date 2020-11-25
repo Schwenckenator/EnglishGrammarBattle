@@ -54,6 +54,14 @@ const canvas = {
         let x = canvas.centreX(txt, xPos);
         canvas.ctx.fillText(txt, x, yPos);
     },
+
+    drawRect: (xPos, yPos, xSize, ySize, lineWidth = 1, colour = "white") => {
+        canvas.ctx.strokeStyle = colour;
+        canvas.ctx.lineWidth = lineWidth;
+        canvas.ctx.beginPath();
+        canvas.ctx.rect(xPos, yPos, xSize, ySize);
+        canvas.ctx.stroke();
+    },
     drawStartMenu: () =>{
         canvas.drawText("ENGLISH", canvas.sizeBig, canvas.textColour, canvas.width/2, canvas.height/2 - 40);
         canvas.drawText("GRAMMAR BATTLE", canvas.sizeBig, canvas.textColour, canvas.width/2, canvas.height/2 + 5);
