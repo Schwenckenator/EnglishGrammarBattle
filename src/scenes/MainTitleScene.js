@@ -10,12 +10,11 @@ export default class MainTitleScreen extends Phaser.Scene
 {
 	constructor()
 	{
-        super('Main-Menu')
+        super('Title-Screen')
 
         this.titles = []
-        this.inner = undefined
-        this.outer = undefined
         this.keys = undefined
+        
     }
 
 	preload()
@@ -31,7 +30,10 @@ export default class MainTitleScreen extends Phaser.Scene
         this.titles = this.createTitleScreen()
         
         this.keys = this.createInput()
+
     }
+
+
 
 
     createBackground(){
@@ -53,7 +55,7 @@ export default class MainTitleScreen extends Phaser.Scene
         enter.on(
             'down', 
             () => {
-                this.scene.start('Grammar-Falls')
+                this.scene.start('Game-Select')
             }
         )
     }
