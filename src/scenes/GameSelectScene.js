@@ -89,7 +89,7 @@ export default class GameSelectScreen extends Phaser.Scene
     }
 
     createBox(){
-        let box = this.add.rectangle(240, 200, 400, SPACING)
+        let box = this.add.rectangle(240, 200, 420, SPACING)
         box.isStroked = true
         box.strokeColor = 0xeeeeee
         box.lineWidth = 3
