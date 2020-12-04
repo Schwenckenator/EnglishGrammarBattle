@@ -169,13 +169,26 @@ export default class GrammarFallsScene extends Phaser.Scene
     }
 
 
-
+    /// First we could move the answer or do an animation
+    /// But for now we just check the answer immediately
     selectAnswer(index){
+        this.checkAnswer(index)
+    }
+
+    checkAnswer(index){
         if(index === this.quiz.correctIndex){
-            this.explode(this.quiz.sentence.x, this.quiz.sentence.y)
+            this.correctAnswer()
         }else{
-            this.explode(this.quiz.answers[index].x, this.quiz.answers[index].y)
+            this.wrongAnswer(index)
         }
+    }
+
+    correctAnswer(){
+        this.explode(this.quiz.sentence.x, this.quiz.sentence.y)
+    }
+
+    wrongAnswer(i){
+        this.explode(this.quiz.answers[i].x, this.quiz.answers[i].y)
     }
 
     explode(x, y){
