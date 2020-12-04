@@ -5,6 +5,8 @@ const EXP_KEY = 'exp';
 
 const FONT_MED = '24px Arial'
 
+const HEART = "\u200D\u2764\uFE0F\u200D"
+
 export default class GrammarFallsScene extends Phaser.Scene
 {
 	constructor()
@@ -12,11 +14,11 @@ export default class GrammarFallsScene extends Phaser.Scene
         super('Grammar-Falls')
         
         this.gameData = undefined
-        
+    
         this.explosion = undefined
-        
-        this.sentence = undefined
-        this.answers = []
+        this.quiz = undefined
+        this.score = undefined
+        this.lives = undefined
     }
 
 	preload()
@@ -33,15 +35,27 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.gameData = this.cache.json.get('sentences')
         this.createBackground()
         this.explosion = this.createExplosion()
-        this.sentence = this.createQuizSentence()
-        this.answers = this.createAnswers()
+        this.quiz = {
+            sentence: this.createQuizSentence(),
+            answers: this.createAnswers(),
+            correctIndex: -1 // Don't know yet
+        }
+        this.score = 0
+        this.scoreText = this.createScoreText()
+        this.lives = 3
+        this.livesText = this.createLivesText()
         this.newQuiz()
+        this.createInput()
     }
 
 
     update(){
 
     }
+
+
+
+    //#region Creator Methods
 
     createBackground(){
         this.add.image(240, 160, SKY_KEY)
@@ -54,12 +68,21 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.anims.create({
             key: 'explode',
             frames: this.anims.generateFrameNumbers(EXP_KEY, { start: 0, end: 15}),
-            frameRate: 36
+            frameRate: 36,
+            hideOnComplete: true
         })
 
         exp.setVisible(false)
 
         return exp
+    }
+
+    createScoreText(){
+        return this.add.text(20, 15, `Score: ${this.score}`, {font: FONT_MED})
+    }
+
+    createLivesText(){
+        return this.add.text(20, 45, `Lives: ${this.getLivesString(this.lives)}`, {font: FONT_MED})
     }
 
     createQuizSentence(){
@@ -76,101 +99,135 @@ export default class GrammarFallsScene extends Phaser.Scene
         return answers
     }
 
-    newQuiz(){
-        let quiz = this.getQuiz()
-        this.sentence.text = this.getSentence(quiz)
-        
-
-    }
-
     createInput(){
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
         keys.enter.on(
             'down', 
             () => {
-                
+                console.log("ONE pressed")
             }
         )
         keys.escape = this.input.keyboard.addKey('ESCAPE')
         keys.escape.on(
             'down', 
             () => {
-                
+                console.log("ONE pressed")
             }
         )
-        keys.up = this.input.keyboard.addKey('UP')
-        keys.up.on(
+        keys.one = this.input.keyboard.addKey('ONE')
+        keys.one.on(
             'down',
             () => {
-
+                console.log("ONE pressed")
+                this.selectAnswer(0)
             }
         )
-        keys.down = this.input.keyboard.addKey('DOWN')
-        keys.down.on(
+        keys.two = this.input.keyboard.addKey('TWO')
+        keys.two.on(
             'down',
             () => {
-
+                console.log("TWO pressed")
+                this.selectAnswer(1)
             }
         )
-        keys.left = this.input.keyboard.addKey('LEFT')
-        keys.left.on(
+        keys.three = this.input.keyboard.addKey('THREE')
+        keys.three.on(
             'down',
             () => {
-
+                console.log("THREE pressed")
+                this.selectAnswer(2)
             }
         )
-        keys.right = this.input.keyboard.addKey('RIGHT')
-        keys.right.on(
+        keys.four = this.input.keyboard.addKey('FOUR')
+        keys.four.on(
             'down',
             () => {
-
+                console.log("FOUR pressed")
+                this.selectAnswer(3)
             }
         )
         return keys
     }
 
-    selectAnswer(index){
+    //#endregion
 
+    newQuiz(){
+        let q = this.getQuestion()
+        this.quiz.sentence.text = this.getSentence(q)
+        let ans = this.getAnswers(q)
+        
+        this.quiz.correctIndex = ans.correctIndex
+        
+        for(let i=0; i<4; i++){
+            this.quiz.answers[i].text = ans.answers[i]
+            this.quiz.answers[i].setPosition(
+            /* x */ 120 + 240 * (i % 2), 
+            /* y */ 570 + 40 * (Math.floor(i/2) % 2)                
+            )
+        }
     }
 
-    getQuiz(){
+
+
+    selectAnswer(index){
+        if(index === this.quiz.correctIndex){
+            this.explode(this.quiz.sentence.x, this.quiz.sentence.y)
+        }else{
+            this.explode(this.quiz.answers[index].x, this.quiz.answers[index].y)
+        }
+    }
+
+    explode(x, y){
+        this.explosion.setPosition(x,y)
+        this.explosion.setVisible(true)
+        this.explosion.anims.play('explode')
+        //TODO: play sound
+    }
+
+    //#region Quiz Generators
+
+    getQuestion(){
         let index = this.randIndex(this.gameData.sentences.length);
         return this.gameData.sentences[index]
     }
 
-    getSentence(quiz){
-        console.log("GetSentence");
-        let text = this.processText(quiz.text);
+    /**
+     * @param {{ text: string; }} q
+     */
+    getSentence(q){
+        console.log("GetSentence")
+        let text = this.processText(q.text)
     
-        return text[0].toUpperCase() + text.slice(1);
-        // sentence.text = text[0].toUpperCase() + text.slice(1);
-    
-        // correctAnswer = ProcessText(data.sentences[index].correctAnswer);
-    
-        //Randomly choose correct place
-        // let correctIndex = RandIndex(4);
-        // let indices = ['c',0,1,2];
-        // shuffle(indices);
-    
-        // for(let i=0; i<4; i++){
-        //     let ans;
-        //     if(indices[i]==='c'){
-        //         ans = correctAnswer;
-        //     }else{
-        //         ans = ProcessText(data.sentences[index].wrongAnswer[indices[i]]);
-        //     }
-    
-        //     answers[i] = new answer(ans, i);
-            
-        // }
-    }
-
-    getCorrectAnswer(){
+        return text[0].toUpperCase() + text.slice(1)
 
     }
-    getWrongAnswers(){
 
+    getAnswers(q){
+        let correctIndex = -1
+        let indices = ['c', 0, 1, 2]
+        indices = this.shuffle(indices)
+        let answers = []
+        for(let i=0; i<4;i++){
+            let ans
+            if(indices[i] === 'c'){
+                ans = this.processText(q.correctAnswer)
+                correctIndex = i
+            }else{
+                ans = this.processText(q.wrongAnswer[indices[i]])
+            }
+            answers.push(ans)
+        }
+
+        return { answers, correctIndex }
+    }
+
+    getLivesString(livesLeft){
+        let str = '';
+        for(let i=0; i < livesLeft; i++){
+            str += HEART;
+        }
+        return str;
     }
     
     /**
@@ -209,4 +266,19 @@ export default class GrammarFallsScene extends Phaser.Scene
     randIndex(max){
         return Math.floor(Math.random() * max);
     }
+
+    shuffle(array){
+        let currentIndex = array.length, temp, randomIndex;
+        while (0 !== currentIndex){
+            randomIndex = this.randIndex(currentIndex);
+            currentIndex -= 1;
+    
+            temp = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temp;
+        }
+        return array;
+    }
+
+    //#endregion
 }
