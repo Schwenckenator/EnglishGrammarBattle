@@ -51,6 +51,7 @@ export default class MainTitleScreen extends Phaser.Scene
     }
 
     createInput(){
+        this.input.keyboard.removeAllKeys()
         let enter = this.input.keyboard.addKey('ENTER')
         enter.on(
             'down', 

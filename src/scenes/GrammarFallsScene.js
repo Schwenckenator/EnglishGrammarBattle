@@ -4,8 +4,18 @@ const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
 
 const FONT_MED = '24px Arial'
-
 const HEART = "\u200D\u2764\uFE0F\u200D"
+
+const DY = 25
+const SCORE_DY = 5
+
+const FREQ = 0.01
+const SCORE_FREQ = 0.001
+
+const X_CENTRE = 240
+const Y_CENTRE = 320
+const X_MAX = 480
+const Y_MAX = 640
 
 export default class GrammarFallsScene extends Phaser.Scene
 {
@@ -38,7 +48,10 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.quiz = {
             sentence: this.createQuizSentence(),
             answers: this.createAnswers(),
-            correctIndex: -1 // Don't know yet
+            correctIndex: -1, // Don't know yet
+            tick: 0,
+            sinOffset: 0,
+            freq: 0
         }
         this.score = 0
         this.scoreText = this.createScoreText()
@@ -50,20 +63,19 @@ export default class GrammarFallsScene extends Phaser.Scene
 
 
     update(){
-
+        this.moveSentence()
     }
-
 
 
     //#region Creator Methods
 
     createBackground(){
-        this.add.image(240, 160, SKY_KEY)
-        this.add.image(240, 480, SKY_KEY)
+        this.add.image(X_CENTRE, 160, SKY_KEY)
+        this.add.image(X_CENTRE, 480, SKY_KEY)
     }
 
     createExplosion(){
-        let exp = this.add.sprite(240, 320, EXP_KEY)
+        let exp = this.add.sprite(X_CENTRE, Y_CENTRE, EXP_KEY)
 
         this.anims.create({
             key: 'explode',
@@ -82,37 +94,39 @@ export default class GrammarFallsScene extends Phaser.Scene
     }
 
     createLivesText(){
-        return this.add.text(20, 45, `Lives: ${this.getLivesString(this.lives)}`, {font: FONT_MED})
+        return this.add.text(20, 45, this.getLivesString(this.lives), {font: FONT_MED})
     }
 
     createQuizSentence(){
-        let text = this.add.text(240, 240, 'BOO!', {font: FONT_MED}).setOrigin(0.5)
+        let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: FONT_MED}).setOrigin(0.5)
+        this.physics.world.enable(text, 0)
         return text
     }
     createAnswers() {
         const numAnswers = 4
         let answers = []
         for(let i=0;i<numAnswers;i++){
-            answers.push(this.add.text(240, 400 + 40 * i, `Ans ${i}`, {font: FONT_MED}).setOrigin(0.5))
+            answers.push(this.add.text(X_CENTRE, 400 + 40 * i, `Ans ${i}`, {font: FONT_MED}).setOrigin(0.5))
         }
 
         return answers
     }
 
     createInput(){
+        this.input.keyboard.removeAllKeys()
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
         keys.enter.on(
             'down', 
             () => {
-                console.log("ONE pressed")
+                console.log("Enter pressed")
             }
         )
-        keys.escape = this.input.keyboard.addKey('ESCAPE')
-        keys.escape.on(
+        keys.esc = this.input.keyboard.addKey('ESC')
+        keys.esc.on(
             'down', 
             () => {
-                console.log("ONE pressed")
+                console.log("Escape pressed")
             }
         )
         keys.one = this.input.keyboard.addKey('ONE')
@@ -166,8 +180,24 @@ export default class GrammarFallsScene extends Phaser.Scene
             /* y */ 570 + 40 * (Math.floor(i/2) % 2)                
             )
         }
-    }
 
+        this.quiz.sentence.setPosition(X_CENTRE, -10)
+        // @ts-ignore
+        this.quiz.sentence.body.setAllowGravity(false)
+        // @ts-ignore
+        this.quiz.sentence.body.setVelocity(0, DY + this.score * SCORE_DY)
+
+        this.quiz.sinOffset = Math.random() * 2 * Math.PI
+        this.quiz.freq = FREQ + this.score * SCORE_FREQ
+    }
+    
+    moveSentence() {
+        let amp = 50
+        let x = X_CENTRE + amp*(Math.sin(this.quiz.freq*this.quiz.tick + this.quiz.sinOffset))
+        let y = this.quiz.sentence.y
+        this.quiz.sentence.setPosition(x, y)
+        this.quiz.tick++
+    }
 
     /// First we could move the answer or do an animation
     /// But for now we just check the answer immediately
@@ -181,14 +211,19 @@ export default class GrammarFallsScene extends Phaser.Scene
         }else{
             this.wrongAnswer(index)
         }
+        this.newQuiz()
     }
 
     correctAnswer(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y)
+        this.score++
+        this.scoreText.text = `Score: ${this.score}`
     }
 
     wrongAnswer(i){
         this.explode(this.quiz.answers[i].x, this.quiz.answers[i].y)
+        this.lives--
+        this.livesText.text = this.getLivesString(this.lives)
     }
 
     explode(x, y){
@@ -236,7 +271,7 @@ export default class GrammarFallsScene extends Phaser.Scene
     }
 
     getLivesString(livesLeft){
-        let str = '';
+        let str = 'Lives: ';
         for(let i=0; i < livesLeft; i++){
             str += HEART;
         }

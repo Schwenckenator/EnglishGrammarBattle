@@ -24,14 +24,16 @@ export default class GameSelectScreen extends Phaser.Scene
 
 	preload()
     {
-        console.log("Preload Main Title")
+        console.log("Preload Game Select")
         this.load.image(SKY_KEY, 'assets/night-sky.png')
     }
 
     create()
     {
-        console.log("Create Main Title")
+        console.log("Create Game Select")
         this.gameList = this.createGameList()
+        this.optionList = this.createGameList()
+        this.optionList = this.createOptionList()
 
         this.createBackground()
         this.titles = this.createTitles()
@@ -67,6 +69,17 @@ export default class GameSelectScreen extends Phaser.Scene
         return list
     }
 
+    createOptionList(){
+        let list = this.createGameList()
+        list.push({
+            name: 'Return to Title', 
+            func: () => {
+                this.scene.start('Title-Screen')
+            }
+        })
+        return list
+    }
+
     createBackground(){
         this.add.image(240, 160, SKY_KEY)
         this.add.image(240, 480, SKY_KEY)
@@ -98,12 +111,25 @@ export default class GameSelectScreen extends Phaser.Scene
     }
 
     createInput(){
+        this.input.keyboard.removeAllKeys()
+        
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
         keys.enter.on(
             'down', 
             () => {
-                this.scene.start('Grammar-Falls')
+                //WTF is this?
+                this.optionList[this.selected].func()
+                //this.scene.start('Grammar-Falls')
+            }
+        )
+        keys.esc = this.input.keyboard.addKey('ESC')
+        keys.esc.on(
+            'down', 
+            () => {
+                console.log("Escape PRessed")
+                this.scene.stop('Game-Select')
+                this.scene.start('Title-Screen')
             }
         )
         keys.up = this.input.keyboard.addKey('UP')
