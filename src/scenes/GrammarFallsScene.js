@@ -4,6 +4,7 @@ const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
 
 const FONT_MED = '24px Arial'
+const FONT_BIG = '48px Arial'
 const HEART = "\u200D\u2764\uFE0F\u200D"
 
 const DY = 25
@@ -29,6 +30,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.quiz = undefined
         this.score = undefined
         this.lives = undefined
+        this.gameObjs = undefined
     }
 
 	preload()
@@ -119,14 +121,16 @@ export default class GrammarFallsScene extends Phaser.Scene
         keys.enter.on(
             'down', 
             () => {
-                console.log("Enter pressed")
+                console.log("GF Enter pressed")
             }
         )
         keys.esc = this.input.keyboard.addKey('ESC')
         keys.esc.on(
             'down', 
             () => {
-                console.log("Escape pressed")
+                console.log("GF Escape pressed")
+                this.scene.pause('Grammar-Falls')
+                this.scene.launch('Pause-Screen', { gameKey: 'Grammar-Falls'})
             }
         )
         keys.one = this.input.keyboard.addKey('ONE')

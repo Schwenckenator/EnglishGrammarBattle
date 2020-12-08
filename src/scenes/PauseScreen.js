@@ -8,11 +8,11 @@ const FONT_MED = '24px Arial'
 
 const SPACING = 60
 
-export default class GameSelectScreen extends Phaser.Scene
+export default class PauseScreen extends Phaser.Scene
 {
 	constructor()
 	{
-        super('Game-Select')
+        super('Pause-Screen')
 
         this.titles = []
         this.menus = []
@@ -20,18 +20,22 @@ export default class GameSelectScreen extends Phaser.Scene
         this.selected = undefined
         this.selBox = undefined
         this.gameList = undefined
+        this.currentGame = undefined
     }
 
 	preload()
     {
-        console.log("Preload Game Select")
+        console.log("Preload Pause Screen")
         this.load.image(SKY_KEY, 'assets/night-sky.png')
+    }
+
+    init(data){
+        this.currentGame = data.gameKey
     }
 
     create()
     {
-        console.log("Create Game Select")
-        this.gameList = this.createGameList()
+        console.log("Create Pause Screen")
         this.optionList = this.createOptionList()
 
         this.createBackground()
@@ -41,41 +45,25 @@ export default class GameSelectScreen extends Phaser.Scene
 
         this.selected = 0
         this.selBox = this.createBox()
-
-
-    }
-    createGameList(){
-        let list = [
-            { 
-                name: 'Grammar Falls', 
-                func: () => {
-                    this.scene.start('Grammar-Falls')
-                }
-            },
-            {
-                name: 'Spelling Spin', 
-                func: () => {
-                    //this.scene.start('Grammar-Falls')
-                }
-            },
-            {
-                name: 'Reading Rampage', 
-                func: () => {
-                    //this.scene.start('Grammar-Falls')
-                }
-            },
-        ]
-        return list
     }
 
     createOptionList(){
-        let list = this.createGameList()
-        list.push({
-            name: 'Return to Title', 
-            func: () => {
-                this.scene.start('Title-Screen')
+        let list = [
+            {
+                name: 'Return to Game', 
+                func: () => {
+                    this.scene.stop('Pause-Screen')
+                    this.scene.run(this.currentGame)
+                }
+            },
+            {
+                name: 'Exit Game', 
+                func: () => {
+                    this.scene.stop(this.currentGame)
+                    this.scene.start('Title-Screen')
+                }
             }
-        })
+        ]
         return list
     }
 
@@ -86,17 +74,15 @@ export default class GameSelectScreen extends Phaser.Scene
 
     createTitles(){
         let titles = [
-            this.add.text(240, 140, 'Choose Game', {font: FONT_MED}).setOrigin(0.5)
+            this.add.text(240, 140, 'PAUSED', {font: FONT_BIG}).setOrigin(0.5)
         ]
 
         return titles
     }
     createMenuItems(){
         let menus = []
-        for(let i=0; i<this.gameList.length; i++){
-            menus.push(this.add.text(240, 200 + SPACING * i, this.gameList[i].name, {font: FONT_BIG}).setOrigin(0.5))
-        }
-        menus.push(this.add.text(240, 200 + SPACING * this.gameList.length, 'Return to title', {font: FONT_MED}).setOrigin(0.5))
+        menus.push(this.add.text(240, 200, 'Return to Game', {font: FONT_MED}).setOrigin(0.5))
+        menus.push(this.add.text(240, 200 + SPACING, 'Exit Game', {font: FONT_MED}).setOrigin(0.5))
         return menus
     }
 
@@ -117,26 +103,26 @@ export default class GameSelectScreen extends Phaser.Scene
         keys.enter.on(
             'down', 
             () => {
-                //WTF is this?
+                console.log("PS Enter Pressed")
                 this.optionList[this.selected].func()
-                //this.scene.start('Grammar-Falls')
             }
         )
         keys.esc = this.input.keyboard.addKey('ESC')
         keys.esc.on(
             'down', 
             () => {
-                console.log("Escape PRessed")
-                this.scene.stop('Game-Select')
-                this.scene.start('Title-Screen')
+                console.log("PS Escape Pressed")
+                this.optionList[0].func() // Return to game
             }
         )
         keys.up = this.input.keyboard.addKey('UP')
         keys.up.on(
             'down',
             () => {
-                this.selected += this.gameList.length // +1 - 1
-                this.selected %= this.gameList.length + 1
+                console.log("PS Up Pressed")
+                // Same as down because there's only 2 options
+                this.selected += 1
+                this.selected %= 2
                 this.moveBox(this.selected)
             }
         )
@@ -144,8 +130,9 @@ export default class GameSelectScreen extends Phaser.Scene
         keys.down.on(
             'down',
             () => {
+                console.log("PS Down Pressed")
                 this.selected += 1
-                this.selected %= this.gameList.length + 1
+                this.selected %= 2
                 this.moveBox(this.selected)
             }
         )
