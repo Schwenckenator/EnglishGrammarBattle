@@ -7,8 +7,8 @@ const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
 const HEART = "\u200D\u2764\uFE0F\u200D"
 
-const DY = 25
-const SCORE_DY = 5
+const DY = 30
+const SCORE_DY = 3
 
 const FREQ = 0.01
 const SCORE_FREQ = 0.001
@@ -19,6 +19,8 @@ const X_MAX = 480
 const Y_MAX = 640
 
 const ANSWER_MOVE_TIME = 0.5
+
+const BOTTOM_Y = 540
 
 export default class GrammarFallsScene extends Phaser.Scene
 {
@@ -71,7 +73,6 @@ export default class GrammarFallsScene extends Phaser.Scene
 
 
     update(){
-        
         if(this.isAnswerSelected){
             let finished = this.moveAnswer()
             if(finished){
@@ -79,6 +80,10 @@ export default class GrammarFallsScene extends Phaser.Scene
             }
         }else{
             this.moveSentence()
+        }
+        if(this.quiz.sentence.y > BOTTOM_Y){
+            this.loseLife()
+            this.next()
         }
     }
 
@@ -99,7 +104,7 @@ export default class GrammarFallsScene extends Phaser.Scene
             frameRate: 36,
             hideOnComplete: true
         })
-
+        exp.setScale(2)
         exp.setVisible(false)
 
         return exp
@@ -199,6 +204,8 @@ export default class GrammarFallsScene extends Phaser.Scene
             this.quiz.answers[i].text = ans.answers[i]
             // @ts-ignore
             this.quiz.answers[i].body.setVelocity(0)
+            // @ts-ignore
+            this.quiz.answers[i].body.setAllowGravity(false)
             
             this.quiz.answers[i].setPosition(
             /* x */ 120 + 240 * (i % 2), 
@@ -259,33 +266,65 @@ export default class GrammarFallsScene extends Phaser.Scene
     checkAnswer(index){
         if(index === this.quiz.correctIndex){
             this.correctAnswer()
+            this.next()
         }else{
             this.wrongAnswer(index)
         }
-        // @ts-ignore
-        this.quiz.answers[this.selectedAnswer].body.setVelocity(0)
-        this.isAnswerSelected = false
-        this.selectedAnswer = -1
-        this.newQuiz()
+        
     }
 
     correctAnswer(){
-        this.explode(this.quiz.sentence.x, this.quiz.sentence.y)
+        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
         this.score++
         this.scoreText.text = `Score: ${this.score}`
     }
 
+    /**
+     * @param {number} i
+     */
     wrongAnswer(i){
-        this.explode(this.quiz.answers[i].x, this.quiz.answers[i].y)
-        this.lives--
-        this.livesText.text = this.getLivesString(this.lives)
+        let amp = 30
+        // @ts-ignore
+        this.quiz.sentence.body.setVelocity(Math.random()* amp - amp/2, -Math.random()* amp)
+        // @ts-ignore
+        this.quiz.sentence.body.setAllowGravity(true)
+        // @ts-ignore
+        this.quiz.answers[i].body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
+        // @ts-ignore
+        this.quiz.answers[i].body.setAllowGravity(true)
     }
 
-    explode(x, y){
+    loseLife(){
+        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
+        this.lives--
+        this.livesText.text = this.getLivesString(this.lives)
+        this.checkForGameOver()
+    }
+
+    explode(x, y, scale){
         this.explosion.setPosition(x,y)
+        this.explosion.setScale(scale)
         this.explosion.setVisible(true)
         this.explosion.anims.play('explode')
         //TODO: play sound
+    }
+
+    checkForGameOver(){
+        console.log("Checking for game over")
+        if(this.lives < 0){
+            //GAME OVER
+            this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', score: this.score })
+        }
+    }
+
+    next(){
+        if(this.selectedAnswer >= 0){
+            // @ts-ignore
+            this.quiz.answers[this.selectedAnswer].body.setVelocity(0)
+        }
+        this.isAnswerSelected = false
+        this.selectedAnswer = -1
+        this.newQuiz()
     }
 
     //#region Quiz Generators

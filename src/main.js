@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import GameOverScreen from './scenes/GameOverScreen'
 import GameSelectScreen from './scenes/GameSelectScene'
 import GrammarFallsScene from './scenes/GrammarFallsScene'
 import MainTitleScreen from './scenes/MainTitleScene'
@@ -11,10 +12,10 @@ const config = {
 	physics: {
 		default: 'arcade',
 		arcade: {
-			gravity: { y: 200 }
+			gravity: { y: 350 }
 		}
 	},
-	scene: [MainTitleScreen, GameSelectScreen, GrammarFallsScene, PauseScreen]
+	scene: [MainTitleScreen, GameSelectScreen, GrammarFallsScene, PauseScreen, GameOverScreen]
 }
 
 export default new Phaser.Game(config)
