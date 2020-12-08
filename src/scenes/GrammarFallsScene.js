@@ -18,6 +18,8 @@ const Y_CENTRE = 320
 const X_MAX = 480
 const Y_MAX = 640
 
+const ANSWER_MOVE_TIME = 0.5
+
 export default class GrammarFallsScene extends Phaser.Scene
 {
 	constructor()
@@ -31,6 +33,8 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.score = undefined
         this.lives = undefined
         this.gameObjs = undefined
+        this.selectedAnswer = undefined
+        this.isAnswerSelected = undefined
     }
 
 	preload()
@@ -61,11 +65,21 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.livesText = this.createLivesText()
         this.newQuiz()
         this.createInput()
+        this.selectedAnswer = -1
+        this.isAnswerSelected = false
     }
 
 
     update(){
-        this.moveSentence()
+        
+        if(this.isAnswerSelected){
+            let finished = this.moveAnswer()
+            if(finished){
+                this.checkAnswer(this.selectedAnswer)
+            }
+        }else{
+            this.moveSentence()
+        }
     }
 
 
@@ -108,7 +122,11 @@ export default class GrammarFallsScene extends Phaser.Scene
         const numAnswers = 4
         let answers = []
         for(let i=0;i<numAnswers;i++){
-            answers.push(this.add.text(X_CENTRE, 400 + 40 * i, `Ans ${i}`, {font: FONT_MED}).setOrigin(0.5))
+            let text = this.add.text(X_CENTRE, 400 + 40 * i, `Ans ${i}`, {font: FONT_MED}).setOrigin(0.5)
+            this.physics.world.enable(text, 0)
+            // @ts-ignore
+            text.body.setAllowGravity(false)
+            answers.push(text)
         }
 
         return answers
@@ -179,6 +197,9 @@ export default class GrammarFallsScene extends Phaser.Scene
         
         for(let i=0; i<4; i++){
             this.quiz.answers[i].text = ans.answers[i]
+            // @ts-ignore
+            this.quiz.answers[i].body.setVelocity(0)
+            
             this.quiz.answers[i].setPosition(
             /* x */ 120 + 240 * (i % 2), 
             /* y */ 570 + 40 * (Math.floor(i/2) % 2)                
@@ -203,10 +224,36 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.quiz.tick++
     }
 
-    /// First we could move the answer or do an animation
-    /// But for now we just check the answer immediately
+    moveAnswer(){
+        let xDiff = this.quiz.sentence.x - this.quiz.answers[this.selectedAnswer].x
+        let yDiff = this.quiz.sentence.y - this.quiz.answers[this.selectedAnswer].y
+        
+        let sqrDist = xDiff * xDiff + yDiff * yDiff
+        return sqrDist < 0.1
+    }
+
     selectAnswer(index){
-        this.checkAnswer(index)
+        this.selectedAnswer = index
+        this.isAnswerSelected = true
+        this.setAnswerDxDy(
+            this.quiz.answers[index], 
+            this.quiz.sentence, 
+            ANSWER_MOVE_TIME)
+        // @ts-ignore
+        this.quiz.sentence.body.setVelocity(0)
+    }
+    
+    /**
+     * @param {Phaser.GameObjects.Text} ansObj
+     * @param {Phaser.GameObjects.Text} senObj
+     * @param {number} moveTime
+     */
+    setAnswerDxDy(ansObj, senObj, moveTime){
+        // @ts-ignore
+        ansObj.body.setVelocity(
+            (senObj.x - ansObj.x) / moveTime,
+            (senObj.y - ansObj.y) / moveTime
+        )
     }
 
     checkAnswer(index){
@@ -215,6 +262,10 @@ export default class GrammarFallsScene extends Phaser.Scene
         }else{
             this.wrongAnswer(index)
         }
+        // @ts-ignore
+        this.quiz.answers[this.selectedAnswer].body.setVelocity(0)
+        this.isAnswerSelected = false
+        this.selectedAnswer = -1
         this.newQuiz()
     }
 
