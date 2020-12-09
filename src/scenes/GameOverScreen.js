@@ -88,7 +88,7 @@ export default class GameOverScreen extends Phaser.Scene
     }
 
     createBox(){
-        let box = this.add.rectangle(240, 200, 420, SPACING)
+        let box = this.add.rectangle(240, 220, 420, SPACING - 20)
         box.isStroked = true
         box.strokeColor = 0xeeeeee
         box.lineWidth = 3

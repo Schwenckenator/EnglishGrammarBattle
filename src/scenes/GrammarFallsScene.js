@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
 
-const SKY_KEY = 'sky';
-const EXP_KEY = 'exp';
+const SKY_KEY = 'sky'
+const EXP_KEY = 'exp'
+const UI_KEY = 'ui'
 
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
@@ -34,6 +35,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.quiz = undefined
         this.score = undefined
         this.lives = undefined
+        this.lostLife = undefined
         this.gameObjs = undefined
         this.selectedAnswer = undefined
         this.isAnswerSelected = undefined
@@ -44,6 +46,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         console.log("Preload Grammar Falls")
         this.load.json('sentences', 'assets/Sentences.json')
         this.load.image(SKY_KEY, 'assets/night-sky.png')
+        this.load.image(UI_KEY, 'assets/BottomMenu.png')
         this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
     }
 
@@ -52,6 +55,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         console.log("Create Grammar Falls")
         this.gameData = this.cache.json.get('sentences')
         this.createBackground()
+        this.add.image(240, 590, UI_KEY)
         this.explosion = this.createExplosion()
         this.quiz = {
             sentence: this.createQuizSentence(),
@@ -65,6 +69,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.scoreText = this.createScoreText()
         this.lives = 3
         this.livesText = this.createLivesText()
+        this.lostLife = false
         this.newQuiz()
         this.createInput()
         this.selectedAnswer = -1
@@ -81,7 +86,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         }else{
             this.moveSentence()
         }
-        if(this.quiz.sentence.y > BOTTOM_Y){
+        if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
             this.loseLife()
             this.next()
         }
@@ -201,6 +206,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.quiz.correctIndex = ans.correctIndex
         
         for(let i=0; i<4; i++){
+            this.quiz.answers[i].setVisible(true)
             this.quiz.answers[i].text = ans.answers[i]
             // @ts-ignore
             this.quiz.answers[i].body.setVelocity(0)
@@ -209,9 +215,10 @@ export default class GrammarFallsScene extends Phaser.Scene
             
             this.quiz.answers[i].setPosition(
             /* x */ 120 + 240 * (i % 2), 
-            /* y */ 570 + 40 * (Math.floor(i/2) % 2)                
+            /* y */ 565 + 50 * (Math.floor(i/2) % 2)                
             )
         }
+        this.quiz.sentence.setVisible(true)
 
         this.quiz.sentence.setPosition(X_CENTRE, -10)
         // @ts-ignore
@@ -221,6 +228,7 @@ export default class GrammarFallsScene extends Phaser.Scene
 
         this.quiz.sinOffset = Math.random() * 2 * Math.PI
         this.quiz.freq = FREQ + this.score * SCORE_FREQ
+        this.lostLife = false
     }
     
     moveSentence() {
@@ -299,6 +307,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.lives--
         this.livesText.text = this.getLivesString(this.lives)
         this.checkForGameOver()
+        this.lostLife = true
     }
 
     explode(x, y, scale){
@@ -313,7 +322,9 @@ export default class GrammarFallsScene extends Phaser.Scene
         console.log("Checking for game over")
         if(this.lives < 0){
             //GAME OVER
-            this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', score: this.score })
+            this.time.delayedCall(500, () => {
+                this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', score: this.score })
+            }, null, this)
         }
     }
 
@@ -321,10 +332,13 @@ export default class GrammarFallsScene extends Phaser.Scene
         if(this.selectedAnswer >= 0){
             // @ts-ignore
             this.quiz.answers[this.selectedAnswer].body.setVelocity(0)
+            this.quiz.answers[this.selectedAnswer].setVisible(false)
         }
+        this.quiz.sentence.setVisible(false)
         this.isAnswerSelected = false
         this.selectedAnswer = -1
-        this.newQuiz()
+        this.time.delayedCall(250, this.newQuiz, null, this)
+        //this.newQuiz()
     }
 
     //#region Quiz Generators
