@@ -208,8 +208,8 @@ export default class GrammarFallsScene extends Phaser.Scene
      */
     createTouchInput(answers){
         for(let i=0; i<answers.length; i++){
-            let w = answers[i].width
-            let h = answers[i].height
+            let w = 200
+            let h = 60
             let x = answers[i].x - w /2
             let y = answers[i].y - h / 2
             console.log(`Touch input answer ${i}`)

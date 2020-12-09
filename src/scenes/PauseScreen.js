@@ -144,7 +144,19 @@ export default class PauseScreen extends Phaser.Scene
 
     createTouchInput(menus){
         for(let i=0; i<menus.length; i++){
-            menus[i].setInteractive()
+            let w = 400
+            let h = 60
+            let x = menus[i].x - w / 2
+            let y = menus[i].y - h / 2
+            let x2 = x + w
+            let y2 = y + h
+
+            let rect = new Phaser.Geom.Rectangle(0, 0, w, h)
+            //Phaser.Geom.Rectangle.FromXY(x, y, x2, y2)
+
+            //console.log(`x: ${x}, y: ${y}, w: ${w}, h: ${h}`)
+            //console.log(`x: ${x}, y: ${y}, x2: ${x2}, y2: ${y2}`)
+            menus[i].setInteractive(rect, Phaser.Geom.Rectangle.Contains)
             menus[i].on(
                 'pointerdown',
                 () => {
@@ -155,8 +167,8 @@ export default class PauseScreen extends Phaser.Scene
             )
             menus[i].on(
                 'pointerover',
-                () => {
-                    console.log(`Answer ${i} touched!`)
+                (pointer) => {
+                    console.log(`pointer x:${pointer.x}, y:${pointer.y}`)
                     //this.selectAnswer(i)
                     this.selected = i
                     this.moveBox(i)
