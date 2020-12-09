@@ -56,8 +56,19 @@ export default class MainTitleScreen extends Phaser.Scene
         enter.on(
             'down', 
             () => {
-                this.scene.start('Game-Select')
+                this.select()
             }
         )
+
+        this.input.on(
+            'pointerdown',
+            () => {
+                this.select()
+            }
+        )
+    }
+
+    select(){
+        this.scene.start('Game-Select')
     }
 }

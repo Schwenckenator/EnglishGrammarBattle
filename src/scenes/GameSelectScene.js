@@ -37,12 +37,12 @@ export default class GameSelectScreen extends Phaser.Scene
         this.createBackground()
         this.titles = this.createTitles()
         this.menus = this.createMenuItems()
-        this.keys = this.createInput()
+        this.keys = this.createKeyboardInput()
 
         this.selected = 0
         this.selBox = this.createBox()
 
-
+        this.createTouchInput(this.menus)
     }
     createGameList(){
         let list = [
@@ -109,7 +109,7 @@ export default class GameSelectScreen extends Phaser.Scene
         return box
     }
 
-    createInput(){
+    createKeyboardInput(){
         this.input.keyboard.removeAllKeys()
         
         let keys = {}
@@ -118,7 +118,7 @@ export default class GameSelectScreen extends Phaser.Scene
             'down', 
             () => {
                 //WTF is this?
-                this.optionList[this.selected].func()
+                this.select(this.selected);
                 //this.scene.start('Grammar-Falls')
             }
         )
@@ -127,8 +127,7 @@ export default class GameSelectScreen extends Phaser.Scene
             'down', 
             () => {
                 console.log("Escape PRessed")
-                this.scene.stop('Game-Select')
-                this.scene.start('Title-Screen')
+                this.returnToTitle();
             }
         )
         keys.up = this.input.keyboard.addKey('UP')
@@ -151,6 +150,38 @@ export default class GameSelectScreen extends Phaser.Scene
         )
         
         return keys
+    }
+
+    select(index) {
+        this.optionList[index].func()
+    }
+
+    returnToTitle() {
+        this.scene.stop('Game-Select')
+        this.scene.start('Title-Screen')
+    }
+
+    createTouchInput(menus){
+        for(let i=0; i<menus.length; i++){
+            menus[i].setInteractive()
+            menus[i].on(
+                'pointerdown',
+                () => {
+                    console.log(`Answer ${i} touched!`)
+                    //this.selectAnswer(i)
+                    this.select(i)
+                }
+            )
+            menus[i].on(
+                'pointerover',
+                () => {
+                    console.log(`Answer ${i} touched!`)
+                    //this.selectAnswer(i)
+                    this.selected = i
+                    this.moveBox(i)
+                }
+            )
+        }
     }
 
     /**

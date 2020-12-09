@@ -45,6 +45,8 @@ export default class PauseScreen extends Phaser.Scene
 
         this.selected = 0
         this.selBox = this.createBox()
+
+        this.createTouchInput(this.menus)
     }
 
     createOptionList(){
@@ -138,6 +140,33 @@ export default class PauseScreen extends Phaser.Scene
         )
         
         return keys
+    }
+
+    createTouchInput(menus){
+        for(let i=0; i<menus.length; i++){
+            menus[i].setInteractive()
+            menus[i].on(
+                'pointerdown',
+                () => {
+                    console.log(`Answer ${i} touched!`)
+                    //this.selectAnswer(i)
+                    this.select(i)
+                }
+            )
+            menus[i].on(
+                'pointerover',
+                () => {
+                    console.log(`Answer ${i} touched!`)
+                    //this.selectAnswer(i)
+                    this.selected = i
+                    this.moveBox(i)
+                }
+            )
+        }
+    }
+
+    select(index){
+        this.optionList[index].func()
     }
 
     /**

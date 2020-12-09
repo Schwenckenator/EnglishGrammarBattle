@@ -43,10 +43,12 @@ export default class GameOverScreen extends Phaser.Scene
         this.createBackground()
         this.titles = this.createTitles()
         this.menus = this.createMenuItems()
-        this.keys = this.createInput()
+        this.keys = this.createKeyboardInput()
 
         this.selected = 0
         this.selBox = this.createBox()
+
+        this.createTouchInput(this.menus)
     }
 
     createOptionList(){
@@ -96,7 +98,7 @@ export default class GameOverScreen extends Phaser.Scene
         return box
     }
 
-    createInput(){
+    createKeyboardInput(){
         this.input.keyboard.removeAllKeys()
         
         let keys = {}
@@ -105,7 +107,7 @@ export default class GameOverScreen extends Phaser.Scene
             'down', 
             () => {
                 console.log("PS Enter Pressed")
-                this.optionList[this.selected].func()
+                this.select(this.selected)
             }
         )
         keys.esc = this.input.keyboard.addKey('ESC')
@@ -113,7 +115,7 @@ export default class GameOverScreen extends Phaser.Scene
             'down', 
             () => {
                 console.log("PS Escape Pressed")
-                this.optionList[0].func() // Return to game
+                this.select(0)// Return to game
             }
         )
         keys.up = this.input.keyboard.addKey('UP')
@@ -139,6 +141,33 @@ export default class GameOverScreen extends Phaser.Scene
         )
         
         return keys
+    }
+
+    createTouchInput(menus){
+        for(let i=0; i<menus.length; i++){
+            menus[i].setInteractive()
+            menus[i].on(
+                'pointerdown',
+                () => {
+                    console.log(`Answer ${i} touched!`)
+                    //this.selectAnswer(i)
+                    this.select(i)
+                }
+            )
+            menus[i].on(
+                'pointerover',
+                () => {
+                    console.log(`Answer ${i} touched!`)
+                    //this.selectAnswer(i)
+                    this.selected = i
+                    this.moveBox(i)
+                }
+            )
+        }
+    }
+
+    select(index){
+        this.optionList[index].func()
     }
 
     /**
