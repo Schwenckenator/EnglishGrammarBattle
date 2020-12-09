@@ -71,9 +71,10 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.livesText = this.createLivesText()
         this.lostLife = false
         this.newQuiz()
-        this.createInput()
+        this.createKeyboardInput()
         this.selectedAnswer = -1
         this.isAnswerSelected = false
+        this.createTouchInput(this.quiz.answers)
     }
 
 
@@ -142,7 +143,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         return answers
     }
 
-    createInput(){
+    createKeyboardInput(){
         this.input.keyboard.removeAllKeys()
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
@@ -157,8 +158,7 @@ export default class GrammarFallsScene extends Phaser.Scene
             'down', 
             () => {
                 console.log("GF Escape pressed")
-                this.scene.pause('Grammar-Falls')
-                this.scene.launch('Pause-Screen', { gameKey: 'Grammar-Falls'})
+                this.pause()
             }
         )
         keys.one = this.input.keyboard.addKey('ONE')
@@ -194,6 +194,46 @@ export default class GrammarFallsScene extends Phaser.Scene
             }
         )
         return keys
+    }
+
+
+
+    pause() {
+        this.scene.pause('Grammar-Falls')
+        this.scene.launch('Pause-Screen', { gameKey: 'Grammar-Falls' })
+    }
+
+    /**
+     * @param {Phaser.GameObjects.Text[]} answers
+     */
+    createTouchInput(answers){
+        for(let i=0; i<answers.length; i++){
+            let w = answers[i].width
+            let h = answers[i].height
+            let x = answers[i].x - w /2
+            let y = answers[i].y - h / 2
+            console.log(`Touch input answer ${i}`)
+            answers[i].setInteractive()
+            answers[i].on(
+                'pointerdown',
+                () => {
+                    console.log(`Answer ${i} touched!`)
+                    this.selectAnswer(i)
+                }
+            )
+        }
+
+        
+        this.input.on(
+            'pointerdown',
+            (pointer) => {
+                console.log("Pointer down")
+                if(pointer.y < 500){
+                    this.pause()
+                }
+            }
+        )
+
     }
 
     //#endregion
