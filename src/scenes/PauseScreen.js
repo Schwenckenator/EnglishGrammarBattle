@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import Game from '../main'
 
 const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
@@ -144,18 +145,21 @@ export default class PauseScreen extends Phaser.Scene
 
     createTouchInput(menus){
         for(let i=0; i<menus.length; i++){
-            let w = 400
+            let w = 440
             let h = 60
-            let x = menus[i].x - w / 2
-            let y = menus[i].y - h / 2
-            let x2 = x + w
-            let y2 = y + h
+            //let x = menus[i].x - w / 2
+            //let y = menus[i].y - h / 2
+            //let x2 = x + w
+            //let y2 = y + h
 
-            let rect = new Phaser.Geom.Rectangle(0, 0, w, h)
+            let rect = new Phaser.Geom.Rectangle(-w/3, -h/3, w, h)
+            rect = Phaser.Geom.Rectangle.FromXY(-220, -30, 220, 30)
+            
             //Phaser.Geom.Rectangle.FromXY(x, y, x2, y2)
 
             //console.log(`x: ${x}, y: ${y}, w: ${w}, h: ${h}`)
             //console.log(`x: ${x}, y: ${y}, x2: ${x2}, y2: ${y2}`)
+            
             menus[i].setInteractive(rect, Phaser.Geom.Rectangle.Contains)
             menus[i].on(
                 'pointerdown',
