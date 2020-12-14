@@ -6,13 +6,13 @@ const EXP_KEY = 'exp';
 const FONT_BIG = '48px Arial'
 const FONT_MED = '24px Arial'
 
-const SPACING = 45
+const SPACING = 60
 
-export default class GameOverScreen extends Phaser.Scene
+export default class NextLevelScreen extends Phaser.Scene
 {
 	constructor()
 	{
-        super('Game-Over-Screen')
+        super('Next-Level-Screen')
 
         this.titles = []
         this.menus = []
@@ -22,7 +22,6 @@ export default class GameOverScreen extends Phaser.Scene
         this.gameList = undefined
         this.lastGame = undefined
         this.score = undefined
-        this.level = undefined
     }
 
 	preload()
@@ -34,41 +33,38 @@ export default class GameOverScreen extends Phaser.Scene
     init(data){
         this.lastGame = data.gameKey
         this.score = data.score
-        this.level = data.level
+        this.lastLevel = data.level
     }
 
     create()
     {
-        console.log("Create Game Over Screen")
-        this.optionList = this.createOptionList()
+        console.log("Create Next Level Screen")
 
         this.createBackground()
         this.titles = this.createTitles()
-        this.menus = this.createMenuItems()
+        // this.menus = this.createMenuItems()
         this.keys = this.createKeyboardInput()
 
-        this.selected = 0
-        this.selBox = this.createBox()
+        // this.selected = 0
+        // this.selBox = this.createBox()
+        this.time.delayedCall(3000, () => {
+            this.scene.start('Grammar-Falls', { level: this.lastLevel + 1, score: this.score })
+        }, null, this)
 
-        this.createTouchInput(this.menus)
-    }
+        this.time.delayedCall(500, () => {
+            this.titles[2].text += '.'
+        }, null, this)
 
-    createOptionList(){
-        let list = [
-            {
-                name: 'Play again', 
-                func: () => {
-                    this.scene.start(this.lastGame)
-                }
-            },
-            {
-                name: 'Exit Game', 
-                func: () => {
-                    this.scene.start('Title-Screen')
-                }
-            }
-        ]
-        return list
+        this.time.delayedCall(1000, () => {
+            this.titles[2].text += '.'
+        }, null, this)
+        this.time.delayedCall(1500, () => {
+            this.titles[2].text += '.'
+        }, null, this)
+        this.time.delayedCall(2000, () => {
+            this.titles[2].text += '.'
+        }, null, this)
+
     }
 
     createBackground(){
@@ -78,27 +74,12 @@ export default class GameOverScreen extends Phaser.Scene
 
     createTitles(){
         let titles = [
-            this.add.text(240, 140, 'GAME OVER', {font: FONT_BIG}).setOrigin(0.5),
-            this.add.text(240, 180, `Level: ${this.level}`, {font: FONT_MED}).setOrigin(0.5),
-            this.add.text(240, 220, `Score: ${this.score}`, {font: FONT_MED}).setOrigin(0.5)
+            this.add.text(240, 140, `Level ${this.lastLevel} Complete!`, {font: FONT_BIG}).setOrigin(0.5),
+            this.add.text(240, 180, `Score: ${this.score}`, {font: FONT_MED}).setOrigin(0.5),
+            this.add.text(240, 220, `Next Level: ${this.lastLevel + 1}.`, {font: FONT_MED}).setOrigin(0.5),
         ]
 
         return titles
-    }
-    createMenuItems(){
-        let menus = []
-        menus.push(this.add.text(240, 275, 'Play again', {font: FONT_MED}).setOrigin(0.5))
-        menus.push(this.add.text(240, 275 + SPACING, 'Exit Game', {font: FONT_MED}).setOrigin(0.5))
-        return menus
-    }
-
-    createBox(){
-        let box = this.add.rectangle(240, 275, 420, SPACING - 10)
-        box.isStroked = true
-        box.strokeColor = 0xeeeeee
-        box.lineWidth = 3
-        box.setOrigin(0.5)
-        return box
     }
 
     createKeyboardInput(){
@@ -110,7 +91,7 @@ export default class GameOverScreen extends Phaser.Scene
             'down', 
             () => {
                 console.log("PS Enter Pressed")
-                this.select(this.selected)
+                //this.select(this.selected)
             }
         )
         keys.esc = this.input.keyboard.addKey('ESC')
@@ -118,7 +99,7 @@ export default class GameOverScreen extends Phaser.Scene
             'down', 
             () => {
                 console.log("PS Escape Pressed")
-                this.select(0)// Return to game
+                //this.select(0)// Return to game
             }
         )
         keys.up = this.input.keyboard.addKey('UP')
@@ -127,9 +108,9 @@ export default class GameOverScreen extends Phaser.Scene
             () => {
                 console.log("PS Up Pressed")
                 // Same as down because there's only 2 options
-                this.selected += 1
-                this.selected %= 2
-                this.moveBox(this.selected)
+                // this.selected += 1
+                // this.selected %= 2
+                // this.moveBox(this.selected)
             }
         )
         keys.down = this.input.keyboard.addKey('DOWN')
@@ -137,9 +118,9 @@ export default class GameOverScreen extends Phaser.Scene
             'down',
             () => {
                 console.log("PS Down Pressed")
-                this.selected += 1
-                this.selected %= 2
-                this.moveBox(this.selected)
+                // this.selected += 1
+                // this.selected %= 2
+                // this.moveBox(this.selected)
             }
         )
         
@@ -154,7 +135,7 @@ export default class GameOverScreen extends Phaser.Scene
                 () => {
                     console.log(`Answer ${i} touched!`)
                     //this.selectAnswer(i)
-                    this.select(i)
+                    // this.select(i)
                 }
             )
             menus[i].on(
@@ -162,21 +143,21 @@ export default class GameOverScreen extends Phaser.Scene
                 () => {
                     console.log(`Answer ${i} touched!`)
                     //this.selectAnswer(i)
-                    this.selected = i
-                    this.moveBox(i)
+                    // this.selected = i
+                    // this.moveBox(i)
                 }
             )
         }
     }
 
-    select(index){
-        this.optionList[index].func()
-    }
+    // select(index){
+    //     this.optionList[index].func()
+    // }
 
     /**
      * @param {number} pos
      */
     moveBox(pos){
-        this.selBox.setPosition(240, 275+SPACING*pos)
+        this.selBox.setPosition(240, 220+SPACING*pos)
     }
 }

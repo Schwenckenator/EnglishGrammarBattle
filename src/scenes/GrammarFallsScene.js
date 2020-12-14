@@ -8,8 +8,8 @@ const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
 const HEART = "\u200D\u2764\uFE0F\u200D"
 
-const DY = 30
-const SCORE_DY = 3
+const LEVEL_DY = 5
+const DY = 30 - LEVEL_DY
 
 const FREQ = 0.01
 const SCORE_FREQ = 0.001
@@ -22,6 +22,8 @@ const Y_MAX = 640
 const ANSWER_MOVE_TIME = 0.5
 
 const BOTTOM_Y = 540
+
+const NEXT_LEVEL_TARGET = 10
 
 export default class GrammarFallsScene extends Phaser.Scene
 {
@@ -39,6 +41,8 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.gameObjs = undefined
         this.selectedAnswer = undefined
         this.isAnswerSelected = undefined
+        this.level = undefined
+        
     }
 
 	preload()
@@ -48,6 +52,12 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.load.image(SKY_KEY, 'assets/night-sky.png')
         this.load.image(UI_KEY, 'assets/BottomMenu.png')
         this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
+    }
+
+    init(data){
+        this.level = data.level
+        this.score = data.score
+        this.lives = 3
     }
 
     create()
@@ -65,7 +75,7 @@ export default class GrammarFallsScene extends Phaser.Scene
             sinOffset: 0,
             freq: 0
         }
-        this.score = 0
+        //this.score = 0
         this.scoreText = this.createScoreText()
         this.lives = 3
         this.livesText = this.createLivesText()
@@ -75,6 +85,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.selectedAnswer = -1
         this.isAnswerSelected = false
         this.createTouchInput(this.quiz.answers)
+        //this.level = 1;
     }
 
 
@@ -89,6 +100,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         }
         if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
             this.loseLife()
+            this.endQuestion()
             this.next()
         }
     }
@@ -264,10 +276,10 @@ export default class GrammarFallsScene extends Phaser.Scene
         // @ts-ignore
         this.quiz.sentence.body.setAllowGravity(false)
         // @ts-ignore
-        this.quiz.sentence.body.setVelocity(0, DY + this.score * SCORE_DY)
+        this.quiz.sentence.body.setVelocity(0, DY + this.level * LEVEL_DY)
 
         this.quiz.sinOffset = Math.random() * 2 * Math.PI
-        this.quiz.freq = FREQ + this.score * SCORE_FREQ
+        this.quiz.freq = FREQ + this.level * SCORE_FREQ
         this.lostLife = false
     }
     
@@ -314,7 +326,7 @@ export default class GrammarFallsScene extends Phaser.Scene
     checkAnswer(index){
         if(index === this.quiz.correctIndex){
             this.correctAnswer()
-            this.next()
+            
         }else{
             this.wrongAnswer(index)
         }
@@ -325,6 +337,15 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
         this.score++
         this.scoreText.text = `Score: ${this.score}`
+        this.endQuestion()
+
+        if(this.checkForNextLevel()){
+            this.time.delayedCall(500, () => {
+                    this.scene.start('Next-Level-Screen', { gameKey: 'Grammar-Falls', score: this.score, level: this.level })
+                }, null, this)
+        }else{
+            this.next()
+        }
     }
 
     /**
@@ -363,12 +384,20 @@ export default class GrammarFallsScene extends Phaser.Scene
         if(this.lives < 0){
             //GAME OVER
             this.time.delayedCall(500, () => {
-                this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', score: this.score })
+                this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', level: this.level, score: this.score })
             }, null, this)
         }
     }
 
+    checkForNextLevel(){
+        return this.score % NEXT_LEVEL_TARGET == 0 // Hit a multiple level target
+    }
+
     next(){
+        this.time.delayedCall(250, this.newQuiz, null, this)
+    }
+
+    endQuestion(){
         if(this.selectedAnswer >= 0){
             // @ts-ignore
             this.quiz.answers[this.selectedAnswer].body.setVelocity(0)
@@ -377,8 +406,6 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.quiz.sentence.setVisible(false)
         this.isAnswerSelected = false
         this.selectedAnswer = -1
-        this.time.delayedCall(250, this.newQuiz, null, this)
-        //this.newQuiz()
     }
 
     //#region Quiz Generators
