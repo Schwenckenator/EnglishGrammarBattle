@@ -1,3 +1,0 @@
-grammarFalls = {
-    run: GrammarFallsGame
-}
