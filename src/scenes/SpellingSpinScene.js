@@ -57,7 +57,7 @@ export default class SpellingSpinScene extends Phaser.Scene
         console.log("Preload Spelling Spin")
         this.load.json('J2Ewords', 'assets/J2Ewords.json')
         this.load.image(SKY_KEY, 'assets/night-sky.png')
-        this.load.image(UI_KEY, 'assets/BottomMenu.png')
+        this.load.image(UI_KEY, 'assets/HorizontalLine.png')
         this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
     }
 
@@ -72,7 +72,7 @@ export default class SpellingSpinScene extends Phaser.Scene
         console.log("Create Spelling Spin")
         this.gameData = this.cache.json.get('J2Ewords')
         this.createBackground()
-        //this.add.image(240, 590, UI_KEY)
+        this.add.image(240, 530, UI_KEY)
         this.explosion = this.createExplosion()
         this.quiz = {
             sentence: this.createQuizSentence(),
@@ -272,7 +272,7 @@ export default class SpellingSpinScene extends Phaser.Scene
             this.quiz.letters[i].body.setAllowGravity(false)
             
             let centreX = 240
-            let centreY = 565
+            let centreY = 580
             
             // let radius = 50
 
@@ -431,7 +431,7 @@ export default class SpellingSpinScene extends Phaser.Scene
         if(this.lives < 0){
             //GAME OVER
             this.time.delayedCall(500, () => {
-                this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', level: this.level, score: this.score })
+                this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
             }, null, this)
         }
     }
