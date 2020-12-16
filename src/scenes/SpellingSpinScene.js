@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
-const UI_KEY = 'ui'
+const UI_KEY = 'ui-line'
 
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
