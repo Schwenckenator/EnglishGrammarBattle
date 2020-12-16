@@ -20,6 +20,7 @@ const X_MAX = 480
 const Y_MAX = 640
 
 const ANSWER_MOVE_TIME = 0.5
+const ANSWER_POS = {x: X_CENTRE, y:500}
 
 const BOTTOM_Y = 500
 
@@ -95,19 +96,19 @@ export default class SpellingSpinScene extends Phaser.Scene
 
 
     update(){
-        // if(this.isAnswerSelected){
-        //     let finished = this.moveAnswer()
-        //     if(finished){
-        //         this.checkAnswer(this.selectedAnswer)
-        //     }
-        // }else{
-        //     this.moveSentence()
-        // }
-        this.moveSentence()
+        if(this.isAnswerSelected){
+            if(this.isClose(this.quiz.answerText, this.quiz.sentence)){
+                this.checkAnswer()
+            }
+        }else{
+            this.moveSentence()
+        }
         if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
             this.loseLife()
             this.endQuestion()
-            this.next()
+            if(this.lives >= 0){
+                this.next()
+            }
         }
     }
 
@@ -148,7 +149,10 @@ export default class SpellingSpinScene extends Phaser.Scene
         return text
     }
     createAnswerText(){
-        let text = this.add.text(X_CENTRE, 500, `Text`, {font: FONT_BIG}).setOrigin(0.5)
+        let text = this.add.text(ANSWER_POS.x, ANSWER_POS.y, `Text`, {font: FONT_BIG}).setOrigin(0.5)
+        this.physics.world.enable(text, 0)
+        // @ts-ignore
+        text.body.setAllowGravity(false)
         text.setVisible(false)
         return text
     }
@@ -241,6 +245,7 @@ export default class SpellingSpinScene extends Phaser.Scene
         this.quiz.sentence.text = this.getSentence(q)
         this.quiz.answerText.text = ""
         this.quiz.answerText.setVisible(false)
+        this.quiz.answerText.setPosition(ANSWER_POS.x, ANSWER_POS.y)
         this.quiz.answer = q.english
         let obj = this.getLetters(q)
         let ls = obj.letters
@@ -338,12 +343,11 @@ export default class SpellingSpinScene extends Phaser.Scene
         this.quiz.answerText.text += letter.text
 
         if(this.quiz.playerAnswer.length === this.quiz.answer.length){
-            //Check answer
-            if(this.quiz.playerAnswer === this.quiz.answer){
-                this.correctAnswer()
-            }else{
-                this.wrongAnswer()
-            }
+            //Shoot answer
+            this.isAnswerSelected = true
+            // @ts-ignore
+            this.quiz.sentence.body.setVelocity(0)
+            this.fireAnswer(this.quiz.answerText, this.quiz.sentence, ANSWER_MOVE_TIME)
         }
     }
     
@@ -353,6 +357,28 @@ export default class SpellingSpinScene extends Phaser.Scene
         let y = this.quiz.sentence.y
         this.quiz.sentence.setPosition(x, y)
         this.quiz.tick++
+    }
+
+    fireAnswer(ansObj, quizObj, moveTime){
+        ansObj.body.setVelocity(
+            (quizObj.x - ansObj.x) / moveTime,
+            (quizObj.y - ansObj.y) / moveTime
+        )
+    }
+
+    isClose(obj1, obj2){
+        let x = obj1.x - obj2.x
+        let y = obj1.y - obj2.y
+        let sqrDist = x * x + y * y
+        return sqrDist < 0.1
+    }
+
+    checkAnswer(){
+        if(this.quiz.playerAnswer === this.quiz.answer){
+            this.correctAnswer()
+        }else{
+            this.wrongAnswer()
+        }
     }
 
     correctAnswer(){
@@ -378,13 +404,14 @@ export default class SpellingSpinScene extends Phaser.Scene
         // @ts-ignore
         this.quiz.sentence.body.setAllowGravity(true)
         // @ts-ignore
-        //this.quiz.answers[i].body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
+        this.quiz.answerText.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
         // @ts-ignore
-        //this.quiz.answers[i].body.setAllowGravity(true)
+        this.quiz.answerText.body.setAllowGravity(true)
     }
 
     loseLife(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
+        this.quiz.answerText.setVisible(false)
         this.lives--
         this.livesText.text = this.getLivesString(this.lives)
         this.checkForGameOver()
@@ -418,16 +445,18 @@ export default class SpellingSpinScene extends Phaser.Scene
     }
 
     endQuestion(){
-        // if(this.selectedAnswer >= 0){
-        //     // @ts-ignore
-        //     this.quiz.answers[this.selectedAnswer].body.setVelocity(0)
-        //     this.quiz.answers[this.selectedAnswer].setVisible(false)
-        // }
+        // @ts-ignore
+        this.quiz.answerText.body.setVelocity(0)
+        // @ts-ignore
+        this.quiz.answerText.body.setAllowGravity(false)
+        this.quiz.answerText.setVisible(false)
+        
         for(let i=0; i<this.quiz.letters.length; i++){
             this.quiz.letters[i].setVisible(false)
         }
         this.quiz.sentence.setVisible(false)
         this.quiz.playerAnswer = ""
+        this.isAnswerSelected = false
     }
 
     //#region Quiz Generators
