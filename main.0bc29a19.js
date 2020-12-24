@@ -21,4 +21,4 @@ var t,e=require("process"),i=arguments[3];!function(e,i){"object"==typeof export
 },{"phaser":"E66h","../main":"epB2"}],"epB2":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e=l(require("phaser")),r=l(require("./scenes/GameOverScreen")),a=l(require("./scenes/GameSelectScene")),t=l(require("./scenes/GrammarFallsScene")),u=l(require("./scenes/MainTitleScene")),s=l(require("./scenes/NextLevelScreen")),c=l(require("./scenes/PauseScreen"));function l(e){return e&&e.__esModule?e:{default:e}}var d={type:e.default.AUTO,width:480,height:640,physics:{default:"arcade",arcade:{gravity:{y:350}}},scene:[u.default,a.default,t.default,c.default,r.default,s.default]},n=new e.default.Game(d);exports.default=n;
 },{"phaser":"E66h","./scenes/GameOverScreen":"wUQf","./scenes/GameSelectScene":"TuIL","./scenes/GrammarFallsScene":"YA41","./scenes/MainTitleScene":"fc7U","./scenes/NextLevelScreen":"nK2h","./scenes/PauseScreen":"l25v"}]},{},["epB2"], null)
-//# sourceMappingURL=dist/main.0bc29a19.js.map
+//# sourceMappingURL=main.0bc29a19.js.map
