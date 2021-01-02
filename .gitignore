@@ -3,3 +3,5 @@
 /package-lock.json
 /.venv
 /.vscode
+/py/credentials.json
+/py/token.pickle
