@@ -1,0 +1,171 @@
+{
+    "sentences":[
+        {
+            "text":             "Hello, my name ___ %NOUN%.",
+            "correctAnswer":    "is",
+            "wrongAnswer":[     "are",
+                                "be",
+                                "am"
+            ]
+        },
+        {
+            "text":             "You ___ a %NOUN%",
+            "correctAnswer":    "are",
+            "wrongAnswer":[     "is",
+                                "be",
+                                "am"
+            ]
+        },
+        {
+            "text":             "They ___ %NOUNS%",
+            "correctAnswer":    "are",
+            "wrongAnswer":[     "is",
+                                "be",
+                                "am"
+            ]
+        }
+    ],
+
+    "partsOfSpeech":[
+        {
+            "name": "nounSingular",
+            "keyword": "NOUN",
+            "words":[
+                "%N_ANI%",
+                "%N_INANI%",
+                "%N_SPORT%"
+            ]
+        },
+        {
+            "name": "nounPlural",
+            "keyword": "NOUNS",
+            "words":[
+                "%NS_ANI%",
+                "%NS_INANI%"
+            ]
+        },
+        {
+            "name": "adjective",
+            "keyword": "ADJ",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "adverb",
+            "keyword": "ADV",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "animateSingularNoun",
+            "keyword": "N_ANI",
+            "words":[
+                "%N_ANIMAL%",
+                "animal",
+                "monkey"
+            ]
+        },
+        {
+            "name": "animatePluralNoun",
+            "keyword": "NS_ANI",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "inanimateSingluarNoun",
+            "keyword": "N_INANI",
+            "words":[
+                "%N_CLOTH%",
+                "art",
+                "bank",
+                "bedroom",
+                "blackboard",
+                "centimeter",
+                "city",
+                "clock",
+                "department store",
+                "e–mail",
+                "face",
+                "flute",
+                "garden",
+                "gym",
+                "hospital",
+                "magazine",
+                "number",
+                "page",
+                "post office",
+                "postcard",
+                "present",
+                "river",
+                "spoon",
+                "street",
+                "tooth",
+                "tower"
+            ]
+        },
+        {
+            "name": "inanimatePluralNoun",
+            "keyword": "NS_INANI",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "sport",
+            "keyword": "N_SPORT",
+            "words":[
+                "badminton",
+                "volleyball"
+            ]
+        },
+        {
+            "name": "fruit",
+            "keyword": "N_FRUIT",
+            "words":[
+                "banana",
+                "orange",
+                "pineapple",
+                "strawberry"
+            ]
+        },
+        {
+            "name": "food",
+            "keyword": "N_FOOD",
+            "words":[
+                "%N_FRUIT%",
+                "bread",
+                "carrot",
+                "cookie",
+                "dessert",
+                "hamburger",
+                "meat",
+                "potato",
+                "pumpkin",
+                "rice"
+            ]
+        },
+        {
+            "name": "clothing",
+            "keyword": "N_CLOTH",
+            "words":[
+                "cap",
+                "coat",
+                "jacket",
+                "shirt",
+                "shoes",
+                "skirt"
+            ]
+        },
+        {
+            "name": "animalSingular",
+            "keyword": "N_ANIMAL",
+            "words":[
+                "pet",
+                "rabbit"
+            ]
+        }
+    ]
+}
