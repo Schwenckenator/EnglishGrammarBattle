@@ -4,6 +4,12 @@ const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
 const UI_KEY = 'ui'
 
+const WRONG_SOUND_KEY = 'wrongSound'
+const CORRECT_SOUND_KEY = 'correctSound'
+const SHOOT_ANSWER_KEY = 'shootAnswer'
+const MUSIC_KEY = 'music'
+const EXPLOSION_SOUND_KEY = 'explosionSound'
+
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
 const HEART = "\u200D\u2764\uFE0F\u200D"
@@ -42,6 +48,12 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.selectedAnswer = undefined
         this.isAnswerSelected = undefined
         this.level = undefined
+
+        this.wrongSound = undefined
+        // this.correctSound = undefined
+        this.musicSound = undefined
+        this.explosionSound = undefined
+        this.shootAnswerSound = undefined
         
     }
 
@@ -52,6 +64,10 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.load.image(SKY_KEY, 'assets/night-sky.png')
         this.load.image(UI_KEY, 'assets/BottomMenu.png')
         this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
+        this.load.audio(MUSIC_KEY, 'assets/edm-detection-mode-by-kevin-macleod-from-filmmusic-io.mp3')
+        this.load.audio(EXPLOSION_SOUND_KEY, 'assets/explosion-large.wav')
+        this.load.audio(SHOOT_ANSWER_KEY, 'assets/laser-shot-correct.mp3')
+        this.load.audio(WRONG_SOUND_KEY, 'assets/laser-shot-incorrect.wav')
     }
 
     init(data){
@@ -80,11 +96,17 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.lives = 3
         this.livesText = this.createLivesText()
         this.lostLife = false
-        this.newQuiz()
+
         this.createKeyboardInput()
         this.selectedAnswer = -1
         this.isAnswerSelected = false
         this.createTouchInput(this.quiz.answers)
+        this.createSounds()
+
+        this.musicSound.play()
+
+        this.newQuiz()
+
         //this.level = 1;
     }
 
@@ -153,6 +175,13 @@ export default class GrammarFallsScene extends Phaser.Scene
         }
 
         return answers
+    }
+
+    createSounds(){
+        this.musicSound = this.sound.add(MUSIC_KEY, {loop: true})
+        this.explosionSound = this.sound.add(EXPLOSION_SOUND_KEY, {loop : false})
+        this.shootAnswerSound = this.sound.add(SHOOT_ANSWER_KEY, {loop: false})
+        this.wrongSound = this.sound.add(WRONG_SOUND_KEY, {loop: false})
     }
 
     createKeyboardInput(){
@@ -308,6 +337,7 @@ export default class GrammarFallsScene extends Phaser.Scene
             ANSWER_MOVE_TIME)
         // @ts-ignore
         this.quiz.sentence.body.setVelocity(0)
+        this.shootAnswerSound.play()
     }
     
     /**
@@ -361,6 +391,8 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.quiz.answers[i].body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
         // @ts-ignore
         this.quiz.answers[i].body.setAllowGravity(true)
+
+        this.wrongSound.play()
     }
 
     loseLife(){
@@ -376,6 +408,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.explosion.setScale(scale)
         this.explosion.setVisible(true)
         this.explosion.anims.play('explode')
+        this.explosionSound.play()
         //TODO: play sound
     }
 
