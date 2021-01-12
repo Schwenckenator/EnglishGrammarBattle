@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import main from '../main'
 import MusicManager from '../MusicManager'
 
 const SKY_KEY = 'sky'
@@ -371,6 +372,7 @@ export default class GrammarFallsScene extends Phaser.Scene
 
     correctAnswer(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
+        this.shakeCamera(150, 0.02)
         this.score++
         this.scoreText.text = `Score: ${this.score}`
         this.endQuestion()
@@ -403,6 +405,7 @@ export default class GrammarFallsScene extends Phaser.Scene
 
     loseLife(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
+        this.shakeCamera(250, 0.05)
         this.lives--
         this.lostLife = true
         this.livesText.text = this.getLivesString(this.lives)
@@ -418,6 +421,11 @@ export default class GrammarFallsScene extends Phaser.Scene
         }
     }
 
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} scale
+     */
     explode(x, y, scale){
         this.explosion.setPosition(x,y)
         this.explosion.setScale(scale)
@@ -425,6 +433,14 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.explosion.anims.play('explode')
         this.explosionSound.play()
         //TODO: play sound
+    }
+
+    shakeCamera(duration, intensity){
+        console.log("Shaking camera!")
+        // let shake = new Phaser.Cameras.Scene2D.Effects.Shake(this.cameras.main)
+        // shake.start()
+        
+        this.cameras.main.shake(duration, intensity)
     }
 
     checkForGameOver(){
