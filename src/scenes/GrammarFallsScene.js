@@ -64,7 +64,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.load.image(SKY_KEY, 'assets/night-sky.png')
         this.load.image(UI_KEY, 'assets/BottomMenu.png')
         this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
-        this.load.audio(MUSIC_KEY, 'assets/edm-detection-mode-by-kevin-macleod-from-filmmusic-io.mp3')
+        // this.load.audio(MUSIC_KEY, 'assets/edm-detection-mode-by-kevin-macleod-from-filmmusic-io.mp3')
         this.load.audio(EXPLOSION_SOUND_KEY, 'assets/explosion-large.wav')
         this.load.audio(SHOOT_ANSWER_KEY, 'assets/laser-shot-correct.mp3')
         this.load.audio(WRONG_SOUND_KEY, 'assets/laser-shot-incorrect.wav')
@@ -288,7 +288,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         
         for(let i=0; i<4; i++){
             this.quiz.answers[i].setVisible(true)
-            this.quiz.answers[i].text = ans.answers[i]
+            this.quiz.answers[i].text = (i+1) + ". " + ans.answers[i]
             // @ts-ignore
             this.quiz.answers[i].body.setVelocity(0)
             // @ts-ignore

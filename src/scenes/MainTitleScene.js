@@ -2,9 +2,13 @@ import Phaser from 'phaser'
 
 const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
+const MUSIC_KEY = 'music'
 
 const FONT_BIG = '48px Arial'
 const FONT_MED = '24px Arial'
+
+global.music = undefined
+global.playMusicWhenReady = false
 
 export default class MainTitleScreen extends Phaser.Scene
 {
@@ -30,7 +34,7 @@ export default class MainTitleScreen extends Phaser.Scene
         this.titles = this.createTitleScreen()
         
         this.keys = this.createInput()
-
+        this.loadMusic()
     }
 
 
@@ -70,5 +74,19 @@ export default class MainTitleScreen extends Phaser.Scene
 
     select(){
         this.scene.start('Game-Select')
+    }
+
+    loadMusic(){
+        let musicLoader = this.load.audio(MUSIC_KEY, 'assets/edm-detection-mode-by-kevin-macleod-from-filmmusic-io.mp3')
+        console.log("Loading music...")
+        musicLoader.on('filecomplete', 
+        () => {
+            global.music = this.sound.add(MUSIC_KEY)
+            console.log("Music Loaded!")
+            if(global.playMusicWhenReady === true){
+                global.music.play()
+            }
+        })
+        musicLoader.start()
     }
 }

@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
 
-const SKY_KEY = 'sky';
-const EXP_KEY = 'exp';
+const SKY_KEY = 'sky'
+const EXP_KEY = 'exp'
+const MUSIC_KEY = 'music'
 
 const FONT_BIG = '48px Arial'
 const FONT_MED = '24px Arial'
@@ -26,6 +27,7 @@ export default class GameSelectScreen extends Phaser.Scene
     {
         console.log("Preload Game Select")
         this.load.image(SKY_KEY, 'assets/night-sky.png')
+        
     }
 
     create()
@@ -38,6 +40,12 @@ export default class GameSelectScreen extends Phaser.Scene
         this.titles = this.createTitles()
         this.menus = this.createMenuItems()
         this.keys = this.createKeyboardInput()
+
+        if(global.music == undefined){
+            global.playMusicWhenReady = true
+        }else if(!global.music.isPlaying){
+            global.music.play()
+        }
 
         this.selected = 0
         this.selBox = this.createBox()
