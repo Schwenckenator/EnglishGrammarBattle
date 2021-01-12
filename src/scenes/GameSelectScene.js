@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import MusicManager from '../MusicManager'
 
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
@@ -41,11 +42,7 @@ export default class GameSelectScreen extends Phaser.Scene
         this.menus = this.createMenuItems()
         this.keys = this.createKeyboardInput()
 
-        if(global.music == undefined){
-            global.playMusicWhenReady = true
-        }else if(!global.music.isPlaying){
-            global.music.play()
-        }
+        MusicManager.play()
 
         this.selected = 0
         this.selBox = this.createBox()

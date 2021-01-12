@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import MusicManager from '../MusicManager'
 
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
@@ -122,8 +123,8 @@ export default class GrammarFallsScene extends Phaser.Scene
         }
         if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
             this.loseLife()
-            this.endQuestion()
-            this.next()
+            // this.endQuestion()
+            // this.next()
         }
     }
 
@@ -240,6 +241,7 @@ export default class GrammarFallsScene extends Phaser.Scene
 
 
     pause() {
+        MusicManager.pause()
         this.scene.pause('Grammar-Falls')
         this.scene.launch('Pause-Screen', { gameKey: 'Grammar-Falls' })
     }
@@ -331,6 +333,10 @@ export default class GrammarFallsScene extends Phaser.Scene
     selectAnswer(index){
         this.selectedAnswer = index
         this.isAnswerSelected = true
+
+        // Delete the '#. ' at the start of the answer string
+        this.quiz.answers[this.selectedAnswer].text = this.quiz.answers[this.selectedAnswer].text.substring(3)
+
         this.setAnswerDxDy(
             this.quiz.answers[index], 
             this.quiz.sentence, 
@@ -398,9 +404,18 @@ export default class GrammarFallsScene extends Phaser.Scene
     loseLife(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
         this.lives--
-        this.livesText.text = this.getLivesString(this.lives)
-        this.checkForGameOver()
         this.lostLife = true
+        this.livesText.text = this.getLivesString(this.lives)
+        this.endQuestion()
+
+        if(this.checkForGameOver()){
+            //GAME OVER
+            this.time.delayedCall(500, () => {
+                this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', level: this.level, score: this.score })
+            }, null, this)
+        }else{
+            this.next()
+        }
     }
 
     explode(x, y, scale){
@@ -414,12 +429,7 @@ export default class GrammarFallsScene extends Phaser.Scene
 
     checkForGameOver(){
         console.log("Checking for game over")
-        if(this.lives < 0){
-            //GAME OVER
-            this.time.delayedCall(500, () => {
-                this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', level: this.level, score: this.score })
-            }, null, this)
-        }
+        return this.lives < 0
     }
 
     checkForNextLevel(){
