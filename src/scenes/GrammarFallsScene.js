@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import main from '../main'
 import MusicManager from '../MusicManager'
 
 const SKY_KEY = 'sky'
@@ -7,9 +6,7 @@ const EXP_KEY = 'exp'
 const UI_KEY = 'ui'
 
 const WRONG_SOUND_KEY = 'wrongSound'
-const CORRECT_SOUND_KEY = 'correctSound'
 const SHOOT_ANSWER_KEY = 'shootAnswer'
-const MUSIC_KEY = 'music'
 const EXPLOSION_SOUND_KEY = 'explosionSound'
 
 const FONT_MED = '24px Arial'
@@ -52,8 +49,6 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.level = undefined
 
         this.wrongSound = undefined
-        // this.correctSound = undefined
-        this.musicSound = undefined
         this.explosionSound = undefined
         this.shootAnswerSound = undefined
         
@@ -66,7 +61,6 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.load.image(SKY_KEY, 'assets/night-sky.png')
         this.load.image(UI_KEY, 'assets/BottomMenu.png')
         this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
-        // this.load.audio(MUSIC_KEY, 'assets/edm-detection-mode-by-kevin-macleod-from-filmmusic-io.mp3')
         this.load.audio(EXPLOSION_SOUND_KEY, 'assets/explosion-large.wav')
         this.load.audio(SHOOT_ANSWER_KEY, 'assets/laser-shot-correct.mp3')
         this.load.audio(WRONG_SOUND_KEY, 'assets/laser-shot-incorrect.wav')
@@ -93,7 +87,6 @@ export default class GrammarFallsScene extends Phaser.Scene
             sinOffset: 0,
             freq: 0
         }
-        //this.score = 0
         this.scoreText = this.createScoreText()
         this.lives = 3
         this.livesText = this.createLivesText()
@@ -105,11 +98,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.createTouchInput(this.quiz.answers)
         this.createSounds()
 
-        this.musicSound.play()
-
         this.newQuiz()
-
-        //this.level = 1;
     }
 
 
@@ -124,8 +113,6 @@ export default class GrammarFallsScene extends Phaser.Scene
         }
         if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
             this.loseLife()
-            // this.endQuestion()
-            // this.next()
         }
     }
 
@@ -180,7 +167,6 @@ export default class GrammarFallsScene extends Phaser.Scene
     }
 
     createSounds(){
-        this.musicSound = this.sound.add(MUSIC_KEY, {loop: true})
         this.explosionSound = this.sound.add(EXPLOSION_SOUND_KEY, {loop : false})
         this.shootAnswerSound = this.sound.add(SHOOT_ANSWER_KEY, {loop: false})
         this.wrongSound = this.sound.add(WRONG_SOUND_KEY, {loop: false})
@@ -372,7 +358,7 @@ export default class GrammarFallsScene extends Phaser.Scene
 
     correctAnswer(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
-        this.shakeCamera(150, 0.02)
+        this.shakeCamera(250, new Phaser.Math.Vector2 (0.02, 0.02))
         this.score++
         this.scoreText.text = `Score: ${this.score}`
         this.endQuestion()
@@ -401,11 +387,13 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.quiz.answers[i].body.setAllowGravity(true)
 
         this.wrongSound.play()
+
+        this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
     }
 
     loseLife(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
-        this.shakeCamera(250, 0.05)
+        this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
         this.lives--
         this.lostLife = true
         this.livesText.text = this.getLivesString(this.lives)
@@ -432,16 +420,33 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.explosion.setVisible(true)
         this.explosion.anims.play('explode')
         this.explosionSound.play()
-        //TODO: play sound
     }
 
+    /**
+     * @param {number} duration
+     * @param { Phaser.Math.Vector2} intensity
+     */
     shakeCamera(duration, intensity){
         console.log("Shaking camera!")
-        // let shake = new Phaser.Cameras.Scene2D.Effects.Shake(this.cameras.main)
-        // shake.start()
+        let goal = intensity.clone()
+        goal.multiply(new Phaser.Math.Vector2(0.0, 0.0))
         
-        this.cameras.main.shake(duration, intensity)
+        let prototype = intensity.clone()
+
+        this.cameras.main.shake(duration, intensity, false, 
+            /**
+            * @param {Phaser.Cameras.Scene2D.Camera} cam
+            * @param { number } time
+            */
+            (cam, time)=>{
+                let progress = time
+                intensity = prototype.clone()
+
+                cam.shakeEffect.intensity = intensity.lerp(goal, progress)
+            })
     }
+
+    
 
     checkForGameOver(){
         console.log("Checking for game over")
