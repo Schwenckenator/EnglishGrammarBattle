@@ -55,7 +55,7 @@ export default class GameSelectScreen extends Phaser.Scene
             {
                 name: 'Spelling Spin', 
                 func: () => {
-                    //this.scene.start('Grammar-Falls')
+                    this.scene.start('Spelling-Spin', {level: 1, score: 0})
                 }
             },
             {
