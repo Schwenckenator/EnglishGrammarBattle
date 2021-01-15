@@ -1,0 +1,16 @@
+{
+    "quiz":[
+        {
+            "japanese": "右",
+            "english": "RIGHT"
+        },
+        {
+            "japanese": "左",
+            "english": "LEFT"
+        },
+        {
+            "japanese": "黒",
+            "english": "BLACK"
+        }
+    ]
+}
