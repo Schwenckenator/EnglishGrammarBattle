@@ -48,7 +48,7 @@ export default class NextLevelScreen extends Phaser.Scene
         // this.selected = 0
         // this.selBox = this.createBox()
         this.time.delayedCall(3000, () => {
-            this.scene.start('Grammar-Falls', { level: this.lastLevel + 1, score: this.score })
+            this.scene.start(this.lastGame, { level: this.lastLevel + 1, score: this.score })
         }, null, this)
 
         this.time.delayedCall(500, () => {

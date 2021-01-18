@@ -3,7 +3,7 @@ import MusicManager from '../MusicManager'
 
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
-const UI_KEY = 'ui'
+const UI_KEY = 'ui-cross'
 
 const WRONG_SOUND_KEY = 'wrongSound'
 const SHOOT_ANSWER_KEY = 'shootAnswer'
@@ -30,11 +30,13 @@ const BOTTOM_Y = 540
 
 const NEXT_LEVEL_TARGET = 10
 
+const THIS_GAME = 'Grammar-Falls'
+
 export default class GrammarFallsScene extends Phaser.Scene
 {
 	constructor()
 	{
-        super('Grammar-Falls')
+        super(THIS_GAME)
         
         this.gameData = undefined
     
@@ -241,8 +243,8 @@ export default class GrammarFallsScene extends Phaser.Scene
 
     pause() {
         MusicManager.pause()
-        this.scene.pause('Grammar-Falls')
-        this.scene.launch('Pause-Screen', { gameKey: 'Grammar-Falls' })
+        this.scene.pause(THIS_GAME)
+        this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })
     }
 
     /**
@@ -377,7 +379,7 @@ export default class GrammarFallsScene extends Phaser.Scene
 
         if(this.checkForNextLevel()){
             this.time.delayedCall(500, () => {
-                    this.scene.start('Next-Level-Screen', { gameKey: 'Grammar-Falls', score: this.score, level: this.level })
+                    this.scene.start('Next-Level-Screen', { gameKey: THIS_GAME, score: this.score, level: this.level })
                 }, null, this)
         }else{
             this.next()
@@ -415,7 +417,7 @@ export default class GrammarFallsScene extends Phaser.Scene
             this.explodeGameOver()
             //GAME OVER
             this.time.delayedCall(2500, () => {
-                this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', level: this.level, score: this.score })
+                this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
             }, null, this)
         }else{
             this.next()
