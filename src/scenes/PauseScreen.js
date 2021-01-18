@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import Game from '../main'
+import MusicManager from '../MusicManager';
 
 const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
@@ -55,6 +56,7 @@ export default class PauseScreen extends Phaser.Scene
             {
                 name: 'Return to Game', 
                 func: () => {
+                    MusicManager.play()
                     this.scene.stop('Pause-Screen')
                     this.scene.run(this.currentGame)
                 }
