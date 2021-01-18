@@ -79,6 +79,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.createBackground()
         this.add.image(240, 590, UI_KEY)
         this.explosion = this.createExplosion()
+        this.explosions = this.createExplosions(10)
         this.quiz = {
             sentence: this.createQuizSentence(),
             answers: this.createAnswers(),
@@ -137,6 +138,17 @@ export default class GrammarFallsScene extends Phaser.Scene
         exp.setVisible(false)
 
         return exp
+    }
+
+    createExplosions(num){
+        let exps = []
+        for(let i=0; i<num;i++){
+            exps.push(this.add.sprite(X_CENTRE,Y_CENTRE, EXP_KEY))
+            exps[i].setScale(2)
+            exps[i].setVisible(false)
+        }
+        
+        return exps
     }
 
     createScoreText(){
@@ -400,8 +412,9 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.endQuestion()
 
         if(this.checkForGameOver()){
+            this.explodeGameOver()
             //GAME OVER
-            this.time.delayedCall(500, () => {
+            this.time.delayedCall(2500, () => {
                 this.scene.start('Game-Over-Screen', { gameKey: 'Grammar-Falls', level: this.level, score: this.score })
             }, null, this)
         }else{
@@ -422,6 +435,33 @@ export default class GrammarFallsScene extends Phaser.Scene
         this.explosionSound.play()
     }
 
+    explodeGameOver(){
+        console.log("Explode Game over Called!")
+        for(let i = 0; i<this.explosions.length; i++){
+            console.log("Explosion" + i)
+            let x = Math.random() * X_MAX / 2 + X_MAX / 4
+            let y = Math.random() * Y_MAX / 2 + Y_MAX / 3
+            let scale = 2 + Math.random() * 4
+            setTimeout(() => {
+                this.explosions[i].setPosition(x,y)
+                this.explosions[i].setScale(scale)
+                this.explosions[i].setVisible(true)
+                this.explosions[i].anims.play('explode')
+                this.explosionSound.play()
+                this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
+            }, i * 200)
+        }
+    }
+
+    explodeSpecific(exp, x, y, scale){
+        console.log("Explode Specific called.")
+        exp.setPosition(x, y)
+        exp.setScale(scale)
+        exp.setVisible(true)
+        exp.anims.play('explode')
+        this.explosionSound.play()
+    }
+
     /**
      * @param {number} duration
      * @param { Phaser.Math.Vector2} intensity
@@ -433,7 +473,7 @@ export default class GrammarFallsScene extends Phaser.Scene
         
         let prototype = intensity.clone()
 
-        this.cameras.main.shake(duration, intensity, false, 
+        this.cameras.main.shake(duration, intensity, true, 
             /**
             * @param {Phaser.Cameras.Scene2D.Camera} cam
             * @param { number } time
