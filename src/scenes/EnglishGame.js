@@ -79,6 +79,7 @@ export default class EnglishGame extends Phaser.Scene{
         this.lives = 3
         this.livesText = this.createLivesText()
         this.lostLife = false
+        this.createSounds()
     }
 
     update(){
@@ -186,6 +187,37 @@ export default class EnglishGame extends Phaser.Scene{
 
                 cam.shakeEffect.intensity = intensity.lerp(goal, progress)
             })
+    }
+
+        /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} scale
+     */
+    explode(x, y, scale){
+        this.explosion.setPosition(x,y)
+        this.explosion.setScale(scale)
+        this.explosion.setVisible(true)
+        this.explosion.anims.play('explode')
+        this.explosionSound.play()
+    }
+
+    explodeGameOver(){
+        console.log("Explode Game over Called!")
+        for(let i = 0; i<this.explosions.length; i++){
+            console.log("Explosion" + i)
+            let x = Math.random() * X_MAX / 2 + X_MAX / 4
+            let y = Math.random() * Y_MAX / 2 + Y_MAX / 3
+            let scale = 2 + Math.random() * 4
+            setTimeout(() => {
+                this.explosions[i].setPosition(x,y)
+                this.explosions[i].setScale(scale)
+                this.explosions[i].setVisible(true)
+                this.explosions[i].anims.play('explode')
+                this.explosionSound.play()
+                this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
+            }, i * 200)
+        }
     }
     
 }

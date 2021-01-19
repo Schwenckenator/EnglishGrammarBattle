@@ -31,22 +31,6 @@ export default class GrammarFallsScene extends EnglishGame
 	{
         super(THIS_GAME)
         
-        // this.gameData = undefined
-    
-        // this.explosion = undefined
-        // this.quiz = undefined
-        // this.score = undefined
-        // this.lives = undefined
-        // this.lostLife = undefined
-        // this.gameObjs = undefined
-        // this.selectedAnswer = undefined
-        // this.isAnswerSelected = undefined
-        // this.level = undefined
-
-        // this.wrongSound = undefined
-        // this.explosionSound = undefined
-        // this.shootAnswerSound = undefined
-        
     }
 
 	preload()
@@ -54,29 +38,15 @@ export default class GrammarFallsScene extends EnglishGame
         super.preload()
         console.log("Preload Grammar Falls")
         this.load.json('sentences', 'assets/Sentences.json')
-        // this.load.image(SKY_KEY, 'assets/night-sky.png')
         this.load.image(UI_KEY, 'assets/BottomMenu.png')
-        // this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
-        // this.load.audio(EXPLOSION_SOUND_KEY, 'assets/explosion-large.wav')
-        // this.load.audio(SHOOT_ANSWER_KEY, 'assets/laser-shot-correct.mp3')
-        // this.load.audio(WRONG_SOUND_KEY, 'assets/laser-shot-incorrect.wav')
     }
-
-    // init(data){
-    //     this.level = data.level
-    //     this.score = data.score
-    //     this.lives = 3
-    // }
 
     create()
     {
         super.create()
         console.log("Create Grammar Falls")
         this.gameData = this.cache.json.get('sentences')
-        // this.createBackground()
         this.add.image(240, 590, UI_KEY)
-        // this.explosion = this.createExplosion()
-        // this.explosions = this.createExplosions(10)
         this.quiz = {
             sentence: this.createQuizSentence(),
             answers: this.createAnswers(),
@@ -85,16 +55,12 @@ export default class GrammarFallsScene extends EnglishGame
             sinOffset: 0,
             freq: 0
         }
-        // this.scoreText = this.createScoreText()
-        // this.lives = 3
-        // this.livesText = this.createLivesText()
-        // this.lostLife = false
 
         this.createKeyboardInput()
         this.selectedAnswer = -1
         this.isAnswerSelected = false
         this.createTouchInput(this.quiz.answers)
-        this.createSounds()
+        // this.createSounds()
 
         this.newQuiz()
     }
@@ -117,45 +83,6 @@ export default class GrammarFallsScene extends EnglishGame
 
     //#region Creator Methods
 
-    // createBackground(){
-    //     this.add.image(X_CENTRE, 160, SKY_KEY)
-    //     this.add.image(X_CENTRE, 480, SKY_KEY)
-    // }
-
-    // createExplosion(){
-    //     let exp = this.add.sprite(X_CENTRE, Y_CENTRE, EXP_KEY)
-
-    //     this.anims.create({
-    //         key: 'explode',
-    //         frames: this.anims.generateFrameNumbers(EXP_KEY, { start: 0, end: 15}),
-    //         frameRate: 36,
-    //         hideOnComplete: true
-    //     })
-    //     exp.setScale(2)
-    //     exp.setVisible(false)
-
-    //     return exp
-    // }
-
-    // createExplosions(num){
-    //     let exps = []
-    //     for(let i=0; i<num;i++){
-    //         exps.push(this.add.sprite(X_CENTRE,Y_CENTRE, EXP_KEY))
-    //         exps[i].setScale(2)
-    //         exps[i].setVisible(false)
-    //     }
-        
-    //     return exps
-    // }
-
-    // createScoreText(){
-    //     return this.add.text(20, 15, `Score: ${this.score}`, {font: FONT_MED})
-    // }
-
-    // createLivesText(){
-    //     return this.add.text(20, 45, this.getLivesString(this.lives), {font: FONT_MED})
-    // }
-
     createQuizSentence(){
         let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: FONT_MED}).setOrigin(0.5)
         this.physics.world.enable(text, 0)
@@ -174,12 +101,6 @@ export default class GrammarFallsScene extends EnglishGame
 
         return answers
     }
-
-    // createSounds(){
-    //     this.explosionSound = this.sound.add(EXPLOSION_SOUND_KEY, {loop : false})
-    //     this.shootAnswerSound = this.sound.add(SHOOT_ANSWER_KEY, {loop: false})
-    //     this.wrongSound = this.sound.add(WRONG_SOUND_KEY, {loop: false})
-    // }
 
     createKeyboardInput(){
         this.input.keyboard.removeAllKeys()
@@ -233,14 +154,6 @@ export default class GrammarFallsScene extends EnglishGame
         )
         return keys
     }
-
-
-
-    // pause() {
-    //     MusicManager.pause()
-    //     this.scene.pause(THIS_GAME)
-    //     this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })
-    // }
 
     /**
      * @param {Phaser.GameObjects.Text[]} answers
@@ -419,72 +332,6 @@ export default class GrammarFallsScene extends EnglishGame
         }
     }
 
-    /**
-     * @param {number} x
-     * @param {number} y
-     * @param {number} scale
-     */
-    explode(x, y, scale){
-        this.explosion.setPosition(x,y)
-        this.explosion.setScale(scale)
-        this.explosion.setVisible(true)
-        this.explosion.anims.play('explode')
-        this.explosionSound.play()
-    }
-
-    explodeGameOver(){
-        console.log("Explode Game over Called!")
-        for(let i = 0; i<this.explosions.length; i++){
-            console.log("Explosion" + i)
-            let x = Math.random() * X_MAX / 2 + X_MAX / 4
-            let y = Math.random() * Y_MAX / 2 + Y_MAX / 3
-            let scale = 2 + Math.random() * 4
-            setTimeout(() => {
-                this.explosions[i].setPosition(x,y)
-                this.explosions[i].setScale(scale)
-                this.explosions[i].setVisible(true)
-                this.explosions[i].anims.play('explode')
-                this.explosionSound.play()
-                this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
-            }, i * 200)
-        }
-    }
-
-    explodeSpecific(exp, x, y, scale){
-        console.log("Explode Specific called.")
-        exp.setPosition(x, y)
-        exp.setScale(scale)
-        exp.setVisible(true)
-        exp.anims.play('explode')
-        this.explosionSound.play()
-    }
-
-    // /**
-    //  * @param {number} duration
-    //  * @param { Phaser.Math.Vector2} intensity
-    //  */
-    // shakeCamera(duration, intensity){
-    //     console.log("Shaking camera!")
-    //     let goal = intensity.clone()
-    //     goal.multiply(new Phaser.Math.Vector2(0.0, 0.0))
-        
-    //     let prototype = intensity.clone()
-
-    //     this.cameras.main.shake(duration, intensity, true, 
-    //         /**
-    //         * @param {Phaser.Cameras.Scene2D.Camera} cam
-    //         * @param { number } time
-    //         */
-    //         (cam, time)=>{
-    //             let progress = time
-    //             intensity = prototype.clone()
-
-    //             cam.shakeEffect.intensity = intensity.lerp(goal, progress)
-    //         })
-    // }
-
-    
-
     checkForGameOver(){
         console.log("Checking for game over")
         return this.lives < 0
@@ -546,14 +393,6 @@ export default class GrammarFallsScene extends EnglishGame
         return { answers, correctIndex }
     }
 
-    // getLivesString(livesLeft){
-    //     let str = 'Lives: ';
-    //     for(let i=0; i < livesLeft; i++){
-    //         str += HEART;
-    //     }
-    //     return str;
-    // }
-    
     /**
      * @param {string} text
      */
@@ -587,22 +426,6 @@ export default class GrammarFallsScene extends EnglishGame
         return finishedText;
         
     }
-    // randIndex(max){
-    //     return Math.floor(Math.random() * max);
-    // }
-
-    // shuffle(array){
-    //     let currentIndex = array.length, temp, randomIndex;
-    //     while (0 !== currentIndex){
-    //         randomIndex = this.randIndex(currentIndex);
-    //         currentIndex -= 1;
-    
-    //         temp = array[currentIndex];
-    //         array[currentIndex] = array[randomIndex];
-    //         array[randomIndex] = temp;
-    //     }
-    //     return array;
-    // }
 
     //#endregion
 }
