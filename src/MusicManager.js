@@ -4,6 +4,7 @@ class MusicManager {
         this.isReady = false
         //this.isPlaying = false
         this.playWhenReady = false
+        this.hasStarted = false
     }
 
     hasMusic(){
@@ -11,9 +12,13 @@ class MusicManager {
     }
 
     play(){
-        if(!this.isReady) { return }
-        
-        if(!this.isPlaying()){
+        if(!this.isReady) {
+            this.playWhenReady = true
+            return 
+        }
+
+        if(!this.hasStarted){
+            this.hasStarted = true
             this.music.play()
         }else{
             this.music.resume()
@@ -23,6 +28,8 @@ class MusicManager {
     pause(){
         if(this.isReady){
             this.music.pause()
+        }else{
+            this.playWhenReady = false
         }
     }
 

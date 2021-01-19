@@ -172,8 +172,8 @@
             ]
         },
         {
-            "name": "nounAnimate",
-            "keyword": "ANI_NOUN",
+            "name": "nounSingularHuman",
+            "keyword": "N_HUMAN",
             "words":[
                 "boy",
                 "girl",
@@ -182,8 +182,8 @@
             ]
         },
         {
-            "name": "nounAnimatePlural",
-            "keyword": "ANI_NOUNS",
+            "name": "nounPluralHuman",
+            "keyword": "NS_HUMAN",
             "words":[
                 "boys",
                 "girls",
@@ -326,12 +326,19 @@
             ]
         },
         {
+            "name": "Animate3rdPersonSingular",
+            "keyword": "ANI_3PS",
+            "words":[
+                "%PRO_NOM_3S%",
+                "a %N_HUMAN%"
+            ]
+        },
+        {
             "name": "PronounNom3rdSingular",
             "keyword": "PRO_NOM_3S",
             "words":[
                 "he",
-                "she",
-                "a %ANI_NOUN%"
+                "she"
             ]
         },
         {

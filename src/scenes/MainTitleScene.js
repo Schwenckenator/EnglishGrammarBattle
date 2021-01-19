@@ -34,6 +34,7 @@ export default class MainTitleScreen extends Phaser.Scene
         
         this.keys = this.createInput()
         this.loadMusic()
+        MusicManager.pause()
     }
 
 

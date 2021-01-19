@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
+import EnglishGame from './EnglishGame'
 
-const SKY_KEY = 'sky'
-const EXP_KEY = 'exp'
+// const SKY_KEY = 'sky'
+// const EXP_KEY = 'exp'
 const UI_KEY = 'ui-line'
 
 const FONT_MED = '24px Arial'
@@ -32,48 +33,29 @@ const ALPHABET = [
 
 const THIS_GAME = 'Spelling-Spin'
 
-export default class SpellingSpinScene extends Phaser.Scene
+export default class SpellingSpinScene extends EnglishGame
 {
 	constructor()
 	{
         super(THIS_GAME)
         
-        this.gameData = undefined
-    
-        this.explosion = undefined
-        this.quiz = undefined
-        this.score = undefined
-        this.lives = undefined
-        this.lostLife = undefined
-        this.gameObjs = undefined
-        this.selectedAnswer = undefined
-        this.isAnswerSelected = undefined
-        this.level = undefined
-        
     }
 
 	preload()
     {
+        super.preload()
         console.log("Preload Spelling Spin")
         this.load.json('J2Ewords', 'assets/J2Ewords.json')
-        this.load.image(SKY_KEY, 'assets/night-sky.png')
         this.load.image(UI_KEY, 'assets/HorizontalLine.png')
-        this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
     }
 
-    init(data){
-        this.level = data.level
-        this.score = data.score
-        this.lives = 3
-    }
 
     create()
     {
+        super.create()
         console.log("Create Spelling Spin")
         this.gameData = this.cache.json.get('J2Ewords')
-        this.createBackground()
         this.add.image(240, 530, UI_KEY)
-        this.explosion = this.createExplosion()
         this.quiz = {
             sentence: this.createQuizSentence(),
             answerText: this.createAnswerText(),
@@ -85,11 +67,6 @@ export default class SpellingSpinScene extends Phaser.Scene
             sinOffset: 0,
             freq: 0
         }
-        //this.score = 0
-        this.scoreText = this.createScoreText()
-        this.lives = 3
-        this.livesText = this.createLivesText()
-        this.lostLife = false
         this.keys = this.createKeyboardInput()
         this.newQuiz()
     }
@@ -114,34 +91,6 @@ export default class SpellingSpinScene extends Phaser.Scene
 
 
     //#region Creator Methods
-
-    createBackground(){
-        this.add.image(X_CENTRE, 160, SKY_KEY)
-        this.add.image(X_CENTRE, 480, SKY_KEY)
-    }
-
-    createExplosion(){
-        let exp = this.add.sprite(X_CENTRE, Y_CENTRE, EXP_KEY)
-
-        this.anims.create({
-            key: 'explode',
-            frames: this.anims.generateFrameNumbers(EXP_KEY, { start: 0, end: 15}),
-            frameRate: 36,
-            hideOnComplete: true
-        })
-        exp.setScale(2)
-        exp.setVisible(false)
-
-        return exp
-    }
-
-    createScoreText(){
-        return this.add.text(20, 15, `Score: ${this.score}`, {font: FONT_MED})
-    }
-
-    createLivesText(){
-        return this.add.text(20, 45, this.getLivesString(this.lives), {font: FONT_MED})
-    }
 
     createQuizSentence(){
         let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: FONT_BIG}).setOrigin(0.5)
@@ -186,7 +135,7 @@ export default class SpellingSpinScene extends Phaser.Scene
             'down', 
             () => {
                 console.log("GF Escape pressed")
-                this.pause()
+                this.pause(THIS_GAME)
             }
         )
         for(let letter of ALPHABET){
@@ -231,7 +180,7 @@ export default class SpellingSpinScene extends Phaser.Scene
             (pointer) => {
                 console.log("Pointer down")
                 if(pointer.y < 500){
-                    this.pause()
+                    this.pause(THIS_GAME)
                 }
             }
         )
@@ -348,6 +297,7 @@ export default class SpellingSpinScene extends Phaser.Scene
             // @ts-ignore
             this.quiz.sentence.body.setVelocity(0)
             this.fireAnswer(this.quiz.answerText, this.quiz.sentence, ANSWER_MOVE_TIME)
+            this.shootAnswerSound.play()
         }
     }
     
@@ -383,6 +333,7 @@ export default class SpellingSpinScene extends Phaser.Scene
 
     correctAnswer(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
+        this.shakeCamera(250, new Phaser.Math.Vector2 (0.02, 0.02))
         this.score++
         this.scoreText.text = `Score: ${this.score}`
         this.endQuestion()
@@ -407,32 +358,35 @@ export default class SpellingSpinScene extends Phaser.Scene
         this.quiz.answerText.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
         // @ts-ignore
         this.quiz.answerText.body.setAllowGravity(true)
+
+        this.wrongSound.play()
+
+        this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
     }
 
     loseLife(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
-        this.quiz.answerText.setVisible(false)
+        // this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
+        // this.quiz.answerText.setVisible(false)
+        // this.lives--
+        // this.livesText.text = this.getLivesString(this.lives)
+        // this.checkForGameOver()
+        // this.lostLife = true
+
+        this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
         this.lives--
-        this.livesText.text = this.getLivesString(this.lives)
-        this.checkForGameOver()
         this.lostLife = true
-    }
+        this.livesText.text = this.getLivesString(this.lives)
+        this.endQuestion()
 
-    explode(x, y, scale){
-        this.explosion.setPosition(x,y)
-        this.explosion.setScale(scale)
-        this.explosion.setVisible(true)
-        this.explosion.anims.play('explode')
-        //TODO: play sound
-    }
-
-    checkForGameOver(){
-        console.log("Checking for game over")
-        if(this.lives < 0){
+        if(this.checkForGameOver()){
+            this.explodeGameOver()
             //GAME OVER
-            this.time.delayedCall(500, () => {
+            this.time.delayedCall(2500, () => {
                 this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
             }, null, this)
+        }else{
+            this.next()
         }
     }
 
@@ -484,36 +438,6 @@ export default class SpellingSpinScene extends Phaser.Scene
         }
 
         return {letters, indices}
-    }
-
-    getLivesString(livesLeft){
-        let str = 'Lives: ';
-        for(let i=0; i < livesLeft; i++){
-            str += HEART;
-        }
-        return str;
-    }
-    
-    randIndex(max){
-        return Math.floor(Math.random() * max);
-    }
-
-    shuffle(array){
-        let currentIndex = array.length, temp, randomIndex;
-        while (0 !== currentIndex){
-            randomIndex = this.randIndex(currentIndex);
-            currentIndex -= 1;
-    
-            temp = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temp;
-        }
-        return array;
-    }
-
-    pause() {
-        this.scene.pause(THIS_GAME)
-        this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })
     }
 
     //#endregion
