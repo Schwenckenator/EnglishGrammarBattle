@@ -131,6 +131,11 @@ export default class EnglishGame extends Phaser.Scene{
         this.wrongSound = this.sound.add(WRONG_SOUND_KEY, {loop: false})
     }
 
+    checkForGameOver(){
+        console.log("Checking for game over")
+        return this.lives < 0
+    }
+
     getLivesString(livesLeft){
         let str = 'Lives: ';
         for(let i=0; i < livesLeft; i++){

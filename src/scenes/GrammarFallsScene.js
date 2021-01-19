@@ -60,7 +60,6 @@ export default class GrammarFallsScene extends EnglishGame
         this.selectedAnswer = -1
         this.isAnswerSelected = false
         this.createTouchInput(this.quiz.answers)
-        // this.createSounds()
 
         this.newQuiz()
     }
@@ -332,10 +331,6 @@ export default class GrammarFallsScene extends EnglishGame
         }
     }
 
-    checkForGameOver(){
-        console.log("Checking for game over")
-        return this.lives < 0
-    }
 
     checkForNextLevel(){
         return this.score % NEXT_LEVEL_TARGET == 0 // Hit a multiple level target

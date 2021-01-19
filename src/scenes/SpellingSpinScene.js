@@ -297,6 +297,7 @@ export default class SpellingSpinScene extends EnglishGame
             // @ts-ignore
             this.quiz.sentence.body.setVelocity(0)
             this.fireAnswer(this.quiz.answerText, this.quiz.sentence, ANSWER_MOVE_TIME)
+            this.shootAnswerSound.play()
         }
     }
     
@@ -332,6 +333,7 @@ export default class SpellingSpinScene extends EnglishGame
 
     correctAnswer(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
+        this.shakeCamera(250, new Phaser.Math.Vector2 (0.02, 0.02))
         this.score++
         this.scoreText.text = `Score: ${this.score}`
         this.endQuestion()
@@ -356,24 +358,35 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
         // @ts-ignore
         this.quiz.answerText.body.setAllowGravity(true)
+
+        this.wrongSound.play()
+
+        this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
     }
 
     loseLife(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
-        this.quiz.answerText.setVisible(false)
-        this.lives--
-        this.livesText.text = this.getLivesString(this.lives)
-        this.checkForGameOver()
-        this.lostLife = true
-    }
+        // this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
+        // this.quiz.answerText.setVisible(false)
+        // this.lives--
+        // this.livesText.text = this.getLivesString(this.lives)
+        // this.checkForGameOver()
+        // this.lostLife = true
 
-    checkForGameOver(){
-        console.log("Checking for game over")
-        if(this.lives < 0){
+        this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
+        this.lives--
+        this.lostLife = true
+        this.livesText.text = this.getLivesString(this.lives)
+        this.endQuestion()
+
+        if(this.checkForGameOver()){
+            this.explodeGameOver()
             //GAME OVER
-            this.time.delayedCall(500, () => {
+            this.time.delayedCall(2500, () => {
                 this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
             }, null, this)
+        }else{
+            this.next()
         }
     }
 
