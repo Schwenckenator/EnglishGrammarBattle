@@ -164,6 +164,28 @@ export default class EnglishGame extends Phaser.Scene{
         this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })
     }
 
+    /**
+     * @param {number} duration
+     * @param { Phaser.Math.Vector2} intensity
+     */
+    shakeCamera(duration, intensity){
+        console.log("Shaking camera!")
+        let goal = intensity.clone()
+        goal.multiply(new Phaser.Math.Vector2(0.0, 0.0))
+        
+        let prototype = intensity.clone()
 
+        this.cameras.main.shake(duration, intensity, true, 
+            /**
+            * @param {Phaser.Cameras.Scene2D.Camera} cam
+            * @param { number } time
+            */
+            (cam, time)=>{
+                let progress = time
+                intensity = prototype.clone()
+
+                cam.shakeEffect.intensity = intensity.lerp(goal, progress)
+            })
+    }
     
 }

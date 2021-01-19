@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
+import EnglishGame from './EnglishGame'
 
-const SKY_KEY = 'sky'
-const EXP_KEY = 'exp'
+// const SKY_KEY = 'sky'
+// const EXP_KEY = 'exp'
 const UI_KEY = 'ui-line'
 
 const FONT_MED = '24px Arial'
@@ -32,46 +33,47 @@ const ALPHABET = [
 
 const THIS_GAME = 'Spelling-Spin'
 
-export default class SpellingSpinScene extends Phaser.Scene
+export default class SpellingSpinScene extends EnglishGame
 {
 	constructor()
 	{
         super(THIS_GAME)
         
-        this.gameData = undefined
+        // this.gameData = undefined
     
-        this.explosion = undefined
-        this.quiz = undefined
-        this.score = undefined
-        this.lives = undefined
-        this.lostLife = undefined
-        this.gameObjs = undefined
-        this.selectedAnswer = undefined
-        this.isAnswerSelected = undefined
-        this.level = undefined
+        // this.explosion = undefined
+        // this.quiz = undefined
+        // this.score = undefined
+        // this.lives = undefined
+        // this.lostLife = undefined
+        // this.gameObjs = undefined
+        // this.selectedAnswer = undefined
+        // this.isAnswerSelected = undefined
+        // this.level = undefined
         
     }
 
 	preload()
     {
+        super.preload()
         console.log("Preload Spelling Spin")
         this.load.json('J2Ewords', 'assets/J2Ewords.json')
-        this.load.image(SKY_KEY, 'assets/night-sky.png')
-        this.load.image(UI_KEY, 'assets/HorizontalLine.png')
-        this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
+        // this.load.image(SKY_KEY, 'assets/night-sky.png')
+        // this.load.image(UI_KEY, 'assets/HorizontalLine.png')
+        // this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
     }
 
-    init(data){
-        this.level = data.level
-        this.score = data.score
-        this.lives = 3
-    }
+    // init(data){
+    //     this.level = data.level
+    //     this.score = data.score
+    //     this.lives = 3
+    // }
 
     create()
     {
         console.log("Create Spelling Spin")
         this.gameData = this.cache.json.get('J2Ewords')
-        this.createBackground()
+        // this.createBackground()
         this.add.image(240, 530, UI_KEY)
         this.explosion = this.createExplosion()
         this.quiz = {
@@ -115,25 +117,25 @@ export default class SpellingSpinScene extends Phaser.Scene
 
     //#region Creator Methods
 
-    createBackground(){
-        this.add.image(X_CENTRE, 160, SKY_KEY)
-        this.add.image(X_CENTRE, 480, SKY_KEY)
-    }
+    // createBackground(){
+    //     this.add.image(X_CENTRE, 160, SKY_KEY)
+    //     this.add.image(X_CENTRE, 480, SKY_KEY)
+    // }
 
-    createExplosion(){
-        let exp = this.add.sprite(X_CENTRE, Y_CENTRE, EXP_KEY)
+    // createExplosion(){
+    //     let exp = this.add.sprite(X_CENTRE, Y_CENTRE, EXP_KEY)
 
-        this.anims.create({
-            key: 'explode',
-            frames: this.anims.generateFrameNumbers(EXP_KEY, { start: 0, end: 15}),
-            frameRate: 36,
-            hideOnComplete: true
-        })
-        exp.setScale(2)
-        exp.setVisible(false)
+    //     this.anims.create({
+    //         key: 'explode',
+    //         frames: this.anims.generateFrameNumbers(EXP_KEY, { start: 0, end: 15}),
+    //         frameRate: 36,
+    //         hideOnComplete: true
+    //     })
+    //     exp.setScale(2)
+    //     exp.setVisible(false)
 
-        return exp
-    }
+    //     return exp
+    // }
 
     createScoreText(){
         return this.add.text(20, 15, `Score: ${this.score}`, {font: FONT_MED})

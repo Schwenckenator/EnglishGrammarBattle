@@ -1,18 +1,10 @@
 import Phaser from 'phaser'
-import MusicManager from '../MusicManager'
 import EnglishGame from './EnglishGame'
-
-const SKY_KEY = 'sky'
-const EXP_KEY = 'exp'
-const UI_KEY = 'ui-cross'
-
-const WRONG_SOUND_KEY = 'wrongSound'
-const SHOOT_ANSWER_KEY = 'shootAnswer'
-const EXPLOSION_SOUND_KEY = 'explosionSound'
 
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
-const HEART = "\u200D\u2764\uFE0F\u200D"
+
+const UI_KEY = 'ui-cross'
 
 const LEVEL_DY = 5
 const DY = 30 - LEVEL_DY
@@ -63,7 +55,7 @@ export default class GrammarFallsScene extends EnglishGame
         console.log("Preload Grammar Falls")
         this.load.json('sentences', 'assets/Sentences.json')
         // this.load.image(SKY_KEY, 'assets/night-sky.png')
-        // this.load.image(UI_KEY, 'assets/BottomMenu.png')
+        this.load.image(UI_KEY, 'assets/BottomMenu.png')
         // this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
         // this.load.audio(EXPLOSION_SOUND_KEY, 'assets/explosion-large.wav')
         // this.load.audio(SHOOT_ANSWER_KEY, 'assets/laser-shot-correct.mp3')
@@ -82,7 +74,7 @@ export default class GrammarFallsScene extends EnglishGame
         console.log("Create Grammar Falls")
         this.gameData = this.cache.json.get('sentences')
         // this.createBackground()
-        // this.add.image(240, 590, UI_KEY)
+        this.add.image(240, 590, UI_KEY)
         // this.explosion = this.createExplosion()
         // this.explosions = this.createExplosions(10)
         this.quiz = {
@@ -467,29 +459,29 @@ export default class GrammarFallsScene extends EnglishGame
         this.explosionSound.play()
     }
 
-    /**
-     * @param {number} duration
-     * @param { Phaser.Math.Vector2} intensity
-     */
-    shakeCamera(duration, intensity){
-        console.log("Shaking camera!")
-        let goal = intensity.clone()
-        goal.multiply(new Phaser.Math.Vector2(0.0, 0.0))
+    // /**
+    //  * @param {number} duration
+    //  * @param { Phaser.Math.Vector2} intensity
+    //  */
+    // shakeCamera(duration, intensity){
+    //     console.log("Shaking camera!")
+    //     let goal = intensity.clone()
+    //     goal.multiply(new Phaser.Math.Vector2(0.0, 0.0))
         
-        let prototype = intensity.clone()
+    //     let prototype = intensity.clone()
 
-        this.cameras.main.shake(duration, intensity, true, 
-            /**
-            * @param {Phaser.Cameras.Scene2D.Camera} cam
-            * @param { number } time
-            */
-            (cam, time)=>{
-                let progress = time
-                intensity = prototype.clone()
+    //     this.cameras.main.shake(duration, intensity, true, 
+    //         /**
+    //         * @param {Phaser.Cameras.Scene2D.Camera} cam
+    //         * @param { number } time
+    //         */
+    //         (cam, time)=>{
+    //             let progress = time
+    //             intensity = prototype.clone()
 
-                cam.shakeEffect.intensity = intensity.lerp(goal, progress)
-            })
-    }
+    //             cam.shakeEffect.intensity = intensity.lerp(goal, progress)
+    //         })
+    // }
 
     
 
