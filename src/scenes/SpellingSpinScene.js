@@ -59,7 +59,7 @@ export default class SpellingSpinScene extends EnglishGame
         console.log("Preload Spelling Spin")
         this.load.json('J2Ewords', 'assets/J2Ewords.json')
         // this.load.image(SKY_KEY, 'assets/night-sky.png')
-        // this.load.image(UI_KEY, 'assets/HorizontalLine.png')
+        this.load.image(UI_KEY, 'assets/HorizontalLine.png')
         // this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
     }
 
@@ -71,6 +71,7 @@ export default class SpellingSpinScene extends EnglishGame
 
     create()
     {
+        super.create()
         console.log("Create Spelling Spin")
         this.gameData = this.cache.json.get('J2Ewords')
         // this.createBackground()
@@ -188,7 +189,7 @@ export default class SpellingSpinScene extends EnglishGame
             'down', 
             () => {
                 console.log("GF Escape pressed")
-                this.pause()
+                this.pause(THIS_GAME)
             }
         )
         for(let letter of ALPHABET){
@@ -233,7 +234,7 @@ export default class SpellingSpinScene extends EnglishGame
             (pointer) => {
                 console.log("Pointer down")
                 if(pointer.y < 500){
-                    this.pause()
+                    this.pause(THIS_GAME)
                 }
             }
         )
@@ -488,35 +489,35 @@ export default class SpellingSpinScene extends EnglishGame
         return {letters, indices}
     }
 
-    getLivesString(livesLeft){
-        let str = 'Lives: ';
-        for(let i=0; i < livesLeft; i++){
-            str += HEART;
-        }
-        return str;
-    }
+    // getLivesString(livesLeft){
+    //     let str = 'Lives: ';
+    //     for(let i=0; i < livesLeft; i++){
+    //         str += HEART;
+    //     }
+    //     return str;
+    // }
     
-    randIndex(max){
-        return Math.floor(Math.random() * max);
-    }
+    // randIndex(max){
+    //     return Math.floor(Math.random() * max);
+    // }
 
-    shuffle(array){
-        let currentIndex = array.length, temp, randomIndex;
-        while (0 !== currentIndex){
-            randomIndex = this.randIndex(currentIndex);
-            currentIndex -= 1;
+    // shuffle(array){
+    //     let currentIndex = array.length, temp, randomIndex;
+    //     while (0 !== currentIndex){
+    //         randomIndex = this.randIndex(currentIndex);
+    //         currentIndex -= 1;
     
-            temp = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temp;
-        }
-        return array;
-    }
+    //         temp = array[currentIndex];
+    //         array[currentIndex] = array[randomIndex];
+    //         array[randomIndex] = temp;
+    //     }
+    //     return array;
+    // }
 
-    pause() {
-        this.scene.pause(THIS_GAME)
-        this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })
-    }
+    // pause() {
+    //     this.scene.pause(THIS_GAME)
+    //     this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })
+    // }
 
     //#endregion
 }

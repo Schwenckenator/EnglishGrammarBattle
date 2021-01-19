@@ -54,7 +54,7 @@ export default class EnglishGame extends Phaser.Scene{
         console.log("Preload ENGLISH GAME SUPER CLASS")
         // this.load.json('sentences', 'assets/Sentences.json')
         this.load.image(SKY_KEY, 'assets/night-sky.png')
-        this.load.image(UI_KEY, 'assets/BottomMenu.png')
+        // this.load.image(UI_KEY, 'assets/BottomMenu.png')
         this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
         this.load.audio(EXPLOSION_SOUND_KEY, 'assets/explosion-large.wav')
         this.load.audio(SHOOT_ANSWER_KEY, 'assets/laser-shot-correct.mp3')
@@ -71,7 +71,7 @@ export default class EnglishGame extends Phaser.Scene{
         console.log("Create ENGLISH GAME SUPER CLASS")
 
         this.createBackground()
-        this.add.image(240, 590, UI_KEY)
+        // this.add.image(240, 590, UI_KEY)
         this.explosion = this.createExplosion()
         this.explosions = this.createExplosions(10)
 
