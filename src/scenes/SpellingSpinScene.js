@@ -68,6 +68,7 @@ export default class SpellingSpinScene extends EnglishGame
             freq: 0
         }
         this.keys = this.createKeyboardInput()
+        this.touch = this.createTouchInput(this.quiz)
         this.newQuiz()
     }
 
@@ -165,7 +166,8 @@ export default class SpellingSpinScene extends EnglishGame
     /**
      * @param {Phaser.GameObjects.Text[]} letters
      */
-    createTouchInput(letters){
+    createTouchInput(quiz){
+        let letters = quiz.letters
         for(let i=0; i<letters.length; i++){
             let w = 200
             let h = 60
@@ -181,13 +183,20 @@ export default class SpellingSpinScene extends EnglishGame
                 }
             )
         }
-
+        quiz.answerText.setInteractive()
+        quiz.answerText.on(
+            'pointerdown',
+            () => {
+                console.log(`Answer Text Touched.`)
+                this.removeLetter()
+            }
+        )
         
         this.input.on(
             'pointerdown',
             (pointer) => {
                 console.log("Pointer down")
-                if(pointer.y < 500){
+                if(pointer.y < 400){
                     this.pause(THIS_GAME)
                 }
             }
@@ -275,7 +284,7 @@ export default class SpellingSpinScene extends EnglishGame
         if(this.quiz.answer.includes(letter) && 
         !this.quiz.playerAnswer.includes(letter)){
             
-            this.quiz.playerAnswer += letter
+            
             let ans = this.quiz.answer
             let ansIndex = ans.indexOf(letter)
             let index = this.quiz.indices.indexOf(ansIndex)
@@ -293,6 +302,8 @@ export default class SpellingSpinScene extends EnglishGame
 
     selectLetter(i){
         
+        this.quiz.playerAnswer += this.quiz.letters[i].text
+
         let prepZone = {x: 240, y:500}
         let moveTime = .25
         //Move letter to prep zone
@@ -339,6 +350,7 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     checkReadyToAnswer(letter){
+        console.log(`Checking if ready to Answer!\nPlayer answer is '${this.quiz.playerAnswer.length}', answer is ${this.quiz.answer.length}`)
         //If all letters are in prep zone, fire word!
         letter.body.setVelocity(0)
         letter.setVisible(false)
