@@ -281,7 +281,7 @@ export default class SpellingSpinScene extends EnglishGame
     checkLetter(letter){
         
 
-        if(this.quiz.answer.includes(letter) && 
+        if((this.quiz.answer.includes(letter) || this.quiz.answer.includes(letter)) && 
         !this.quiz.playerAnswer.includes(letter)){
             
             
