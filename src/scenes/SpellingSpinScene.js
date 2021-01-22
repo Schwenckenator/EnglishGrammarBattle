@@ -60,6 +60,8 @@ export default class SpellingSpinScene extends EnglishGame
             sentence: this.createQuizSentence(),
             answerText: this.createAnswerText(),
             answer: "",
+            remainingLetters: "",
+            answerIndices: [],
             playerAnswer: "",
             indices: [],
             letters: this.createLetters(),
@@ -107,7 +109,7 @@ export default class SpellingSpinScene extends EnglishGame
         return text
     }
     createLetters() {
-        const numLetters = 10
+        const numLetters = 20
         let letters = []
         for(let i=0;i<numLetters;i++){
             let text = this.add.text(X_CENTRE, 400 + 40 * i, `${i}`, {font: FONT_BIG}).setOrigin(0.5)
@@ -160,7 +162,7 @@ export default class SpellingSpinScene extends EnglishGame
      * @param {string} letter
      */
     keyboardAddLetter(letter){
-        this.input.keyboard.addKey(letter).on('down',() => {this.checkLetter(letter); console.log(`Spelling Spin: ${letter} down.`)})
+        this.input.keyboard.addKey(letter).on('down',() => {console.log(`Spelling Spin: ${letter} down.`); this.checkLetter(letter)})
     }
 
     /**
@@ -215,6 +217,7 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answer = q.english
         let obj = this.getLetters(q)
         let ls = obj.letters
+        this.quiz.remainingLetters = ls.join('')
         this.quiz.indices = obj.indices
 
         console.log(
@@ -281,17 +284,16 @@ export default class SpellingSpinScene extends EnglishGame
     checkLetter(letter){
         
 
-        if((this.quiz.answer.includes(letter) || this.quiz.answer.includes(letter)) && 
-        !this.quiz.playerAnswer.includes(letter)){
+        if(this.quiz.remainingLetters.includes(letter)){
             
             
-            let ans = this.quiz.answer
-            let ansIndex = ans.indexOf(letter)
-            let index = this.quiz.indices.indexOf(ansIndex)
+            let letters = this.quiz.remainingLetters
+            let letterIndex = letters.indexOf(letter)
+            let index = this.quiz.indices.indexOf(letterIndex)
             console.log(
                 `
                 Letter '${letter}' is in answer!
-                It is index ${ansIndex} in the answer.
+                It is index ${letterIndex} in the answer.
                 Selecting answer ${index}...
                 `
             )
@@ -303,6 +305,11 @@ export default class SpellingSpinScene extends EnglishGame
     selectLetter(i){
         
         this.quiz.playerAnswer += this.quiz.letters[i].text
+        this.quiz.remainingLetters = this.quiz.remainingLetters.replace(this.quiz.letters[i].text, '_')
+        this.quiz.answerIndices.push(i)
+        console.log(`Spelling Spin: SELECTED LETTER TEXT IS '${this.quiz.letters[i].text}'.`)
+        console.log(`Spelling Spin: Remaining letters are '${this.quiz.remainingLetters}'.`)
+        console.log(`Spelling Spin: Pushing '${i}' to indices in answer list.`)
 
         let prepZone = {x: 240, y:500}
         let moveTime = .25
@@ -325,9 +332,15 @@ export default class SpellingSpinScene extends EnglishGame
 
         this.quiz.answerText.text = this.quiz.playerAnswer
         
+        // Add the deleted letter back to the remaining letters.
+        // this.quiz.remainingLetters += deletedChar
+        
         // work out what index it was
-        let index = this.quiz.indices.indexOf(this.quiz.answer.indexOf(deletedChar))
+        let index = this.quiz.answerIndices.pop()
         console.log(`Spelling Spin: Index of '${deletedChar}' is '${index}'.`)
+
+        this.quiz.remainingLetters = this.replaceAt(this.quiz.remainingLetters, index, deletedChar)
+        console.log(`Spelling Spin: Remaining letters are ${this.quiz.remainingLetters}'.`)
 
         // put the answer back below the line, and make it selectable again.
         let moveTime = .25
@@ -347,6 +360,12 @@ export default class SpellingSpinScene extends EnglishGame
             this.quiz.letters[index].body.setVelocity(0)
             this.quiz.letters[index].setPosition(newPos.x, newPos.y)
         })
+    }
+
+    replaceAt(str, index, replace){
+        let arr = Array.from(str)
+        arr[index] = replace
+        return arr.join('')
     }
 
     checkReadyToAnswer(letter){
@@ -390,7 +409,8 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     checkAnswer(){
-        if(this.quiz.playerAnswer === this.quiz.answer){
+        let answer = this.quiz.answer.replace(/ /g, '')
+        if(this.quiz.playerAnswer === answer){
             this.correctAnswer()
         }else{
             this.wrongAnswer()
