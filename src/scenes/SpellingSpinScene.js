@@ -215,6 +215,7 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.setVisible(false)
         this.quiz.answerText.setPosition(ANSWER_POS.x, ANSWER_POS.y)
         this.quiz.answer = q.english
+        this.quiz.answerIndices = []
         let obj = this.getLetters(q)
         let ls = obj.letters
         this.quiz.remainingLetters = ls.join('')
@@ -289,16 +290,16 @@ export default class SpellingSpinScene extends EnglishGame
             
             let letters = this.quiz.remainingLetters
             let letterIndex = letters.indexOf(letter)
-            let index = this.quiz.indices.indexOf(letterIndex)
+            // let index = this.quiz.indices.indexOf(letterIndex)
             console.log(
                 `
                 Letter '${letter}' is in answer!
                 It is index ${letterIndex} in the answer.
-                Selecting answer ${index}...
+                Selecting answer ${letterIndex}...
                 `
             )
 
-            this.selectLetter(index)
+            this.selectLetter(letterIndex)
         }
     }
 
