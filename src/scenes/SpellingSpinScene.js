@@ -31,6 +31,9 @@ const ALPHABET = [
     'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
 ]
 
+const LETTER_USED_CHAR = '*'
+const SPACE_REPLACEMENT = '_'
+
 const THIS_GAME = 'Spelling-Spin'
 
 export default class SpellingSpinScene extends EnglishGame
@@ -46,6 +49,7 @@ export default class SpellingSpinScene extends EnglishGame
         super.preload()
         console.log("Preload Spelling Spin")
         this.load.json('J2Ewords', 'assets/J2Ewords.json')
+        // this.load.json('J2Ewords', 'assets/J2EwordsOLD.json')
         this.load.image(UI_KEY, 'assets/HorizontalLine.png')
     }
 
@@ -60,6 +64,8 @@ export default class SpellingSpinScene extends EnglishGame
             sentence: this.createQuizSentence(),
             answerText: this.createAnswerText(),
             answer: "",
+            remainingLetters: "",
+            answerIndices: [],
             playerAnswer: "",
             indices: [],
             letters: this.createLetters(),
@@ -68,6 +74,7 @@ export default class SpellingSpinScene extends EnglishGame
             freq: 0
         }
         this.keys = this.createKeyboardInput()
+        this.touch = this.createTouchInput(this.quiz)
         this.newQuiz()
     }
 
@@ -106,7 +113,7 @@ export default class SpellingSpinScene extends EnglishGame
         return text
     }
     createLetters() {
-        const numLetters = 10
+        const numLetters = 20
         let letters = []
         for(let i=0;i<numLetters;i++){
             let text = this.add.text(X_CENTRE, 400 + 40 * i, `${i}`, {font: FONT_BIG}).setOrigin(0.5)
@@ -127,15 +134,31 @@ export default class SpellingSpinScene extends EnglishGame
         keys.enter.on(
             'down', 
             () => {
-                console.log("GF Enter pressed")
+                console.log("Spelling Spin: Enter pressed")
             }
         )
         keys.esc = this.input.keyboard.addKey('ESC')
         keys.esc.on(
             'down', 
             () => {
-                console.log("GF Escape pressed")
+                console.log("Spelling Spin: Escape pressed")
                 this.pause(THIS_GAME)
+            }
+        )
+        keys.back = this.input.keyboard.addKey('BACKSPACE')
+        keys.back.on(
+            'down', 
+            () => {
+                console.log("Spelling Spin: BACKSPACE pressed")
+                this.removeLetter()
+            }
+        )
+        keys.space = this.input.keyboard.addKey('SPACE')
+        keys.space.on(
+            'down', 
+            () => {
+                console.log("Spelling Spin: SPACE pressed")
+                this.checkLetter(SPACE_REPLACEMENT)
             }
         )
         for(let letter of ALPHABET){
@@ -151,13 +174,14 @@ export default class SpellingSpinScene extends EnglishGame
      * @param {string} letter
      */
     keyboardAddLetter(letter){
-        this.input.keyboard.addKey(letter).on('down',() => {this.checkLetter(letter); console.log(`${letter} down.`)})
+        this.input.keyboard.addKey(letter).on('down',() => {console.log(`Spelling Spin: ${letter} down.`); this.checkLetter(letter)})
     }
 
     /**
      * @param {Phaser.GameObjects.Text[]} letters
      */
-    createTouchInput(letters){
+    createTouchInput(quiz){
+        let letters = quiz.letters
         for(let i=0; i<letters.length; i++){
             let w = 200
             let h = 60
@@ -173,13 +197,20 @@ export default class SpellingSpinScene extends EnglishGame
                 }
             )
         }
-
+        quiz.answerText.setInteractive()
+        quiz.answerText.on(
+            'pointerdown',
+            () => {
+                console.log(`Answer Text Touched.`)
+                this.removeLetter()
+            }
+        )
         
         this.input.on(
             'pointerdown',
             (pointer) => {
                 console.log("Pointer down")
-                if(pointer.y < 500){
+                if(pointer.y < 400){
                     this.pause(THIS_GAME)
                 }
             }
@@ -196,8 +227,10 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.setVisible(false)
         this.quiz.answerText.setPosition(ANSWER_POS.x, ANSWER_POS.y)
         this.quiz.answer = q.english
+        this.quiz.answerIndices = []
         let obj = this.getLetters(q)
         let ls = obj.letters
+        this.quiz.remainingLetters = ls.join('')
         this.quiz.indices = obj.indices
 
         console.log(
@@ -248,30 +281,49 @@ export default class SpellingSpinScene extends EnglishGame
         this.lostLife = false
     }
 
+    calculateLetterPosition(index, length){
+        let width = 400
+        let segment = width / length
+
+        let centreX = 240
+        let centreY = 580
+
+        let x = centreX + segment * (index + .5) - width / 2 
+        let y = centreY
+
+        return {x: x, y: y}
+    }
+
     checkLetter(letter){
         
 
-        if(this.quiz.answer.includes(letter) && 
-        !this.quiz.playerAnswer.includes(letter)){
+        if(this.quiz.remainingLetters.includes(letter)){
             
-            this.quiz.playerAnswer += letter
-            let ans = this.quiz.answer
-            let ansIndex = ans.indexOf(letter)
-            let index = this.quiz.indices.indexOf(ansIndex)
+            
+            let letters = this.quiz.remainingLetters
+            let letterIndex = letters.indexOf(letter)
+            // let index = this.quiz.indices.indexOf(letterIndex)
             console.log(
                 `
                 Letter '${letter}' is in answer!
-                It is index ${ansIndex} in the answer.
-                Selecting answer ${index}...
+                It is index ${letterIndex} in the answer.
+                Selecting answer ${letterIndex}...
                 `
             )
 
-            this.selectLetter(index)
+            this.selectLetter(letterIndex)
         }
     }
 
     selectLetter(i){
         
+        this.quiz.playerAnswer += this.quiz.letters[i].text
+        this.quiz.remainingLetters = this.quiz.remainingLetters.replace(this.quiz.letters[i].text, LETTER_USED_CHAR)
+        this.quiz.answerIndices.push(i)
+        console.log(`Spelling Spin: SELECTED LETTER TEXT IS '${this.quiz.letters[i].text}'.`)
+        console.log(`Spelling Spin: Remaining letters are '${this.quiz.remainingLetters}'.`)
+        console.log(`Spelling Spin: Pushing '${i}' to indices in answer list.`)
+
         let prepZone = {x: 240, y:500}
         let moveTime = .25
         //Move letter to prep zone
@@ -284,7 +336,53 @@ export default class SpellingSpinScene extends EnglishGame
         this.time.delayedCall(moveTime * 1000, this.checkReadyToAnswer, [this.quiz.letters[i]], this)
     }
 
+    removeLetter(){
+        if(this.quiz.playerAnswer.length === 0) return
+
+        let deletedChar = this.quiz.playerAnswer.charAt(this.quiz.playerAnswer.length - 1)
+        // Take last letter from the player answer
+        this.quiz.playerAnswer = this.quiz.playerAnswer.slice(0, -1)
+
+        this.quiz.answerText.text = this.quiz.playerAnswer
+        
+        // Add the deleted letter back to the remaining letters.
+        // this.quiz.remainingLetters += deletedChar
+        
+        // work out what index it was
+        let index = this.quiz.answerIndices.pop()
+        console.log(`Spelling Spin: Index of '${deletedChar}' is '${index}'.`)
+
+        this.quiz.remainingLetters = this.replaceAt(this.quiz.remainingLetters, index, deletedChar)
+        console.log(`Spelling Spin: Remaining letters are ${this.quiz.remainingLetters}'.`)
+
+        // put the answer back below the line, and make it selectable again.
+        let moveTime = .25
+
+        let newPos = this.calculateLetterPosition(index, this.quiz.answer.length)
+
+        // Make letter object visible
+        this.quiz.letters[index].setVisible(true)
+
+        this.quiz.letters[index].body.setVelocity(
+            (newPos.x - this.quiz.letters[index].x) / moveTime,
+            (newPos.y - this.quiz.letters[index].y) / moveTime
+        )
+
+        // Add delayed call to stop movement and perfectly position Letter object
+        this.time.delayedCall(moveTime * 1000, ()=>{
+            this.quiz.letters[index].body.setVelocity(0)
+            this.quiz.letters[index].setPosition(newPos.x, newPos.y)
+        })
+    }
+
+    replaceAt(str, index, replace){
+        let arr = Array.from(str)
+        arr[index] = replace
+        return arr.join('')
+    }
+
     checkReadyToAnswer(letter){
+        console.log(`Checking if ready to Answer!\nPlayer answer is '${this.quiz.playerAnswer.length}', answer is ${this.quiz.answer.length}`)
         //If all letters are in prep zone, fire word!
         letter.body.setVelocity(0)
         letter.setVisible(false)
@@ -324,7 +422,11 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     checkAnswer(){
-        if(this.quiz.playerAnswer === this.quiz.answer){
+        let answer = this.quiz.answer
+        let playerAnswer = this.quiz.playerAnswer.replace(/_/g, ' ')
+
+        console.log(`Answer = '${answer}'\nPlayers answer = '${playerAnswer}'.\nCorrect? ${playerAnswer === answer}`)
+        if(answer === playerAnswer){
             this.correctAnswer()
         }else{
             this.wrongAnswer()
@@ -434,6 +536,10 @@ export default class SpellingSpinScene extends EnglishGame
         indices = this.shuffle(indices)
         let letters = []
         for(let i=0; i<indices.length; i++){
+            if(q.english[indices[i]] === ' '){
+                letters.push(SPACE_REPLACEMENT)
+                continue
+            }
             letters.push(q.english[indices[i]])
         }
 

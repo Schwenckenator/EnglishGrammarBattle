@@ -28,23 +28,6 @@
 
     "partsOfSpeech":[
         {
-            "name": "nounSingular",
-            "keyword": "NOUN",
-            "words":[
-                "%N_ANI%",
-                "%N_INANI%",
-                "%N_SPORT%"
-            ]
-        },
-        {
-            "name": "nounPlural",
-            "keyword": "NOUNS",
-            "words":[
-                "%NS_ANI%",
-                "%NS_INANI%"
-            ]
-        },
-        {
             "name": "adjective",
             "keyword": "ADJ",
             "words":[
@@ -68,10 +51,50 @@
             ]
         },
         {
-            "name": "animatePluralNoun",
-            "keyword": "NS_ANI",
+            "name": "animalSingular",
+            "keyword": "N_ANIMAL",
             "words":[
-                ""
+                "pet",
+                "rabbit"
+            ]
+        },
+        {
+            "name": "clothing",
+            "keyword": "N_CLOTH",
+            "words":[
+                "cap",
+                "coat",
+                "jacket",
+                "shirt",
+                "shoes",
+                "skirt"
+            ]
+        },
+        {
+            "name": "food",
+            "keyword": "N_FOOD",
+            "words":[
+                "%N_FRUIT%",
+                "bread",
+                "carrot",
+                "cookie",
+                "dessert",
+                "hamburger",
+                "meat",
+                "potato",
+                "pumpkin",
+                "rice",
+                "cooking"
+            ]
+        },
+        {
+            "name": "fruit",
+            "keyword": "N_FRUIT",
+            "words":[
+                "banana",
+                "orange",
+                "pineapple",
+                "strawberry"
             ]
         },
         {
@@ -107,13 +130,6 @@
             ]
         },
         {
-            "name": "inanimatePluralNoun",
-            "keyword": "NS_INANI",
-            "words":[
-                ""
-            ]
-        },
-        {
             "name": "sport",
             "keyword": "N_SPORT",
             "words":[
@@ -122,49 +138,125 @@
             ]
         },
         {
-            "name": "fruit",
-            "keyword": "N_FRUIT",
+            "name": "nounSingular",
+            "keyword": "NOUN",
             "words":[
-                "banana",
-                "orange",
-                "pineapple",
-                "strawberry"
+                "%N_ANI%",
+                "%N_INANI%",
+                "%N_SPORT%",
+                "%N_FOOD%"
             ]
         },
         {
-            "name": "food",
-            "keyword": "N_FOOD",
+            "name": "nounPlural",
+            "keyword": "NOUNS",
             "words":[
-                "%N_FRUIT%",
-                "bread",
-                "carrot",
-                "cookie",
-                "dessert",
-                "hamburger",
-                "meat",
-                "potato",
-                "pumpkin",
-                "rice"
+                "%NS_ANI%",
+                "%NS_INANI%"
             ]
         },
         {
-            "name": "clothing",
-            "keyword": "N_CLOTH",
+            "name": "animatePluralNoun",
+            "keyword": "NS_ANI",
             "words":[
-                "cap",
-                "coat",
-                "jacket",
-                "shirt",
-                "shoes",
-                "skirt"
+                ""
             ]
         },
         {
-            "name": "animalSingular",
-            "keyword": "N_ANIMAL",
+            "name": "inanimatePluralNoun",
+            "keyword": "NS_INANI",
             "words":[
-                "pet",
-                "rabbit"
+                ""
+            ]
+        },
+        {
+            "name": "verb",
+            "keyword": "VERB",
+            "words":[
+                "%VERB_IN%",
+                "%VERB_TR%",
+                "clean",
+                "do the dishes",
+                "ride",
+                "run",
+                "shopping",
+                "sing",
+                "skate",
+                "ski",
+                "sit",
+                "stand",
+                "start",
+                "stop",
+                "study",
+                "swim",
+                "think",
+                "try",
+                "use",
+                "visit",
+                "want",
+                "wash",
+                "watch",
+                "work",
+                "write"
+            ]
+        },
+        {
+            "name": "verbIntransitive",
+            "keyword": "VERB_IN",
+            "words":[
+                "arrive",
+                "ask",
+                "dance",
+                "fly",
+                "jump",
+                "live"
+            ]
+        },
+        {
+            "name": "verbTransitive",
+            "keyword": "VERB_TR",
+            "words":[
+                "answer",
+                "bring",
+                "buy",
+                "catch",
+                "close",
+                "cook",
+                "cut",
+                "do",
+                "drink",
+                "drive",
+                "eat",
+                "enjoy",
+                "have",
+                "hear",
+                "help",
+                "read"
+            ]
+        },
+        {
+            "name": "verbGerund",
+            "keyword": "VERBING",
+            "words":[
+                "%VERBING_IN%",
+                "%VERBING_TR%"
+            ]
+        },
+        {
+            "name": "verbGerundIntransitive",
+            "keyword": "VERBING_IN",
+            "words":[
+                "cycling",
+                "diving",
+                "fishing",
+                "hiking"
+            ]
+        },
+        {
+            "name": "verbGerundTransitive",
+            "keyword": "VERBING_TR",
+            "words":[
+                ""
             ]
         }
     ]
