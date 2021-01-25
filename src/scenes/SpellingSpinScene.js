@@ -31,6 +31,9 @@ const ALPHABET = [
     'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
 ]
 
+const LETTER_USED_CHAR = '*'
+const SPACE_REPLACEMENT = '_'
+
 const THIS_GAME = 'Spelling-Spin'
 
 export default class SpellingSpinScene extends EnglishGame
@@ -46,6 +49,7 @@ export default class SpellingSpinScene extends EnglishGame
         super.preload()
         console.log("Preload Spelling Spin")
         this.load.json('J2Ewords', 'assets/J2Ewords.json')
+        // this.load.json('J2Ewords', 'assets/J2EwordsOLD.json')
         this.load.image(UI_KEY, 'assets/HorizontalLine.png')
     }
 
@@ -147,6 +151,14 @@ export default class SpellingSpinScene extends EnglishGame
             () => {
                 console.log("Spelling Spin: BACKSPACE pressed")
                 this.removeLetter()
+            }
+        )
+        keys.space = this.input.keyboard.addKey('SPACE')
+        keys.space.on(
+            'down', 
+            () => {
+                console.log("Spelling Spin: SPACE pressed")
+                this.checkLetter(SPACE_REPLACEMENT)
             }
         )
         for(let letter of ALPHABET){
@@ -306,7 +318,7 @@ export default class SpellingSpinScene extends EnglishGame
     selectLetter(i){
         
         this.quiz.playerAnswer += this.quiz.letters[i].text
-        this.quiz.remainingLetters = this.quiz.remainingLetters.replace(this.quiz.letters[i].text, '_')
+        this.quiz.remainingLetters = this.quiz.remainingLetters.replace(this.quiz.letters[i].text, LETTER_USED_CHAR)
         this.quiz.answerIndices.push(i)
         console.log(`Spelling Spin: SELECTED LETTER TEXT IS '${this.quiz.letters[i].text}'.`)
         console.log(`Spelling Spin: Remaining letters are '${this.quiz.remainingLetters}'.`)
@@ -410,8 +422,11 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     checkAnswer(){
-        let answer = this.quiz.answer.replace(/ /g, '')
-        if(this.quiz.playerAnswer === answer){
+        let answer = this.quiz.answer
+        let playerAnswer = this.quiz.playerAnswer.replace(/_/g, ' ')
+
+        console.log(`Answer = '${answer}'\nPlayers answer = '${playerAnswer}'.\nCorrect? ${playerAnswer === answer}`)
+        if(answer === playerAnswer){
             this.correctAnswer()
         }else{
             this.wrongAnswer()
@@ -521,6 +536,10 @@ export default class SpellingSpinScene extends EnglishGame
         indices = this.shuffle(indices)
         let letters = []
         for(let i=0; i<indices.length; i++){
+            if(q.english[indices[i]] === ' '){
+                letters.push(SPACE_REPLACEMENT)
+                continue
+            }
             letters.push(q.english[indices[i]])
         }
 
