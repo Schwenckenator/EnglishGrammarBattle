@@ -238,11 +238,7 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.indices = obj.indices
 
         console.log(
-            `
-            Answer: ${q.english}
-            Letters: ${ls}
-            Indices: ${obj.indices}
-            `
+            `Spelling Spin:\nAnswer: ${q.english}\nLetters: ${ls}\nIndices: ${obj.indices}`
         )
 
         let arc = 2 * Math.PI / ls.length
@@ -308,11 +304,7 @@ export default class SpellingSpinScene extends EnglishGame
             let letterIndex = letters.indexOf(letter)
             // let index = this.quiz.indices.indexOf(letterIndex)
             console.log(
-                `
-                Letter '${letter}' is in answer!
-                It is index ${letterIndex} in the answer.
-                Selecting answer ${letterIndex}...
-                `
+                `Spelling Spin:\nLetter '${letter}' is in answer!\nIt is index ${letterIndex} in the answer.\nSelecting answer ${letterIndex}...\n`
             )
 
             this.selectLetter(letterIndex)
@@ -320,10 +312,8 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     selectLetter(i){
-        
-        this.quiz.playerAnswer += this.quiz.letters[i].text
         this.quiz.remainingLetters = this.quiz.remainingLetters.replace(this.quiz.letters[i].text, LETTER_USED_CHAR)
-        this.quiz.answerIndices.push(i)
+
         console.log(`Spelling Spin: SELECTED LETTER TEXT IS '${this.quiz.letters[i].text}'.`)
         console.log(`Spelling Spin: Remaining letters are '${this.quiz.remainingLetters}'.`)
         console.log(`Spelling Spin: Pushing '${i}' to indices in answer list.`)
@@ -337,7 +327,7 @@ export default class SpellingSpinScene extends EnglishGame
             (prepZone.y - this.quiz.letters[i].y) / moveTime
         )
 
-        this.time.delayedCall(moveTime * 1000, this.checkReadyToAnswer, [this.quiz.letters[i]], this)
+        this.time.delayedCall(moveTime * 1000, this.checkReadyToAnswer, [this.quiz.letters[i], i], this)
     }
 
     removeLetter(){
@@ -385,8 +375,11 @@ export default class SpellingSpinScene extends EnglishGame
         return arr.join('')
     }
 
-    checkReadyToAnswer(letter){
-        console.log(`Checking if ready to Answer!\nPlayer answer is '${this.quiz.playerAnswer.length}', answer is ${this.quiz.answer.length}`)
+    checkReadyToAnswer(letter, i){
+        this.quiz.playerAnswer += letter.text
+        
+        this.quiz.answerIndices.push(i)
+        console.log(`Checking if ready to Answer!\nPlayer answer has '${this.quiz.playerAnswer.length}', answer has '${this.quiz.answer.length}'.`)
         //If all letters are in prep zone, fire word!
         letter.body.setVelocity(0)
         letter.setVisible(false)
@@ -512,6 +505,7 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.setVisible(false)
         
         for(let i=0; i<this.quiz.letters.length; i++){
+            console.log(`Spelling Spin: Hiding letter ${i}`)
             this.quiz.letters[i].setVisible(false)
         }
         this.quiz.sentence.setVisible(false)
