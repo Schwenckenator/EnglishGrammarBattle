@@ -30,6 +30,11 @@ const NEXT_LEVEL_TARGET = 10
 const ALPHABET = [
     'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
 ]
+const KEY_PAIRS = [
+    {name: 'SPACE', code: 'SPACE', char: SPACE_REPLACEMENT},
+    {name: 'MINUS', code: 'MINUS', char: '-'},
+    {name: 'MINUS', code: 173, char: '-'}
+]
 
 const LETTER_USED_CHAR = '*'
 const SPACE_REPLACEMENT = '_'
@@ -153,16 +158,11 @@ export default class SpellingSpinScene extends EnglishGame
                 this.removeLetter()
             }
         )
-        keys.space = this.input.keyboard.addKey('SPACE')
-        keys.space.on(
-            'down', 
-            () => {
-                console.log("Spelling Spin: SPACE pressed")
-                this.checkLetter(SPACE_REPLACEMENT)
-            }
-        )
+
+        for(let k of KEY_PAIRS){
+            this.keyboardAddPair(k.code, k.name, k.char)
+        }
         for(let letter of ALPHABET){
-            console.log(letter)
             this.keyboardAddLetter(letter)
         }
         
@@ -174,7 +174,11 @@ export default class SpellingSpinScene extends EnglishGame
      * @param {string} letter
      */
     keyboardAddLetter(letter){
-        this.input.keyboard.addKey(letter).on('down',() => {console.log(`Spelling Spin: ${letter} down.`); this.checkLetter(letter)})
+        this.keyboardAddPair(letter, letter, letter)
+    }
+
+    keyboardAddPair(code, name, char){
+        this.input.keyboard.addKey(code).on('down',() => {console.log(`Spelling Spin: ${name} down.`); this.checkLetter(char)})
     }
 
     /**
