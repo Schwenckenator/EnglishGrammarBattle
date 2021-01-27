@@ -22,6 +22,7 @@ export default class NextLevelScreen extends Phaser.Scene
         this.gameList = undefined
         this.lastGame = undefined
         this.score = undefined
+        this.lives = undefined
     }
 
 	preload()
@@ -33,6 +34,7 @@ export default class NextLevelScreen extends Phaser.Scene
     init(data){
         this.lastGame = data.gameKey
         this.score = data.score
+        this.lives = data.lives
         this.lastLevel = data.level
     }
 
@@ -48,7 +50,7 @@ export default class NextLevelScreen extends Phaser.Scene
         // this.selected = 0
         // this.selBox = this.createBox()
         this.time.delayedCall(3000, () => {
-            this.scene.start(this.lastGame, { level: this.lastLevel + 1, score: this.score })
+            this.scene.start(this.lastGame, { level: this.lastLevel + 1, score: this.score, lives: this.lives })
         }, null, this)
 
         this.time.delayedCall(500, () => {

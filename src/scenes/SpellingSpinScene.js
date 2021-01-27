@@ -439,7 +439,7 @@ export default class SpellingSpinScene extends EnglishGame
 
         if(this.checkForNextLevel()){
             this.time.delayedCall(500, () => {
-                    this.scene.start('Next-Level-Screen', { gameKey: THIS_GAME, score: this.score, level: this.level })
+                    this.scene.start('Next-Level-Screen', { gameKey: THIS_GAME, score: this.score, lives: this.lives, level: this.level })
                 }, null, this)
         }else{
             this.next()

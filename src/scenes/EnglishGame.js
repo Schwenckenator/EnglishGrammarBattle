@@ -64,7 +64,7 @@ export default class EnglishGame extends Phaser.Scene{
     init(data){
         this.level = data.level
         this.score = data.score
-        this.lives = 3
+        this.lives = data.lives
     }
 
     create(){
@@ -76,7 +76,6 @@ export default class EnglishGame extends Phaser.Scene{
         this.explosions = this.createExplosions(10)
 
         this.scoreText = this.createScoreText()
-        this.lives = 3
         this.livesText = this.createLivesText()
         this.lostLife = false
         this.createSounds()
