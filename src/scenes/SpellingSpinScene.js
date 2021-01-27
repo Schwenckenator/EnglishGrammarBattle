@@ -94,10 +94,10 @@ export default class SpellingSpinScene extends EnglishGame
         }
         if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
             this.loseLife()
-            this.endQuestion()
-            if(this.lives >= 0){
-                this.next()
-            }
+            // this.endQuestion()
+            // if(this.lives >= 0){
+            //     this.next()
+            // }
         }
     }
 
