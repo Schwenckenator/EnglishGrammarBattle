@@ -30,14 +30,15 @@ const NEXT_LEVEL_TARGET = 10
 const ALPHABET = [
     'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
 ]
-const KEY_PAIRS = [
-    {name: 'SPACE', code: 'SPACE', char: SPACE_REPLACEMENT},
-    {name: 'MINUS', code: 'MINUS', char: '-'},
-    {name: 'MINUS', code: 173, char: '-'}
-]
 
 const LETTER_USED_CHAR = '*'
 const SPACE_REPLACEMENT = '_'
+const KEY_PAIRS = [
+    {name: 'SPACE', code: 'SPACE', char: SPACE_REPLACEMENT},
+    {name: 'MINUS', code: 'MINUS', char: '-'},
+    {name: 'MINUS', code: 173,     char: '-'}
+]
+
 
 const THIS_GAME = 'Spelling-Spin'
 
@@ -54,7 +55,7 @@ export default class SpellingSpinScene extends EnglishGame
         super.preload()
         console.log("Preload Spelling Spin")
         this.load.json('J2Ewords', 'assets/J2Ewords.json')
-        // this.load.json('J2Ewords', 'assets/J2EwordsOLD.json')
+        // this.load.json('J2Ewords', 'assets/J2EwordsTEST.json')
         this.load.image(UI_KEY, 'assets/HorizontalLine.png')
     }
 
@@ -178,12 +179,10 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     keyboardAddPair(code, name, char){
+        console.log(`Spelling Spin: Adding Character '${name}', code '${code}'. Char '${char}'`)
         this.input.keyboard.addKey(code).on('down',() => {console.log(`Spelling Spin: ${name} down.`); this.checkLetter(char)})
     }
 
-    /**
-     * @param {Phaser.GameObjects.Text[]} letters
-     */
     createTouchInput(quiz){
         let letters = quiz.letters
         for(let i=0; i<letters.length; i++){
@@ -295,7 +294,7 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     checkLetter(letter){
-        
+        console.log(`Spelling Spin: Checking '${letter}'`)
 
         if(this.quiz.remainingLetters.includes(letter)){
             
@@ -340,7 +339,6 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.text = this.quiz.playerAnswer
         
         // Add the deleted letter back to the remaining letters.
-        // this.quiz.remainingLetters += deletedChar
         
         // work out what index it was
         let index = this.quiz.answerIndices.pop()
