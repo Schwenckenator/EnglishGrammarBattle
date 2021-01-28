@@ -92,6 +92,7 @@ export default class MainTitleScreen extends Phaser.Scene
     }
 
     select(){
+        SFXManager.playSelect()
         this.scene.start('Game-Select')
     }
 

@@ -159,7 +159,11 @@ export default class GameSelectScreen extends Phaser.Scene
     }
 
     select(index) {
-        SFXManager.playSelect()
+        if(index === this.optionList.length - 1){ // Last option is return
+            SFXManager.playReturn()
+        }else{
+            SFXManager.playSelect()
+        }
         this.optionList[index].func()
     }
 

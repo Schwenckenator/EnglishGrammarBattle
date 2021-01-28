@@ -197,6 +197,7 @@ export default class PauseScreen extends Phaser.Scene
      * @param {number} pos
      */
     moveBox(pos){
+        SFXManager.playHover()
         this.selBox.setPosition(240, 200+SPACING*pos)
     }
 }
