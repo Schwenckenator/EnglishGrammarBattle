@@ -1,9 +1,13 @@
 import Phaser from 'phaser'
-import MusicManager from '../MusicManager'
+import MusicManager from '../classes/MusicManager'
+import SFXManager from '../classes/SFXManager';
 
 const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
 const MUSIC_KEY = 'music'
+const SFX_HOVER_KEY = 'sfxHover'
+const SFX_SELECT_KEY = 'sfxSelect'
+const SFX_RETURN_KEY = 'sfxReturn'
 
 const FONT_BIG = '48px Arial'
 const FONT_MED = '24px Arial'
@@ -24,6 +28,9 @@ export default class MainTitleScreen extends Phaser.Scene
     {
         console.log("Preload Main Title")
         this.load.image(SKY_KEY, 'assets/night-sky.png')
+        this.load.audio(SFX_HOVER_KEY, SFXManager.UI_hoverPath)
+        this.load.audio(SFX_SELECT_KEY, SFXManager.UI_selectPath)
+        this.load.audio(SFX_RETURN_KEY, SFXManager.UI_returnPath)
     }
 
     create()
@@ -33,11 +40,23 @@ export default class MainTitleScreen extends Phaser.Scene
         this.titles = this.createTitleScreen()
         
         this.keys = this.createInput()
+
+        this.createSoundEffects()
         this.loadMusic()
         MusicManager.pause()
+
+        
     }
 
-
+    createSoundEffects(){
+        if(SFXManager.isLoaded()) return
+        SFXManager.init(
+            this.sound.add(SFX_HOVER_KEY),
+            this.sound.add(SFX_SELECT_KEY),
+            this.sound.add(SFX_RETURN_KEY)
+        )
+        
+    }
 
 
     createBackground(){

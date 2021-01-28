@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
-import MusicManager from '../MusicManager'
+import MusicManager from '../classes/MusicManager'
+import SFXManager from '../classes/SFXManager'
 
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
@@ -158,10 +159,12 @@ export default class GameSelectScreen extends Phaser.Scene
     }
 
     select(index) {
+        SFXManager.playSelect()
         this.optionList[index].func()
     }
 
     returnToTitle() {
+        SFXManager.playReturn()
         this.scene.stop('Game-Select')
         this.scene.start('Title-Screen')
     }
@@ -193,6 +196,7 @@ export default class GameSelectScreen extends Phaser.Scene
      * @param {number} pos
      */
     moveBox(pos){
+        SFXManager.playHover()
         this.selBox.setPosition(240, 200+SPACING*pos)
     }
 }

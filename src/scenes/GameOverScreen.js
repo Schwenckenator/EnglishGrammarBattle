@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import SFXManager from '../classes/SFXManager';
 
 const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
@@ -118,7 +119,7 @@ export default class GameOverScreen extends Phaser.Scene
             'down', 
             () => {
                 console.log("PS Escape Pressed")
-                this.select(0)// Return to game
+                this.select(1)// Return to game
             }
         )
         keys.up = this.input.keyboard.addKey('UP')
@@ -170,6 +171,12 @@ export default class GameOverScreen extends Phaser.Scene
     }
 
     select(index){
+        if(index === 1){
+            SFXManager.playReturn()
+        }else{
+            SFXManager.playSelect()
+        }
+        
         this.optionList[index].func()
     }
 
@@ -177,6 +184,7 @@ export default class GameOverScreen extends Phaser.Scene
      * @param {number} pos
      */
     moveBox(pos){
+        SFXManager.playHover()
         this.selBox.setPosition(240, 275+SPACING*pos)
     }
 }

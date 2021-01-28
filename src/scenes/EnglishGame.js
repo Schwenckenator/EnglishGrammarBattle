@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
-import MusicManager from '../MusicManager'
+import MusicManager from '../classes/MusicManager'
+import SFXManager from '../classes/SFXManager'
 
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
@@ -164,6 +165,7 @@ export default class EnglishGame extends Phaser.Scene{
      * @param {string} THIS_GAME
      */
     pause(THIS_GAME){
+        SFXManager.playReturn()
         MusicManager.pause()
         this.scene.pause(THIS_GAME)
         this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })

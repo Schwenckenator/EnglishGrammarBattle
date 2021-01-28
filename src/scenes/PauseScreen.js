@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import Game from '../main'
-import MusicManager from '../MusicManager';
+import MusicManager from '../classes/MusicManager';
+import SFXManager from '../classes/SFXManager';
 
 const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
@@ -109,7 +110,7 @@ export default class PauseScreen extends Phaser.Scene
             'down', 
             () => {
                 console.log("PS Enter Pressed")
-                this.optionList[this.selected].func()
+                this.select(this.selected)
             }
         )
         keys.esc = this.input.keyboard.addKey('ESC')
@@ -117,7 +118,7 @@ export default class PauseScreen extends Phaser.Scene
             'down', 
             () => {
                 console.log("PS Escape Pressed")
-                this.optionList[0].func() // Return to game
+                this.select(0) // Return to game
             }
         )
         keys.up = this.input.keyboard.addKey('UP')
@@ -184,6 +185,11 @@ export default class PauseScreen extends Phaser.Scene
     }
 
     select(index){
+        if(index === 1){
+            SFXManager.playReturn()
+        }else{
+            SFXManager.playSelect()
+        }
         this.optionList[index].func()
     }
 
