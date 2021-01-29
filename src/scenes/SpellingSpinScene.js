@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import SFXManager from '../classes/SFXManager'
 import EnglishGame from './EnglishGame'
 
 // const SKY_KEY = 'sky'
@@ -326,6 +327,8 @@ export default class SpellingSpinScene extends EnglishGame
             (prepZone.y - this.quiz.letters[i].y) / moveTime
         )
 
+        SFXManager.playBeep()
+
         this.time.delayedCall(moveTime * 1000, this.checkReadyToAnswer, [this.quiz.letters[i], i], this)
     }
 
@@ -359,6 +362,8 @@ export default class SpellingSpinScene extends EnglishGame
             (newPos.x - this.quiz.letters[index].x) / moveTime,
             (newPos.y - this.quiz.letters[index].y) / moveTime
         )
+
+        SFXManager.playTone()
 
         // Add delayed call to stop movement and perfectly position Letter object
         this.time.delayedCall(moveTime * 1000, ()=>{
