@@ -166,6 +166,7 @@ export default class EnglishGame extends Phaser.Scene{
      */
     pause(THIS_GAME){
         SFXManager.playReturn()
+        SFXManager.stopAlert()
         MusicManager.pause()
         this.scene.pause(THIS_GAME)
         this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })

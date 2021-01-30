@@ -59,7 +59,7 @@ export default class GameOverScreen extends Phaser.Scene
             {
                 name: 'Play again', 
                 func: () => {
-                    this.scene.start(this.lastGame, {level: 1, score: 0})
+                    this.scene.start(this.lastGame, {level: 1, score: 0, lives: 3})
                 }
             },
             {

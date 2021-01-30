@@ -442,6 +442,7 @@ export default class SpellingSpinScene extends EnglishGame
 
         if(this.checkForNextLevel()){
             this.time.delayedCall(500, () => {
+                    SFXManager.stopAlert()
                     this.scene.start('Next-Level-Screen', { gameKey: THIS_GAME, score: this.score, lives: this.lives, level: this.level })
                 }, null, this)
         }else{
@@ -479,12 +480,19 @@ export default class SpellingSpinScene extends EnglishGame
         this.lives--
         this.lostLife = true
         this.livesText.text = this.getLivesString(this.lives)
+        if(this.lives === 0){
+            SFXManager.playAlert()
+        }else {
+            SFXManager.stopAlert()
+        }
+
         this.endQuestion()
 
         if(this.checkForGameOver()){
             this.explodeGameOver()
             //GAME OVER
             this.time.delayedCall(2500, () => {
+                SFXManager.stopAlert()
                 this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
             }, null, this)
         }else{
