@@ -272,60 +272,12 @@ export default class GrammarFallsScene extends EnglishGame
             this.correctAnswer()
             
         }else{
-            this.wrongAnswer(index)
+            this.wrongAnswer(this.quiz.sentence, this.quiz.answers[index])
         }
         
     }
 
-    correctAnswer(){
-        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
-        this.shakeCamera(250, new Phaser.Math.Vector2 (0.02, 0.02))
-        this.score++
-        this.scoreText.text = `Score: ${this.score}`
-        this.endQuestion()
-
-        if(this.checkForNextLevel()){
-            this.time.delayedCall(500, () => {
-                    this.scene.start('Next-Level-Screen', { gameKey: THIS_GAME, score: this.score, level: this.level })
-                }, null, this)
-        }else{
-            this.next()
-        }
-    }
-
-    /**
-     * @param {number} i
-     */
-    wrongAnswer(i){
-        let amp = 30
-        // @ts-ignore
-        this.quiz.sentence.body.setVelocity(Math.random()* amp - amp/2, -Math.random()* amp)
-        // @ts-ignore
-        this.quiz.sentence.body.setAllowGravity(true)
-        // @ts-ignore
-        this.quiz.answers[i].body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
-        // @ts-ignore
-        this.quiz.answers[i].body.setAllowGravity(true)
-
-        this.wrongSound.play()
-
-        this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
-    }
-
-    loseLife(){
-        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
-        super.loseLife()
-    }
-
-
-    checkForNextLevel(){
-        return this.score % NEXT_LEVEL_TARGET == 0 // Hit a multiple level target
-    }
-
-    next(){
-        this.time.delayedCall(250, this.newQuiz, null, this)
-    }
-
+    // ABSTRACT IMPLEMENTATION
     endQuestion(){
         if(this.selectedAnswer >= 0){
             // @ts-ignore

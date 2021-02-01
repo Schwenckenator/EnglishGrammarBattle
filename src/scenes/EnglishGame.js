@@ -221,7 +221,40 @@ export default class EnglishGame extends Phaser.Scene{
         }
     }
 
+    correctAnswer(){
+        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
+        this.shakeCamera(250, new Phaser.Math.Vector2 (0.02, 0.02))
+        this.score++
+        this.scoreText.text = `Score: ${this.score}`
+        this.endQuestion()
+
+        if(this.checkForNextLevel()){
+            this.time.delayedCall(500, () => {
+                    this.scene.start('Next-Level-Screen', { gameKey: this.thisGame, score: this.score, level: this.level })
+                }, null, this)
+        }else{
+            this.next()
+        }
+    }
+
+    wrongAnswer(quiz, ans){
+        let amp = 30
+        // @ts-ignore
+        quiz.body.setVelocity(Math.random()* amp - amp/2, -Math.random()* amp)
+        // @ts-ignore
+        quiz.body.setAllowGravity(true)
+        // @ts-ignore
+        ans.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
+        // @ts-ignore
+        ans.body.setAllowGravity(true)
+
+        this.wrongSound.play()
+
+        this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
+    }
+
     loseLife(){
+        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
         this.shakeCamera(500, new Phaser.Math.Vector2(0.1, 0.1))
         this.lives--
         this.lostLife = true
@@ -248,14 +281,17 @@ export default class EnglishGame extends Phaser.Scene{
 
     }
 
+    newQuiz(){
+        throw new Error('Abstract Method not implemented.')
+    }
+
     endQuestion() {
         throw new Error('Abstract Method not implemented.')
     }
 
     next() {
-        throw new Error('Abstract Method not implemented.')
+        this.time.delayedCall(250, this.newQuiz, null, this)
     }
-
     
 
     checkForNextLevel(){
