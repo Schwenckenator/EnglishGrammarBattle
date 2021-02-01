@@ -30,9 +30,10 @@ const ANSWER_MOVE_TIME = 0.5
 const NEXT_LEVEL_TARGET = 10
 
 export default class EnglishGame extends Phaser.Scene{
-    constructor(THIS_GAME){
+    constructor(THIS_GAME, BOTTOM_Y){
         super(THIS_GAME)
         this.thisGame = THIS_GAME
+        this.bottomY = BOTTOM_Y
         this.gameData = undefined
     
         this.explosion = undefined
@@ -48,6 +49,12 @@ export default class EnglishGame extends Phaser.Scene{
         this.wrongSound = undefined
         this.explosionSound = undefined
         this.shootAnswerSound = undefined
+
+        this.sway = {
+            tick: 0,
+            sinOffset: 0,
+            freq: 0
+        }
     }
 
     preload()
@@ -81,7 +88,14 @@ export default class EnglishGame extends Phaser.Scene{
     }
 
     update(){
-
+        if(this.isAnswerSelected){
+            this.doAnswer()
+        }else{
+            this.doGame()
+        }
+        if(this.quiz.sentence.y > this.bottomY && !this.lostLife){
+            this.loseLife()
+        }
     }
     //#region Create
     createBackground(){
@@ -131,6 +145,13 @@ export default class EnglishGame extends Phaser.Scene{
 
     //#endregion
 
+    doAnswer(){
+        throw new Error('Abstract Method not implemented.')
+    }
+
+    doGame(){
+        throw new Error('Abstract Method not implemented.')
+    }
 
 
     getLivesString(livesLeft){
@@ -201,6 +222,14 @@ export default class EnglishGame extends Phaser.Scene{
         this.explosion.setVisible(true)
         this.explosion.anims.play('explode')
         this.explosionSound.play()
+    }
+
+    moveQuiz(quizObj){
+        let amp = 50
+        let x = X_CENTRE + amp*(Math.sin(this.sway.freq * this.sway.tick + this.sway.sinOffset))
+        let y = quizObj.y
+        quizObj.setPosition(x, y)
+        this.sway.tick++
     }
 
     explodeGameOver(){
@@ -293,6 +322,10 @@ export default class EnglishGame extends Phaser.Scene{
         this.time.delayedCall(250, this.newQuiz, null, this)
     }
     
+    resetSway(){
+        this.sway.sinOffset = Math.random() * 2 * Math.PI
+        this.sway.freq = FREQ + this.level * SCORE_FREQ
+    }
 
     checkForNextLevel(){
         return this.score % NEXT_LEVEL_TARGET == 0 // Hit a multiple level target

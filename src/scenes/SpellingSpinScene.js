@@ -47,8 +47,7 @@ export default class SpellingSpinScene extends EnglishGame
 {
 	constructor()
 	{
-        super(THIS_GAME)
-        
+        super(THIS_GAME, BOTTOM_Y)
     }
 
 	preload()
@@ -76,27 +75,20 @@ export default class SpellingSpinScene extends EnglishGame
             playerAnswer: "",
             indices: [],
             letters: this.createLetters(),
-            tick: 0,
-            sinOffset: 0,
-            freq: 0
         }
         this.keys = this.createKeyboardInput()
         this.touch = this.createTouchInput(this.quiz)
         this.newQuiz()
     }
 
+    doAnswer(){
+        if(this.isClose(this.quiz.answerText, this.quiz.sentence)){
+            this.checkAnswer()
+        }
+    }
 
-    update(){
-        if(this.isAnswerSelected){
-            if(this.isClose(this.quiz.answerText, this.quiz.sentence)){
-                this.checkAnswer()
-            }
-        }else{
-            this.moveSentence()
-        }
-        if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
-            this.loseLife()
-        }
+    doGame(){
+        this.moveQuiz(this.quiz.sentence)
     }
 
 
@@ -272,8 +264,7 @@ export default class SpellingSpinScene extends EnglishGame
         // @ts-ignore
         this.quiz.sentence.body.setVelocity(0, DY + this.level * LEVEL_DY)
 
-        this.quiz.sinOffset = Math.random() * 2 * Math.PI
-        this.quiz.freq = FREQ + this.level * SCORE_FREQ
+        this.resetSway()
         this.lostLife = false
     }
 
@@ -393,14 +384,6 @@ export default class SpellingSpinScene extends EnglishGame
             this.fireAnswer(this.quiz.answerText, this.quiz.sentence, ANSWER_MOVE_TIME)
             this.shootAnswerSound.play()
         }
-    }
-    
-    moveSentence() {
-        let amp = 50
-        let x = X_CENTRE + amp*(Math.sin(this.quiz.freq*this.quiz.tick + this.quiz.sinOffset))
-        let y = this.quiz.sentence.y
-        this.quiz.sentence.setPosition(x, y)
-        this.quiz.tick++
     }
 
     fireAnswer(ansObj, quizObj, moveTime){
