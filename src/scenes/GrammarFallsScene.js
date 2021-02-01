@@ -116,7 +116,7 @@ export default class GrammarFallsScene extends EnglishGame
             'down', 
             () => {
                 console.log("GF Escape pressed")
-                this.pause(THIS_GAME)
+                this.pause()
             }
         )
         keys.one = this.input.keyboard.addKey('ONE')
@@ -180,7 +180,7 @@ export default class GrammarFallsScene extends EnglishGame
             (pointer) => {
                 console.log("Pointer down")
                 if(pointer.y < 500){
-                    this.pause(THIS_GAME)
+                    this.pause()
                 }
             }
         )
@@ -314,21 +314,7 @@ export default class GrammarFallsScene extends EnglishGame
 
     loseLife(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
-        this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
-        this.lives--
-        this.lostLife = true
-        this.livesText.text = this.getLivesString(this.lives)
-        this.endQuestion()
-
-        if(this.checkForGameOver()){
-            this.explodeGameOver()
-            //GAME OVER
-            this.time.delayedCall(2500, () => {
-                this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
-            }, null, this)
-        }else{
-            this.next()
-        }
+        super.loseLife()
     }
 
 

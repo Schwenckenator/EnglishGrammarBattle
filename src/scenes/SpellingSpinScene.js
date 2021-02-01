@@ -96,10 +96,6 @@ export default class SpellingSpinScene extends EnglishGame
         }
         if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
             this.loseLife()
-            // this.endQuestion()
-            // if(this.lives >= 0){
-            //     this.next()
-            // }
         }
     }
 
@@ -149,7 +145,7 @@ export default class SpellingSpinScene extends EnglishGame
             'down', 
             () => {
                 console.log("Spelling Spin: Escape pressed")
-                this.pause(THIS_GAME)
+                this.pause()
             }
         )
         keys.back = this.input.keyboard.addKey('BACKSPACE')
@@ -215,7 +211,7 @@ export default class SpellingSpinScene extends EnglishGame
             (pointer) => {
                 console.log("Pointer down")
                 if(pointer.y < 400){
-                    this.pause(THIS_GAME)
+                    this.pause()
                 }
             }
         )
@@ -469,40 +465,12 @@ export default class SpellingSpinScene extends EnglishGame
 
     loseLife(){
         this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
-        // this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
-        // this.quiz.answerText.setVisible(false)
-        // this.lives--
-        // this.livesText.text = this.getLivesString(this.lives)
-        // this.checkForGameOver()
-        // this.lostLife = true
-
-        this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
-        this.lives--
-        this.lostLife = true
-        this.livesText.text = this.getLivesString(this.lives)
-        if(this.lives === 0){
-            SFXManager.playAlert()
-        }else {
-            SFXManager.stopAlert()
-        }
-
-        this.endQuestion()
-
-        if(this.checkForGameOver()){
-            this.explodeGameOver()
-            //GAME OVER
-            this.time.delayedCall(2500, () => {
-                SFXManager.stopAlert()
-                this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
-            }, null, this)
-        }else{
-            this.next()
-        }
+        super.loseLife()
     }
 
-    checkForNextLevel(){
-        return this.score % NEXT_LEVEL_TARGET == 0 // Hit a multiple level target
-    }
+    // checkForNextLevel(){
+    //     return this.score % NEXT_LEVEL_TARGET == 0 // Hit a multiple level target
+    // }
 
     next(){
         this.time.delayedCall(250, this.newQuiz, null, this)
