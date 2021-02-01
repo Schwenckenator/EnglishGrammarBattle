@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import SFXManager from '../classes/SFXManager'
 import EnglishGame from './EnglishGame'
 
 // const SKY_KEY = 'sky'
@@ -33,6 +34,12 @@ const ALPHABET = [
 
 const LETTER_USED_CHAR = '*'
 const SPACE_REPLACEMENT = '_'
+const KEY_PAIRS = [
+    {name: 'SPACE', code: 'SPACE', char: SPACE_REPLACEMENT},
+    {name: 'MINUS', code: 'MINUS', char: '-'},
+    {name: 'MINUS', code: 173,     char: '-'}
+]
+
 
 const THIS_GAME = 'Spelling-Spin'
 
@@ -49,7 +56,7 @@ export default class SpellingSpinScene extends EnglishGame
         super.preload()
         console.log("Preload Spelling Spin")
         this.load.json('J2Ewords', 'assets/J2Ewords.json')
-        // this.load.json('J2Ewords', 'assets/J2EwordsOLD.json')
+        // this.load.json('J2Ewords', 'assets/J2EwordsTEST.json')
         this.load.image(UI_KEY, 'assets/HorizontalLine.png')
     }
 
@@ -89,10 +96,10 @@ export default class SpellingSpinScene extends EnglishGame
         }
         if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
             this.loseLife()
-            this.endQuestion()
-            if(this.lives >= 0){
-                this.next()
-            }
+            // this.endQuestion()
+            // if(this.lives >= 0){
+            //     this.next()
+            // }
         }
     }
 
@@ -153,16 +160,11 @@ export default class SpellingSpinScene extends EnglishGame
                 this.removeLetter()
             }
         )
-        keys.space = this.input.keyboard.addKey('SPACE')
-        keys.space.on(
-            'down', 
-            () => {
-                console.log("Spelling Spin: SPACE pressed")
-                this.checkLetter(SPACE_REPLACEMENT)
-            }
-        )
+
+        for(let k of KEY_PAIRS){
+            this.keyboardAddPair(k.code, k.name, k.char)
+        }
         for(let letter of ALPHABET){
-            console.log(letter)
             this.keyboardAddLetter(letter)
         }
         
@@ -174,12 +176,14 @@ export default class SpellingSpinScene extends EnglishGame
      * @param {string} letter
      */
     keyboardAddLetter(letter){
-        this.input.keyboard.addKey(letter).on('down',() => {console.log(`Spelling Spin: ${letter} down.`); this.checkLetter(letter)})
+        this.keyboardAddPair(letter, letter, letter)
     }
 
-    /**
-     * @param {Phaser.GameObjects.Text[]} letters
-     */
+    keyboardAddPair(code, name, char){
+        console.log(`Spelling Spin: Adding Character '${name}', code '${code}'. Char '${char}'`)
+        this.input.keyboard.addKey(code).on('down',() => {console.log(`Spelling Spin: ${name} down.`); this.checkLetter(char)})
+    }
+
     createTouchInput(quiz){
         let letters = quiz.letters
         for(let i=0; i<letters.length; i++){
@@ -234,11 +238,7 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.indices = obj.indices
 
         console.log(
-            `
-            Answer: ${q.english}
-            Letters: ${ls}
-            Indices: ${obj.indices}
-            `
+            `Spelling Spin:\nAnswer: ${q.english}\nLetters: ${ls}\nIndices: ${obj.indices}`
         )
 
         let arc = 2 * Math.PI / ls.length
@@ -295,7 +295,7 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     checkLetter(letter){
-        
+        console.log(`Spelling Spin: Checking '${letter}'`)
 
         if(this.quiz.remainingLetters.includes(letter)){
             
@@ -304,11 +304,7 @@ export default class SpellingSpinScene extends EnglishGame
             let letterIndex = letters.indexOf(letter)
             // let index = this.quiz.indices.indexOf(letterIndex)
             console.log(
-                `
-                Letter '${letter}' is in answer!
-                It is index ${letterIndex} in the answer.
-                Selecting answer ${letterIndex}...
-                `
+                `Spelling Spin:\nLetter '${letter}' is in answer!\nIt is index ${letterIndex} in the answer.\nSelecting answer ${letterIndex}...\n`
             )
 
             this.selectLetter(letterIndex)
@@ -316,10 +312,8 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     selectLetter(i){
-        
-        this.quiz.playerAnswer += this.quiz.letters[i].text
         this.quiz.remainingLetters = this.quiz.remainingLetters.replace(this.quiz.letters[i].text, LETTER_USED_CHAR)
-        this.quiz.answerIndices.push(i)
+
         console.log(`Spelling Spin: SELECTED LETTER TEXT IS '${this.quiz.letters[i].text}'.`)
         console.log(`Spelling Spin: Remaining letters are '${this.quiz.remainingLetters}'.`)
         console.log(`Spelling Spin: Pushing '${i}' to indices in answer list.`)
@@ -333,7 +327,9 @@ export default class SpellingSpinScene extends EnglishGame
             (prepZone.y - this.quiz.letters[i].y) / moveTime
         )
 
-        this.time.delayedCall(moveTime * 1000, this.checkReadyToAnswer, [this.quiz.letters[i]], this)
+        SFXManager.playBeep()
+
+        this.time.delayedCall(moveTime * 1000, this.checkReadyToAnswer, [this.quiz.letters[i], i], this)
     }
 
     removeLetter(){
@@ -346,7 +342,6 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.text = this.quiz.playerAnswer
         
         // Add the deleted letter back to the remaining letters.
-        // this.quiz.remainingLetters += deletedChar
         
         // work out what index it was
         let index = this.quiz.answerIndices.pop()
@@ -368,6 +363,8 @@ export default class SpellingSpinScene extends EnglishGame
             (newPos.y - this.quiz.letters[index].y) / moveTime
         )
 
+        SFXManager.playTone()
+
         // Add delayed call to stop movement and perfectly position Letter object
         this.time.delayedCall(moveTime * 1000, ()=>{
             this.quiz.letters[index].body.setVelocity(0)
@@ -381,8 +378,11 @@ export default class SpellingSpinScene extends EnglishGame
         return arr.join('')
     }
 
-    checkReadyToAnswer(letter){
-        console.log(`Checking if ready to Answer!\nPlayer answer is '${this.quiz.playerAnswer.length}', answer is ${this.quiz.answer.length}`)
+    checkReadyToAnswer(letter, i){
+        this.quiz.playerAnswer += letter.text
+        
+        this.quiz.answerIndices.push(i)
+        console.log(`Checking if ready to Answer!\nPlayer answer has '${this.quiz.playerAnswer.length}', answer has '${this.quiz.answer.length}'.`)
         //If all letters are in prep zone, fire word!
         letter.body.setVelocity(0)
         letter.setVisible(false)
@@ -442,7 +442,8 @@ export default class SpellingSpinScene extends EnglishGame
 
         if(this.checkForNextLevel()){
             this.time.delayedCall(500, () => {
-                    this.scene.start('Next-Level-Screen', { gameKey: THIS_GAME, score: this.score, level: this.level })
+                    SFXManager.stopAlert()
+                    this.scene.start('Next-Level-Screen', { gameKey: THIS_GAME, score: this.score, lives: this.lives, level: this.level })
                 }, null, this)
         }else{
             this.next()
@@ -479,12 +480,19 @@ export default class SpellingSpinScene extends EnglishGame
         this.lives--
         this.lostLife = true
         this.livesText.text = this.getLivesString(this.lives)
+        if(this.lives === 0){
+            SFXManager.playAlert()
+        }else {
+            SFXManager.stopAlert()
+        }
+
         this.endQuestion()
 
         if(this.checkForGameOver()){
             this.explodeGameOver()
             //GAME OVER
             this.time.delayedCall(2500, () => {
+                SFXManager.stopAlert()
                 this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
             }, null, this)
         }else{
@@ -508,6 +516,7 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.setVisible(false)
         
         for(let i=0; i<this.quiz.letters.length; i++){
+            console.log(`Spelling Spin: Hiding letter ${i}`)
             this.quiz.letters[i].setVisible(false)
         }
         this.quiz.sentence.setVisible(false)

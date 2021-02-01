@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
-import MusicManager from '../MusicManager'
+import MusicManager from '../classes/MusicManager'
+import SFXManager from '../classes/SFXManager'
 
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
@@ -54,21 +55,21 @@ export default class GameSelectScreen extends Phaser.Scene
             { 
                 name: 'Grammar Falls', 
                 func: () => {
-                    this.scene.start('Grammar-Falls', {level: 1, score: 0})
+                    this.scene.start('Grammar-Falls', {level: 1, score: 0, lives: 3})
                 }
             },
             {
                 name: 'Spelling Spin', 
                 func: () => {
-                    this.scene.start('Spelling-Spin', {level: 1, score: 0})
+                    this.scene.start('Spelling-Spin', {level: 1, score: 0, lives: 3})
                 }
             },
-            {
-                name: 'Reading Rampage', 
-                func: () => {
-                    //this.scene.start('Grammar-Falls')
-                }
-            },
+            // {
+            //     name: 'Reading Rampage', 
+            //     func: () => {
+            //         //this.scene.start('Grammar-Falls')
+            //     }
+            // },
         ]
         return list
     }
@@ -158,10 +159,16 @@ export default class GameSelectScreen extends Phaser.Scene
     }
 
     select(index) {
+        if(index === this.optionList.length - 1){ // Last option is return
+            SFXManager.playReturn()
+        }else{
+            SFXManager.playSelect()
+        }
         this.optionList[index].func()
     }
 
     returnToTitle() {
+        SFXManager.playReturn()
         this.scene.stop('Game-Select')
         this.scene.start('Title-Screen')
     }
@@ -193,6 +200,7 @@ export default class GameSelectScreen extends Phaser.Scene
      * @param {number} pos
      */
     moveBox(pos){
+        SFXManager.playHover()
         this.selBox.setPosition(240, 200+SPACING*pos)
     }
 }

@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
-import MusicManager from '../MusicManager'
+import MusicManager from '../classes/MusicManager'
+import SFXManager from '../classes/SFXManager'
 
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
@@ -64,7 +65,7 @@ export default class EnglishGame extends Phaser.Scene{
     init(data){
         this.level = data.level
         this.score = data.score
-        this.lives = 3
+        this.lives = data.lives
     }
 
     create(){
@@ -76,7 +77,6 @@ export default class EnglishGame extends Phaser.Scene{
         this.explosions = this.createExplosions(10)
 
         this.scoreText = this.createScoreText()
-        this.lives = 3
         this.livesText = this.createLivesText()
         this.lostLife = false
         this.createSounds()
@@ -165,6 +165,8 @@ export default class EnglishGame extends Phaser.Scene{
      * @param {string} THIS_GAME
      */
     pause(THIS_GAME){
+        SFXManager.playReturn()
+        SFXManager.stopAlert()
         MusicManager.pause()
         this.scene.pause(THIS_GAME)
         this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })
