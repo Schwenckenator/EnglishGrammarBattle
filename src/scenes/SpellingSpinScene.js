@@ -76,7 +76,7 @@ export default class SpellingSpinScene extends EnglishGame
             indices: [],
             letters: this.createLetters(),
         }
-        this.keys = this.createKeyboardInput()
+        this.keys = this.createKeyboardInputOLD()
         this.touch = this.createTouchInput(this.quiz)
         this.newQuiz()
     }
@@ -122,7 +122,46 @@ export default class SpellingSpinScene extends EnglishGame
         return letters
     }
 
-    createKeyboardInput(){
+    createKeyboardInputOLD(){
+        // let keysPairs = []
+
+        // keysPairs.push({
+        //     key: 'ESC',
+        //     func: () => {
+        //         console.log("Spelling Spin: Escape pressed")
+        //         this.pause()
+        //     }
+        // })
+        // keysPairs.push({
+        //     key: 'BACKSPACE',
+        //     func: () => {
+        //         console.log("Spelling Spin: Backspace pressed")
+        //         this.removeLetter()
+        //     }
+        // })
+
+        // function addPair(name, code, char){
+        //     console.log(`Spelling Spin: Adding Character '${name}', code '${code}'. Char '${char}'`)
+        //     return {
+        //         key: code,
+        //         func: ()=>{
+        //             console.log(`Spelling Spin: ${name} down.`);
+        //             this.checkLetter(char)
+        //         }
+        //     }
+        // }
+
+        // for(let k of KEY_PAIRS){
+        //     keysPairs.push(addPair(k.name, k.code, k.char))
+        // }
+        // for(let letter of ALPHABET){
+        //     keysPairs.push(addPair(letter, letter, letter))
+        // }
+
+
+        // // @ts-ignore
+        // this.createKeyboardInput(keysPairs)
+
         this.input.keyboard.removeAllKeys()
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
@@ -244,11 +283,6 @@ export default class SpellingSpinScene extends EnglishGame
             let centreX = 240
             let centreY = 580
             
-            // let radius = 50
-
-            // let x = centreX + radius * Math.sin(arc * i)
-            // let y = centreY + radius * Math.cos(arc * i)
-
             //Why do I need the .5? No idea.
             let x = centreX + segment * (i + .5) - width / 2 
             let y = centreY

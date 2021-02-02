@@ -52,7 +52,7 @@ export default class GrammarFallsScene extends EnglishGame
             correctIndex: -1, // Don't know yet
         }
 
-        this.createKeyboardInput()
+        this.createKeyboardInputOLD()
         this.selectedAnswer = -1
         this.isAnswerSelected = false
         this.createTouchInput(this.quiz.answers)
@@ -94,7 +94,7 @@ export default class GrammarFallsScene extends EnglishGame
         return answers
     }
 
-    createKeyboardInput(){
+    createKeyboardInputOLD(){
         this.input.keyboard.removeAllKeys()
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')

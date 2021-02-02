@@ -143,6 +143,20 @@ export default class EnglishGame extends Phaser.Scene{
         this.wrongSound = this.sound.add(WRONG_SOUND_KEY, {loop: false})
     }
 
+
+    // /**
+    //  * @param {[
+    //  * {key: string | number | Phaser.Input.Keyboard.Key,
+    //  * func: () => void}
+    //  * ]} keyFuncDict
+    //  */
+    // createKeyboardInput(keyFuncDict){
+    //     this.input.keyboard.removeAllKeys()
+    //     for(let pair of keyFuncDict){
+    //         this.input.keyboard.addKey(pair.key).on('down', pair.func)
+    //     }
+    // }
+
     //#endregion
 
     doAnswer(){
