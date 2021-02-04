@@ -8,13 +8,9 @@ const UI_KEY = 'ui-line'
 
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
-const HEART = "\u200D\u2764\uFE0F\u200D"
 
 const LEVEL_DY = 5
 const DY = 30 - LEVEL_DY
-
-const FREQ = 0.01
-const SCORE_FREQ = 0.001
 
 const X_CENTRE = 240
 const Y_CENTRE = 320
@@ -25,8 +21,6 @@ const ANSWER_MOVE_TIME = 0.5
 const ANSWER_POS = {x: X_CENTRE, y:500}
 
 const BOTTOM_Y = 500
-
-const NEXT_LEVEL_TARGET = 10
 
 const ALPHABET = [
     'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'

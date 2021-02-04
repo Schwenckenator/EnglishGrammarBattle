@@ -1,0 +1,19 @@
+{
+    "quizzes":[
+        {
+            "sentence": "I like red dogs."
+        },
+        {
+            "sentence": "The cheese sold here is delicious."
+        },
+        {
+            "sentence": "Where are the green apples?"
+        },
+        {
+            "sentence": "Are you a teacher?"
+        },
+        {
+            "sentence": "This is the worst pizza."
+        }
+    ]
+}

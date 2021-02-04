@@ -21,8 +21,6 @@ const ANSWER_MOVE_TIME = 0.5
 
 const BOTTOM_Y = 540
 
-const NEXT_LEVEL_TARGET = 10
-
 const THIS_GAME = 'Grammar-Falls'
 
 export default class GrammarFallsScene extends EnglishGame
