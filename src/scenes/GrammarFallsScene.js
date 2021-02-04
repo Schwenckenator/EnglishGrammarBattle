@@ -29,8 +29,7 @@ export default class GrammarFallsScene extends EnglishGame
 {
 	constructor()
 	{
-        super(THIS_GAME)
-        
+        super(THIS_GAME, BOTTOM_Y)
     }
 
 	preload()
@@ -52,12 +51,9 @@ export default class GrammarFallsScene extends EnglishGame
             sentence: this.createQuizSentence(),
             answers: this.createAnswers(),
             correctIndex: -1, // Don't know yet
-            tick: 0,
-            sinOffset: 0,
-            freq: 0
         }
 
-        this.createKeyboardInput()
+        this.createKeyboardInputOLD()
         this.selectedAnswer = -1
         this.isAnswerSelected = false
         this.createTouchInput(this.quiz.answers)
@@ -65,19 +61,16 @@ export default class GrammarFallsScene extends EnglishGame
         this.newQuiz()
     }
 
+    doAnswer(){
+        let finished = this.moveAnswer()
+        if(finished){
+            this.checkAnswer(this.selectedAnswer)
+        }
+    }
 
-    update(){
-        if(this.isAnswerSelected){
-            let finished = this.moveAnswer()
-            if(finished){
-                this.checkAnswer(this.selectedAnswer)
-            }
-        }else{
-            this.moveSentence()
-        }
-        if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
-            this.loseLife()
-        }
+    doGame(){
+        console.log('Grammar Falls do game.')
+        this.moveQuiz(this.quiz.sentence)
     }
 
 
@@ -102,7 +95,7 @@ export default class GrammarFallsScene extends EnglishGame
         return answers
     }
 
-    createKeyboardInput(){
+    createKeyboardInputOLD(){
         this.input.keyboard.removeAllKeys()
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
@@ -117,7 +110,7 @@ export default class GrammarFallsScene extends EnglishGame
             'down', 
             () => {
                 console.log("GF Escape pressed")
-                this.pause(THIS_GAME)
+                this.pause()
             }
         )
         keys.one = this.input.keyboard.addKey('ONE')
@@ -181,7 +174,7 @@ export default class GrammarFallsScene extends EnglishGame
             (pointer) => {
                 console.log("Pointer down")
                 if(pointer.y < 500){
-                    this.pause(THIS_GAME)
+                    this.pause()
                 }
             }
         )
@@ -218,17 +211,8 @@ export default class GrammarFallsScene extends EnglishGame
         // @ts-ignore
         this.quiz.sentence.body.setVelocity(0, DY + this.level * LEVEL_DY)
 
-        this.quiz.sinOffset = Math.random() * 2 * Math.PI
-        this.quiz.freq = FREQ + this.level * SCORE_FREQ
+        this.resetSway()
         this.lostLife = false
-    }
-    
-    moveSentence() {
-        let amp = 50
-        let x = X_CENTRE + amp*(Math.sin(this.quiz.freq*this.quiz.tick + this.quiz.sinOffset))
-        let y = this.quiz.sentence.y
-        this.quiz.sentence.setPosition(x, y)
-        this.quiz.tick++
     }
 
     moveAnswer(){
@@ -273,74 +257,12 @@ export default class GrammarFallsScene extends EnglishGame
             this.correctAnswer()
             
         }else{
-            this.wrongAnswer(index)
+            this.wrongAnswer(this.quiz.sentence, this.quiz.answers[index])
         }
         
     }
 
-    correctAnswer(){
-        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
-        this.shakeCamera(250, new Phaser.Math.Vector2 (0.02, 0.02))
-        this.score++
-        this.scoreText.text = `Score: ${this.score}`
-        this.endQuestion()
-
-        if(this.checkForNextLevel()){
-            this.time.delayedCall(500, () => {
-                    this.scene.start('Next-Level-Screen', { gameKey: THIS_GAME, score: this.score, level: this.level })
-                }, null, this)
-        }else{
-            this.next()
-        }
-    }
-
-    /**
-     * @param {number} i
-     */
-    wrongAnswer(i){
-        let amp = 30
-        // @ts-ignore
-        this.quiz.sentence.body.setVelocity(Math.random()* amp - amp/2, -Math.random()* amp)
-        // @ts-ignore
-        this.quiz.sentence.body.setAllowGravity(true)
-        // @ts-ignore
-        this.quiz.answers[i].body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
-        // @ts-ignore
-        this.quiz.answers[i].body.setAllowGravity(true)
-
-        this.wrongSound.play()
-
-        this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
-    }
-
-    loseLife(){
-        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
-        this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
-        this.lives--
-        this.lostLife = true
-        this.livesText.text = this.getLivesString(this.lives)
-        this.endQuestion()
-
-        if(this.checkForGameOver()){
-            this.explodeGameOver()
-            //GAME OVER
-            this.time.delayedCall(2500, () => {
-                this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
-            }, null, this)
-        }else{
-            this.next()
-        }
-    }
-
-
-    checkForNextLevel(){
-        return this.score % NEXT_LEVEL_TARGET == 0 // Hit a multiple level target
-    }
-
-    next(){
-        this.time.delayedCall(250, this.newQuiz, null, this)
-    }
-
+    // ABSTRACT IMPLEMENTATION
     endQuestion(){
         if(this.selectedAnswer >= 0){
             // @ts-ignore
