@@ -56,7 +56,7 @@ export default class SpellingSpinScene extends EnglishGame
         console.log("Preload Spelling Spin")
         this.load.json('J2Ewords', 'assets/J2Ewords.json')
         // this.load.json('J2Ewords', 'assets/J2EwordsTEST.json')
-        this.load.image(UI_KEY, 'assets/HorizontalLine.png')
+        this.load.image(UI_KEY, 'assets/UI-OpenBottom.png')
     }
 
 
@@ -65,7 +65,8 @@ export default class SpellingSpinScene extends EnglishGame
         super.create()
         console.log("Create Spelling Spin")
         this.gameData = this.cache.json.get('J2Ewords')
-        this.add.image(240, 530, UI_KEY)
+        let uiY = Y_MAX - 100 - 60 / 2 
+        this.add.image(240, uiY, UI_KEY)
         this.quiz = {
             sentence: this.createQuizSentence(),
             answerText: this.createAnswerText(),

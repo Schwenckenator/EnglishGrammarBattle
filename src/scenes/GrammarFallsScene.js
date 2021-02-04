@@ -37,7 +37,7 @@ export default class GrammarFallsScene extends EnglishGame
         super.preload()
         console.log("Preload Grammar Falls")
         this.load.json('sentences', 'assets/Sentences.json')
-        this.load.image(UI_KEY, 'assets/BottomMenu.png')
+        this.load.image(UI_KEY, 'assets/UI-4-section.png')
     }
 
     create()
@@ -45,7 +45,8 @@ export default class GrammarFallsScene extends EnglishGame
         super.create()
         console.log("Create Grammar Falls")
         this.gameData = this.cache.json.get('sentences')
-        this.add.image(240, 590, UI_KEY)
+        let uiY = Y_MAX - 150 / 2
+        this.add.image(X_CENTRE, uiY, UI_KEY)
         this.quiz = {
             sentence: this.createQuizSentence(),
             answers: this.createAnswers(),
