@@ -5,6 +5,7 @@ import SFXManager from '../classes/SFXManager'
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
 const UI_KEY = 'ui-cross'
+const UI_SCORE_LIVES = 'ui-score-lives'
 
 const WRONG_SOUND_KEY = 'wrongSound'
 const SHOOT_ANSWER_KEY = 'shootAnswer'
@@ -55,6 +56,7 @@ export default class EnglishGame extends Phaser.Scene{
         console.log("Preload ENGLISH GAME SUPER CLASS")
         // this.load.json('sentences', 'assets/Sentences.json')
         this.load.image(SKY_KEY, 'assets/night-sky.png')
+        this.load.image(UI_SCORE_LIVES, 'assets/UI-ScoreLives.png')
         // this.load.image(UI_KEY, 'assets/BottomMenu.png')
         this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
         this.load.audio(EXPLOSION_SOUND_KEY, 'assets/explosion-large.wav')
@@ -89,6 +91,7 @@ export default class EnglishGame extends Phaser.Scene{
     createBackground(){
         this.add.image(X_CENTRE, 160, SKY_KEY)
         this.add.image(X_CENTRE, 480, SKY_KEY)
+        this.add.image(120, 50, UI_SCORE_LIVES)
     }
 
     createExplosion(){
@@ -118,11 +121,11 @@ export default class EnglishGame extends Phaser.Scene{
     }
 
     createScoreText(){
-        return this.add.text(20, 15, `Score: ${this.score}`, {font: FONT_MED})
+        return this.add.text(20, 15, `Score: ${this.score}`, {font: FONT_MED, color: '#000'})
     }
 
     createLivesText(){
-        return this.add.text(20, 45, this.getLivesString(this.lives), {font: FONT_MED})
+        return this.add.text(20, 45, this.getLivesString(this.lives), {font: FONT_MED, color: '#000'})
     }
 
     createSounds(){
