@@ -47,8 +47,7 @@ export default class SpellingSpinScene extends EnglishGame
 {
 	constructor()
 	{
-        super(THIS_GAME)
-        
+        super(THIS_GAME, BOTTOM_Y)
     }
 
 	preload()
@@ -78,27 +77,19 @@ export default class SpellingSpinScene extends EnglishGame
             indices: [],
             letters: this.createLetters(),
         }
-        this.keys = this.createKeyboardInput()
+        this.keys = this.createKeyboardInputOLD()
         this.touch = this.createTouchInput(this.quiz)
         this.newQuiz()
     }
 
+    doAnswer(){
+        if(this.isClose(this.quiz.answerText, this.quiz.sentence)){
+            this.checkAnswer()
+        }
+    }
 
-    update(){
-        if(this.isAnswerSelected){
-            if(this.isClose(this.quiz.answerText, this.quiz.sentence)){
-                this.checkAnswer()
-            }
-        }else{
-            this.moveSentence()
-        }
-        if(this.quiz.sentence.y > BOTTOM_Y && !this.lostLife){
-            this.loseLife()
-            // this.endQuestion()
-            // if(this.lives >= 0){
-            //     this.next()
-            // }
-        }
+    doGame(){
+        this.moveQuiz(this.quiz.sentence)
     }
 
 
@@ -132,7 +123,46 @@ export default class SpellingSpinScene extends EnglishGame
         return letters
     }
 
-    createKeyboardInput(){
+    createKeyboardInputOLD(){
+        // let keysPairs = []
+
+        // keysPairs.push({
+        //     key: 'ESC',
+        //     func: () => {
+        //         console.log("Spelling Spin: Escape pressed")
+        //         this.pause()
+        //     }
+        // })
+        // keysPairs.push({
+        //     key: 'BACKSPACE',
+        //     func: () => {
+        //         console.log("Spelling Spin: Backspace pressed")
+        //         this.removeLetter()
+        //     }
+        // })
+
+        // function addPair(name, code, char){
+        //     console.log(`Spelling Spin: Adding Character '${name}', code '${code}'. Char '${char}'`)
+        //     return {
+        //         key: code,
+        //         func: ()=>{
+        //             console.log(`Spelling Spin: ${name} down.`);
+        //             this.checkLetter(char)
+        //         }
+        //     }
+        // }
+
+        // for(let k of KEY_PAIRS){
+        //     keysPairs.push(addPair(k.name, k.code, k.char))
+        // }
+        // for(let letter of ALPHABET){
+        //     keysPairs.push(addPair(letter, letter, letter))
+        // }
+
+
+        // // @ts-ignore
+        // this.createKeyboardInput(keysPairs)
+
         this.input.keyboard.removeAllKeys()
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
@@ -147,7 +177,7 @@ export default class SpellingSpinScene extends EnglishGame
             'down', 
             () => {
                 console.log("Spelling Spin: Escape pressed")
-                this.pause(THIS_GAME)
+                this.pause()
             }
         )
         keys.back = this.input.keyboard.addKey('BACKSPACE')
@@ -213,7 +243,7 @@ export default class SpellingSpinScene extends EnglishGame
             (pointer) => {
                 console.log("Pointer down")
                 if(pointer.y < 400){
-                    this.pause(THIS_GAME)
+                    this.pause()
                 }
             }
         )
@@ -254,11 +284,6 @@ export default class SpellingSpinScene extends EnglishGame
             let centreX = 240
             let centreY = 580
             
-            // let radius = 50
-
-            // let x = centreX + radius * Math.sin(arc * i)
-            // let y = centreY + radius * Math.cos(arc * i)
-
             //Why do I need the .5? No idea.
             let x = centreX + segment * (i + .5) - width / 2 
             let y = centreY
@@ -274,8 +299,7 @@ export default class SpellingSpinScene extends EnglishGame
         // @ts-ignore
         this.quiz.sentence.body.setVelocity(0, DY + this.level * LEVEL_DY)
 
-        this.quiz.sinOffset = Math.random() * 2 * Math.PI
-        this.quiz.freq = FREQ + this.level * SCORE_FREQ
+        this.resetSway()
         this.lostLife = false
     }
 
@@ -396,14 +420,6 @@ export default class SpellingSpinScene extends EnglishGame
             this.shootAnswerSound.play()
         }
     }
-    
-    moveSentence() {
-        let amp = 50
-        let x = X_CENTRE + amp*(Math.sin(this.quiz.freq*this.quiz.tick + this.quiz.sinOffset))
-        let y = this.quiz.sentence.y
-        this.quiz.sentence.setPosition(x, y)
-        this.quiz.tick++
-    }
 
     fireAnswer(ansObj, quizObj, moveTime){
         ansObj.body.setVelocity(
@@ -427,85 +443,11 @@ export default class SpellingSpinScene extends EnglishGame
         if(answer === playerAnswer){
             this.correctAnswer()
         }else{
-            this.wrongAnswer()
+            this.wrongAnswer(this.quiz.sentence, this.quiz.answerText)
         }
     }
 
-    correctAnswer(){
-        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
-        this.shakeCamera(250, new Phaser.Math.Vector2 (0.02, 0.02))
-        this.score++
-        this.scoreText.text = `Score: ${this.score}`
-        this.endQuestion()
-
-        if(this.checkForNextLevel()){
-            this.time.delayedCall(500, () => {
-                    SFXManager.stopAlert()
-                    this.scene.start('Next-Level-Screen', { gameKey: THIS_GAME, score: this.score, lives: this.lives, level: this.level })
-                }, null, this)
-        }else{
-            this.next()
-        }
-    }
-
-
-    wrongAnswer(){
-        let amp = 30
-        // @ts-ignore
-        this.quiz.sentence.body.setVelocity(Math.random()* amp - amp/2, -Math.random()* amp)
-        // @ts-ignore
-        this.quiz.sentence.body.setAllowGravity(true)
-        // @ts-ignore
-        this.quiz.answerText.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
-        // @ts-ignore
-        this.quiz.answerText.body.setAllowGravity(true)
-
-        this.wrongSound.play()
-
-        this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
-    }
-
-    loseLife(){
-        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
-        // this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
-        // this.quiz.answerText.setVisible(false)
-        // this.lives--
-        // this.livesText.text = this.getLivesString(this.lives)
-        // this.checkForGameOver()
-        // this.lostLife = true
-
-        this.shakeCamera(500, new Phaser.Math.Vector2 (0.1, 0.1))
-        this.lives--
-        this.lostLife = true
-        this.livesText.text = this.getLivesString(this.lives)
-        if(this.lives === 0){
-            SFXManager.playAlert()
-        }else {
-            SFXManager.stopAlert()
-        }
-
-        this.endQuestion()
-
-        if(this.checkForGameOver()){
-            this.explodeGameOver()
-            //GAME OVER
-            this.time.delayedCall(2500, () => {
-                SFXManager.stopAlert()
-                this.scene.start('Game-Over-Screen', { gameKey: THIS_GAME, level: this.level, score: this.score })
-            }, null, this)
-        }else{
-            this.next()
-        }
-    }
-
-    checkForNextLevel(){
-        return this.score % NEXT_LEVEL_TARGET == 0 // Hit a multiple level target
-    }
-
-    next(){
-        this.time.delayedCall(250, this.newQuiz, null, this)
-    }
-
+    // ABSTRACT IMPLEMENTATION 
     endQuestion(){
         // @ts-ignore
         this.quiz.answerText.body.setVelocity(0)

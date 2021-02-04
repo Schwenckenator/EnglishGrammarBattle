@@ -31,9 +31,10 @@ const ANSWER_MOVE_TIME = 0.5
 const NEXT_LEVEL_TARGET = 10
 
 export default class EnglishGame extends Phaser.Scene{
-    constructor(THIS_GAME){
+    constructor(THIS_GAME, BOTTOM_Y){
         super(THIS_GAME)
-
+        this.thisGame = THIS_GAME
+        this.bottomY = BOTTOM_Y
         this.gameData = undefined
     
         this.explosion = undefined
@@ -49,15 +50,19 @@ export default class EnglishGame extends Phaser.Scene{
         this.wrongSound = undefined
         this.explosionSound = undefined
         this.shootAnswerSound = undefined
+
+        this.sway = {
+            tick: 0,
+            sinOffset: 0,
+            freq: 0
+        }
     }
 
     preload()
     {
         console.log("Preload ENGLISH GAME SUPER CLASS")
-        // this.load.json('sentences', 'assets/Sentences.json')
         this.load.image(SKY_KEY, 'assets/night-sky.png')
         this.load.image(UI_SCORE_LIVES, 'assets/UI-ScoreLives.png')
-        // this.load.image(UI_KEY, 'assets/BottomMenu.png')
         this.load.spritesheet(EXP_KEY, 'assets/explosion.png', {frameWidth: 64, frameHeight: 64})
         this.load.audio(EXPLOSION_SOUND_KEY, 'assets/explosion-large.wav')
         this.load.audio(SHOOT_ANSWER_KEY, 'assets/laser-shot-correct.mp3')
@@ -85,9 +90,16 @@ export default class EnglishGame extends Phaser.Scene{
     }
 
     update(){
-
+        if(this.isAnswerSelected){
+            this.doAnswer()
+        }else{
+            this.doGame()
+        }
+        if(this.quiz.sentence.y > this.bottomY && !this.lostLife){
+            this.loseLife()
+        }
     }
-
+    //#region Create
     createBackground(){
         this.add.image(X_CENTRE, 160, SKY_KEY)
         this.add.image(X_CENTRE, 480, SKY_KEY)
@@ -134,10 +146,30 @@ export default class EnglishGame extends Phaser.Scene{
         this.wrongSound = this.sound.add(WRONG_SOUND_KEY, {loop: false})
     }
 
-    checkForGameOver(){
-        console.log("Checking for game over")
-        return this.lives < 0
+
+    // /**
+    //  * @param {[
+    //  * {key: string | number | Phaser.Input.Keyboard.Key,
+    //  * func: () => void}
+    //  * ]} keyFuncDict
+    //  */
+    // createKeyboardInput(keyFuncDict){
+    //     this.input.keyboard.removeAllKeys()
+    //     for(let pair of keyFuncDict){
+    //         this.input.keyboard.addKey(pair.key).on('down', pair.func)
+    //     }
+    // }
+
+    //#endregion
+
+    doAnswer(){
+        throw new Error('Abstract Method not implemented.')
     }
+
+    doGame(){
+        throw new Error('Abstract Method not implemented.')
+    }
+
 
     getLivesString(livesLeft){
         let str = 'Lives: ';
@@ -164,15 +196,12 @@ export default class EnglishGame extends Phaser.Scene{
         return array;
     }
 
-    /**
-     * @param {string} THIS_GAME
-     */
-    pause(THIS_GAME){
+    pause(){
         SFXManager.playReturn()
         SFXManager.stopAlert()
         MusicManager.pause()
-        this.scene.pause(THIS_GAME)
-        this.scene.launch('Pause-Screen', { gameKey: THIS_GAME })
+        this.scene.pause(this.thisGame)
+        this.scene.launch('Pause-Screen', { gameKey: this.thisGame })
     }
 
     /**
@@ -212,6 +241,14 @@ export default class EnglishGame extends Phaser.Scene{
         this.explosionSound.play()
     }
 
+    moveQuiz(quizObj){
+        let amp = 50
+        let x = X_CENTRE + amp*(Math.sin(this.sway.freq * this.sway.tick + this.sway.sinOffset))
+        let y = quizObj.y
+        quizObj.setPosition(x, y)
+        this.sway.tick++
+    }
+
     explodeGameOver(){
         console.log("Explode Game over Called!")
         for(let i = 0; i<this.explosions.length; i++){
@@ -229,5 +266,93 @@ export default class EnglishGame extends Phaser.Scene{
             }, i * 200)
         }
     }
+
+    correctAnswer(){
+        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 2)
+        this.shakeCamera(250, new Phaser.Math.Vector2 (0.02, 0.02))
+        this.score++
+        this.scoreText.text = `Score: ${this.score}`
+        this.endQuestion()
+
+        if(this.checkForNextLevel()){
+            this.time.delayedCall(500, () => {
+                    this.scene.start('Next-Level-Screen', { gameKey: this.thisGame, score: this.score, level: this.level })
+                }, null, this)
+        }else{
+            this.next()
+        }
+    }
+
+    wrongAnswer(quiz, ans){
+        let amp = 30
+        // @ts-ignore
+        quiz.body.setVelocity(Math.random()* amp - amp/2, -Math.random()* amp)
+        // @ts-ignore
+        quiz.body.setAllowGravity(true)
+        // @ts-ignore
+        ans.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
+        // @ts-ignore
+        ans.body.setAllowGravity(true)
+
+        this.wrongSound.play()
+
+        this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
+    }
+
+    loseLife(){
+        this.explode(this.quiz.sentence.x, this.quiz.sentence.y, 4)
+        this.shakeCamera(500, new Phaser.Math.Vector2(0.1, 0.1))
+        this.lives--
+        this.lostLife = true
+        this.livesText.text = this.getLivesString(this.lives)
+
+        if(this.lives === 0){
+            SFXManager.playAlert()
+        }else {
+            SFXManager.stopAlert()
+        }
+        
+        this.endQuestion()
+
+        if(this.checkForGameOver()){
+            this.explodeGameOver()
+            
+            this.time.delayedCall(2500, () => {
+                SFXManager.stopAlert()
+                this.scene.start('Game-Over-Screen', { gameKey: this.thisGame, level: this.level, score: this.score })
+            }, null, this)
+        }else{
+            this.next()
+        }
+
+    }
+
+    newQuiz(){
+        throw new Error('Abstract Method not implemented.')
+    }
+
+    endQuestion() {
+        throw new Error('Abstract Method not implemented.')
+    }
+
+    next() {
+        this.time.delayedCall(250, this.newQuiz, null, this)
+    }
+    
+    resetSway(){
+        this.sway.sinOffset = Math.random() * 2 * Math.PI
+        this.sway.freq = FREQ + this.level * SCORE_FREQ
+    }
+
+    checkForNextLevel(){
+        return this.score % NEXT_LEVEL_TARGET == 0 // Hit a multiple level target
+    }
+
+    checkForGameOver(){
+        console.log("Checking for game over")
+        return this.lives < 0
+    }
+
+
     
 }
