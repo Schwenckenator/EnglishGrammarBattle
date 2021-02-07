@@ -43,31 +43,35 @@ export default class GrammarFallsScene extends EnglishGame
         super.create()
         console.log("Create Grammar Falls")
         this.gameData = this.cache.json.get('sentences')
-        let uiY = Y_MAX - 150 / 2
-        this.add.image(X_CENTRE, uiY, UI_KEY)
+        
         this.quiz = {
             sentence: this.createQuizSentence(),
             answers: this.createAnswers(),
             correctIndex: -1, // Don't know yet
         }
 
-        this.createKeyboardInputOLD()
+        let uiY = Y_MAX - 150 / 2
+        this.add.image(X_CENTRE, uiY, UI_KEY)
+
         this.selectedAnswer = -1
         this.isAnswerSelected = false
-        this.createTouchInput(this.quiz.answers)
+
+        this.createKeyboardInput()
+        this.createTouchInput(this.quiz)
 
         this.newQuiz()
     }
 
     doAnswer(){
-        let finished = this.moveAnswer()
-        if(finished){
+        if(this.isClose(
+            this.quiz.sentence, 
+            this.quiz.answers[this.selectedAnswer])
+            ){
             this.checkAnswer(this.selectedAnswer)
         }
     }
 
     doGame(){
-        console.log('Grammar Falls do game.')
         this.moveQuiz(this.quiz.sentence)
     }
 
@@ -93,7 +97,7 @@ export default class GrammarFallsScene extends EnglishGame
         return answers
     }
 
-    createKeyboardInputOLD(){
+    createKeyboardInput(){
         this.input.keyboard.removeAllKeys()
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
@@ -146,18 +150,16 @@ export default class GrammarFallsScene extends EnglishGame
         return keys
     }
 
-    /**
-     * @param {Phaser.GameObjects.Text[]} answers
-     */
-    createTouchInput(answers){
-        for(let i=0; i<answers.length; i++){
+
+    createTouchInput(quiz){
+        for(let i=0; i<quiz.answers.length; i++){
             let w = 200
             let h = 60
-            let x = answers[i].x - w /2
-            let y = answers[i].y - h / 2
+            let x = quiz.answers[i].x - w /2
+            let y = quiz.answers[i].y - h / 2
             console.log(`Touch input answer ${i}`)
-            answers[i].setInteractive()
-            answers[i].on(
+            quiz.answers[i].setInteractive()
+            quiz.answers[i].on(
                 'pointerdown',
                 () => {
                     console.log(`Answer ${i} touched!`)
@@ -213,15 +215,18 @@ export default class GrammarFallsScene extends EnglishGame
         this.lostLife = false
     }
 
-    moveAnswer(){
-        let xDiff = this.quiz.sentence.x - this.quiz.answers[this.selectedAnswer].x
-        let yDiff = this.quiz.sentence.y - this.quiz.answers[this.selectedAnswer].y
+    // moveAnswer(){
+    //     let xDiff = this.quiz.sentence.x - this.quiz.answers[this.selectedAnswer].x
+    //     let yDiff = this.quiz.sentence.y - this.quiz.answers[this.selectedAnswer].y
         
-        let sqrDist = xDiff * xDiff + yDiff * yDiff
-        return sqrDist < 0.1
-    }
+    //     let sqrDist = xDiff * xDiff + yDiff * yDiff
+    //     return sqrDist < 0.1
+    // }
 
     selectAnswer(index){
+        // If already selected, don't do it again
+        if(this.isAnswerSelected) return 
+
         this.selectedAnswer = index
         this.isAnswerSelected = true
 

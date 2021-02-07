@@ -19,6 +19,10 @@ const BOTTOM_Y = 540
 
 export default class WordScrambleScene extends EnglishGame{
 
+    log(obj){
+        console.log(`${THIS_GAME}: ${obj}`)
+    }
+
     constructor(){
         super(THIS_GAME)
     }
@@ -32,10 +36,9 @@ export default class WordScrambleScene extends EnglishGame{
 
     create(){
         super.create()
+        this.log(`Create ${THIS_GAME} CLASS`)
         this.gameData = this.cache.json.get(DATA_KEY)
 
-        let UI_Y = Y_MAX - 150 / 2 
-        this.add.image(X_CENTRE, UI_Y, UI_KEY)
         this.quiz = {
             sentence: this.createQuizSentence(),
             answerText: this.createAnswerText(),
@@ -45,8 +48,11 @@ export default class WordScrambleScene extends EnglishGame{
             words: this.createWords()
         }
 
-        this.keys = this.createKeyboardInput()
-        this.touch = this.createTouchInput(this.quiz)
+        let UI_Y = Y_MAX - 150 / 2 
+        this.add.image(X_CENTRE, UI_Y, UI_KEY)
+
+        this.createKeyboardInput()
+        this.createTouchInput(this.quiz)
 
         this.newQuiz()
     }
@@ -56,7 +62,7 @@ export default class WordScrambleScene extends EnglishGame{
     }
 
     doGame(){
-
+        this.moveQuiz(this.quiz.sentence)
     }
 
     createQuizSentence() {
@@ -73,6 +79,7 @@ export default class WordScrambleScene extends EnglishGame{
         return text
     }
     createWords() {
+        this.log('Create Words.')
         const numWords = 4
         let words = []
         for(let i=0;i<numWords;i++){
@@ -93,7 +100,7 @@ export default class WordScrambleScene extends EnglishGame{
         keys.esc.on(
             'down',
             () => {
-                console.log(`${THIS_GAME}: Escape Pressed.`)
+                this.log(`Escape Pressed.`)
                 this.pause()
             }
         )
@@ -133,6 +140,10 @@ export default class WordScrambleScene extends EnglishGame{
     }
 
     createTouchInput(quiz) {
+        this.log('Create Touch Input.')
+        console.log(quiz)
+        console.log(quiz.words)
+        console.log(quiz.words.length)
         for(let i=0; quiz.words.length; i++){
             quiz.words[i].setInteractive()
             quiz.words[i].on(

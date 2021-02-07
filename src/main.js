@@ -6,6 +6,7 @@ import MainTitleScreen from './scenes/MainTitleScene'
 import NextLevelScreen from './scenes/NextLevelScreen'
 import PauseScreen from './scenes/PauseScreen'
 import SpellingSpinScene from './scenes/SpellingSpinScene'
+import WordScrambleScene from './scenes/WordScramble'
 
 const config = {
 	type: Phaser.AUTO,
@@ -17,7 +18,7 @@ const config = {
 			gravity: { y: 350 }
 		}
 	},
-	scene: [MainTitleScreen, GameSelectScreen, GrammarFallsScene, SpellingSpinScene, PauseScreen, GameOverScreen, NextLevelScreen]
+	scene: [MainTitleScreen, GameSelectScreen, GrammarFallsScene, SpellingSpinScene, WordScrambleScene, PauseScreen, GameOverScreen, NextLevelScreen]
 }
 
 export default new Phaser.Game(config)

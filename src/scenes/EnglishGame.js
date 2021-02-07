@@ -87,6 +87,7 @@ export default class EnglishGame extends Phaser.Scene{
         this.livesText = this.createLivesText()
         this.lostLife = false
         this.createSounds()
+
     }
 
     update(){
@@ -147,18 +148,13 @@ export default class EnglishGame extends Phaser.Scene{
     }
 
 
-    // /**
-    //  * @param {[
-    //  * {key: string | number | Phaser.Input.Keyboard.Key,
-    //  * func: () => void}
-    //  * ]} keyFuncDict
-    //  */
-    // createKeyboardInput(keyFuncDict){
-    //     this.input.keyboard.removeAllKeys()
-    //     for(let pair of keyFuncDict){
-    //         this.input.keyboard.addKey(pair.key).on('down', pair.func)
-    //     }
-    // }
+    createKeyboardInput(){
+        throw new Error('Abstract Method not implemented.')
+    }
+
+    createTouchInput(quizObj){
+        throw new Error('Abstract Method not implemented.')
+    }
 
     //#endregion
 
@@ -353,6 +349,11 @@ export default class EnglishGame extends Phaser.Scene{
         return this.lives < 0
     }
 
-
+    isClose(obj1, obj2){
+        let x = obj1.x - obj2.x
+        let y = obj1.y - obj2.y
+        let sqrDist = x * x + y * y
+        return sqrDist < 0.1
+    }
     
 }

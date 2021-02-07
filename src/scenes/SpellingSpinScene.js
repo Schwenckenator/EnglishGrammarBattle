@@ -59,8 +59,8 @@ export default class SpellingSpinScene extends EnglishGame
         super.create()
         console.log("Create Spelling Spin")
         this.gameData = this.cache.json.get('J2Ewords')
-        let uiY = Y_MAX - 100 - 60 / 2 
-        this.add.image(240, uiY, UI_KEY)
+
+
         this.quiz = {
             sentence: this.createQuizSentence(),
             answerText: this.createAnswerText(),
@@ -71,8 +71,12 @@ export default class SpellingSpinScene extends EnglishGame
             indices: [],
             letters: this.createLetters(),
         }
-        this.keys = this.createKeyboardInputOLD()
-        this.touch = this.createTouchInput(this.quiz)
+
+        let uiY = Y_MAX - 100 - 60 / 2 
+        this.add.image(240, uiY, UI_KEY)
+
+        this.createKeyboardInput()
+        this.createTouchInput(this.quiz)
         this.newQuiz()
     }
 
@@ -117,46 +121,7 @@ export default class SpellingSpinScene extends EnglishGame
         return letters
     }
 
-    createKeyboardInputOLD(){
-        // let keysPairs = []
-
-        // keysPairs.push({
-        //     key: 'ESC',
-        //     func: () => {
-        //         console.log("Spelling Spin: Escape pressed")
-        //         this.pause()
-        //     }
-        // })
-        // keysPairs.push({
-        //     key: 'BACKSPACE',
-        //     func: () => {
-        //         console.log("Spelling Spin: Backspace pressed")
-        //         this.removeLetter()
-        //     }
-        // })
-
-        // function addPair(name, code, char){
-        //     console.log(`Spelling Spin: Adding Character '${name}', code '${code}'. Char '${char}'`)
-        //     return {
-        //         key: code,
-        //         func: ()=>{
-        //             console.log(`Spelling Spin: ${name} down.`);
-        //             this.checkLetter(char)
-        //         }
-        //     }
-        // }
-
-        // for(let k of KEY_PAIRS){
-        //     keysPairs.push(addPair(k.name, k.code, k.char))
-        // }
-        // for(let letter of ALPHABET){
-        //     keysPairs.push(addPair(letter, letter, letter))
-        // }
-
-
-        // // @ts-ignore
-        // this.createKeyboardInput(keysPairs)
-
+    createKeyboardInput(){
         this.input.keyboard.removeAllKeys()
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
@@ -422,12 +387,12 @@ export default class SpellingSpinScene extends EnglishGame
         )
     }
 
-    isClose(obj1, obj2){
-        let x = obj1.x - obj2.x
-        let y = obj1.y - obj2.y
-        let sqrDist = x * x + y * y
-        return sqrDist < 0.1
-    }
+    // isClose(obj1, obj2){
+    //     let x = obj1.x - obj2.x
+    //     let y = obj1.y - obj2.y
+    //     let sqrDist = x * x + y * y
+    //     return sqrDist < 0.1
+    // }
 
     checkAnswer(){
         let answer = this.quiz.answer

@@ -51,25 +51,26 @@ export default class GameSelectScreen extends Phaser.Scene
         this.createTouchInput(this.menus)
     }
     createGameList(){
+        let gameData = {level: 1, score: 0, lives: 3}
         let list = [
             { 
                 name: 'Grammar Falls', 
                 func: () => {
-                    this.scene.start('Grammar-Falls', {level: 1, score: 0, lives: 3})
+                    this.scene.start('Grammar-Falls', gameData)
                 }
             },
             {
                 name: 'Spelling Spin', 
                 func: () => {
-                    this.scene.start('Spelling-Spin', {level: 1, score: 0, lives: 3})
+                    this.scene.start('Spelling-Spin', gameData)
                 }
             },
-            // {
-            //     name: 'Reading Rampage', 
-            //     func: () => {
-            //         //this.scene.start('Grammar-Falls')
-            //     }
-            // },
+            {
+                name: 'Word Scramble', 
+                func: () => {
+                    this.scene.start('Word-Scramble', gameData)
+                }
+            },
         ]
         return list
     }
@@ -179,8 +180,7 @@ export default class GameSelectScreen extends Phaser.Scene
             menus[i].on(
                 'pointerdown',
                 () => {
-                    console.log(`Answer ${i} touched!`)
-                    //this.selectAnswer(i)
+                    console.log(`Answer ${i} selected!`)
                     this.select(i)
                 }
             )
@@ -188,7 +188,6 @@ export default class GameSelectScreen extends Phaser.Scene
                 'pointerover',
                 () => {
                     console.log(`Answer ${i} touched!`)
-                    //this.selectAnswer(i)
                     this.selected = i
                     this.moveBox(i)
                 }
