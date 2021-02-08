@@ -353,12 +353,6 @@ export default class SpellingSpinScene extends EnglishGame
         })
     }
 
-    replaceAt(str, index, replace){
-        let arr = Array.from(str)
-        arr[index] = replace
-        return arr.join('')
-    }
-
     checkReadyToAnswer(letter, i){
         this.quiz.playerAnswer += letter.text
         

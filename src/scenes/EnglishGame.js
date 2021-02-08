@@ -179,6 +179,12 @@ export default class EnglishGame extends Phaser.Scene{
         return Math.floor(Math.random() * max);
     }
 
+    replaceAt(str, index, replace){
+        let arr = Array.from(str)
+        arr[index] = replace
+        return arr.join('')
+    }
+
     shuffle(array){
         let shuffledArray = [...array]
         let currentIndex = shuffledArray.length, temp, randomIndex;
@@ -191,6 +197,13 @@ export default class EnglishGame extends Phaser.Scene{
             shuffledArray[randomIndex] = temp;
         }
         return shuffledArray;
+    }
+
+    calcVelocity(obj1, obj2, moveTime){
+        return { 
+            x: (obj1.x - obj2.x) / moveTime,
+            y: (obj1.y - obj2.y) / moveTime
+        }
     }
 
     pause(){

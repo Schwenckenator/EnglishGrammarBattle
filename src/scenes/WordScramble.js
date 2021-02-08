@@ -41,10 +41,10 @@ export default class WordScrambleScene extends EnglishGame{
 
         this.quiz = {
             sentence: this.createQuizSentence(),
-            answerText: this.createAnswerText(),
+            currentText: "",
             correctAnswer: "",
-            answerIndices: [],
-            playerAnswer: "",
+            wordsInAnswer: [],
+            isWordUsed: [],
             words: this.createWords()
         }
 
@@ -64,6 +64,8 @@ export default class WordScrambleScene extends EnglishGame{
     doGame(){
         this.moveQuiz(this.quiz.sentence)
     }
+
+    //#region Creator Methods
 
     createQuizSentence() {
         let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: FONT_MED}).setOrigin(0.5)
@@ -111,7 +113,7 @@ export default class WordScrambleScene extends EnglishGame{
             'down',
             () => {
                 console.log("ONE pressed")
-                this.selectAnswer(0)
+                this.selectWord(0)
             }
         )
         keys.two = this.input.keyboard.addKey('TWO')
@@ -119,7 +121,7 @@ export default class WordScrambleScene extends EnglishGame{
             'down',
             () => {
                 console.log("TWO pressed")
-                this.selectAnswer(1)
+                this.selectWord(1)
             }
         )
         keys.three = this.input.keyboard.addKey('THREE')
@@ -127,7 +129,7 @@ export default class WordScrambleScene extends EnglishGame{
             'down',
             () => {
                 console.log("THREE pressed")
-                this.selectAnswer(2)
+                this.selectWord(2)
             }
         )
         keys.four = this.input.keyboard.addKey('FOUR')
@@ -135,7 +137,7 @@ export default class WordScrambleScene extends EnglishGame{
             'down',
             () => {
                 console.log("FOUR pressed")
-                this.selectAnswer(3)
+                this.selectWord(3)
             }
         )
         return keys
@@ -149,7 +151,7 @@ export default class WordScrambleScene extends EnglishGame{
                 'pointerdown',
                 () => {
                     console.log(`Answer ${i} touched!`)
-                    this.selectAnswer(i)
+                    this.selectWord(i)
                 }
             )
         }
@@ -164,19 +166,24 @@ export default class WordScrambleScene extends EnglishGame{
             }
         )
     }
+
+    //#endregion
+
     newQuiz() {
         let q = this.getQuestion()
         let data = this.getSentence(q)
         this.quiz.sentence.text = data.sentence
-        let ans = data.clozeWords
+        this.quiz.correctAnswer = data.answer
+        let words = data.clozeWords
 
         console.log(this.quiz.sentence.text)
-        console.log(ans)
+        console.log(this.quiz.correctAnswer)
+        console.log(words)
 
         for(let i=0; i<4; i++){
-            this.quiz.words[i].text = 
+            this.quiz.isWordUsed[i] = false
             this.quiz.words[i].setVisible(true)
-            this.quiz.words[i].text = (i+1) + ". " + ans[i]
+            this.quiz.words[i].text = (i+1) + ". " + words[i]
             // @ts-ignore
             this.quiz.words[i].body.setVelocity(0)
             // @ts-ignore
@@ -218,7 +225,7 @@ export default class WordScrambleScene extends EnglishGame{
 
         let sentence = words.join(' ')
 
-        return { sentence, clozeWords }
+        return { sentence, clozeWords, answer: q.sentence }
     }
 
     getAnswers(q) {
@@ -235,8 +242,49 @@ export default class WordScrambleScene extends EnglishGame{
     }
 
 
-    selectAnswer(index) {
-        throw new Error("Method not implemented.");
+    selectWord(index) {
+        this.quiz.wordsInAnswer.push(this.quiz.words[index])
+        this.quiz.isWordUsed[index] = true
+
+        //Move word toward sentence
+        let moveTime = 0.5
+        let velocity = this.calcVelocity(
+            this.quiz.sentence,
+            this.quiz.words[index],
+            moveTime
+        )
+        console.log(velocity)
+        // @ts-ignore
+        this.quiz.words[index].body.setVelocity(velocity.x, velocity.y)
+
+        this.time.delayedCall(
+            moveTime * 1000, 
+            this.addWordToSentence, 
+            [this.quiz.words[index]],
+            this
+            )
+        //throw new Error("Method not implemented.");
+    }
+
+    removeWord(){
+
+    }
+
+    addWordToSentence(word){
+        console.log(`Adding ${word} to Sentence!`)
+        // console.log(word)
+        word.body.setVelocity(0)
+        word.setVisible(false)
+
+        let currentStr = this.quiz.sentence.text
+
+        currentStr = currentStr.replace('____', word.text)
+
+        this.quiz.sentence.text = currentStr
+    }
+
+    checkReadyToAnswer(word, i){
+
     }
     
 }
