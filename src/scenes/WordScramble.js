@@ -68,6 +68,8 @@ export default class WordScrambleScene extends EnglishGame{
     createQuizSentence() {
         let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: FONT_MED}).setOrigin(0.5)
         this.physics.world.enable(text, 0)
+        // @ts-ignore
+        text.body.setAllowGravity(false)
         return text
     }
     createAnswerText() {
@@ -141,10 +143,7 @@ export default class WordScrambleScene extends EnglishGame{
 
     createTouchInput(quiz) {
         this.log('Create Touch Input.')
-        console.log(quiz)
-        console.log(quiz.words)
-        console.log(quiz.words.length)
-        for(let i=0; quiz.words.length; i++){
+        for(let i=0; i < quiz.words.length; i++){
             quiz.words[i].setInteractive()
             quiz.words[i].on(
                 'pointerdown',
@@ -167,8 +166,12 @@ export default class WordScrambleScene extends EnglishGame{
     }
     newQuiz() {
         let q = this.getQuestion()
-        this.quiz.sentence = this.getSentence(q)
-        let ans = this.getAnswers(q)
+        let data = this.getSentence(q)
+        this.quiz.sentence.text = data.sentence
+        let ans = data.clozeWords
+
+        console.log(this.quiz.sentence.text)
+        console.log(ans)
 
     }
 
@@ -178,10 +181,41 @@ export default class WordScrambleScene extends EnglishGame{
         return this.gameData.quizzes[index]
     }
     getSentence(q) {
-        return q.sentence
+        let words = q.sentence.split(' ')
+        let shuffled = this.shuffle(words)
+        let clozeWords = []
+
+        console.log(`Shuffled Array...`)
+        console.log(shuffled)
+        console.log(`^^^^^^^^^^^^`)
+
+        for(let i = 0; i < 4; i++){
+            console.log(`Pushing ${shuffled[i]} into clozed words.`)
+            clozeWords.push(shuffled[i])
+        }
+        for(let i=0; i< words.length; i++){
+            console.log(`Checking ${words[i]}`)
+            if(clozeWords.includes(words[i])){
+                console.log(`It includes ${words[i]}!`)
+                words[i] = '____'
+            }
+        }
+
+        let sentence = words.join(' ')
+
+        return { sentence, clozeWords }
     }
 
     getAnswers(q) {
+        let indices = [0,1,2,3] // Add 4 indices
+
+        indices = this.shuffle(indices)
+
+        for(let i=0; i< indices.length; i++){
+
+        }
+
+
         throw new Error("Method not implemented.");
     }
 

@@ -180,16 +180,17 @@ export default class EnglishGame extends Phaser.Scene{
     }
 
     shuffle(array){
-        let currentIndex = array.length, temp, randomIndex;
+        let shuffledArray = [...array]
+        let currentIndex = shuffledArray.length, temp, randomIndex;
         while (0 !== currentIndex){
             randomIndex = this.randIndex(currentIndex);
             currentIndex -= 1;
     
-            temp = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temp;
+            temp = shuffledArray[currentIndex];
+            shuffledArray[currentIndex] = shuffledArray[randomIndex];
+            shuffledArray[randomIndex] = temp;
         }
-        return array;
+        return shuffledArray;
     }
 
     pause(){
