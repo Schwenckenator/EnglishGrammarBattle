@@ -173,6 +173,21 @@ export default class WordScrambleScene extends EnglishGame{
         console.log(this.quiz.sentence.text)
         console.log(ans)
 
+        for(let i=0; i<4; i++){
+            this.quiz.words[i].text = 
+            this.quiz.words[i].setVisible(true)
+            this.quiz.words[i].text = (i+1) + ". " + ans[i]
+            // @ts-ignore
+            this.quiz.words[i].body.setVelocity(0)
+            // @ts-ignore
+            this.quiz.words[i].body.setAllowGravity(false)
+            
+            this.quiz.words[i].setPosition(
+            /* x */ 120 + 240 * (i % 2), 
+            /* y */ 565 + 50 * (Math.floor(i/2) % 2)                
+            )
+        }
+
     }
 
 

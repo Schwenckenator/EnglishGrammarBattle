@@ -215,14 +215,6 @@ export default class GrammarFallsScene extends EnglishGame
         this.lostLife = false
     }
 
-    // moveAnswer(){
-    //     let xDiff = this.quiz.sentence.x - this.quiz.answers[this.selectedAnswer].x
-    //     let yDiff = this.quiz.sentence.y - this.quiz.answers[this.selectedAnswer].y
-        
-    //     let sqrDist = xDiff * xDiff + yDiff * yDiff
-    //     return sqrDist < 0.1
-    // }
-
     selectAnswer(index){
         // If already selected, don't do it again
         if(this.isAnswerSelected) return 

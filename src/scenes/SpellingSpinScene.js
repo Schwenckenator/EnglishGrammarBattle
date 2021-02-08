@@ -387,13 +387,6 @@ export default class SpellingSpinScene extends EnglishGame
         )
     }
 
-    // isClose(obj1, obj2){
-    //     let x = obj1.x - obj2.x
-    //     let y = obj1.y - obj2.y
-    //     let sqrDist = x * x + y * y
-    //     return sqrDist < 0.1
-    // }
-
     checkAnswer(){
         let answer = this.quiz.answer
         let playerAnswer = this.quiz.playerAnswer.replace(/_/g, ' ')
