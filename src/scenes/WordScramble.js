@@ -5,6 +5,9 @@ const X_MAX = 480
 const X_CENTRE = X_MAX / 2
 const Y_MAX = 640
 
+const LEVEL_DY = 5
+const DY = 30 - LEVEL_DY
+
 const ANSWER_MOVE_TIME = 0.5
 const ANSWER_POS = {x: X_CENTRE, y:500}
 
@@ -24,7 +27,7 @@ export default class WordScrambleScene extends EnglishGame{
     }
 
     constructor(){
-        super(THIS_GAME)
+        super(THIS_GAME, BOTTOM_Y)
     }
 
     preload(){
@@ -195,6 +198,17 @@ export default class WordScrambleScene extends EnglishGame{
             )
         }
 
+        this.quiz.sentence.setVisible(true)
+
+        this.quiz.sentence.setPosition(X_CENTRE, -10)
+        // @ts-ignore
+        this.quiz.sentence.body.setAllowGravity(false)
+        // @ts-ignore
+        this.quiz.sentence.body.setVelocity(0, DY + this.level * LEVEL_DY)
+
+        this.resetSway()
+        this.lostLife = false
+
     }
 
 
@@ -228,37 +242,44 @@ export default class WordScrambleScene extends EnglishGame{
         return { sentence, clozeWords, answer: q.sentence }
     }
 
-    getAnswers(q) {
-        let indices = [0,1,2,3] // Add 4 indices
+    // getAnswers(q) {
+    //     let indices = [0,1,2,3] // Add 4 indices
 
-        indices = this.shuffle(indices)
+    //     indices = this.shuffle(indices)
 
-        for(let i=0; i< indices.length; i++){
+    //     for(let i=0; i< indices.length; i++){
 
-        }
+    //     }
 
 
-        throw new Error("Method not implemented.");
-    }
+    //     throw new Error("Method not implemented.");
+    // }
 
 
     selectWord(index) {
+        // If used, don't use it again
+        if(this.quiz.isWordUsed[index]){
+            return
+        }
+
         this.quiz.wordsInAnswer.push(this.quiz.words[index])
         this.quiz.isWordUsed[index] = true
 
         //Move word toward sentence
-        let moveTime = 0.5
         let velocity = this.calcVelocity(
             this.quiz.sentence,
             this.quiz.words[index],
-            moveTime
+            ANSWER_MOVE_TIME
         )
         console.log(velocity)
         // @ts-ignore
         this.quiz.words[index].body.setVelocity(velocity.x, velocity.y)
 
+        //Slice the number off
+        this.quiz.words[index].text = this.quiz.words[index].text.substring(3)
+
         this.time.delayedCall(
-            moveTime * 1000, 
+            ANSWER_MOVE_TIME * 1000, 
             this.addWordToSentence, 
             [this.quiz.words[index]],
             this
@@ -281,10 +302,35 @@ export default class WordScrambleScene extends EnglishGame{
         currentStr = currentStr.replace('____', word.text)
 
         this.quiz.sentence.text = currentStr
+
+        if(this.isReadyToAnswer()){
+            this.checkAnswer()
+        }
     }
 
-    checkReadyToAnswer(word, i){
-
+    isReadyToAnswer(){
+        console.log('Is ready to Answer?')
+        for(let used of this.quiz.isWordUsed){
+            console.log(used)
+            if(!used){
+                return false
+            }
+        }
+        return true
     }
+
+    checkAnswer(){
+        if(this.quiz.sentence.text === this.quiz.correctAnswer){
+            this.correctAnswer()
+        } else {
+            this.wrongAnswer(this.quiz.sentence)
+        }
+    }
+
+    endQuestion(){
+        this.quiz.sentence.setVisible(false)
+    }
+
+    
     
 }

@@ -299,10 +299,13 @@ export default class EnglishGame extends Phaser.Scene{
         quiz.body.setVelocity(Math.random()* amp - amp/2, -Math.random()* amp)
         // @ts-ignore
         quiz.body.setAllowGravity(true)
-        // @ts-ignore
-        ans.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
-        // @ts-ignore
-        ans.body.setAllowGravity(true)
+        
+        if(ans){
+            // @ts-ignore
+            ans.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
+            // @ts-ignore
+            ans.body.setAllowGravity(true)
+        }
 
         this.wrongSound.play()
 
