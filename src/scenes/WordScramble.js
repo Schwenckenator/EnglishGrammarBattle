@@ -59,6 +59,8 @@ export default class WordScrambleScene extends EnglishGame{
         this.createKeyboardInput()
         this.createTouchInput(this.quiz)
 
+        this.timerEvents = []
+
         this.newQuiz()
     }
 
@@ -188,6 +190,7 @@ export default class WordScrambleScene extends EnglishGame{
         this.quiz.sentence.text = data.sentence
         this.quiz.correctAnswer = data.answer
         let words = data.clozeWords
+        this.quiz.indicesInAnswer = []
 
         console.log(this.quiz.sentence.text)
         console.log(this.quiz.correctAnswer)
@@ -293,17 +296,28 @@ export default class WordScrambleScene extends EnglishGame{
         //Slice the number off
         this.quiz.words[index].text = this.quiz.words[index].text.substring(3)
 
-        this.time.delayedCall(
+        this.timerEvents.push(this.time.delayedCall(
             ANSWER_MOVE_TIME * 1000, 
             this.addWordToSentence, 
             [this.quiz.words[index]],
             this
             )
+        )
         //throw new Error("Method not implemented.");
     }
 
     removeWord(){
+
         if(this.quiz.indicesInAnswer.length === 0) return
+
+        //Pop the last word in flight, if it exists
+        let e = this.timerEvents.pop()
+        if(e) e.destroy()
+
+        console.log('~~~~~~~~~~~~~~~~~~~')
+        console.log('Timer events now are...')
+        console.log(this.timerEvents)
+        console.log('~~~~~~~~~~~~~~~~~~~')
 
         let lastIndex = this.quiz.indicesInAnswer.pop()
         this.quiz.isWordUsed[lastIndex] = false
