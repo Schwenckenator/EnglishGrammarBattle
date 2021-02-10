@@ -14,6 +14,8 @@ const ANSWER_POS = {x: X_CENTRE, y:500}
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
 
+const BLANK = '____'
+
 const DATA_KEY = 'DATA'
 const UI_KEY = 'UI'
 
@@ -46,7 +48,7 @@ export default class WordScrambleScene extends EnglishGame{
             sentence: this.createQuizSentence(),
             currentText: "",
             correctAnswer: "",
-            wordsInAnswer: [],
+            indicesInAnswer: [],
             isWordUsed: [],
             words: this.createWords()
         }
@@ -109,6 +111,14 @@ export default class WordScrambleScene extends EnglishGame{
             () => {
                 this.log(`Escape Pressed.`)
                 this.pause()
+            }
+        )
+        keys.back = this.input.keyboard.addKey('BACKSPACE')
+        keys.back.on(
+            'down',
+            () => {
+                console.log("BACKSPACE pressed")
+                this.removeWord()
             }
         )
         keys.one = this.input.keyboard.addKey('ONE')
@@ -192,10 +202,8 @@ export default class WordScrambleScene extends EnglishGame{
             // @ts-ignore
             this.quiz.words[i].body.setAllowGravity(false)
             
-            this.quiz.words[i].setPosition(
-            /* x */ 120 + 240 * (i % 2), 
-            /* y */ 565 + 50 * (Math.floor(i/2) % 2)                
-            )
+            let pos = this.getAnswerXY(i)
+            this.quiz.words[i].setPosition(pos.x, pos.y)
         }
 
         this.quiz.sentence.setVisible(true)
@@ -209,6 +217,13 @@ export default class WordScrambleScene extends EnglishGame{
         this.resetSway()
         this.lostLife = false
 
+    }
+
+    getAnswerXY(index){
+        return {
+            x: 120 + 240 * (index % 2), 
+            y: 565 + 50 * (Math.floor(index/2) % 2)                
+        }
     }
 
 
@@ -233,7 +248,7 @@ export default class WordScrambleScene extends EnglishGame{
             console.log(`Checking ${words[i]}`)
             if(clozeWords.includes(words[i])){
                 console.log(`It includes ${words[i]}!`)
-                words[i] = '____'
+                words[i] = BLANK
             }
         }
 
@@ -262,7 +277,7 @@ export default class WordScrambleScene extends EnglishGame{
             return
         }
 
-        this.quiz.wordsInAnswer.push(this.quiz.words[index])
+        this.quiz.indicesInAnswer.push(index)
         this.quiz.isWordUsed[index] = true
 
         //Move word toward sentence
@@ -288,6 +303,33 @@ export default class WordScrambleScene extends EnglishGame{
     }
 
     removeWord(){
+        if(this.quiz.indicesInAnswer.length === 0) return
+
+        let lastIndex = this.quiz.indicesInAnswer.pop()
+        this.quiz.isWordUsed[lastIndex] = false
+
+        let lastWordObj = this.quiz.words[lastIndex]
+
+        let sentence = this.quiz.sentence
+        sentence.text = sentence.text.replace(lastWordObj.text, BLANK)
+
+        lastWordObj.setVisible(true)
+        lastWordObj.setPosition(sentence.x, sentence.y)
+
+        lastWordObj.text = (lastIndex + 1) + '. ' + lastWordObj.text
+
+        let pos = this.getAnswerXY(lastIndex)
+        let velocity = this.calcVelocity(pos, lastWordObj, ANSWER_MOVE_TIME)
+
+        this.quiz.words[lastIndex].body.setVelocity(velocity.x, velocity.y)
+
+        this.time.delayedCall(
+            ANSWER_MOVE_TIME * 1000, 
+            () => {
+                this.quiz.words[lastIndex].body.setVelocity(0)
+                this.quiz.words[lastIndex].setPosition(pos.x, pos.y)
+            }
+        )
 
     }
 
@@ -297,9 +339,11 @@ export default class WordScrambleScene extends EnglishGame{
         word.body.setVelocity(0)
         word.setVisible(false)
 
+        this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
+
         let currentStr = this.quiz.sentence.text
 
-        currentStr = currentStr.replace('____', word.text)
+        currentStr = currentStr.replace(BLANK, word.text)
 
         this.quiz.sentence.text = currentStr
 
