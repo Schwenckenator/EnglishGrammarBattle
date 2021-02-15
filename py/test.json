@@ -1,7 +1,7 @@
 {
     "sentences":[
         {
-            "text":             "Hello, my name ___ %NOUN%.",
+            "text":             "Hello, my name ____ %NOUN%.",
             "correctAnswer":    "is",
             "wrongAnswer":[     "are",
                                 "be",
@@ -9,7 +9,7 @@
             ]
         },
         {
-            "text":             "You ___ a %NOUN%",
+            "text":             "You ____ a %NOUN%",
             "correctAnswer":    "are",
             "wrongAnswer":[     "is",
                                 "be",
@@ -17,11 +17,43 @@
             ]
         },
         {
-            "text":             "They ___ %NOUNS%",
+            "text":             "They ____ %NOUNS%",
             "correctAnswer":    "are",
             "wrongAnswer":[     "is",
                                 "be",
                                 "am"
+            ]
+        },
+        {
+            "text":             "%PRO_3S_NOM% is ____ %NOUNS%.",
+            "correctAnswer":    "%VERBING_TR%",
+            "wrongAnswer":[     "%VERB_TR%",
+                                "%VERB_IN%",
+                                "%VERBS_TR%"
+            ]
+        },
+        {
+            "text":             "%PRO_3S_NOM% is ____ a %NOUN%.",
+            "correctAnswer":    "%VERBING_TR%",
+            "wrongAnswer":[     "%VERB_TR%",
+                                "%VERB_IN%",
+                                "%VERBS_TR%"
+            ]
+        },
+        {
+            "text":             "%PRO_3S_NOM% is ____ the %NOUN%.",
+            "correctAnswer":    "%VERBING_TR%",
+            "wrongAnswer":[     "%VERB_TR%",
+                                "%VERB_IN%",
+                                "%VERBS_TR%"
+            ]
+        },
+        {
+            "text":             "%PRO_3S_NOM% is ____ the %NOUNS%.",
+            "correctAnswer":    "%VERBING_TR%",
+            "wrongAnswer":[     "%VERB_TR%",
+                                "%VERB_IN%",
+                                "%VERBS_TR%"
             ]
         }
     ],
@@ -42,24 +74,38 @@
             ]
         },
         {
-            "name": "animateSingularNoun",
-            "keyword": "N_ANI",
+            "name": "nounAnimalPlural",
+            "keyword": "N_ANIMALS",
             "words":[
-                "%N_ANIMAL%",
+                "pets"
+            ]
+        },
+        {
+            "name": "nounAnimalSingular",
+            "keyword": "N_ANIMAL",
+            "words":[
+                "pet",
+                "rabbit",
                 "animal",
                 "monkey"
             ]
         },
         {
-            "name": "animalSingular",
-            "keyword": "N_ANIMAL",
+            "name": "nounAnimatePlural",
+            "keyword": "NS_ANI",
             "words":[
-                "pet",
-                "rabbit"
+                ""
             ]
         },
         {
-            "name": "clothing",
+            "name": "nounAnimateSingular",
+            "keyword": "N_ANI",
+            "words":[
+                "%N_ANIMAL%"
+            ]
+        },
+        {
+            "name": "nounClothing",
             "keyword": "N_CLOTH",
             "words":[
                 "cap",
@@ -71,7 +117,7 @@
             ]
         },
         {
-            "name": "food",
+            "name": "nounFood",
             "keyword": "N_FOOD",
             "words":[
                 "%N_FRUIT%",
@@ -88,7 +134,7 @@
             ]
         },
         {
-            "name": "fruit",
+            "name": "nounFruit",
             "keyword": "N_FRUIT",
             "words":[
                 "banana",
@@ -98,7 +144,14 @@
             ]
         },
         {
-            "name": "inanimateSingluarNoun",
+            "name": "nounInanimatePlural",
+            "keyword": "NS_INANI",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "nounInanimateSingluar",
             "keyword": "N_INANI",
             "words":[
                 "%N_CLOTH%",
@@ -110,7 +163,7 @@
                 "city",
                 "clock",
                 "department store",
-                "e–mail",
+                "email",
                 "face",
                 "flute",
                 "garden",
@@ -130,11 +183,11 @@
             ]
         },
         {
-            "name": "sport",
-            "keyword": "N_SPORT",
+            "name": "nounPlural",
+            "keyword": "NOUNS",
             "words":[
-                "badminton",
-                "volleyball"
+                "%NS_ANI%",
+                "%NS_INANI%"
             ]
         },
         {
@@ -148,25 +201,29 @@
             ]
         },
         {
-            "name": "nounPlural",
-            "keyword": "NOUNS",
+            "name": "nounSport",
+            "keyword": "N_SPORT",
             "words":[
-                "%NS_ANI%",
-                "%NS_INANI%"
+                "badminton",
+                "volleyball"
             ]
         },
         {
-            "name": "animatePluralNoun",
-            "keyword": "NS_ANI",
+            "name": "pronoun1st2nd3rdPluralNominative",
+            "keyword": "PRO_123P_NOM",
             "words":[
-                ""
+                "I",
+                "we",
+                "you",
+                "they"
             ]
         },
         {
-            "name": "inanimatePluralNoun",
-            "keyword": "NS_INANI",
+            "name": "pronoun3rdPersonSinglularNominative",
+            "keyword": "PRO_3S_NOM",
             "words":[
-                ""
+                "he",
+                "she"
             ]
         },
         {
@@ -201,6 +258,39 @@
             ]
         },
         {
+            "name": "verb3PS",
+            "keyword": "VERBS",
+            "words":[
+                "%VERBS_IN%",
+                "%VERBS_TR%"
+            ]
+        },
+        {
+            "name": "verbGerund",
+            "keyword": "VERBING",
+            "words":[
+                "%VERBING_IN%",
+                "%VERBING_TR%"
+            ]
+        },
+        {
+            "name": "verbGerundIntransitive",
+            "keyword": "VERBING_IN",
+            "words":[
+                "cycling",
+                "diving",
+                "fishing",
+                "hiking"
+            ]
+        },
+        {
+            "name": "verbGerundTransitive",
+            "keyword": "VERBING_TR",
+            "words":[
+                ""
+            ]
+        },
+        {
             "name": "verbIntransitive",
             "keyword": "VERB_IN",
             "words":[
@@ -210,6 +300,20 @@
                 "fly",
                 "jump",
                 "live"
+            ]
+        },
+        {
+            "name": "verbIntransitive3PS",
+            "keyword": "VERBS_IN",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "verbPast",
+            "keyword": "VERBED",
+            "words":[
+                ""
             ]
         },
         {
@@ -235,26 +339,8 @@
             ]
         },
         {
-            "name": "verbGerund",
-            "keyword": "VERBING",
-            "words":[
-                "%VERBING_IN%",
-                "%VERBING_TR%"
-            ]
-        },
-        {
-            "name": "verbGerundIntransitive",
-            "keyword": "VERBING_IN",
-            "words":[
-                "cycling",
-                "diving",
-                "fishing",
-                "hiking"
-            ]
-        },
-        {
-            "name": "verbGerundTransitive",
-            "keyword": "VERBING_TR",
+            "name": "verbTransitive3PS",
+            "keyword": "VERBS_TR",
             "words":[
                 ""
             ]
