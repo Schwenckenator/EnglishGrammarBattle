@@ -11,7 +11,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1okniTOvNF_MHrPtzbVgFWVI5TQquTBjNitTRw2kRwZY'
-SAMPLE_RANGE_NAME = 'A2:AA1000'
+SAMPLE_RANGE_NAME = 'Vocab!A2:AA1000'
     
 class Quiz:
     def __init__(self, japanese, english):
@@ -105,7 +105,7 @@ def main():
     service = build('sheets', 'v4', credentials=creds)
 
     # Call the Sheets API
-    sheet = service.spreadsheets()
+    sheet = service.spreadsheets() # pylint: disable=no-member
     result_input = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                 range=SAMPLE_RANGE_NAME).execute()
     values_input = result_input.get('values', [])
