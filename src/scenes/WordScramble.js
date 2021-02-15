@@ -235,7 +235,8 @@ export default class WordScrambleScene extends EnglishGame{
         return this.gameData.quizzes[index]
     }
     getSentence(q) {
-        let words = q.sentence.split(' ')
+        let text = this.processText(q.sentence)
+        let words = text.split(' ')
         let shuffled = this.shuffle(words)
         let clozeWords = []
 
@@ -257,7 +258,7 @@ export default class WordScrambleScene extends EnglishGame{
 
         let sentence = words.join(' ')
 
-        return { sentence, clozeWords, answer: q.sentence }
+        return { sentence, clozeWords, answer: text }
     }
 
     // getAnswers(q) {
@@ -390,5 +391,38 @@ export default class WordScrambleScene extends EnglishGame{
     }
 
     
+    /**
+     * @param {string} text
+     */
+    processText(text){
+        if(!text.includes("%")){
+            return text;
+        }
     
+        // Text includes a % sign
+        //debugger;
+        let finishedText = text;
+        console.log("New Sentence is: " + text);
+        while(finishedText.includes("%")){
+            console.log("Sentence is currently: " + finishedText);
+            let str = finishedText;
+            let wildCard = str.split("%")[1];
+            let replacement = "";
+            
+            for(const partOfSpeech of this.gameData.partsOfSpeech){
+                console.log(partOfSpeech.name);
+                if(wildCard == partOfSpeech.keyword){
+                    console.log("Found keyword "+partOfSpeech.keyword);
+                    replacement = partOfSpeech.words[this.randIndex(partOfSpeech.words.length)];
+                    break;
+                }
+            }
+            
+            finishedText = finishedText.replace("%"+wildCard+"%", replacement);
+        }
+
+        console.log("Finished sentence is: " + finishedText);
+        return finishedText[0].toUpperCase() + finishedText.slice(1);
+        
+    }
 }

@@ -123,7 +123,7 @@ def OrganiseData(data):
 
 def writeJson(data):
     tab = "    "
-    f = open("test.json", "w", encoding = 'utf-8')
+    f = open("testGrammarFalls.json", "w", encoding = 'utf-8')
     lines = []
     lines.append('{\n')
 

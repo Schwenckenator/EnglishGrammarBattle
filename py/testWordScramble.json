@@ -1,13 +1,10 @@
 {
-    "sentences":[
+    "quizzes":[
         {
             "sentence": "Hello, my name is %NOUN%."
         },
         {
             "sentence": "You are a %NOUN%"
-        },
-        {
-            "sentence": "They are %NOUNS%"
         },
         {
             "sentence": "%PRO_3S_NOM% is %VERBING_TR% %NOUNS%."
@@ -20,6 +17,9 @@
         },
         {
             "sentence": "%PRO_3S_NOM% is %VERBING_TR% the %NOUNS%."
+        },
+        {
+            "sentence": "%PRO_123P_NOM% like %ADJ% %N_ANIMALS%."
         }
     ],
 
@@ -59,7 +59,7 @@
             "name": "nounAnimatePlural",
             "keyword": "NS_ANI",
             "words":[
-                ""
+                "%N_ANIMALS%"
             ]
         },
         {

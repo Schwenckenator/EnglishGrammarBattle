@@ -127,11 +127,15 @@ def writeJson(data):
     lines.append('{\n')
 
     #Sentences
-    lines.append(tab+'"sentences":[\n')
+    lines.append(tab+'"quizzes":[\n')
 
     quizzes = []
 
     for quiz in data["quizzes"]:
+        words = quiz.question.split(" ")
+        if(len(words) < 4):
+            continue
+
         string = ""
 
         string += tab*2 + '{\n'
