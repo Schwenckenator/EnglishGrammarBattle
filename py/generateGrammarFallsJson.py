@@ -41,24 +41,32 @@ def OrganiseData(data):
     print("-----------START-------------")
     print("-----------------------------")
 
+    VOCAB = data[0].get('values', [])
+    CATEGORIES = data[1].get('values', [])
+    SENTENCES = data[2].get('values', [])
+
+    print(VOCAB[0])
+    print(CATEGORIES[0])
+    print(SENTENCES[0])
+
     quizzes = []
     categories = []
     # First, generate categories
-    for row in data:
+    for row in CATEGORIES:
         
-        # Are we finished with the categories?
-        if len(row) < 5:
-            break
+        # # Are we finished with the categories?
+        # if len(row) < 5:
+        #     break
         
-        cat = Category(row[5], row[6])
+        cat = Category(row[0], row[1])
 
         # category = row[5]
         # keyword = row[6]
         subCatStr = ""
 
         # Are there no subcategories?
-        if len(row) >= 8:
-            subCatStr = row[7]
+        if len(row) >= 3:
+            subCatStr = row[2]
             
             if subCatStr != "":
                 #remove spaces
@@ -76,8 +84,9 @@ def OrganiseData(data):
     
     lookup = buildDict(categories)
     # print("-----------------------------")
+    
     #next, find the vocab
-    for row in data:
+    for row in VOCAB:
         # index = findIndex(categories, row[3])
         name = row[3]
         english = row[1]
@@ -87,12 +96,12 @@ def OrganiseData(data):
         # print('%s, %s, %s' % (row[0], row[1], row[3]))
     
     # last, organise the quizzes
-    for row in data:
+    for row in SENTENCES:
         # Are we finished with the quizzes?
-        if len(row) < 9:
-            break
+        # if len(row) < 9:
+        #     break
 
-        q = Quiz(row[9], row[10], row[11:14])
+        q = Quiz(row[0], row[1], row[2:5])
         quizzes.append(q)
 
     for cat in categories:
@@ -212,9 +221,13 @@ def main():
 
     # Call the Sheets API
     sheet = service.spreadsheets() # pylint: disable=no-member
-    result_input = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                range=SAMPLE_RANGE_NAME).execute()
-    values_input = result_input.get('values', [])
+    # result_input = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+    #                             range=SAMPLE_RANGE_NAME).execute()
+    
+    result_input = sheet.values().batchGet(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                ranges=RANGES).execute()
+
+    values_input = result_input.get('valueRanges', [])
 
     if not values_input:
         print('No data found.')
@@ -223,6 +236,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-df = pd.DataFrame(values_input[1:], columns=values_input[0])
-
