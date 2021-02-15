@@ -11,7 +11,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1okniTOvNF_MHrPtzbVgFWVI5TQquTBjNitTRw2kRwZY'
-SAMPLE_RANGE_NAME = 'A2:AA1000'
+SAMPLE_RANGE_NAME = 'Vocab!A2:AA1000'
     
 class Quiz:
     def __init__(self, japanese, english):
@@ -117,4 +117,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
