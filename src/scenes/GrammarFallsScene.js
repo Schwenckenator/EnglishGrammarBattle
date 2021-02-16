@@ -48,6 +48,7 @@ export default class GrammarFallsScene extends EnglishGame
             sentence: this.createQuizSentence(),
             answers: this.createAnswers(),
             correctIndex: -1, // Don't know yet
+            correctAnswer: ""
         }
 
         let uiY = Y_MAX - 150 / 2
@@ -185,10 +186,12 @@ export default class GrammarFallsScene extends EnglishGame
 
     newQuiz(){
         let q = this.getQuestion()
-        this.quiz.sentence.text = this.getSentence(q)
+        let sentence = this.getSentence(q)
+        this.quiz.sentence.text = sentence
         let ans = this.getAnswers(q)
         
         this.quiz.correctIndex = ans.correctIndex
+        this.quiz.correctAnswer = sentence.replace(this.BLANK, ans.correctAnswer)
         
         for(let i=0; i<4; i++){
             this.quiz.answers[i].setVisible(true)
@@ -289,6 +292,7 @@ export default class GrammarFallsScene extends EnglishGame
 
     getAnswers(q){
         let correctIndex = -1
+        let correctAnswer = ''
         let indices = ['c', 0, 1, 2]
         indices = this.shuffle(indices)
         let answers = []
@@ -296,6 +300,7 @@ export default class GrammarFallsScene extends EnglishGame
             let ans
             if(indices[i] === 'c'){
                 ans = this.processText(q.correctAnswer)
+                correctAnswer = ans
                 correctIndex = i
             }else{
                 ans = this.processText(q.wrongAnswer[indices[i]])
@@ -303,7 +308,9 @@ export default class GrammarFallsScene extends EnglishGame
             answers.push(ans)
         }
 
-        return { answers, correctIndex }
+        
+
+        return { answers, correctIndex, correctAnswer }
     }
 
     /**

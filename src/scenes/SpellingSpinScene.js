@@ -64,7 +64,7 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz = {
             sentence: this.createQuizSentence(),
             answerText: this.createAnswerText(),
-            answer: "",
+            correctAnswer: "",
             remainingLetters: "",
             answerIndices: [],
             playerAnswer: "",
@@ -217,7 +217,7 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.text = ""
         this.quiz.answerText.setVisible(false)
         this.quiz.answerText.setPosition(ANSWER_POS.x, ANSWER_POS.y)
-        this.quiz.answer = q.english
+        this.quiz.correctAnswer = q.english
         this.quiz.answerIndices = []
         let obj = this.getLetters(q)
         let ls = obj.letters
@@ -334,7 +334,7 @@ export default class SpellingSpinScene extends EnglishGame
         // put the answer back below the line, and make it selectable again.
         let moveTime = .25
 
-        let newPos = this.calculateLetterPosition(index, this.quiz.answer.length)
+        let newPos = this.calculateLetterPosition(index, this.quiz.correctAnswer.length)
 
         // Make letter object visible
         this.quiz.letters[index].setVisible(true)
@@ -357,14 +357,14 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.playerAnswer += letter.text
         
         this.quiz.answerIndices.push(i)
-        console.log(`Checking if ready to Answer!\nPlayer answer has '${this.quiz.playerAnswer.length}', answer has '${this.quiz.answer.length}'.`)
+        console.log(`Checking if ready to Answer!\nPlayer answer has '${this.quiz.playerAnswer.length}', answer has '${this.quiz.correctAnswer.length}'.`)
         //If all letters are in prep zone, fire word!
         letter.body.setVelocity(0)
         letter.setVisible(false)
         this.quiz.answerText.setVisible(true)
         this.quiz.answerText.text += letter.text
 
-        if(this.quiz.playerAnswer.length === this.quiz.answer.length){
+        if(this.quiz.playerAnswer.length === this.quiz.correctAnswer.length){
             //Shoot answer
             this.isAnswerSelected = true
             // @ts-ignore
@@ -382,7 +382,7 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     checkAnswer(){
-        let answer = this.quiz.answer
+        let answer = this.quiz.correctAnswer
         let playerAnswer = this.quiz.playerAnswer.replace(/_/g, ' ')
 
         console.log(`Answer = '${answer}'\nPlayers answer = '${playerAnswer}'.\nCorrect? ${playerAnswer === answer}`)

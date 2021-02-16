@@ -14,8 +14,6 @@ const ANSWER_POS = {x: X_CENTRE, y:500}
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
 
-const BLANK = '____'
-
 const DATA_KEY = 'DATA'
 const UI_KEY = 'UI'
 
@@ -252,7 +250,7 @@ export default class WordScrambleScene extends EnglishGame{
             console.log(`Checking ${words[i]}`)
             if(clozeWords.includes(words[i])){
                 console.log(`It includes ${words[i]}!`)
-                words[i] = BLANK
+                words[i] = this.BLANK
             }
         }
 
@@ -311,7 +309,7 @@ export default class WordScrambleScene extends EnglishGame{
         let lastWordObj = this.quiz.words[lastIndex]
 
         let sentence = this.quiz.sentence
-        sentence.text = sentence.text.replace(lastWordObj.text, BLANK)
+        sentence.text = sentence.text.replace(lastWordObj.text, this.BLANK)
 
         lastWordObj.setVisible(true)
         lastWordObj.setPosition(sentence.x, sentence.y)
@@ -342,7 +340,7 @@ export default class WordScrambleScene extends EnglishGame{
 
         let currentStr = this.quiz.sentence.text
 
-        currentStr = currentStr.replace(BLANK, word.text)
+        currentStr = currentStr.replace(this.BLANK, word.text)
 
         this.quiz.sentence.text = currentStr
 
@@ -353,7 +351,7 @@ export default class WordScrambleScene extends EnglishGame{
 
     isReadyToAnswer(){
         console.log('Is ready to Answer?')
-        return !this.quiz.sentence.text.includes(BLANK)
+        return !this.quiz.sentence.text.includes(this.BLANK)
     }
 
     checkAnswer(){

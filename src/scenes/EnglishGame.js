@@ -35,6 +35,7 @@ export default class EnglishGame extends Phaser.Scene{
         super(THIS_GAME)
         this.thisGame = THIS_GAME
         this.bottomY = BOTTOM_Y
+        this.BLANK = '____'
         this.gameData = undefined
     
         this.explosion = undefined
@@ -324,6 +325,8 @@ export default class EnglishGame extends Phaser.Scene{
         }else {
             SFXManager.stopAlert()
         }
+
+        this.displayCorrectAnswer(this.quiz.sentence)
         
         this.endQuestion()
 
@@ -346,6 +349,14 @@ export default class EnglishGame extends Phaser.Scene{
 
     endQuestion() {
         throw new Error('Abstract Method not implemented.')
+    }
+
+    
+    /**
+     * @param {Phaser.GameObjects.Text} obj
+     */
+    displayCorrectAnswer(obj){
+        obj.text = 
     }
 
     next() {
