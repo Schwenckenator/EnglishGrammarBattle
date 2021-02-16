@@ -261,20 +261,6 @@ export default class WordScrambleScene extends EnglishGame{
         return { sentence, clozeWords, answer: text }
     }
 
-    // getAnswers(q) {
-    //     let indices = [0,1,2,3] // Add 4 indices
-
-    //     indices = this.shuffle(indices)
-
-    //     for(let i=0; i< indices.length; i++){
-
-    //     }
-
-
-    //     throw new Error("Method not implemented.");
-    // }
-
-
     selectWord(index) {
         // If used, don't use it again
         if(this.quiz.isWordUsed[index]){
@@ -304,7 +290,6 @@ export default class WordScrambleScene extends EnglishGame{
             this
             )
         )
-        //throw new Error("Method not implemented.");
     }
 
     removeWord(){
@@ -350,7 +335,6 @@ export default class WordScrambleScene extends EnglishGame{
 
     addWordToSentence(word){
         console.log(`Adding ${word} to Sentence!`)
-        // console.log(word)
         word.body.setVelocity(0)
         word.setVisible(false)
 
@@ -369,13 +353,7 @@ export default class WordScrambleScene extends EnglishGame{
 
     isReadyToAnswer(){
         console.log('Is ready to Answer?')
-        for(let used of this.quiz.isWordUsed){
-            console.log(used)
-            if(!used){
-                return false
-            }
-        }
-        return true
+        return !this.quiz.sentence.text.includes(BLANK)
     }
 
     checkAnswer(){
