@@ -24,10 +24,9 @@ class Category:
         self.members = []
     
 class Quiz:
-    def __init__(self, question, correct, wrongs):
+    def __init__(self, question, correct):
         self.question = question
         self.correct = correct
-        self.wrongs = wrongs
     
 def buildDict(cats):
     lookup = {}
@@ -101,7 +100,7 @@ def OrganiseData(data):
         # if len(row) < 9:
         #     break
 
-        q = Quiz(row[0], row[1], row[2:5])
+        q = Quiz(row[0], row[1])
         quizzes.append(q)
 
     for cat in categories:
@@ -123,30 +122,29 @@ def OrganiseData(data):
 
 def writeJson(data):
     tab = "    "
-    f = open("testGrammarFalls.json", "w", encoding = 'utf-8')
+    f = open("testWordScramble.json", "w", encoding = 'utf-8')
     lines = []
     lines.append('{\n')
 
     #Sentences
-    lines.append(tab+'"sentences":[\n')
+    lines.append(tab+'"quizzes":[\n')
 
     quizzes = []
 
     for quiz in data["quizzes"]:
+        words = quiz.question.split(" ")
+        if(len(words) < 4):
+            continue
+
         string = ""
 
         string += tab*2 + '{\n'
-        string += tab*3 + '"text":             "%s",\n' % (quiz.question)
-        string += tab*3 + '"correctAnswer":    "%s",\n' % (quiz.correct)
-        string += tab*3 + '"wrongAnswer":[     "%s",\n' % (quiz.wrongs[0])
-        
-        string += tab*8+'"%s",\n' % (quiz.wrongs[1])
-        string += tab*8+'"%s"\n' % (quiz.wrongs[2])
+        string += tab*3 + '"sentence": "%s"\n' % (quiz.question)
+        # string += tab*3 + '"correctAnswer":    "%s",\n' % (quiz.correct)
 
-        string += tab*3 + ']\n'
         string += tab*2 + '}'
 
-    
+        string = string.replace('____', quiz.correct)
 
         quizzes.append(string)
 

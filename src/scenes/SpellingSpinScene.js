@@ -8,13 +8,9 @@ const UI_KEY = 'ui-line'
 
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
-const HEART = "\u200D\u2764\uFE0F\u200D"
 
 const LEVEL_DY = 5
 const DY = 30 - LEVEL_DY
-
-const FREQ = 0.01
-const SCORE_FREQ = 0.001
 
 const X_CENTRE = 240
 const Y_CENTRE = 320
@@ -25,8 +21,6 @@ const ANSWER_MOVE_TIME = 0.5
 const ANSWER_POS = {x: X_CENTRE, y:500}
 
 const BOTTOM_Y = 500
-
-const NEXT_LEVEL_TARGET = 10
 
 const ALPHABET = [
     'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
@@ -54,7 +48,7 @@ export default class SpellingSpinScene extends EnglishGame
     {
         super.preload()
         console.log("Preload Spelling Spin")
-        this.load.json('J2Ewords', 'assets/J2Ewords.json')
+        this.load.json('J2Ewords', 'assets/SpellingSpinData.json')
         // this.load.json('J2Ewords', 'assets/J2EwordsTEST.json')
         this.load.image(UI_KEY, 'assets/UI-OpenBottom.png')
     }
@@ -65,8 +59,8 @@ export default class SpellingSpinScene extends EnglishGame
         super.create()
         console.log("Create Spelling Spin")
         this.gameData = this.cache.json.get('J2Ewords')
-        let uiY = Y_MAX - 100 - 60 / 2 
-        this.add.image(240, uiY, UI_KEY)
+
+
         this.quiz = {
             sentence: this.createQuizSentence(),
             answerText: this.createAnswerText(),
@@ -77,8 +71,12 @@ export default class SpellingSpinScene extends EnglishGame
             indices: [],
             letters: this.createLetters(),
         }
-        this.keys = this.createKeyboardInputOLD()
-        this.touch = this.createTouchInput(this.quiz)
+
+        let uiY = Y_MAX - 100 - 60 / 2 
+        this.add.image(240, uiY, UI_KEY)
+
+        this.createKeyboardInput()
+        this.createTouchInput(this.quiz)
         this.newQuiz()
     }
 
@@ -123,46 +121,7 @@ export default class SpellingSpinScene extends EnglishGame
         return letters
     }
 
-    createKeyboardInputOLD(){
-        // let keysPairs = []
-
-        // keysPairs.push({
-        //     key: 'ESC',
-        //     func: () => {
-        //         console.log("Spelling Spin: Escape pressed")
-        //         this.pause()
-        //     }
-        // })
-        // keysPairs.push({
-        //     key: 'BACKSPACE',
-        //     func: () => {
-        //         console.log("Spelling Spin: Backspace pressed")
-        //         this.removeLetter()
-        //     }
-        // })
-
-        // function addPair(name, code, char){
-        //     console.log(`Spelling Spin: Adding Character '${name}', code '${code}'. Char '${char}'`)
-        //     return {
-        //         key: code,
-        //         func: ()=>{
-        //             console.log(`Spelling Spin: ${name} down.`);
-        //             this.checkLetter(char)
-        //         }
-        //     }
-        // }
-
-        // for(let k of KEY_PAIRS){
-        //     keysPairs.push(addPair(k.name, k.code, k.char))
-        // }
-        // for(let letter of ALPHABET){
-        //     keysPairs.push(addPair(letter, letter, letter))
-        // }
-
-
-        // // @ts-ignore
-        // this.createKeyboardInput(keysPairs)
-
+    createKeyboardInput(){
         this.input.keyboard.removeAllKeys()
         let keys = {}
         keys.enter = this.input.keyboard.addKey('ENTER')
@@ -394,12 +353,6 @@ export default class SpellingSpinScene extends EnglishGame
         })
     }
 
-    replaceAt(str, index, replace){
-        let arr = Array.from(str)
-        arr[index] = replace
-        return arr.join('')
-    }
-
     checkReadyToAnswer(letter, i){
         this.quiz.playerAnswer += letter.text
         
@@ -426,13 +379,6 @@ export default class SpellingSpinScene extends EnglishGame
             (quizObj.x - ansObj.x) / moveTime,
             (quizObj.y - ansObj.y) / moveTime
         )
-    }
-
-    isClose(obj1, obj2){
-        let x = obj1.x - obj2.x
-        let y = obj1.y - obj2.y
-        let sqrDist = x * x + y * y
-        return sqrDist < 0.1
     }
 
     checkAnswer(){

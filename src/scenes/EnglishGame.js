@@ -87,6 +87,7 @@ export default class EnglishGame extends Phaser.Scene{
         this.livesText = this.createLivesText()
         this.lostLife = false
         this.createSounds()
+
     }
 
     update(){
@@ -147,18 +148,13 @@ export default class EnglishGame extends Phaser.Scene{
     }
 
 
-    // /**
-    //  * @param {[
-    //  * {key: string | number | Phaser.Input.Keyboard.Key,
-    //  * func: () => void}
-    //  * ]} keyFuncDict
-    //  */
-    // createKeyboardInput(keyFuncDict){
-    //     this.input.keyboard.removeAllKeys()
-    //     for(let pair of keyFuncDict){
-    //         this.input.keyboard.addKey(pair.key).on('down', pair.func)
-    //     }
-    // }
+    createKeyboardInput(){
+        throw new Error('Abstract Method not implemented.')
+    }
+
+    createTouchInput(quizObj){
+        throw new Error('Abstract Method not implemented.')
+    }
 
     //#endregion
 
@@ -183,17 +179,31 @@ export default class EnglishGame extends Phaser.Scene{
         return Math.floor(Math.random() * max);
     }
 
+    replaceAt(str, index, replace){
+        let arr = Array.from(str)
+        arr[index] = replace
+        return arr.join('')
+    }
+
     shuffle(array){
-        let currentIndex = array.length, temp, randomIndex;
+        let shuffledArray = [...array]
+        let currentIndex = shuffledArray.length, temp, randomIndex;
         while (0 !== currentIndex){
             randomIndex = this.randIndex(currentIndex);
             currentIndex -= 1;
     
-            temp = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temp;
+            temp = shuffledArray[currentIndex];
+            shuffledArray[currentIndex] = shuffledArray[randomIndex];
+            shuffledArray[randomIndex] = temp;
         }
-        return array;
+        return shuffledArray;
+    }
+
+    calcVelocity(obj1, obj2, moveTime){
+        return { 
+            x: (obj1.x - obj2.x) / moveTime,
+            y: (obj1.y - obj2.y) / moveTime
+        }
     }
 
     pause(){
@@ -289,10 +299,13 @@ export default class EnglishGame extends Phaser.Scene{
         quiz.body.setVelocity(Math.random()* amp - amp/2, -Math.random()* amp)
         // @ts-ignore
         quiz.body.setAllowGravity(true)
-        // @ts-ignore
-        ans.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
-        // @ts-ignore
-        ans.body.setAllowGravity(true)
+        
+        if(ans){
+            // @ts-ignore
+            ans.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
+            // @ts-ignore
+            ans.body.setAllowGravity(true)
+        }
 
         this.wrongSound.play()
 
@@ -353,6 +366,11 @@ export default class EnglishGame extends Phaser.Scene{
         return this.lives < 0
     }
 
-
+    isClose(obj1, obj2){
+        let x = obj1.x - obj2.x
+        let y = obj1.y - obj2.y
+        let sqrDist = x * x + y * y
+        return sqrDist < 0.1
+    }
     
 }
