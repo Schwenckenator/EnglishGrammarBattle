@@ -45,10 +45,11 @@ export default class GrammarFallsScene extends EnglishGame
         this.gameData = this.cache.json.get('sentences')
         
         this.quiz = {
-            sentence: this.createQuizSentence(),
+            sentence: this.createQuizSentence(FONT_MED),
             answers: this.createAnswers(),
             correctIndex: -1, // Don't know yet
-            correctAnswer: ""
+            correctAnswer: "",
+            correctAnswerText: this.createCorrectAnswerText(FONT_MED)
         }
 
         let uiY = Y_MAX - 150 / 2
@@ -79,11 +80,7 @@ export default class GrammarFallsScene extends EnglishGame
 
     //#region Creator Methods
 
-    createQuizSentence(){
-        let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: FONT_MED}).setOrigin(0.5)
-        this.physics.world.enable(text, 0)
-        return text
-    }
+
     createAnswers() {
         const numAnswers = 4
         let answers = []

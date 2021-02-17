@@ -62,9 +62,10 @@ export default class SpellingSpinScene extends EnglishGame
 
 
         this.quiz = {
-            sentence: this.createQuizSentence(),
+            sentence: this.createQuizSentence(FONT_BIG),
             answerText: this.createAnswerText(),
             correctAnswer: "",
+            correctAnswerText: this.createCorrectAnswerText(FONT_BIG),
             remainingLetters: "",
             answerIndices: [],
             playerAnswer: "",
@@ -92,12 +93,6 @@ export default class SpellingSpinScene extends EnglishGame
 
 
     //#region Creator Methods
-
-    createQuizSentence(){
-        let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: FONT_BIG}).setOrigin(0.5)
-        this.physics.world.enable(text, 0)
-        return text
-    }
     createAnswerText(){
         let text = this.add.text(ANSWER_POS.x, ANSWER_POS.y, `Text`, {font: FONT_BIG}).setOrigin(0.5)
         this.physics.world.enable(text, 0)

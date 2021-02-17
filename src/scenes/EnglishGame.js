@@ -148,6 +148,25 @@ export default class EnglishGame extends Phaser.Scene{
         this.wrongSound = this.sound.add(WRONG_SOUND_KEY, {loop: false})
     }
 
+    /**
+     * @param {string} font
+     */
+    createQuizSentence(font){
+        let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: font}).setOrigin(0.5)
+        this.physics.world.enable(text, 0)
+        return text
+    }
+
+    /**
+     * @param {string} font
+     */
+    createCorrectAnswerText(font){
+        let text = this.add.text(X_CENTRE, 240, 'Answer!', {font: font}).setOrigin(0.5)
+        this.physics.world.enable(text, 0)
+        text.setVisible(false)
+        return text
+    }
+
 
     createKeyboardInput(){
         throw new Error('Abstract Method not implemented.')
@@ -297,13 +316,13 @@ export default class EnglishGame extends Phaser.Scene{
     wrongAnswer(quiz, ans){
         let amp = 30
         // @ts-ignore
-        quiz.body.setVelocity(Math.random()* amp - amp/2, -Math.random()* amp)
+        quiz.body.setVelocity(this.randomDir(amp), -Math.random()* amp)
         // @ts-ignore
         quiz.body.setAllowGravity(true)
         
         if(ans){
             // @ts-ignore
-            ans.body.setVelocity(Math.random() * amp - amp/2, -Math.random()* amp)
+            ans.body.setVelocity(this.randomDir(amp), -Math.random()* amp)
             // @ts-ignore
             ans.body.setAllowGravity(true)
         }
@@ -311,6 +330,11 @@ export default class EnglishGame extends Phaser.Scene{
         this.wrongSound.play()
 
         this.shakeCamera(150, new Phaser.Math.Vector2 (0.01, 0.01))
+    }
+
+    // Returns a random number 1/2 pos/neg of amp
+    randomDir(amp){
+        return Math.random()* amp - amp/2
     }
 
     loseLife(){
@@ -325,15 +349,15 @@ export default class EnglishGame extends Phaser.Scene{
         }else {
             SFXManager.stopAlert()
         }
-
-        this.displayCorrectAnswer(this.quiz.sentence)
         
         this.endQuestion()
+
+        this.displayCorrectAnswer(this.quiz.correctAnswerText)
 
         if(this.checkForGameOver()){
             this.explodeGameOver()
             
-            this.time.delayedCall(2500, () => {
+            this.time.delayedCall(3500, () => {
                 SFXManager.stopAlert()
                 this.scene.start('Game-Over-Screen', { gameKey: this.thisGame, level: this.level, score: this.score })
             }, null, this)
@@ -356,11 +380,29 @@ export default class EnglishGame extends Phaser.Scene{
      * @param {Phaser.GameObjects.Text} obj
      */
     displayCorrectAnswer(obj){
-        obj.text = 
+        let velocity = 500
+        let xVelocityMax = 50
+
+        obj.setVisible(true)
+
+        let sen = this.quiz.sentence
+        obj.setPosition(sen.x, sen.y)
+        // @ts-ignore
+        obj.body.setAllowGravity(true)
+        obj.text = this.quiz.correctAnswer
+        // @ts-ignore
+        obj.body.setVelocity(this.randomDir(xVelocityMax), -velocity)
+
+        this.time.delayedCall(3500, () => {
+            // @ts-ignore
+            obj.body.setAllowGravity(false)
+            // @ts-ignore
+            obj.body.setVelocity(false)
+        })
     }
 
-    next() {
-        this.time.delayedCall(250, this.newQuiz, null, this)
+    next(delay = 250) {
+        this.time.delayedCall(delay, this.newQuiz, null, this)
     }
     
     resetSway(){
