@@ -23,7 +23,8 @@ const ANSWER_POS = {x: X_CENTRE, y:500}
 const BOTTOM_Y = 500
 
 const ALPHABET = [
-    'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+    'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+    'a', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
 ]
 
 const LETTER_USED_CHAR = '*'
@@ -62,9 +63,10 @@ export default class SpellingSpinScene extends EnglishGame
 
 
         this.quiz = {
-            sentence: this.createQuizSentence(),
+            sentence: this.createQuizSentence(FONT_BIG),
             answerText: this.createAnswerText(),
-            answer: "",
+            correctAnswer: "",
+            correctAnswerText: this.createCorrectAnswerText(FONT_BIG),
             remainingLetters: "",
             answerIndices: [],
             playerAnswer: "",
@@ -92,12 +94,6 @@ export default class SpellingSpinScene extends EnglishGame
 
 
     //#region Creator Methods
-
-    createQuizSentence(){
-        let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: FONT_BIG}).setOrigin(0.5)
-        this.physics.world.enable(text, 0)
-        return text
-    }
     createAnswerText(){
         let text = this.add.text(ANSWER_POS.x, ANSWER_POS.y, `Text`, {font: FONT_BIG}).setOrigin(0.5)
         this.physics.world.enable(text, 0)
@@ -163,7 +159,7 @@ export default class SpellingSpinScene extends EnglishGame
      * @param {string} letter
      */
     keyboardAddLetter(letter){
-        this.keyboardAddPair(letter, letter, letter)
+        this.keyboardAddPair(letter.toUpperCase(), letter, letter)
     }
 
     keyboardAddPair(code, name, char){
@@ -217,9 +213,12 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.text = ""
         this.quiz.answerText.setVisible(false)
         this.quiz.answerText.setPosition(ANSWER_POS.x, ANSWER_POS.y)
-        this.quiz.answer = q.english
+
+        let isUpperCase = Math.random() > 0.5
+
+        this.quiz.correctAnswer = this.case(q.english, isUpperCase)
         this.quiz.answerIndices = []
-        let obj = this.getLetters(q)
+        let obj = this.getLetters(q, isUpperCase)
         let ls = obj.letters
         this.quiz.remainingLetters = ls.join('')
         this.quiz.indices = obj.indices
@@ -260,6 +259,14 @@ export default class SpellingSpinScene extends EnglishGame
 
         this.resetSway()
         this.lostLife = false
+    }
+
+    case(str, isUpperCase){
+        if(isUpperCase){
+            return str.toUpperCase()
+        }else{
+            return str.toLowerCase()
+        }
     }
 
     calculateLetterPosition(index, length){
@@ -334,7 +341,7 @@ export default class SpellingSpinScene extends EnglishGame
         // put the answer back below the line, and make it selectable again.
         let moveTime = .25
 
-        let newPos = this.calculateLetterPosition(index, this.quiz.answer.length)
+        let newPos = this.calculateLetterPosition(index, this.quiz.correctAnswer.length)
 
         // Make letter object visible
         this.quiz.letters[index].setVisible(true)
@@ -357,14 +364,14 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.playerAnswer += letter.text
         
         this.quiz.answerIndices.push(i)
-        console.log(`Checking if ready to Answer!\nPlayer answer has '${this.quiz.playerAnswer.length}', answer has '${this.quiz.answer.length}'.`)
+        console.log(`Checking if ready to Answer!\nPlayer answer has '${this.quiz.playerAnswer.length}', answer has '${this.quiz.correctAnswer.length}'.`)
         //If all letters are in prep zone, fire word!
         letter.body.setVelocity(0)
         letter.setVisible(false)
         this.quiz.answerText.setVisible(true)
         this.quiz.answerText.text += letter.text
 
-        if(this.quiz.playerAnswer.length === this.quiz.answer.length){
+        if(this.quiz.playerAnswer.length === this.quiz.correctAnswer.length){
             //Shoot answer
             this.isAnswerSelected = true
             // @ts-ignore
@@ -382,7 +389,7 @@ export default class SpellingSpinScene extends EnglishGame
     }
 
     checkAnswer(){
-        let answer = this.quiz.answer
+        let answer = this.quiz.correctAnswer
         let playerAnswer = this.quiz.playerAnswer.replace(/_/g, ' ')
 
         console.log(`Answer = '${answer}'\nPlayers answer = '${playerAnswer}'.\nCorrect? ${playerAnswer === answer}`)
@@ -423,7 +430,7 @@ export default class SpellingSpinScene extends EnglishGame
         return q.japanese
     }
 
-    getLetters(q){
+    getLetters(q, isUpperCase){
         let indices = []
         for(let i=0; i<q.english.length; i++){
             indices.push(i)
@@ -435,7 +442,7 @@ export default class SpellingSpinScene extends EnglishGame
                 letters.push(SPACE_REPLACEMENT)
                 continue
             }
-            letters.push(q.english[indices[i]])
+            letters.push(this.case(q.english[indices[i]], isUpperCase))
         }
 
         return {letters, indices}

@@ -14,8 +14,6 @@ const ANSWER_POS = {x: X_CENTRE, y:500}
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
 
-const BLANK = '____'
-
 const DATA_KEY = 'DATA'
 const UI_KEY = 'UI'
 
@@ -45,9 +43,10 @@ export default class WordScrambleScene extends EnglishGame{
         this.gameData = this.cache.json.get(DATA_KEY)
 
         this.quiz = {
-            sentence: this.createQuizSentence(),
+            sentence: this.createQuizSentence(FONT_MED),
             currentText: "",
             correctAnswer: "",
+            correctAnswerText: this.createCorrectAnswerText(FONT_MED),
             indicesInAnswer: [],
             isWordUsed: [],
             words: this.createWords()
@@ -73,14 +72,6 @@ export default class WordScrambleScene extends EnglishGame{
     }
 
     //#region Creator Methods
-
-    createQuizSentence() {
-        let text = this.add.text(X_CENTRE, 240, 'BOO!', {font: FONT_MED}).setOrigin(0.5)
-        this.physics.world.enable(text, 0)
-        // @ts-ignore
-        text.body.setAllowGravity(false)
-        return text
-    }
     createAnswerText() {
         let text = this.add.text(ANSWER_POS.x, ANSWER_POS.y, `Text`, {font: FONT_MED}).setOrigin(0.5)
         this.physics.world.enable(text, 0)
@@ -252,7 +243,7 @@ export default class WordScrambleScene extends EnglishGame{
             console.log(`Checking ${words[i]}`)
             if(clozeWords.includes(words[i])){
                 console.log(`It includes ${words[i]}!`)
-                words[i] = BLANK
+                words[i] = this.BLANK
             }
         }
 
@@ -311,7 +302,7 @@ export default class WordScrambleScene extends EnglishGame{
         let lastWordObj = this.quiz.words[lastIndex]
 
         let sentence = this.quiz.sentence
-        sentence.text = sentence.text.replace(lastWordObj.text, BLANK)
+        sentence.text = sentence.text.replace(lastWordObj.text, this.BLANK)
 
         lastWordObj.setVisible(true)
         lastWordObj.setPosition(sentence.x, sentence.y)
@@ -342,7 +333,7 @@ export default class WordScrambleScene extends EnglishGame{
 
         let currentStr = this.quiz.sentence.text
 
-        currentStr = currentStr.replace(BLANK, word.text)
+        currentStr = currentStr.replace(this.BLANK, word.text)
 
         this.quiz.sentence.text = currentStr
 
@@ -353,7 +344,7 @@ export default class WordScrambleScene extends EnglishGame{
 
     isReadyToAnswer(){
         console.log('Is ready to Answer?')
-        return !this.quiz.sentence.text.includes(BLANK)
+        return !this.quiz.sentence.text.includes(this.BLANK)
     }
 
     checkAnswer(){
