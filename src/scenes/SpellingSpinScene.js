@@ -23,7 +23,8 @@ const ANSWER_POS = {x: X_CENTRE, y:500}
 const BOTTOM_Y = 500
 
 const ALPHABET = [
-    'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+    'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+    'a', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
 ]
 
 const LETTER_USED_CHAR = '*'
@@ -158,7 +159,7 @@ export default class SpellingSpinScene extends EnglishGame
      * @param {string} letter
      */
     keyboardAddLetter(letter){
-        this.keyboardAddPair(letter, letter, letter)
+        this.keyboardAddPair(letter.toUpperCase(), letter, letter)
     }
 
     keyboardAddPair(code, name, char){
@@ -212,9 +213,12 @@ export default class SpellingSpinScene extends EnglishGame
         this.quiz.answerText.text = ""
         this.quiz.answerText.setVisible(false)
         this.quiz.answerText.setPosition(ANSWER_POS.x, ANSWER_POS.y)
-        this.quiz.correctAnswer = q.english
+
+        let isUpperCase = Math.random() > 0.5
+
+        this.quiz.correctAnswer = this.case(q.english, isUpperCase)
         this.quiz.answerIndices = []
-        let obj = this.getLetters(q)
+        let obj = this.getLetters(q, isUpperCase)
         let ls = obj.letters
         this.quiz.remainingLetters = ls.join('')
         this.quiz.indices = obj.indices
@@ -255,6 +259,14 @@ export default class SpellingSpinScene extends EnglishGame
 
         this.resetSway()
         this.lostLife = false
+    }
+
+    case(str, isUpperCase){
+        if(isUpperCase){
+            return str.toUpperCase()
+        }else{
+            return str.toLowerCase()
+        }
     }
 
     calculateLetterPosition(index, length){
@@ -418,7 +430,7 @@ export default class SpellingSpinScene extends EnglishGame
         return q.japanese
     }
 
-    getLetters(q){
+    getLetters(q, isUpperCase){
         let indices = []
         for(let i=0; i<q.english.length; i++){
             indices.push(i)
@@ -430,7 +442,7 @@ export default class SpellingSpinScene extends EnglishGame
                 letters.push(SPACE_REPLACEMENT)
                 continue
             }
-            letters.push(q.english[indices[i]])
+            letters.push(this.case(q.english[indices[i]], isUpperCase))
         }
 
         return {letters, indices}
