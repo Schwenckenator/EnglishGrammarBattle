@@ -1,3 +1,5 @@
+import VolumeManager from "./VolumeManager"
+
 const SFX_HOVER_KEY = 'sfxHover'
 const SFX_SELECT_KEY = 'sfxSelect'
 const SFX_RETURN_KEY = 'sfxReturn'
@@ -48,25 +50,25 @@ class SFXManager {
     }
 
     playHover(){
-        this.UI_hover.play()
+        this.UI_hover.play(VolumeManager.volume)
     }
     playSelect(){
-        this.UI_select.play()
+        this.UI_select.play(VolumeManager.volume)
     }
     playReturn(){
-        this.UI_return.play()
+        this.UI_return.play(VolumeManager.volume)
     }
     playBeep(){
-        this.GAME_beep.play()
+        this.GAME_beep.play(VolumeManager.volume)
     }
     playTone(){
-        this.GAME_tone.play()
+        this.GAME_tone.play(VolumeManager.volume)
     }
     playAlert(){
-        this.GAME_alert.play()
+        this.GAME_alert.play(VolumeManager.volume)
     }
     stopAlert(){
-        this.GAME_alert.stop()
+        this.GAME_alert.stop(VolumeManager.volume)
     }
 }
 
