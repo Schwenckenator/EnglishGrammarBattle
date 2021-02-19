@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import Game from '../main'
 import MusicManager from '../classes/MusicManager';
 import SFXManager from '../classes/SFXManager';
+import VolumeManager from '../classes/VolumeManager';
 
 const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
@@ -48,6 +49,8 @@ export default class PauseScreen extends Phaser.Scene
 
         this.selected = 0
         this.selBox = this.createBox()
+
+        VolumeManager.addSlider(this)
 
         this.createTouchInput(this.menus)
     }

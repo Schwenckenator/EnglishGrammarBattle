@@ -50,25 +50,25 @@ class SFXManager {
     }
 
     playHover(){
-        this.UI_hover.play(VolumeManager.volume)
+        this.UI_hover.play()
     }
     playSelect(){
-        this.UI_select.play(VolumeManager.volume)
+        this.UI_select.play()
     }
     playReturn(){
-        this.UI_return.play(VolumeManager.volume)
+        this.UI_return.play()
     }
     playBeep(){
-        this.GAME_beep.play(VolumeManager.volume)
+        this.GAME_beep.play()
     }
     playTone(){
-        this.GAME_tone.play(VolumeManager.volume)
+        this.GAME_tone.play()
     }
     playAlert(){
-        this.GAME_alert.play(VolumeManager.volume)
+        this.GAME_alert.play()
     }
     stopAlert(){
-        this.GAME_alert.stop(VolumeManager.volume)
+        this.GAME_alert.stop()
     }
 }
 

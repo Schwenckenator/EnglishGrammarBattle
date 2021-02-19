@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import MusicManager from '../classes/MusicManager'
 import SFXManager from '../classes/SFXManager'
+import VolumeManager from '../classes/VolumeManager'
 
 const SKY_KEY = 'sky'
 const EXP_KEY = 'exp'
@@ -89,6 +90,7 @@ export default class EnglishGame extends Phaser.Scene{
         this.lostLife = false
         this.createSounds()
 
+        //VolumeManager.addSlider(this)
     }
 
     update(){

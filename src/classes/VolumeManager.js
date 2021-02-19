@@ -16,26 +16,31 @@ class VolumeManager {
      * @param { Phaser.Scene } context
      */
     addSlider(context){
+
         console.log("Adding slider!")
         let xMax = 480
         let x = xMax - 20
         let y = 65
         let h = 100
 
+        let minY = y - h/2
+        let maxY = y + h/2
+
+        let circleY = maxY - 100 * this.volume
+
         let line = context.add.rectangle(x, y, 6, h)
         line.isFilled = true
         line.fillColor = 0xdddddd
         line.setOrigin(0.5)
         
-        let circle = context.add.circle(x, y, 10)
+        let circle = context.add.circle(x, circleY, 10)
         circle.isFilled = true
         circle.fillColor =0xeeeeee
         circle.setOrigin(0.5)
         circle.setInteractive()
 
         
-        let minY = y - h/2
-        let maxY = y + h/2
+
         
         // @ts-ignore
         context.input.setDraggable(circle)
@@ -49,8 +54,8 @@ class VolumeManager {
 
             circle.y = newY
             let vol = (maxY - circle.y) / 100
-            this.setVolume(vol)
-            console.log(this.volume)
+            context.sound.volume = vol
+            this.volume = vol
         })
 
 

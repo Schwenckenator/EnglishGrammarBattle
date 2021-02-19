@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import SFXManager from '../classes/SFXManager';
+import VolumeManager from '../classes/VolumeManager';
 
 const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
@@ -50,6 +51,8 @@ export default class GameOverScreen extends Phaser.Scene
 
         this.selected = 0
         this.selBox = this.createBox()
+
+        VolumeManager.addSlider(this)
 
         this.createTouchInput(this.menus)
     }

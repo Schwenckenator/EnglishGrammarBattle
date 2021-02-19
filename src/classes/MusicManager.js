@@ -1,3 +1,5 @@
+import VolumeManager from "./VolumeManager"
+
 class MusicManager {
     constructor() {
         this.music = undefined
@@ -19,7 +21,7 @@ class MusicManager {
 
         if(!this.hasStarted){
             this.hasStarted = true
-            this.music.play()
+            this.music.play({volume: VolumeManager.volume})
         }else{
             this.music.resume()
         }
