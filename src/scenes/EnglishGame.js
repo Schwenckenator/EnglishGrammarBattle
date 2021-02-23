@@ -306,7 +306,7 @@ export default class EnglishGame extends Phaser.Scene{
 
         if(this.checkForNextLevel()){
             this.time.delayedCall(500, () => {
-                    this.scene.start('Next-Level-Screen', { gameKey: this.thisGame, score: this.score, level: this.level })
+                    this.scene.start('Next-Level-Screen', { gameKey: this.thisGame, score: this.score, level: this.level, lives: this.lives })
                 }, null, this)
         }else{
             this.next()
@@ -416,7 +416,7 @@ export default class EnglishGame extends Phaser.Scene{
 
     checkForGameOver(){
         console.log("Checking for game over")
-        return this.lives < 0
+        return this.lives < 0 //|| this.lives == undefined
     }
 
     isClose(obj1, obj2){
