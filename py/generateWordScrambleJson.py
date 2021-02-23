@@ -100,7 +100,7 @@ def OrganiseData(data):
         # if len(row) < 9:
         #     break
 
-        q = Quiz(row[0], row[1])
+        q = Quiz(row[1], row[2])
         quizzes.append(q)
 
     for cat in categories:
@@ -144,7 +144,7 @@ def writeJson(data):
 
         string += tab*2 + '}'
 
-        string = string.replace('____', quiz.correct)
+        string = string.replace('_____', quiz.correct)
 
         quizzes.append(string)
 

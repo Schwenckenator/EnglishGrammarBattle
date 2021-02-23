@@ -35,7 +35,7 @@ export default class EnglishGame extends Phaser.Scene{
         super(THIS_GAME)
         this.thisGame = THIS_GAME
         this.bottomY = BOTTOM_Y
-        this.BLANK = '____'
+        this.BLANK = '_____'
         this.gameData = undefined
     
         this.explosion = undefined

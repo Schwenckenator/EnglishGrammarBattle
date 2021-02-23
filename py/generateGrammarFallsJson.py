@@ -101,7 +101,7 @@ def OrganiseData(data):
         # if len(row) < 9:
         #     break
 
-        q = Quiz(row[0], row[1], row[2:5])
+        q = Quiz(row[1], row[2], row[3:6])
         quizzes.append(q)
 
     for cat in categories:

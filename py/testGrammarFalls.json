@@ -1,0 +1,1348 @@
+{
+    "sentences":[
+        {
+            "text":             "What _____ do you like?",
+            "correctAnswer":    "%N_CATEGORY%",
+            "wrongAnswer":[     "%VERBING%",
+                                "%ADV%",
+                                "%VERBED%"
+            ]
+        },
+        {
+            "text":             "%NAME%’s %N_PARENT% comes home around seven every _____.",
+            "correctAnswer":    "night",
+            "wrongAnswer":[     "noon",
+                                "hour",
+                                "today"
+            ]
+        },
+        {
+            "text":             "Do you have _____ pets?",
+            "correctAnswer":    "any",
+            "wrongAnswer":[     "all",
+                                "each",
+                                "very"
+            ]
+        },
+        {
+            "text":             "Does %NAME% like _____?",
+            "correctAnswer":    "music",
+            "wrongAnswer":[     "%VERBS%",
+                                "%ADV%",
+                                "%VERBED%"
+            ]
+        },
+        {
+            "text":             "What do you _____ at lunch, tea or coffee?",
+            "correctAnswer":    "drink",
+            "wrongAnswer":[     "tell",
+                                "eat",
+                                "work"
+            ]
+        },
+        {
+            "text":             "September is the _____ month of the year.",
+            "correctAnswer":    "ninth",
+            "wrongAnswer":[     "tenth",
+                                "eleventh",
+                                "twelfth"
+            ]
+        },
+        {
+            "text":             "%NAME%, here’s a letter _____ %NAME%.",
+            "correctAnswer":    "from",
+            "wrongAnswer":[     "in",
+                                "at",
+                                "before"
+            ]
+        },
+        {
+            "text":             "We play baseball _____ school every day.",
+            "correctAnswer":    "after",
+            "wrongAnswer":[     "over",
+                                "on",
+                                "use"
+            ]
+        },
+        {
+            "text":             "Let’s _____ shopping at the new department store tomorrow.",
+            "correctAnswer":    "go",
+            "wrongAnswer":[     "have",
+                                "walk",
+                                "use"
+            ]
+        },
+        {
+            "text":             "He’s sleeping in _____.",
+            "correctAnswer":    "bed",
+            "wrongAnswer":[     "day",
+                                "year",
+                                "night"
+            ]
+        },
+        {
+            "text":             "I want a _____ of %N_DRINK%, please, %N_PARENT_CALL%.",
+            "correctAnswer":    "cup",
+            "wrongAnswer":[     "coin",
+                                "camera",
+                                "mouth"
+            ]
+        },
+        {
+            "text":             "%NAME%’s father reads the newspaper _____ the morning.",
+            "correctAnswer":    "in",
+            "wrongAnswer":[     "on",
+                                "to",
+                                "of"
+            ]
+        },
+        {
+            "text":             "%NAME% has one sister. ____ is in the fifth grade.",
+            "correctAnswer":    "she",
+            "wrongAnswer":[     "you",
+                                "we",
+                                "they"
+            ]
+        },
+        {
+            "text":             "This video camera is very nice. _____ is it?",
+            "correctAnswer":    "Whose",
+            "wrongAnswer":[     "when",
+                                "how",
+                                "where"
+            ]
+        },
+        {
+            "text":             "Where are _____ new tennis shoes, %N_PARENT_CALL%?",
+            "correctAnswer":    "my",
+            "wrongAnswer":[     "I",
+                                "me",
+                                "mine"
+            ]
+        },
+        {
+            "text":             "Do you want milk or apple juice? _____.",
+            "correctAnswer":    "Milk, please.",
+            "wrongAnswer":[     "Yes, it is.",
+                                "Goodbye.",
+                                "Yes, I like it."
+            ]
+        },
+        {
+            "text":             "What time is the next bus? _____.",
+            "correctAnswer":    "Ten o’clock",
+            "wrongAnswer":[     "For two hours.",
+                                "That’s OK.",
+                                "Yes, we are."
+            ]
+        },
+        {
+            "text":             "Do you _____ this song, %NAME%?",
+            "correctAnswer":    "know",
+            "wrongAnswer":[     "stay",
+                                "writes",
+                                "sit"
+            ]
+        },
+        {
+            "text":             "%NAME% sometimes _____ dinner for her family.",
+            "correctAnswer":    "cooks",
+            "wrongAnswer":[     "live",
+                                "walks",
+                                "drinks"
+            ]
+        },
+        {
+            "text":             "I’m _____ I’m late, %NAME_HON%.",
+            "correctAnswer":    "sorry",
+            "wrongAnswer":[     "fine",
+                                "great",
+                                "nice"
+            ]
+        },
+        {
+            "text":             "It’s too cold, %NAME%. Please _____ the window.",
+            "correctAnswer":    "close",
+            "wrongAnswer":[     "meet",
+                                "have",
+                                "see"
+            ]
+        },
+        {
+            "text":             "I have three children, two sons and one _____.",
+            "correctAnswer":    "daughter",
+            "wrongAnswer":[     "mother",
+                                "brother",
+                                "sister"
+            ]
+        },
+        {
+            "text":             "_____ is the first month of the year.",
+            "correctAnswer":    "January",
+            "wrongAnswer":[     "February",
+                                "March",
+                                "April"
+            ]
+        },
+        {
+            "text":             "%NAME%, come on! It’s _____ for dinner.",
+            "correctAnswer":    "time",
+            "wrongAnswer":[     "day",
+                                "noon",
+                                "hour"
+            ]
+        },
+        {
+            "text":             "_____ many CDs do you have, %NAME%?",
+            "correctAnswer":    "How",
+            "wrongAnswer":[     "Do",
+                                "What",
+                                "Why"
+            ]
+        },
+        {
+            "text":             "Let’s _____ shopping at the department store, %NAME%.",
+            "correctAnswer":    "go",
+            "wrongAnswer":[     "have",
+                                "walk",
+                                "speak"
+            ]
+        },
+        {
+            "text":             "I always _____ to music on the bus.",
+            "correctAnswer":    "listen",
+            "wrongAnswer":[     "know",
+                                "open",
+                                "make"
+            ]
+        },
+        {
+            "text":             "My sister plays computer games every _____.",
+            "correctAnswer":    "night",
+            "wrongAnswer":[     "friend",
+                                "TV",
+                                "hand"
+            ]
+        },
+        {
+            "text":             "_____ at that cat. It’s really cute.",
+            "correctAnswer":    "look",
+            "wrongAnswer":[     "see",
+                                "watch",
+                                "say"
+            ]
+        },
+        {
+            "text":             "_____ %NAME_HON% teach math?",
+            "correctAnswer":    "does",
+            "wrongAnswer":[     "do",
+                                "am",
+                                "are"
+            ]
+        },
+        {
+            "text":             "I have three dogs. I like _____ very much.",
+            "correctAnswer":    "them",
+            "wrongAnswer":[     "they",
+                                "their",
+                                "theirs"
+            ]
+        },
+        {
+            "text":             "My mother plays the piano very _____.",
+            "correctAnswer":    "well",
+            "wrongAnswer":[     "large",
+                                "many",
+                                "big"
+            ]
+        },
+        {
+            "text":             "She lives _____ Hokkaido.",
+            "correctAnswer":    "in",
+            "wrongAnswer":[     "for",
+                                "of",
+                                "after"
+            ]
+        },
+        {
+            "text":             "_____ is the ninth month of the year.",
+            "correctAnswer":    "September",
+            "wrongAnswer":[     "August",
+                                "October",
+                                "November"
+            ]
+        },
+        {
+            "text":             "Our school’s baseball _____ is tomorrow morning.",
+            "correctAnswer":    "game",
+            "wrongAnswer":[     "park",
+                                "name",
+                                "face"
+            ]
+        },
+        {
+            "text":             "Her _____ is really long.",
+            "correctAnswer":    "hair",
+            "wrongAnswer":[     "coin",
+                                "dance",
+                                "diary"
+            ]
+        },
+        {
+            "text":             "I _____ two dogs.",
+            "correctAnswer":    "have",
+            "wrongAnswer":[     "meet",
+                                "come",
+                                "think"
+            ]
+        },
+        {
+            "text":             "Do you often write _____ to your grandmother, %NAME%?",
+            "correctAnswer":    "letters",
+            "wrongAnswer":[     "pens",
+                                "games",
+                                "rooms"
+            ]
+        },
+        {
+            "text":             "%NAME%, get _____! It’s eight o’clock.",
+            "correctAnswer":    "up",
+            "wrongAnswer":[     "under",
+                                "of",
+                                "today"
+            ]
+        },
+        {
+            "text":             "My name is %NAME%. I’m _____ %N_COUNTRY%.",
+            "correctAnswer":    "from",
+            "wrongAnswer":[     "with",
+                                "before",
+                                "about"
+            ]
+        },
+        {
+            "text":             "%NAME% has a _____ of postcards.",
+            "correctAnswer":    "lot",
+            "wrongAnswer":[     "much",
+                                "too",
+                                "high"
+            ]
+        },
+        {
+            "text":             "_____ is your birthday?",
+            "correctAnswer":    "when",
+            "wrongAnswer":[     "how",
+                                "who",
+                                "where"
+            ]
+        },
+        {
+            "text":             "I didn’t hear you. Can you _____ your question, please?",
+            "correctAnswer":    "repeat",
+            "wrongAnswer":[     "receive",
+                                "clean",
+                                "meet"
+            ]
+        },
+        {
+            "text":             "Excuse me. What time will this bus _____ at Tokyo Station?",
+            "correctAnswer":    "arrive",
+            "wrongAnswer":[     "tell",
+                                "become",
+                                "catch"
+            ]
+        },
+        {
+            "text":             "My favorite sport is volleyball. It’s really _____.",
+            "correctAnswer":    "fun",
+            "wrongAnswer":[     "soft",
+                                "dry",
+                                "sad"
+            ]
+        },
+        {
+            "text":             "Do you want _____ or jam on your toast?",
+            "correctAnswer":    "butter",
+            "wrongAnswer":[     "station",
+                                "spoon",
+                                "table"
+            ]
+        },
+        {
+            "text":             "Mrs. Mason is very _____. She has a lot of money and a big house.",
+            "correctAnswer":    "rich",
+            "wrongAnswer":[     "hungry",
+                                "same",
+                                "sleepy"
+            ]
+        },
+        {
+            "text":             "Ted, don’t be late _____ school again!",
+            "correctAnswer":    "for",
+            "wrongAnswer":[     "by",
+                                "of",
+                                "on"
+            ]
+        },
+        {
+            "text":             "She didn’t know anyone at first, but she soon _____ many new friends.",
+            "correctAnswer":    "made",
+            "wrongAnswer":[     "began",
+                                "said",
+                                "put"
+            ]
+        },
+        {
+            "text":             "I _____ send you a postcard.",
+            "correctAnswer":    "will",
+            "wrongAnswer":[     "are",
+                                "am",
+                                "do"
+            ]
+        },
+        {
+            "text":             "I like _____ movies on weekends.",
+            "correctAnswer":    "watching",
+            "wrongAnswer":[     "watch",
+                                "watched",
+                                "watches"
+            ]
+        },
+        {
+            "text":             "The Shinano River is the _____ in Japan.",
+            "correctAnswer":    "longest",
+            "wrongAnswer":[     "long",
+                                "longer",
+                                "too long"
+            ]
+        },
+        {
+            "text":             "Jane, _____ Can you go to my bedroom and get my glasses?",
+            "correctAnswer":    "I need your help.",
+            "wrongAnswer":[     "you did great.",
+                                "I heard the news.",
+                                "you're tired."
+            ]
+        },
+        {
+            "text":             "Yuji started writing to him two months _____.",
+            "correctAnswer":    "ago",
+            "wrongAnswer":[     "next",
+                                "soon",
+                                "well"
+            ]
+        },
+        {
+            "text":             "I’ll _____ at the station.",
+            "correctAnswer":    "wait",
+            "wrongAnswer":[     "forget",
+                                "hear",
+                                "end"
+            ]
+        },
+        {
+            "text":             "Excuse me. You _____ some money.",
+            "correctAnswer":    "dropped",
+            "wrongAnswer":[     "learned",
+                                "checked",
+                                "brushed"
+            ]
+        },
+        {
+            "text":             "At night, we can sit on the beach and see _____ in the sky.",
+            "correctAnswer":    "fireworks",
+            "wrongAnswer":[     "walls",
+                                "restauraunts",
+                                "calenders"
+            ]
+        },
+        {
+            "text":             "What _____ are you studying at school?",
+            "correctAnswer":    "language",
+            "wrongAnswer":[     "vacation",
+                                "team",
+                                "passport"
+            ]
+        },
+        {
+            "text":             "Dinner will be _____ soon.",
+            "correctAnswer":    "ready",
+            "wrongAnswer":[     "easy",
+                                "high",
+                                "clean"
+            ]
+        },
+        {
+            "text":             "We have a _____ library in our school.",
+            "correctAnswer":    "large",
+            "wrongAnswer":[     "cloudy",
+                                "soft",
+                                "last"
+            ]
+        },
+        {
+            "text":             "Eat your carrots. They’re good _____ you.",
+            "correctAnswer":    "for",
+            "wrongAnswer":[     "of",
+                                "up",
+                                "before"
+            ]
+        },
+        {
+            "text":             "My family and I went on a _____ to Kyoto.",
+            "correctAnswer":    "trip",
+            "wrongAnswer":[     "game",
+                                "report",
+                                "story"
+            ]
+        },
+        {
+            "text":             "I have a good _____. Let’s ride our bikes to the river.",
+            "correctAnswer":    "idea",
+            "wrongAnswer":[     "word",
+                                "lesson",
+                                "paper"
+            ]
+        },
+        {
+            "text":             "Bob really _____ like George.",
+            "correctAnswer":    "looks",
+            "wrongAnswer":[     "makes",
+                                "cleans",
+                                "stays"
+            ]
+        },
+        {
+            "text":             "It’s a beautiful day. Let’s _____ a walk this afternoon.",
+            "correctAnswer":    "take",
+            "wrongAnswer":[     "put",
+                                "know",
+                                "leave"
+            ]
+        },
+        {
+            "text":             "Please _____ quiet, Paul. Your grandmother is sleeping.",
+            "correctAnswer":    "be",
+            "wrongAnswer":[     "is",
+                                "am",
+                                "are"
+            ]
+        },
+        {
+            "text":             "_____ did you get up so early today, Ellie?",
+            "correctAnswer":    "why",
+            "wrongAnswer":[     "What",
+                                "When",
+                                "Where"
+            ]
+        },
+        {
+            "text":             "We went to the park for art class today. We _____ pictures there.",
+            "correctAnswer":    "drew",
+            "wrongAnswer":[     "to draw",
+                                "draws",
+                                "drawing"
+            ]
+        },
+        {
+            "text":             "Linda lives _____ her school, so she can walk there easily.",
+            "correctAnswer":    "near",
+            "wrongAnswer":[     "among",
+                                "down",
+                                "into"
+            ]
+        },
+        {
+            "text":             "I watch a cooking _____ on TV every Wednesday.",
+            "correctAnswer":    "program",
+            "wrongAnswer":[     "view",
+                                "road",
+                                "member"
+            ]
+        },
+        {
+            "text":             "Mr. Jones is a very _____singer.",
+            "correctAnswer":    "famous",
+            "wrongAnswer":[     "late",
+                                "rides",
+                                "stays"
+            ]
+        },
+        {
+            "text":             "Jason often goes fishing on the weekend and usually _____ lots of fish.",
+            "correctAnswer":    "catches",
+            "wrongAnswer":[     "asks",
+                                "rides",
+                                "stays"
+            ]
+        },
+        {
+            "text":             "I don’t like my hairstyle now, so I want to _____.",
+            "correctAnswer":    "change",
+            "wrongAnswer":[     "stop",
+                                "take",
+                                "write"
+            ]
+        },
+        {
+            "text":             "Where can I buy _____ for the concert?",
+            "correctAnswer":    "tickets",
+            "wrongAnswer":[     "books",
+                                "musicals",
+                                "pictures"
+            ]
+        },
+        {
+            "text":             "It’s snowing a lot today, so please drive _____.",
+            "correctAnswer":    "slowly",
+            "wrongAnswer":[     "freely",
+                                "coldly",
+                                "busily"
+            ]
+        },
+        {
+            "text":             "Grace, I was looking _____ you. Where were you?",
+            "correctAnswer":    "for",
+            "wrongAnswer":[     "of",
+                                "by",
+                                "from"
+            ]
+        },
+        {
+            "text":             "How _____ was the movie, Mickey? About two hours.",
+            "correctAnswer":    "long",
+            "wrongAnswer":[     "much",
+                                "old",
+                                "big"
+            ]
+        },
+        {
+            "text":             "I really want to _____ about your trip to Canada, Jenny.",
+            "correctAnswer":    "hear",
+            "wrongAnswer":[     "drink",
+                                "say",
+                                "look"
+            ]
+        },
+        {
+            "text":             "Brian, it’s late. Go to bed _____ once.",
+            "correctAnswer":    "at",
+            "wrongAnswer":[     "on",
+                                "in",
+                                "of"
+            ]
+        },
+        {
+            "text":             "How was the party, Mary? Did you _____ a good time?",
+            "correctAnswer":    "have",
+            "wrongAnswer":[     "play",
+                                "take",
+                                "talk"
+            ]
+        },
+        {
+            "text":             "When I got to the movie theater, it was already _____, so I went back home.",
+            "correctAnswer":    "full",
+            "wrongAnswer":[     "cloudy",
+                                "hungry",
+                                "useful"
+            ]
+        },
+        {
+            "text":             "Please play _____ in your room.",
+            "correctAnswer":    "quietly",
+            "wrongAnswer":[     "deeply",
+                                "cheaply",
+                                "luckily"
+            ]
+        },
+        {
+            "text":             "I need a _____ so I can send this letter to Emily.",
+            "correctAnswer":    "stamp",
+            "wrongAnswer":[     "circle",
+                                "gate",
+                                "sound"
+            ]
+        },
+        {
+            "text":             "Last week, the school band _____ in a concert at the city hall.",
+            "correctAnswer":    "performed",
+            "wrongAnswer":[     "invented",
+                                "protected",
+                                "imagined"
+            ]
+        },
+        {
+            "text":             "Jack went to bed late last night because he studied _____ 1:00 a.m.",
+            "correctAnswer":    "until",
+            "wrongAnswer":[     "along",
+                                "across",
+                                "during"
+            ]
+        },
+        {
+            "text":             "Now I can _____ and enjoy myself.",
+            "correctAnswer":    "relax",
+            "wrongAnswer":[     "happen",
+                                "cover",
+                                "hold"
+            ]
+        },
+        {
+            "text":             "My aunt loves traveling to foreign countries because she likes to learn about other _____.",
+            "correctAnswer":    "cultures",
+            "wrongAnswer":[     "couples",
+                                "chances",
+                                "ceilings"
+            ]
+        },
+        {
+            "text":             "No, I don’t like it at _____.",
+            "correctAnswer":    "all",
+            "wrongAnswer":[     "every",
+                                "each",
+                                "much"
+            ]
+        },
+        {
+            "text":             "My hometown is _____ for its lovely beaches and warm weather.",
+            "correctAnswer":    "famous",
+            "wrongAnswer":[     "smart",
+                                "ready",
+                                "interested"
+            ]
+        },
+        {
+            "text":             "Please _____ on the door before you come in, Daniel.",
+            "correctAnswer":    "knock",
+            "wrongAnswer":[     "cost",
+                                "prepare",
+                                "trick"
+            ]
+        },
+        {
+            "text":             "Would you like to leave a _____ for her?",
+            "correctAnswer":    "message",
+            "wrongAnswer":[     "minute",
+                                "voice",
+                                "business"
+            ]
+        },
+        {
+            "text":             "I bought him a _____ of jogging shoes.",
+            "correctAnswer":    "pair",
+            "wrongAnswer":[     "piece",
+                                "space",
+                                "time"
+            ]
+        },
+        {
+            "text":             "I have a friend _____ father is a TV star.",
+            "correctAnswer":    "whose",
+            "wrongAnswer":[     "which",
+                                "whom",
+                                "who"
+            ]
+        },
+        {
+            "text":             "Excuse me. _____ this bus go to the airport?",
+            "correctAnswer":    "does",
+            "wrongAnswer":[     "is",
+                                "are",
+                                "do"
+            ]
+        },
+        {
+            "text":             "Let’s _____ him a present.",
+            "correctAnswer":    "get",
+            "wrongAnswer":[     "gets",
+                                "to get",
+                                "getting"
+            ]
+        },
+        {
+            "text":             "He’s _____ his teeth in the bathroom.",
+            "correctAnswer":    "brushing",
+            "wrongAnswer":[     "inviting",
+                                "paying",
+                                "driving"
+            ]
+        },
+        {
+            "text":             "Did you hear about Tony’s car _____?",
+            "correctAnswer":    "accident",
+            "wrongAnswer":[     "package",
+                                "ceremony",
+                                "decoration"
+            ]
+        },
+        {
+            "text":             "Can you _____ me your dictionary?",
+            "correctAnswer":    "lend",
+            "wrongAnswer":[     "borrow",
+                                "break",
+                                "lose"
+            ]
+        },
+        {
+            "text":             "We’ll eat lunch now, and _____ the meeting in the afternoon.",
+            "correctAnswer":    "continue",
+            "wrongAnswer":[     "trick",
+                                "graduate",
+                                "serve"
+            ]
+        },
+        {
+            "text":             "I think fishing is _____.",
+            "correctAnswer":    "boring",
+            "wrongAnswer":[     "exciting",
+                                "enjoyable",
+                                "glad"
+            ]
+        },
+        {
+            "text":             "Some people _____ that there is a monster in that lake, but I don’t.",
+            "correctAnswer":    "believe",
+            "wrongAnswer":[     "touch",
+                                "reach",
+                                "shut"
+            ]
+        },
+        {
+            "text":             "This necklace is really beautiful, Alice. Did you make it by _____?",
+            "correctAnswer":    "yourself",
+            "wrongAnswer":[     "you",
+                                "your",
+                                "yours"
+            ]
+        },
+        {
+            "text":             "When Ellie and Pam have difficult homework, they often help _____ other.",
+            "correctAnswer":    "each",
+            "wrongAnswer":[     "every",
+                                "same",
+                                "some"
+            ]
+        },
+        {
+            "text":             "This jacket is a little big for me. Can I _____ on a smaller one?",
+            "correctAnswer":    "try",
+            "wrongAnswer":[     "hit",
+                                "make",
+                                "enter"
+            ]
+        },
+        {
+            "text":             "Susan and Nancy talked _____ the phone until 11:30 p.m. last night",
+            "correctAnswer":    "on",
+            "wrongAnswer":[     "for",
+                                "up",
+                                "in"
+            ]
+        },
+        {
+            "text":             "James, why _____ we go out for dinner tonight?",
+            "correctAnswer":    "don’t",
+            "wrongAnswer":[     "aren't",
+                                "haven't",
+                                "doesn't"
+            ]
+        },
+        {
+            "text":             "Kathy’s father bought a new car last month. It’s _____ bigger than the old one.",
+            "correctAnswer":    "much",
+            "wrongAnswer":[     "many",
+                                "very",
+                                "more"
+            ]
+        },
+        {
+            "text":             "The little dog fell into the river. Luckily, he was _____ by a policeman.",
+            "correctAnswer":    "saved",
+            "wrongAnswer":[     "save",
+                                "saves",
+                                "saving"
+            ]
+        },
+        {
+            "text":             "Satoshi, have you ever _____ a letter in English?",
+            "correctAnswer":    "written",
+            "wrongAnswer":[     "write",
+                                "wrote",
+                                "writing"
+            ]
+        },
+        {
+            "text":             "No, I _____. I have baseball practice.",
+            "correctAnswer":    "won’t",
+            "wrongAnswer":[     "will",
+                                "would",
+                                "could"
+            ]
+        },
+        {
+            "text":             "You can use my umbrella. I have _____ one.",
+            "correctAnswer":    "another",
+            "wrongAnswer":[     "other",
+                                "each",
+                                "much"
+            ]
+        },
+        {
+            "text":             "When people meet for the first time, they often _____ hands.",
+            "correctAnswer":    "shake",
+            "wrongAnswer":[     "call",
+                                "build",
+                                "invite"
+            ]
+        },
+        {
+            "text":             "I have to speak in front of the whole school this afternoon. I’m very _____.",
+            "correctAnswer":    "nervous",
+            "wrongAnswer":[     "close",
+                                "delicious",
+                                "narrow"
+            ]
+        },
+        {
+            "text":             "Are there any _____ at school this weekend, Jane?",
+            "correctAnswer":    "activities",
+            "wrongAnswer":[     "accidents",
+                                "alarms",
+                                "areas"
+            ]
+        },
+        {
+            "text":             "At last, I found it _____ some books on the floor.",
+            "correctAnswer":    "among",
+            "wrongAnswer":[     "asks",
+                                "during",
+                                "until"
+            ]
+        },
+        {
+            "text":             "If you win the art contest, you will _____ a prize.",
+            "correctAnswer":    "receive",
+            "wrongAnswer":[     "invite",
+                                "guess",
+                                "serve"
+            ]
+        },
+        {
+            "text":             "I _____ with you. Let’s come here again.",
+            "correctAnswer":    "agree",
+            "wrongAnswer":[     "think",
+                                "hurry",
+                                "share"
+            ]
+        },
+        {
+            "text":             "If you don’t clean it _____, I won’t take you to the movies.",
+            "correctAnswer":    "up",
+            "wrongAnswer":[     "on",
+                                "in",
+                                "over"
+            ]
+        },
+        {
+            "text":             "Please _____ down the radio.",
+            "correctAnswer":    "turn",
+            "wrongAnswer":[     "go",
+                                "make",
+                                "stand"
+            ]
+        },
+        {
+            "text":             "Can I have one more _____ of bread?",
+            "correctAnswer":    "slice",
+            "wrongAnswer":[     "pair",
+                                "page",
+                                "sheet"
+            ]
+        }
+    ],
+
+    "partsOfSpeech":[
+        {
+            "name": "adjective",
+            "keyword": "ADJ",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "adverb",
+            "keyword": "ADV",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "nounAnimalPlural",
+            "keyword": "N_ANIMALS",
+            "words":[
+                "pets"
+            ]
+        },
+        {
+            "name": "nounAnimalSingular",
+            "keyword": "N_ANIMAL",
+            "words":[
+                "animal",
+                "monkey",
+                "pet",
+                "rabbit"
+            ]
+        },
+        {
+            "name": "nounAnimatePlural",
+            "keyword": "NS_ANI",
+            "words":[
+                "%N_ANIMALS%"
+            ]
+        },
+        {
+            "name": "nounAnimateSingular",
+            "keyword": "N_ANI",
+            "words":[
+                "%N_ANIMAL%"
+            ]
+        },
+        {
+            "name": "nounClothing",
+            "keyword": "N_CLOTH",
+            "words":[
+                "cap",
+                "coat",
+                "jacket",
+                "shirt",
+                "shoes",
+                "skirt"
+            ]
+        },
+        {
+            "name": "nounFood",
+            "keyword": "N_FOOD",
+            "words":[
+                "%N_FRUIT%",
+                "bread",
+                "carrot",
+                "cookie",
+                "cooking",
+                "dessert",
+                "hamburger",
+                "meat",
+                "potato",
+                "pumpkin",
+                "rice"
+            ]
+        },
+        {
+            "name": "nounFruit",
+            "keyword": "N_FRUIT",
+            "words":[
+                "banana",
+                "orange",
+                "pineapple",
+                "strawberry"
+            ]
+        },
+        {
+            "name": "nounInanimatePlural",
+            "keyword": "NS_INANI",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "nounInanimateSingluar",
+            "keyword": "N_INANI",
+            "words":[
+                "%N_CLOTH%",
+                "art",
+                "bank",
+                "bedroom",
+                "blackboard",
+                "centimeter",
+                "city",
+                "clock",
+                "department store",
+                "email",
+                "face",
+                "flute",
+                "garden",
+                "gym",
+                "hospital",
+                "magazine",
+                "number",
+                "page",
+                "post office",
+                "postcard",
+                "present",
+                "river",
+                "spoon",
+                "street",
+                "tooth",
+                "tower"
+            ]
+        },
+        {
+            "name": "nounPlural",
+            "keyword": "NOUNS",
+            "words":[
+                "%NS_ANI%",
+                "%NS_INANI%"
+            ]
+        },
+        {
+            "name": "nounSingular",
+            "keyword": "NOUN",
+            "words":[
+                "%N_ANI%",
+                "%N_INANI%",
+                "%N_SPORT%",
+                "%N_FOOD%"
+            ]
+        },
+        {
+            "name": "nounSport",
+            "keyword": "N_SPORT",
+            "words":[
+                "badminton",
+                "volleyball"
+            ]
+        },
+        {
+            "name": "pronoun1st2nd3rdPluralNominative",
+            "keyword": "PRO_123P_NOM",
+            "words":[
+                "I",
+                "they",
+                "we",
+                "you"
+            ]
+        },
+        {
+            "name": "pronoun3rdPersonSinglularNominative",
+            "keyword": "PRO_3S_NOM",
+            "words":[
+                "he",
+                "she"
+            ]
+        },
+        {
+            "name": "verb",
+            "keyword": "VERB",
+            "words":[
+                "%VERB_IN%",
+                "%VERB_TR%",
+                "do the dishes"
+            ]
+        },
+        {
+            "name": "verb3PS",
+            "keyword": "VERBS",
+            "words":[
+                "%VERBS_IN%",
+                "%VERBS_TR%",
+                "does the dishes"
+            ]
+        },
+        {
+            "name": "verbGerund",
+            "keyword": "VERBING",
+            "words":[
+                "%VERBING_IN%",
+                "%VERBING_TR%",
+                "doing the dishes"
+            ]
+        },
+        {
+            "name": "verbGerundIntransitive",
+            "keyword": "VERBING_IN",
+            "words":[
+                "arriving",
+                "asking",
+                "cycling",
+                "dancing",
+                "diving",
+                "fishing",
+                "flying",
+                "hiking",
+                "jumping",
+                "living",
+                "running",
+                "shopping",
+                "singing",
+                "sitting",
+                "skating",
+                "skiing",
+                "standing",
+                "stopping",
+                "studying",
+                "swimming",
+                "thinking",
+                "working"
+            ]
+        },
+        {
+            "name": "verbGerundTransitive",
+            "keyword": "VERBING_TR",
+            "words":[
+                "answering",
+                "bringing",
+                "buying",
+                "catching",
+                "cleaning",
+                "closing",
+                "cooking",
+                "cutting",
+                "doing",
+                "drinking",
+                "driving",
+                "eating",
+                "enjoying",
+                "having",
+                "hearing",
+                "helping",
+                "reading",
+                "riding",
+                "starting",
+                "trying",
+                "using",
+                "visiting",
+                "wanting",
+                "washing",
+                "watching",
+                "writing"
+            ]
+        },
+        {
+            "name": "verbIntransitive",
+            "keyword": "VERB_IN",
+            "words":[
+                "arrive",
+                "ask",
+                "cycle",
+                "dance",
+                "dive",
+                "fish",
+                "fly",
+                "hike",
+                "jump",
+                "live",
+                "run",
+                "shop",
+                "sing",
+                "sit",
+                "skate",
+                "ski",
+                "stand",
+                "stop",
+                "study",
+                "swim",
+                "think",
+                "work"
+            ]
+        },
+        {
+            "name": "verbIntransitive3PS",
+            "keyword": "VERBS_IN",
+            "words":[
+                "arrives",
+                "asks",
+                "cycles",
+                "dances",
+                "dives",
+                "fishes",
+                "flys",
+                "hikes",
+                "jumps",
+                "lives",
+                "runs",
+                "shops",
+                "sings",
+                "sits",
+                "skates",
+                "skis",
+                "stands",
+                "stops",
+                "studies",
+                "swims",
+                "thinks",
+                "works"
+            ]
+        },
+        {
+            "name": "verbPast",
+            "keyword": "VERBED",
+            "words":[
+                ""
+            ]
+        },
+        {
+            "name": "verbTransitive",
+            "keyword": "VERB_TR",
+            "words":[
+                "answer",
+                "bring",
+                "buy",
+                "catch",
+                "clean",
+                "close",
+                "cook",
+                "cut",
+                "do",
+                "drink",
+                "drive",
+                "eat",
+                "enjoy",
+                "have",
+                "hear",
+                "help",
+                "read",
+                "ride",
+                "start",
+                "try",
+                "use",
+                "visit",
+                "want",
+                "wash",
+                "watch",
+                "write"
+            ]
+        },
+        {
+            "name": "verbTransitive3PS",
+            "keyword": "VERBS_TR",
+            "words":[
+                "answers",
+                "brings",
+                "buys",
+                "catches",
+                "cleans",
+                "closes",
+                "cooks",
+                "cuts",
+                "does",
+                "drinks",
+                "drives",
+                "eats",
+                "enjoys",
+                "has",
+                "hears",
+                "helps",
+                "reads",
+                "rides",
+                "starts",
+                "tries",
+                "uses",
+                "visits",
+                "wants",
+                "washes",
+                "watches",
+                "writes"
+            ]
+        }
+    ]
+}
