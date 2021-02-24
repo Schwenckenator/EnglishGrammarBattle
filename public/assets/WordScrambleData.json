@@ -4,7 +4,7 @@
             "sentence": "What %N_CATEGORY% do you like?"
         },
         {
-            "sentence": "%NAME%’s %N_PARENT% comes home around\nseven every night."
+            "sentence": "%NAME%’s %N_PARENT% comes home\naround seven every night."
         },
         {
             "sentence": "Do you have any pets?"
@@ -13,40 +13,40 @@
             "sentence": "Does %NAME% like music?"
         },
         {
-            "sentence": "What do you drink at lunch, tea or\ncoffee?"
+            "sentence": "What do you drink at\nlunch, tea or coffee?"
         },
         {
-            "sentence": "September is the ninth month of the\nyear."
+            "sentence": "September is the ninth\nmonth of the year."
         },
         {
             "sentence": "%NAME%, here’s a letter from %NAME%."
         },
         {
-            "sentence": "We play baseball after school every\nday."
+            "sentence": "We play baseball after\nschool every day."
         },
         {
-            "sentence": "Let’s go shopping at the new department\nstore tomorrow."
+            "sentence": "Let’s go shopping at the new\ndepartment store tomorrow."
         },
         {
             "sentence": "He’s sleeping in bed."
         },
         {
-            "sentence": "I want a cup of %N_DRINK%, please,\n%N_PARENT_CALL%."
+            "sentence": "I want a cup of %N_DRINK%,\nplease, %N_PARENT_CALL%."
         },
         {
             "sentence": "%NAME%’s father reads the newspaper\nin the morning."
         },
         {
-            "sentence": "%NAME% has one sister. ____ is in\nthe fifth grade."
+            "sentence": "%NAME% has one sister. ____\nis in the fifth grade."
         },
         {
-            "sentence": "This video camera is very nice. Whose\nis it?"
+            "sentence": "This video camera is very\nnice. Whose is it?"
         },
         {
-            "sentence": "Where are my new tennis shoes,\n%N_PARENT_CALL%?"
+            "sentence": "Where are my new tennis\nshoes, %N_PARENT_CALL%?"
         },
         {
-            "sentence": "Do you want milk or apple juice?\nMilk, please.."
+            "sentence": "Do you want milk or apple juice? Milk, please.."
         },
         {
             "sentence": "What time is the next bus? Ten o’clock."
@@ -55,16 +55,16 @@
             "sentence": "Do you know this song, %NAME%?"
         },
         {
-            "sentence": "%NAME% sometimes cooks dinner for\nher family."
+            "sentence": "%NAME% sometimes cooks\ndinner for her family."
         },
         {
             "sentence": "I’m sorry I’m late, %NAME_HON%."
         },
         {
-            "sentence": "It’s too cold, %NAME%. Please close\nthe window."
+            "sentence": "It’s too cold, %NAME%.\nPlease close the window."
         },
         {
-            "sentence": "I have three children, two sons and\none daughter."
+            "sentence": "I have three children,\ntwo sons and one daughter."
         },
         {
             "sentence": "January is the first month of the year."
@@ -76,13 +76,13 @@
             "sentence": "How many CDs do you have, %NAME%?"
         },
         {
-            "sentence": "Let’s go shopping at the department\nstore, %NAME%."
+            "sentence": "Let’s go shopping at the\ndepartment store, %NAME%."
         },
         {
             "sentence": "I always listen to music on the bus."
         },
         {
-            "sentence": "My sister plays computer games every\nnight."
+            "sentence": "My sister plays computer\ngames every night."
         },
         {
             "sentence": "look at that cat. It’s really cute."
@@ -91,7 +91,7 @@
             "sentence": "does %NAME_HON% teach math?"
         },
         {
-            "sentence": "I have three dogs. I like them very\nmuch."
+            "sentence": "I have three dogs. I\nlike them very much."
         },
         {
             "sentence": "My mother plays the piano very well."
@@ -103,7 +103,7 @@
             "sentence": "September is the ninth month of the year."
         },
         {
-            "sentence": "Our school’s baseball game is tomorrow\nmorning."
+            "sentence": "Our school’s baseball game\nis tomorrow morning."
         },
         {
             "sentence": "Her hair is really long."
@@ -112,13 +112,13 @@
             "sentence": "I have two dogs."
         },
         {
-            "sentence": "Do you often write letters to your\ngrandmother, %NAME%?"
+            "sentence": "Do you often write letters to\nyour grandmother, %NAME%?"
         },
         {
             "sentence": "%NAME%, get up! It’s eight o’clock."
         },
         {
-            "sentence": "My name is %NAME%. I’m from %N_COUNTRY%."
+            "sentence": "My name is %NAME%. I’m\nfrom %N_COUNTRY%."
         },
         {
             "sentence": "%NAME% has a lot of postcards."
@@ -127,25 +127,25 @@
             "sentence": "when is your birthday?"
         },
         {
-            "sentence": "I didn’t hear you. Can you repeat\nyour question, please?"
+            "sentence": "I didn’t hear you. Can you\nrepeat your question, please?"
         },
         {
-            "sentence": "Excuse me. What time will this bus\narrive at Tokyo Station?"
+            "sentence": "Excuse me. What time will this\nbus arrive at Tokyo Station?"
         },
         {
             "sentence": "My favorite sport is volleyball.\nIt’s really fun."
         },
         {
-            "sentence": "Do you want butter or jam on your\ntoast?"
+            "sentence": "Do you want butter or jam on your toast?"
         },
         {
-            "sentence": "Mrs. Mason is very rich. She has\na lot of money and a big house."
+            "sentence": "Mrs. Mason is very rich.\nShe has a lot of\nmoney and a big house."
         },
         {
             "sentence": "Ted, don’t be late for school again!"
         },
         {
-            "sentence": "She didn’t know anyone at first,\nbut she soon made many new friends."
+            "sentence": "She didn’t know anyone\nat first, but she soon\nmade many new friends."
         },
         {
             "sentence": "I will send you a postcard."
@@ -154,13 +154,13 @@
             "sentence": "I like watching movies on weekends."
         },
         {
-            "sentence": "The Shinano River is the longest in\nJapan."
+            "sentence": "The Shinano River is\nthe longest in Japan."
         },
         {
-            "sentence": "Jane, I need your help. Can you go to my bedroom\nand get my glasses?"
+            "sentence": "Jane, I need your help. Can you go to my\nbedroom and get my glasses?"
         },
         {
-            "sentence": "Yuji started writing to him two months\nago."
+            "sentence": "Yuji started writing to\nhim two months ago."
         },
         {
             "sentence": "I’ll wait at the station."
@@ -181,106 +181,106 @@
             "sentence": "We have a large library in our school."
         },
         {
-            "sentence": "Eat your carrots. They’re good for\nyou."
+            "sentence": "Eat your carrots. They’re\ngood for you."
         },
         {
-            "sentence": "My family and I went on a trip to\nKyoto."
+            "sentence": "My family and I went\non a trip to Kyoto."
         },
         {
-            "sentence": "I have a good idea. Let’s ride our\nbikes to the river."
+            "sentence": "I have a good idea. Let’s\nride our bikes to the river."
         },
         {
             "sentence": "Bob really looks like George."
         },
         {
-            "sentence": "It’s a beautiful day. Let’s take\na walk this afternoon."
+            "sentence": "It’s a beautiful day. Let’s\ntake a walk this afternoon."
         },
         {
-            "sentence": "Please be quiet, Paul. Your grandmother\nis sleeping."
+            "sentence": "Please be quiet, Paul. Your\ngrandmother is sleeping."
         },
         {
-            "sentence": "why did you get up so early today,\nEllie?"
+            "sentence": "why did you get up\nso early today, Ellie?"
         },
         {
-            "sentence": "We went to the park for art class\ntoday. We drew pictures there."
+            "sentence": "We went to the park for\nart class today. We\ndrew pictures there."
         },
         {
-            "sentence": "Linda lives near her school, so\nshe can walk there easily."
+            "sentence": "Linda lives near her school,\nso she can walk there easily."
         },
         {
-            "sentence": "I watch a cooking program on TV every\nWednesday."
+            "sentence": "I watch a cooking program\non TV every Wednesday."
         },
         {
             "sentence": "Mr. Jones is a very famoussinger."
         },
         {
-            "sentence": "Jason often goes fishing on the weekend\nand usually catches lots of\nfish."
+            "sentence": "Jason often goes fishing\non the weekend and usually\ncatches lots of fish."
         },
         {
-            "sentence": "I don’t like my hairstyle now, so\nI want to change."
+            "sentence": "I don’t like my hairstyle\nnow, so I want to change."
         },
         {
             "sentence": "Where can I buy tickets for the concert?"
         },
         {
-            "sentence": "It’s snowing a lot today, so please\ndrive slowly."
+            "sentence": "It’s snowing a lot today,\nso please drive slowly."
         },
         {
-            "sentence": "Grace, I was looking for you. Where\nwere you?"
+            "sentence": "Grace, I was looking for\nyou. Where were you?"
         },
         {
-            "sentence": "How long was the movie, Mickey?\nAbout two hours."
+            "sentence": "How long was the movie,\nMickey? About two hours."
         },
         {
-            "sentence": "I really want to hear about your\ntrip to Canada, Jenny."
+            "sentence": "I really want to hear about\nyour trip to Canada, Jenny."
         },
         {
-            "sentence": "Brian, it’s late. Go to bed at\nonce."
+            "sentence": "Brian, it’s late. Go to bed at once."
         },
         {
-            "sentence": "How was the party, Mary? Did you\nhave a good time?"
+            "sentence": "How was the party, Mary?\nDid you have a good time?"
         },
         {
-            "sentence": "When I got to the movie theater,\nit was already full, so I went\nback home."
+            "sentence": "When I got to the movie theater,\nit was already full,\nso I went back home."
         },
         {
             "sentence": "Please play quietly in your room."
         },
         {
-            "sentence": "I need a stamp so I can send this\nletter to Emily."
+            "sentence": "I need a stamp so I can send\nthis letter to Emily."
         },
         {
-            "sentence": "Last week, the school band performed\nin a concert at the city hall."
+            "sentence": "Last week, the school\nband performed in a concert\nat the city hall."
         },
         {
-            "sentence": "Jack went to bed late last night\nbecause he studied until 1:00 a.m."
+            "sentence": "Jack went to bed late\nlast night because he\nstudied until 1:00 a.m."
         },
         {
             "sentence": "Now I can relax and enjoy myself."
         },
         {
-            "sentence": "My aunt loves traveling to foreign\ncountries because she likes to\nlearn about other cultures."
+            "sentence": "My aunt loves traveling\nto foreign countries\nbecause she likes to\nlearn about other cultures."
         },
         {
             "sentence": "No, I don’t like it at all."
         },
         {
-            "sentence": "My hometown is famous for its lovely\nbeaches and warm weather."
+            "sentence": "My hometown is famous\nfor its lovely beaches\nand warm weather."
         },
         {
-            "sentence": "Please knock on the door before you\ncome in, Daniel."
+            "sentence": "Please knock on the door before\nyou come in, Daniel."
         },
         {
-            "sentence": "Would you like to leave a message for\nher?"
+            "sentence": "Would you like to leave\na message for her?"
         },
         {
             "sentence": "I bought him a pair of jogging shoes."
         },
         {
-            "sentence": "I have a friend whose father is a\nTV star."
+            "sentence": "I have a friend whose\nfather is a TV star."
         },
         {
-            "sentence": "Excuse me. does this bus go to the\nairport?"
+            "sentence": "Excuse me. does this\nbus go to the airport?"
         },
         {
             "sentence": "Let’s get him a present."
@@ -295,64 +295,64 @@
             "sentence": "Can you lend me your dictionary?"
         },
         {
-            "sentence": "We’ll eat lunch now, and continue the\nmeeting in the afternoon."
+            "sentence": "We’ll eat lunch now,\nand continue the meeting\nin the afternoon."
         },
         {
             "sentence": "I think fishing is boring."
         },
         {
-            "sentence": "Some people believe that there is a\nmonster in that lake, but I don’t."
+            "sentence": "Some people believe that\nthere is a monster in\nthat lake, but I don’t."
         },
         {
-            "sentence": "This necklace is really beautiful,\nAlice. Did you make it by yourself?"
+            "sentence": "This necklace is really\nbeautiful, Alice. Did\nyou make it by yourself?"
         },
         {
-            "sentence": "When Ellie and Pam have difficult\nhomework, they often help each\nother."
+            "sentence": "When Ellie and Pam have\ndifficult homework, they\noften help each other."
         },
         {
-            "sentence": "This jacket is a little big for me.\nCan I try on a smaller one?"
+            "sentence": "This jacket is a little\nbig for me. Can I\ntry on a smaller one?"
         },
         {
-            "sentence": "Susan and Nancy talked on the\nphone until 11:30 p.m. last night"
+            "sentence": "Susan and Nancy talked\non the phone until\n11:30 p.m. last night"
         },
         {
-            "sentence": "James, why don’t we go out for dinner\ntonight?"
+            "sentence": "James, why don’t we go\nout for dinner tonight?"
         },
         {
-            "sentence": "Kathy’s father bought a new car last\nmonth. It’s much bigger than\nthe old one."
+            "sentence": "Kathy’s father bought a new\ncar last month. It’s much\nbigger than the old one."
         },
         {
-            "sentence": "The little dog fell into the river.\nLuckily, he was saved by a policeman."
+            "sentence": "The little dog fell into\nthe river. Luckily, he\nwas saved by a policeman."
         },
         {
-            "sentence": "Satoshi, have you ever written a letter\nin English?"
+            "sentence": "Satoshi, have you ever written\na letter in English?"
         },
         {
             "sentence": "No, I won’t. I have baseball practice."
         },
         {
-            "sentence": "You can use my umbrella. I have another\none."
+            "sentence": "You can use my umbrella.\nI have another one."
         },
         {
-            "sentence": "When people meet for the first time,\nthey often shake hands."
+            "sentence": "When people meet for\nthe first time, they\noften shake hands."
         },
         {
-            "sentence": "I have to speak in front of the whole\nschool this afternoon. I’m\nvery nervous."
+            "sentence": "I have to speak in front\nof the whole school this\nafternoon. I’m very nervous."
         },
         {
-            "sentence": "Are there any activities at school this\nweekend, Jane?"
+            "sentence": "Are there any activities at school\nthis weekend, Jane?"
         },
         {
-            "sentence": "At last, I found it among some books\non the floor."
+            "sentence": "At last, I found it among\nsome books on the floor."
         },
         {
-            "sentence": "If you win the art contest, you will\nreceive a prize."
+            "sentence": "If you win the art contest,\nyou will receive a prize."
         },
         {
-            "sentence": "I agree with you. Let’s come here\nagain."
+            "sentence": "I agree with you. Let’s\ncome here again."
         },
         {
-            "sentence": "If you don’t clean it up, I won’t\ntake you to the movies."
+            "sentence": "If you don’t clean it\nup, I won’t take\nyou to the movies."
         },
         {
             "sentence": "Please turn down the radio."
@@ -654,7 +654,6 @@
                 "piano",
                 "place",
                 "plant",
-                "present",
                 "program",
                 "quiz",
                 "restaurant",
@@ -984,6 +983,62 @@
                 "washes",
                 "watches",
                 "writes"
+            ]
+        },
+        {
+            "name": "name",
+            "keyword": "NAME",
+            "words":[
+                "%NAME_F%",
+                "%NAME_M%"
+            ]
+        },
+        {
+            "name": "nameFemale",
+            "keyword": "NAME_F",
+            "words":[
+                "Mary",
+                "Jane",
+                "Kazuko",
+                "Lucy",
+                "Jill",
+                "Alice"
+            ]
+        },
+        {
+            "name": "nameMale",
+            "keyword": "NAME_M",
+            "words":[
+                "Paul",
+                "Frank",
+                "Jack",
+                "Mike",
+                "Tom",
+                "Bill"
+            ]
+        },
+        {
+            "name": "parentCall",
+            "keyword": "PARENT_CALL",
+            "words":[
+                "mom",
+                "dad"
+            ]
+        },
+        {
+            "name": "parent",
+            "keyword": "PARENT",
+            "words":[
+                "mother",
+                "father"
+            ]
+        },
+        {
+            "name": "nameHonorific",
+            "keyword": "NAME_HON",
+            "words":[
+                "Ms. Sasaki",
+                "Mr. Parker"
             ]
         }
     ]

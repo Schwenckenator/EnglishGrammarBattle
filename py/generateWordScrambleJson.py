@@ -96,25 +96,23 @@ def OrganiseData(data):
     
     # last, organise the quizzes
     for row in SENTENCES:
+        maxCharsPerLine = 40
+        preferredCharsPerLine = 30
+
         sentence = row[1]
-        sentenceIsLong = True
-        count = 1
-        longCharLimit = 32
-        print("Start Edit!")
-        while(sentenceIsLong):
-            print(sentence)
-            if(len(sentence) > longCharLimit * count):
-                index = sentence.find(" ", longCharLimit * count)
-                print("Space index is "+str(index))
-                if(index > 0):
-                    sentence = sentence[0:index] + "\\n" + sentence[index+1:]
-                count += 1
-            else:
-                sentenceIsLong = False
-            
-            if(count > 100):
-                print("INFINITE LOOP AVOIDED")
-                break
+        length = len(sentence)
+        if(length >= maxCharsPerLine):
+            lines = length // preferredCharsPerLine + 1
+            print("Lines: " +str(lines))
+            newLength = length // lines
+            print("Length Per Line: " +str(newLength))
+            indices = []
+            for i in range(1, lines):
+                # When we replace the space with \n, it shifts the rest of the letters
+                # so we need (+ i - 1)
+                indices.append(sentence.find(" ", newLength * i - 1) + i - 1)
+            for i in indices:
+                sentence = sentence[0:i] + "\\n" + sentence[i+1:]
 
         print("Editing Finished!")
         print(sentence)
