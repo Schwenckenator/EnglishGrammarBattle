@@ -9,7 +9,7 @@
             ]
         },
         {
-            "text":             "%NAME%’s %N_PARENT% comes home around seven every _____.",
+            "text":             "%NAME%’s %N_PARENT% comes home\naround seven every _____.",
             "correctAnswer":    "night",
             "wrongAnswer":[     "noon",
                                 "hour",
@@ -33,7 +33,7 @@
             ]
         },
         {
-            "text":             "What do you _____ at lunch, tea or coffee?",
+            "text":             "What do you _____ at lunch, tea\nor coffee?",
             "correctAnswer":    "drink",
             "wrongAnswer":[     "tell",
                                 "eat",
@@ -41,7 +41,7 @@
             ]
         },
         {
-            "text":             "September is the _____ month of the year.",
+            "text":             "September is the _____ month of\nthe year.",
             "correctAnswer":    "ninth",
             "wrongAnswer":[     "tenth",
                                 "eleventh",
@@ -49,7 +49,7 @@
             ]
         },
         {
-            "text":             "%NAME%, here’s a letter _____ %NAME%.",
+            "text":             "%NAME%, here’s a letter _____ %NAME%\n%NAME%, here’s a letter\n_____ %NAME%.",
             "correctAnswer":    "from",
             "wrongAnswer":[     "in",
                                 "at",
@@ -57,7 +57,7 @@
             ]
         },
         {
-            "text":             "We play baseball _____ school every day.",
+            "text":             "We play baseball _____ school every\nday.",
             "correctAnswer":    "after",
             "wrongAnswer":[     "over",
                                 "on",
@@ -65,7 +65,7 @@
             ]
         },
         {
-            "text":             "Let’s _____ shopping at the new department store tomorrow.",
+            "text":             "Let’s _____ shopping at the new\ndepartment store tomorrow.",
             "correctAnswer":    "go",
             "wrongAnswer":[     "have",
                                 "walk",
@@ -81,7 +81,7 @@
             ]
         },
         {
-            "text":             "I want a _____ of %N_DRINK%, please, %N_PARENT_CALL%.",
+            "text":             "I want a _____ of %N_DRINK%, please,\n%N_PARENT_CALL%.",
             "correctAnswer":    "cup",
             "wrongAnswer":[     "coin",
                                 "camera",
@@ -89,7 +89,7 @@
             ]
         },
         {
-            "text":             "%NAME%’s father reads the newspaper _____ the morning.",
+            "text":             "%NAME%’s father reads the newspaper\n_____ the morning.",
             "correctAnswer":    "in",
             "wrongAnswer":[     "on",
                                 "to",
@@ -97,7 +97,7 @@
             ]
         },
         {
-            "text":             "%NAME% has one sister. ____ is in the fifth grade.",
+            "text":             "%NAME% has one sister. ____ is\nin the fifth grade.",
             "correctAnswer":    "she",
             "wrongAnswer":[     "you",
                                 "we",
@@ -105,7 +105,7 @@
             ]
         },
         {
-            "text":             "This video camera is very nice. _____ is it?",
+            "text":             "This video camera is very nice.\n_____ is it?",
             "correctAnswer":    "Whose",
             "wrongAnswer":[     "when",
                                 "how",
@@ -113,7 +113,7 @@
             ]
         },
         {
-            "text":             "Where are _____ new tennis shoes, %N_PARENT_CALL%?",
+            "text":             "Where are _____ new tennis shoes,\n%N_PARENT_CALL%?",
             "correctAnswer":    "my",
             "wrongAnswer":[     "I",
                                 "me",
@@ -121,7 +121,7 @@
             ]
         },
         {
-            "text":             "Do you want milk or apple juice? _____.",
+            "text":             "Do you want milk or apple juice?\n_____.",
             "correctAnswer":    "Milk, please.",
             "wrongAnswer":[     "Yes, it is.",
                                 "Goodbye.",
@@ -129,7 +129,7 @@
             ]
         },
         {
-            "text":             "What time is the next bus? _____.",
+            "text":             "What time is the next bus? _____\nWhat time is the next bus?\n_____.",
             "correctAnswer":    "Ten o’clock",
             "wrongAnswer":[     "For two hours.",
                                 "That’s OK.",
@@ -137,7 +137,7 @@
             ]
         },
         {
-            "text":             "Do you _____ this song, %NAME%?",
+            "text":             "Do you _____ this song, %NAME%\nDo you _____ this song, %NAME%\nDo you _____ this song, %NAME%\nDo\nyou _____ this song,\n%NAME%?",
             "correctAnswer":    "know",
             "wrongAnswer":[     "stay",
                                 "writes",
@@ -145,7 +145,7 @@
             ]
         },
         {
-            "text":             "%NAME% sometimes _____ dinner for her family.",
+            "text":             "%NAME% sometimes _____ dinner for\nher family.",
             "correctAnswer":    "cooks",
             "wrongAnswer":[     "live",
                                 "walks",
@@ -153,7 +153,7 @@
             ]
         },
         {
-            "text":             "I’m _____ I’m late, %NAME_HON%.",
+            "text":             "I’m _____ I’m late, %NAME_HON%\nI’m _____ I’m late, %NAME_HON%\nI’m _____ I’m late, %NAME_HON%\nI’m\n_____ I’m late, %NAME_HON%\nI’m _____ I’m late, %NAME_HON%\nI’m\n_____ I’m late,\n%NAME_HON%\nI’m _____ I’m late,\n%NAME_HON%\nI’m\n_____ I’m\nlate, %NAME_HON%.",
             "correctAnswer":    "sorry",
             "wrongAnswer":[     "fine",
                                 "great",
@@ -161,7 +161,7 @@
             ]
         },
         {
-            "text":             "It’s too cold, %NAME%. Please _____ the window.",
+            "text":             "It’s too cold, %NAME%. Please _____\nthe window.",
             "correctAnswer":    "close",
             "wrongAnswer":[     "meet",
                                 "have",
@@ -169,7 +169,7 @@
             ]
         },
         {
-            "text":             "I have three children, two sons and one _____.",
+            "text":             "I have three children, two sons\nand one _____.",
             "correctAnswer":    "daughter",
             "wrongAnswer":[     "mother",
                                 "brother",
@@ -177,7 +177,7 @@
             ]
         },
         {
-            "text":             "_____ is the first month of the year.",
+            "text":             "_____ is the first month of the\nyear.",
             "correctAnswer":    "January",
             "wrongAnswer":[     "February",
                                 "March",
@@ -185,7 +185,7 @@
             ]
         },
         {
-            "text":             "%NAME%, come on! It’s _____ for dinner.",
+            "text":             "%NAME%, come on! It’s _____ for\ndinner.",
             "correctAnswer":    "time",
             "wrongAnswer":[     "day",
                                 "noon",
@@ -193,7 +193,7 @@
             ]
         },
         {
-            "text":             "_____ many CDs do you have, %NAME%?",
+            "text":             "_____ many CDs do you have, %NAME%\n_____ many CDs do you have,\n%NAME%?",
             "correctAnswer":    "How",
             "wrongAnswer":[     "Do",
                                 "What",
@@ -201,7 +201,7 @@
             ]
         },
         {
-            "text":             "Let’s _____ shopping at the department store, %NAME%.",
+            "text":             "Let’s _____ shopping at the department\nstore, %NAME%.",
             "correctAnswer":    "go",
             "wrongAnswer":[     "have",
                                 "walk",
@@ -209,7 +209,7 @@
             ]
         },
         {
-            "text":             "I always _____ to music on the bus.",
+            "text":             "I always _____ to music on the\nbus.",
             "correctAnswer":    "listen",
             "wrongAnswer":[     "know",
                                 "open",
@@ -217,7 +217,7 @@
             ]
         },
         {
-            "text":             "My sister plays computer games every _____.",
+            "text":             "My sister plays computer games\nevery _____.",
             "correctAnswer":    "night",
             "wrongAnswer":[     "friend",
                                 "TV",
@@ -225,7 +225,7 @@
             ]
         },
         {
-            "text":             "_____ at that cat. It’s really cute.",
+            "text":             "_____ at that cat. It’s really\ncute.",
             "correctAnswer":    "look",
             "wrongAnswer":[     "see",
                                 "watch",
@@ -241,7 +241,7 @@
             ]
         },
         {
-            "text":             "I have three dogs. I like _____ very much.",
+            "text":             "I have three dogs. I like _____\nvery much.",
             "correctAnswer":    "them",
             "wrongAnswer":[     "they",
                                 "their",
@@ -249,7 +249,7 @@
             ]
         },
         {
-            "text":             "My mother plays the piano very _____.",
+            "text":             "My mother plays the piano very\n_____.",
             "correctAnswer":    "well",
             "wrongAnswer":[     "large",
                                 "many",
@@ -265,7 +265,7 @@
             ]
         },
         {
-            "text":             "_____ is the ninth month of the year.",
+            "text":             "_____ is the ninth month of the\nyear.",
             "correctAnswer":    "September",
             "wrongAnswer":[     "August",
                                 "October",
@@ -273,7 +273,7 @@
             ]
         },
         {
-            "text":             "Our school’s baseball _____ is tomorrow morning.",
+            "text":             "Our school’s baseball _____ is\ntomorrow morning.",
             "correctAnswer":    "game",
             "wrongAnswer":[     "park",
                                 "name",
@@ -297,7 +297,7 @@
             ]
         },
         {
-            "text":             "Do you often write _____ to your grandmother, %NAME%?",
+            "text":             "Do you often write _____ to your\ngrandmother, %NAME%?",
             "correctAnswer":    "letters",
             "wrongAnswer":[     "pens",
                                 "games",
@@ -305,7 +305,7 @@
             ]
         },
         {
-            "text":             "%NAME%, get _____! It’s eight o’clock.",
+            "text":             "%NAME%, get _____! It’s eight o’clock\n%NAME%, get _____! It’s\neight o’clock.",
             "correctAnswer":    "up",
             "wrongAnswer":[     "under",
                                 "of",
@@ -313,7 +313,7 @@
             ]
         },
         {
-            "text":             "My name is %NAME%. I’m _____ %N_COUNTRY%.",
+            "text":             "My name is %NAME%. I’m _____ %N_COUNTRY%\nMy name is %NAME%.\nI’m _____ %N_COUNTRY%.",
             "correctAnswer":    "from",
             "wrongAnswer":[     "with",
                                 "before",
@@ -321,7 +321,7 @@
             ]
         },
         {
-            "text":             "%NAME% has a _____ of postcards.",
+            "text":             "%NAME% has a _____ of postcards\n%NAME% has a _____ of postcards\n%NAME% has a _____ of postcards\n%NAME%\nhas a _____ of\npostcards.",
             "correctAnswer":    "lot",
             "wrongAnswer":[     "much",
                                 "too",
@@ -337,7 +337,7 @@
             ]
         },
         {
-            "text":             "I didn’t hear you. Can you _____ your question, please?",
+            "text":             "I didn’t hear you. Can you _____\nyour question, please?",
             "correctAnswer":    "repeat",
             "wrongAnswer":[     "receive",
                                 "clean",
@@ -345,7 +345,7 @@
             ]
         },
         {
-            "text":             "Excuse me. What time will this bus _____ at Tokyo Station?",
+            "text":             "Excuse me. What time will this\nbus _____ at Tokyo Station?",
             "correctAnswer":    "arrive",
             "wrongAnswer":[     "tell",
                                 "become",
@@ -353,7 +353,7 @@
             ]
         },
         {
-            "text":             "My favorite sport is volleyball. It’s really _____.",
+            "text":             "My favorite sport is volleyball.\nIt’s really _____.",
             "correctAnswer":    "fun",
             "wrongAnswer":[     "soft",
                                 "dry",
@@ -361,7 +361,7 @@
             ]
         },
         {
-            "text":             "Do you want _____ or jam on your toast?",
+            "text":             "Do you want _____ or jam on your\ntoast?",
             "correctAnswer":    "butter",
             "wrongAnswer":[     "station",
                                 "spoon",
@@ -369,7 +369,7 @@
             ]
         },
         {
-            "text":             "Mrs. Mason is very _____. She has a lot of money and a big house.",
+            "text":             "Mrs. Mason is very _____. She has\na lot of money and a big house\nMrs. Mason is very _____.\nShe has\na lot of money and\na big house.",
             "correctAnswer":    "rich",
             "wrongAnswer":[     "hungry",
                                 "same",
@@ -377,7 +377,7 @@
             ]
         },
         {
-            "text":             "Ted, don’t be late _____ school again!",
+            "text":             "Ted, don’t be late _____ school\nagain!",
             "correctAnswer":    "for",
             "wrongAnswer":[     "by",
                                 "of",
@@ -385,7 +385,7 @@
             ]
         },
         {
-            "text":             "She didn’t know anyone at first, but she soon _____ many new friends.",
+            "text":             "She didn’t know anyone at first,\nbut she soon _____ many new\nfriends.",
             "correctAnswer":    "made",
             "wrongAnswer":[     "began",
                                 "said",
@@ -401,7 +401,7 @@
             ]
         },
         {
-            "text":             "I like _____ movies on weekends.",
+            "text":             "I like _____ movies on weekends\nI like _____ movies on weekends\nI like _____ movies on weekends\nI\nlike _____ movies on\nweekends.",
             "correctAnswer":    "watching",
             "wrongAnswer":[     "watch",
                                 "watched",
@@ -409,7 +409,7 @@
             ]
         },
         {
-            "text":             "The Shinano River is the _____ in Japan.",
+            "text":             "The Shinano River is the _____\nin Japan.",
             "correctAnswer":    "longest",
             "wrongAnswer":[     "long",
                                 "longer",
@@ -417,7 +417,7 @@
             ]
         },
         {
-            "text":             "Jane, _____ Can you go to my bedroom and get my glasses?",
+            "text":             "Jane, _____ Can you go to my bedroom\nand get my glasses?",
             "correctAnswer":    "I need your help.",
             "wrongAnswer":[     "you did great.",
                                 "I heard the news.",
@@ -425,7 +425,7 @@
             ]
         },
         {
-            "text":             "Yuji started writing to him two months _____.",
+            "text":             "Yuji started writing to him two\nmonths _____.",
             "correctAnswer":    "ago",
             "wrongAnswer":[     "next",
                                 "soon",
@@ -441,7 +441,7 @@
             ]
         },
         {
-            "text":             "Excuse me. You _____ some money.",
+            "text":             "Excuse me. You _____ some money\nExcuse me. You _____ some money\nExcuse me. You _____ some\nmoney\nExcuse me. You _____\nsome money.",
             "correctAnswer":    "dropped",
             "wrongAnswer":[     "learned",
                                 "checked",
@@ -449,7 +449,7 @@
             ]
         },
         {
-            "text":             "At night, we can sit on the beach and see _____ in the sky.",
+            "text":             "At night, we can sit on the beach\nand see _____ in the sky.",
             "correctAnswer":    "fireworks",
             "wrongAnswer":[     "walls",
                                 "restauraunts",
@@ -457,7 +457,7 @@
             ]
         },
         {
-            "text":             "What _____ are you studying at school?",
+            "text":             "What _____ are you studying at\nschool?",
             "correctAnswer":    "language",
             "wrongAnswer":[     "vacation",
                                 "team",
@@ -473,7 +473,7 @@
             ]
         },
         {
-            "text":             "We have a _____ library in our school.",
+            "text":             "We have a _____ library in our\nschool.",
             "correctAnswer":    "large",
             "wrongAnswer":[     "cloudy",
                                 "soft",
@@ -481,7 +481,7 @@
             ]
         },
         {
-            "text":             "Eat your carrots. They’re good _____ you.",
+            "text":             "Eat your carrots. They’re good\n_____ you.",
             "correctAnswer":    "for",
             "wrongAnswer":[     "of",
                                 "up",
@@ -489,7 +489,7 @@
             ]
         },
         {
-            "text":             "My family and I went on a _____ to Kyoto.",
+            "text":             "My family and I went on a _____\nto Kyoto.",
             "correctAnswer":    "trip",
             "wrongAnswer":[     "game",
                                 "report",
@@ -497,7 +497,7 @@
             ]
         },
         {
-            "text":             "I have a good _____. Let’s ride our bikes to the river.",
+            "text":             "I have a good _____. Let’s ride\nour bikes to the river.",
             "correctAnswer":    "idea",
             "wrongAnswer":[     "word",
                                 "lesson",
@@ -513,7 +513,7 @@
             ]
         },
         {
-            "text":             "It’s a beautiful day. Let’s _____ a walk this afternoon.",
+            "text":             "It’s a beautiful day. Let’s _____\na walk this afternoon.",
             "correctAnswer":    "take",
             "wrongAnswer":[     "put",
                                 "know",
@@ -521,7 +521,7 @@
             ]
         },
         {
-            "text":             "Please _____ quiet, Paul. Your grandmother is sleeping.",
+            "text":             "Please _____ quiet, Paul. Your\ngrandmother is sleeping.",
             "correctAnswer":    "be",
             "wrongAnswer":[     "is",
                                 "am",
@@ -529,7 +529,7 @@
             ]
         },
         {
-            "text":             "_____ did you get up so early today, Ellie?",
+            "text":             "_____ did you get up so early today,\nEllie?",
             "correctAnswer":    "why",
             "wrongAnswer":[     "What",
                                 "When",
@@ -537,7 +537,7 @@
             ]
         },
         {
-            "text":             "We went to the park for art class today. We _____ pictures there.",
+            "text":             "We went to the park for art class\ntoday. We _____ pictures there\nWe went to the park for\nart class\ntoday. We _____ pictures\nthere.",
             "correctAnswer":    "drew",
             "wrongAnswer":[     "to draw",
                                 "draws",
@@ -545,7 +545,7 @@
             ]
         },
         {
-            "text":             "Linda lives _____ her school, so she can walk there easily.",
+            "text":             "Linda lives _____ her school, so\nshe can walk there easily.",
             "correctAnswer":    "near",
             "wrongAnswer":[     "among",
                                 "down",
@@ -553,7 +553,7 @@
             ]
         },
         {
-            "text":             "I watch a cooking _____ on TV every Wednesday.",
+            "text":             "I watch a cooking _____ on TV every\nWednesday.",
             "correctAnswer":    "program",
             "wrongAnswer":[     "view",
                                 "road",
@@ -561,7 +561,7 @@
             ]
         },
         {
-            "text":             "Mr. Jones is a very _____singer.",
+            "text":             "Mr. Jones is a very _____singer\nMr. Jones is a very _____singer\nMr. Jones is a very _____singer\nMr.\nJones is a very _____singer\nMr. Jones is a very\n_____singer\nMr. Jones is a\nvery _____singer\nMr. Jones\nis a very _____singer\nMr.\nJones\nis a very _____singer.",
             "correctAnswer":    "famous",
             "wrongAnswer":[     "late",
                                 "rides",
@@ -569,7 +569,7 @@
             ]
         },
         {
-            "text":             "Jason often goes fishing on the weekend and usually _____ lots of fish.",
+            "text":             "Jason often goes fishing on the\nweekend and usually _____ lots\nof fish.",
             "correctAnswer":    "catches",
             "wrongAnswer":[     "asks",
                                 "rides",
@@ -577,7 +577,7 @@
             ]
         },
         {
-            "text":             "I don’t like my hairstyle now, so I want to _____.",
+            "text":             "I don’t like my hairstyle now,\nso I want to _____.",
             "correctAnswer":    "change",
             "wrongAnswer":[     "stop",
                                 "take",
@@ -585,7 +585,7 @@
             ]
         },
         {
-            "text":             "Where can I buy _____ for the concert?",
+            "text":             "Where can I buy _____ for the concert\nWhere can I buy _____\nfor the concert?",
             "correctAnswer":    "tickets",
             "wrongAnswer":[     "books",
                                 "musicals",
@@ -593,7 +593,7 @@
             ]
         },
         {
-            "text":             "It’s snowing a lot today, so please drive _____.",
+            "text":             "It’s snowing a lot today, so please\ndrive _____.",
             "correctAnswer":    "slowly",
             "wrongAnswer":[     "freely",
                                 "coldly",
@@ -601,7 +601,7 @@
             ]
         },
         {
-            "text":             "Grace, I was looking _____ you. Where were you?",
+            "text":             "Grace, I was looking _____ you.\nWhere were you?",
             "correctAnswer":    "for",
             "wrongAnswer":[     "of",
                                 "by",
@@ -609,7 +609,7 @@
             ]
         },
         {
-            "text":             "How _____ was the movie, Mickey? About two hours.",
+            "text":             "How _____ was the movie, Mickey?\nAbout two hours.",
             "correctAnswer":    "long",
             "wrongAnswer":[     "much",
                                 "old",
@@ -617,7 +617,7 @@
             ]
         },
         {
-            "text":             "I really want to _____ about your trip to Canada, Jenny.",
+            "text":             "I really want to _____ about your\ntrip to Canada, Jenny.",
             "correctAnswer":    "hear",
             "wrongAnswer":[     "drink",
                                 "say",
@@ -625,7 +625,7 @@
             ]
         },
         {
-            "text":             "Brian, it’s late. Go to bed _____ once.",
+            "text":             "Brian, it’s late. Go to bed _____\nonce.",
             "correctAnswer":    "at",
             "wrongAnswer":[     "on",
                                 "in",
@@ -633,7 +633,7 @@
             ]
         },
         {
-            "text":             "How was the party, Mary? Did you _____ a good time?",
+            "text":             "How was the party, Mary? Did you\n_____ a good time?",
             "correctAnswer":    "have",
             "wrongAnswer":[     "play",
                                 "take",
@@ -641,7 +641,7 @@
             ]
         },
         {
-            "text":             "When I got to the movie theater, it was already _____, so I went back home.",
+            "text":             "When I got to the movie theater,\nit was already _____, so I\nwent back home.",
             "correctAnswer":    "full",
             "wrongAnswer":[     "cloudy",
                                 "hungry",
@@ -649,7 +649,7 @@
             ]
         },
         {
-            "text":             "Please play _____ in your room.",
+            "text":             "Please play _____ in your room\nPlease play _____ in your room\nPlease play _____ in your room\nPlease\nplay _____ in your\nroom.",
             "correctAnswer":    "quietly",
             "wrongAnswer":[     "deeply",
                                 "cheaply",
@@ -657,7 +657,7 @@
             ]
         },
         {
-            "text":             "I need a _____ so I can send this letter to Emily.",
+            "text":             "I need a _____ so I can send this\nletter to Emily.",
             "correctAnswer":    "stamp",
             "wrongAnswer":[     "circle",
                                 "gate",
@@ -665,7 +665,7 @@
             ]
         },
         {
-            "text":             "Last week, the school band _____ in a concert at the city hall.",
+            "text":             "Last week, the school band _____\nin a concert at the city hall\nLast week, the school band\n_____\nin a concert at the city\nhall.",
             "correctAnswer":    "performed",
             "wrongAnswer":[     "invented",
                                 "protected",
@@ -673,7 +673,7 @@
             ]
         },
         {
-            "text":             "Jack went to bed late last night because he studied _____ 1:00 a.m.",
+            "text":             "Jack went to bed late last night\nbecause he studied _____ 1:00\na.m.",
             "correctAnswer":    "until",
             "wrongAnswer":[     "along",
                                 "across",
@@ -681,7 +681,7 @@
             ]
         },
         {
-            "text":             "Now I can _____ and enjoy myself.",
+            "text":             "Now I can _____ and enjoy myself\nNow I can _____ and enjoy myself\nNow I can _____ and enjoy\nmyself\nNow I can _____ and\nenjoy myself.",
             "correctAnswer":    "relax",
             "wrongAnswer":[     "happen",
                                 "cover",
@@ -689,7 +689,7 @@
             ]
         },
         {
-            "text":             "My aunt loves traveling to foreign countries because she likes to learn about other _____.",
+            "text":             "My aunt loves traveling to foreign\ncountries because she likes\nto learn about other _____\nMy aunt loves traveling to foreign\ncountries\nbecause she\nlikes\nto learn about other\n_____.",
             "correctAnswer":    "cultures",
             "wrongAnswer":[     "couples",
                                 "chances",
@@ -705,7 +705,7 @@
             ]
         },
         {
-            "text":             "My hometown is _____ for its lovely beaches and warm weather.",
+            "text":             "My hometown is _____ for its lovely\nbeaches and warm weather\nMy hometown is _____ for its\nlovely\nbeaches and warm weather\nMy hometown is _____ for\nits lovely\nbeaches and warm\nweather\nMy hometown is _____\nfor its\nlovely\nbeaches and\nwarm weather.",
             "correctAnswer":    "famous",
             "wrongAnswer":[     "smart",
                                 "ready",
@@ -713,7 +713,7 @@
             ]
         },
         {
-            "text":             "Please _____ on the door before you come in, Daniel.",
+            "text":             "Please _____ on the door before\nyou come in, Daniel.",
             "correctAnswer":    "knock",
             "wrongAnswer":[     "cost",
                                 "prepare",
@@ -721,7 +721,7 @@
             ]
         },
         {
-            "text":             "Would you like to leave a _____ for her?",
+            "text":             "Would you like to leave a _____\nfor her?",
             "correctAnswer":    "message",
             "wrongAnswer":[     "minute",
                                 "voice",
@@ -729,7 +729,7 @@
             ]
         },
         {
-            "text":             "I bought him a _____ of jogging shoes.",
+            "text":             "I bought him a _____ of jogging\nshoes.",
             "correctAnswer":    "pair",
             "wrongAnswer":[     "piece",
                                 "space",
@@ -737,7 +737,7 @@
             ]
         },
         {
-            "text":             "I have a friend _____ father is a TV star.",
+            "text":             "I have a friend _____ father is\na TV star.",
             "correctAnswer":    "whose",
             "wrongAnswer":[     "which",
                                 "whom",
@@ -745,7 +745,7 @@
             ]
         },
         {
-            "text":             "Excuse me. _____ this bus go to the airport?",
+            "text":             "Excuse me. _____ this bus go to\nthe airport?",
             "correctAnswer":    "does",
             "wrongAnswer":[     "is",
                                 "are",
@@ -761,7 +761,7 @@
             ]
         },
         {
-            "text":             "He’s _____ his teeth in the bathroom.",
+            "text":             "He’s _____ his teeth in the bathroom\nHe’s _____ his teeth in\nthe bathroom.",
             "correctAnswer":    "brushing",
             "wrongAnswer":[     "inviting",
                                 "paying",
@@ -769,7 +769,7 @@
             ]
         },
         {
-            "text":             "Did you hear about Tony’s car _____?",
+            "text":             "Did you hear about Tony’s car _____\nDid you hear about Tony’s\ncar _____?",
             "correctAnswer":    "accident",
             "wrongAnswer":[     "package",
                                 "ceremony",
@@ -777,7 +777,7 @@
             ]
         },
         {
-            "text":             "Can you _____ me your dictionary?",
+            "text":             "Can you _____ me your dictionary\nCan you _____ me your dictionary\nCan you _____ me your dictionary\nCan\nyou _____ me your\ndictionary?",
             "correctAnswer":    "lend",
             "wrongAnswer":[     "borrow",
                                 "break",
@@ -785,7 +785,7 @@
             ]
         },
         {
-            "text":             "We’ll eat lunch now, and _____ the meeting in the afternoon.",
+            "text":             "We’ll eat lunch now, and _____\nthe meeting in the afternoon\nWe’ll eat lunch now, and _____\nthe\nmeeting in the afternoon\nWe’ll eat lunch now, and _____\nthe\nmeeting in the afternoon\nWe’ll\neat lunch now, and\n_____\nthe\nmeeting in the\nafternoon.",
             "correctAnswer":    "continue",
             "wrongAnswer":[     "trick",
                                 "graduate",
@@ -801,7 +801,7 @@
             ]
         },
         {
-            "text":             "Some people _____ that there is a monster in that lake, but I don’t.",
+            "text":             "Some people _____ that there is\na monster in that lake, but\nI don’t.",
             "correctAnswer":    "believe",
             "wrongAnswer":[     "touch",
                                 "reach",
@@ -809,7 +809,7 @@
             ]
         },
         {
-            "text":             "This necklace is really beautiful, Alice. Did you make it by _____?",
+            "text":             "This necklace is really beautiful,\nAlice. Did you make it by\n_____?",
             "correctAnswer":    "yourself",
             "wrongAnswer":[     "you",
                                 "your",
@@ -817,7 +817,7 @@
             ]
         },
         {
-            "text":             "When Ellie and Pam have difficult homework, they often help _____ other.",
+            "text":             "When Ellie and Pam have difficult\nhomework, they often help\n_____ other.",
             "correctAnswer":    "each",
             "wrongAnswer":[     "every",
                                 "same",
@@ -825,7 +825,7 @@
             ]
         },
         {
-            "text":             "This jacket is a little big for me. Can I _____ on a smaller one?",
+            "text":             "This jacket is a little big for\nme. Can I _____ on a smaller\none?",
             "correctAnswer":    "try",
             "wrongAnswer":[     "hit",
                                 "make",
@@ -833,7 +833,7 @@
             ]
         },
         {
-            "text":             "Susan and Nancy talked _____ the phone until 11:30 p.m. last night",
+            "text":             "Susan and Nancy talked _____ the\nphone until 11:30 p.m. last\nnight",
             "correctAnswer":    "on",
             "wrongAnswer":[     "for",
                                 "up",
@@ -841,7 +841,7 @@
             ]
         },
         {
-            "text":             "James, why _____ we go out for dinner tonight?",
+            "text":             "James, why _____ we go out for\ndinner tonight?",
             "correctAnswer":    "don’t",
             "wrongAnswer":[     "aren't",
                                 "haven't",
@@ -849,7 +849,7 @@
             ]
         },
         {
-            "text":             "Kathy’s father bought a new car last month. It’s _____ bigger than the old one.",
+            "text":             "Kathy’s father bought a new car\nlast month. It’s _____ bigger\nthan the old one.",
             "correctAnswer":    "much",
             "wrongAnswer":[     "many",
                                 "very",
@@ -857,7 +857,7 @@
             ]
         },
         {
-            "text":             "The little dog fell into the river. Luckily, he was _____ by a policeman.",
+            "text":             "The little dog fell into the river.\nLuckily, he was _____ by\na policeman.",
             "correctAnswer":    "saved",
             "wrongAnswer":[     "save",
                                 "saves",
@@ -865,7 +865,7 @@
             ]
         },
         {
-            "text":             "Satoshi, have you ever _____ a letter in English?",
+            "text":             "Satoshi, have you ever _____ a\nletter in English?",
             "correctAnswer":    "written",
             "wrongAnswer":[     "write",
                                 "wrote",
@@ -873,7 +873,7 @@
             ]
         },
         {
-            "text":             "No, I _____. I have baseball practice.",
+            "text":             "No, I _____. I have baseball practice\nNo, I _____. I have baseball\npractice.",
             "correctAnswer":    "won’t",
             "wrongAnswer":[     "will",
                                 "would",
@@ -881,7 +881,7 @@
             ]
         },
         {
-            "text":             "You can use my umbrella. I have _____ one.",
+            "text":             "You can use my umbrella. I have\n_____ one.",
             "correctAnswer":    "another",
             "wrongAnswer":[     "other",
                                 "each",
@@ -889,7 +889,7 @@
             ]
         },
         {
-            "text":             "When people meet for the first time, they often _____ hands.",
+            "text":             "When people meet for the first\ntime, they often _____ hands\nWhen people meet for the first\ntime,\nthey often _____ hands\nWhen people meet for the first\ntime,\nthey often _____\nhands\nWhen people meet for the\nfirst\ntime,\nthey often _____\nhands.",
             "correctAnswer":    "shake",
             "wrongAnswer":[     "call",
                                 "build",
@@ -897,7 +897,7 @@
             ]
         },
         {
-            "text":             "I have to speak in front of the whole school this afternoon. I’m very _____.",
+            "text":             "I have to speak in front of the\nwhole school this afternoon.\nI’m very _____.",
             "correctAnswer":    "nervous",
             "wrongAnswer":[     "close",
                                 "delicious",
@@ -905,7 +905,7 @@
             ]
         },
         {
-            "text":             "Are there any _____ at school this weekend, Jane?",
+            "text":             "Are there any _____ at school this\nweekend, Jane?",
             "correctAnswer":    "activities",
             "wrongAnswer":[     "accidents",
                                 "alarms",
@@ -913,7 +913,7 @@
             ]
         },
         {
-            "text":             "At last, I found it _____ some books on the floor.",
+            "text":             "At last, I found it _____ some\nbooks on the floor.",
             "correctAnswer":    "among",
             "wrongAnswer":[     "asks",
                                 "during",
@@ -921,7 +921,7 @@
             ]
         },
         {
-            "text":             "If you win the art contest, you will _____ a prize.",
+            "text":             "If you win the art contest, you\nwill _____ a prize.",
             "correctAnswer":    "receive",
             "wrongAnswer":[     "invite",
                                 "guess",
@@ -929,7 +929,7 @@
             ]
         },
         {
-            "text":             "I _____ with you. Let’s come here again.",
+            "text":             "I _____ with you. Let’s come here\nagain.",
             "correctAnswer":    "agree",
             "wrongAnswer":[     "think",
                                 "hurry",
@@ -937,7 +937,7 @@
             ]
         },
         {
-            "text":             "If you don’t clean it _____, I won’t take you to the movies.",
+            "text":             "If you don’t clean it _____, I\nwon’t take you to the movies\nIf you don’t clean it _____,\nI\nwon’t take you to the movies\nIf you don’t clean it _____,\nI\nwon’t take you to the movies\nIf\nyou don’t clean it\n_____,\nI\nwon’t take you to\nthe movies.",
             "correctAnswer":    "up",
             "wrongAnswer":[     "on",
                                 "in",
@@ -953,7 +953,7 @@
             ]
         },
         {
-            "text":             "Can I have one more _____ of bread?",
+            "text":             "Can I have one more _____ of bread\nCan I have one more _____\nof bread?",
             "correctAnswer":    "slice",
             "wrongAnswer":[     "pair",
                                 "page",

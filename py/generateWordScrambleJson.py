@@ -96,11 +96,30 @@ def OrganiseData(data):
     
     # last, organise the quizzes
     for row in SENTENCES:
-        # Are we finished with the quizzes?
-        # if len(row) < 9:
-        #     break
+        sentence = row[1]
+        sentenceIsLong = True
+        count = 1
+        longCharLimit = 32
+        print("Start Edit!")
+        while(sentenceIsLong):
+            print(sentence)
+            if(len(sentence) > longCharLimit * count):
+                index = sentence.find(" ", longCharLimit * count)
+                print("Space index is "+str(index))
+                if(index > 0):
+                    sentence = sentence[0:index] + "\\n" + sentence[index+1:]
+                count += 1
+            else:
+                sentenceIsLong = False
+            
+            if(count > 100):
+                print("INFINITE LOOP AVOIDED")
+                break
 
-        q = Quiz(row[1], row[2])
+        print("Editing Finished!")
+        print(sentence)
+
+        q = Quiz(sentence, row[2])
         quizzes.append(q)
 
     for cat in categories:
