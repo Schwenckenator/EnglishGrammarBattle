@@ -1,3 +1,5 @@
+import VolumeManager from "./VolumeManager"
+
 const SFX_HOVER_KEY = 'sfxHover'
 const SFX_SELECT_KEY = 'sfxSelect'
 const SFX_RETURN_KEY = 'sfxReturn'
