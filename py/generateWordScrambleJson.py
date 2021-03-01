@@ -96,11 +96,28 @@ def OrganiseData(data):
     
     # last, organise the quizzes
     for row in SENTENCES:
-        # Are we finished with the quizzes?
-        # if len(row) < 9:
-        #     break
+        maxCharsPerLine = 40
+        preferredCharsPerLine = 30
 
-        q = Quiz(row[0], row[1])
+        sentence = row[1]
+        length = len(sentence)
+        if(length >= maxCharsPerLine):
+            lines = length // preferredCharsPerLine + 1
+            print("Lines: " +str(lines))
+            newLength = length // lines
+            print("Length Per Line: " +str(newLength))
+            indices = []
+            for i in range(1, lines):
+                # When we replace the space with \n, it shifts the rest of the letters
+                # so we need (+ i - 1)
+                indices.append(sentence.find(" ", newLength * i - 1) + i - 1)
+            for i in indices:
+                sentence = sentence[0:i] + "\\n" + sentence[i+1:]
+
+        print("Editing Finished!")
+        print(sentence)
+
+        q = Quiz(sentence, row[2])
         quizzes.append(q)
 
     for cat in categories:
@@ -122,7 +139,7 @@ def OrganiseData(data):
 
 def writeJson(data):
     tab = "    "
-    f = open("testWordScramble.json", "w", encoding = 'utf-8')
+    f = open("WordScrambleTEST.json", "w", encoding = 'utf-8')
     lines = []
     lines.append('{\n')
 
@@ -144,7 +161,7 @@ def writeJson(data):
 
         string += tab*2 + '}'
 
-        string = string.replace('____', quiz.correct)
+        string = string.replace('_____', quiz.correct)
 
         quizzes.append(string)
 

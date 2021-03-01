@@ -97,11 +97,53 @@ def OrganiseData(data):
     
     # last, organise the quizzes
     for row in SENTENCES:
-        # Are we finished with the quizzes?
-        # if len(row) < 9:
-        #     break
+        # First, check to see how long the sentence is
+        # If it's longer than 30 chars, add a newline at the next space
+        # then start counting again
 
-        q = Quiz(row[0], row[1], row[2:5])
+        # sentence = row[1]
+        # sentenceIsLong = True
+        # count = 1
+        # longCharLimit = 32
+        # print("Start Edit!")
+        # while(sentenceIsLong):
+        #     print(sentence)
+        #     if(len(sentence) > longCharLimit * count):
+        #         index = sentence.find(" ", longCharLimit * count)
+        #         print("Space index is "+str(index))
+        #         if(index > 0):
+        #             sentence = sentence[0:index] + "\\n" + sentence[index+1:]
+        #         count += 1
+        #     else:
+        #         sentenceIsLong = False
+            
+        #     if(count > 100):
+        #         print("INFINITE LOOP AVOIDED")
+        #         break
+
+        # print("Editing Finished!")
+        # print(sentence)
+
+        maxCharsPerLine = 40
+        preferredCharsPerLine = 30
+
+        sentence = row[1]
+        length = len(sentence)
+        if(length >= maxCharsPerLine):
+            lines = length // preferredCharsPerLine + 1
+            print("Lines: " +str(lines))
+            newLength = length // lines
+            print("Length Per Line: " +str(newLength))
+            indices = []
+            for i in range(1, lines):
+                # When we replace the space with \n, it shifts the rest of the letters
+                # so we need (+ i - 1)
+                indices.append(sentence.find(" ", newLength * i - 1) + i - 1)
+            for i in indices:
+                sentence = sentence[0:i] + "\\n" + sentence[i+1:]
+
+
+        q = Quiz(sentence, row[2], row[3:6])
         quizzes.append(q)
 
     for cat in categories:
@@ -123,7 +165,7 @@ def OrganiseData(data):
 
 def writeJson(data):
     tab = "    "
-    f = open("testGrammarFalls.json", "w", encoding = 'utf-8')
+    f = open("GrammarFallsTEST.json", "w", encoding = 'utf-8')
     lines = []
     lines.append('{\n')
 
