@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import GameTimer from '../classes/GameTimer'
 import MusicManager from '../classes/MusicManager'
 import SFXManager from '../classes/SFXManager'
 import VolumeManager from '../classes/VolumeManager'
@@ -51,6 +52,7 @@ export default class GameSelectScreen extends Phaser.Scene
         this.selBox = this.createBox()
 
         VolumeManager.addSlider(this)
+        GameTimer.startTimer(this)
 
         this.createTouchInput(this.menus)
     }

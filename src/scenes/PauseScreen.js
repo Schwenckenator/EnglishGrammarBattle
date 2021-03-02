@@ -3,6 +3,7 @@ import Game from '../main'
 import MusicManager from '../classes/MusicManager';
 import SFXManager from '../classes/SFXManager';
 import VolumeManager from '../classes/VolumeManager';
+import GameTimer from '../classes/GameTimer';
 
 const SKY_KEY = 'sky';
 const EXP_KEY = 'exp';
