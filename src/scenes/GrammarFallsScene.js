@@ -43,6 +43,11 @@ export default class GrammarFallsScene extends EnglishGame
         super.create()
         console.log("Create Grammar Falls")
         this.gameData = this.cache.json.get('sentences')
+
+        let rect = this.add.rectangle(240, 640, 480, 100)
+        rect.isFilled = true
+        rect.fillColor = 0x000033
+        rect.setOrigin(0.5, 1)
         
         this.quiz = {
             sentence: this.createQuizSentence(FONT_MED),

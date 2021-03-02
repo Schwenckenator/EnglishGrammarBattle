@@ -6,7 +6,7 @@ import MainTitleScreen from './scenes/MainTitleScene'
 import NextLevelScreen from './scenes/NextLevelScreen'
 import PauseScreen from './scenes/PauseScreen'
 import SpellingSpinScene from './scenes/SpellingSpinScene'
-import WordScrambleScene from './scenes/WordScramble'
+import WordScrambleScene from './scenes/WordScrambleScene'
 
 const config = {
 	type: Phaser.AUTO,
