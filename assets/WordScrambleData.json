@@ -1,31 +1,364 @@
 {
     "quizzes":[
         {
-            "sentence": "You are a %NOUN%"
+            "sentence": "What %N_CATEGORY% do you like?"
         },
         {
-            "sentence": "Hello, my name is %NOUN%."
+            "sentence": "%NAME%’s %N_PARENT% comes home\naround seven every night."
         },
         {
-            "sentence": "%PRO_3S_NOM% is %VERBING_TR% the %NOUNS%."
+            "sentence": "Do you have any pets?"
         },
         {
-            "sentence": "%PRO_3S_NOM% is %VERBING_TR% the %NOUN%."
+            "sentence": "Does %NAME% like music?"
         },
         {
-            "sentence": "%PRO_3S_NOM% is %VERBING_TR% some %NOUNS%"
+            "sentence": "What do you drink at\nlunch, tea or coffee?"
         },
         {
-            "sentence": "%PRO_3S_NOM% is %VERBING_TR% a %NOUN%."
+            "sentence": "September is the ninth\nmonth of the year."
         },
         {
-            "sentence": "%PRO_3S_NOM% is %VERBING_TR% %NOUNS%."
+            "sentence": "%NAME%, here’s a letter from %NAME%."
         },
         {
-            "sentence": "%PRO_3S_NOM% is %VERBING_TR% with a %NOUN%."
+            "sentence": "We play baseball after\nschool every day."
         },
         {
-            "sentence": "%PRO_123P_NOM% like %ADJ% %N_ANIMALS%."
+            "sentence": "Let’s go shopping at the new\ndepartment store tomorrow."
+        },
+        {
+            "sentence": "He’s sleeping in bed."
+        },
+        {
+            "sentence": "I want a cup of %N_DRINK%,\nplease, %N_PARENT_CALL%."
+        },
+        {
+            "sentence": "%NAME%’s father reads the newspaper\nin the morning."
+        },
+        {
+            "sentence": "%NAME% has one sister. ____\nis in the fifth grade."
+        },
+        {
+            "sentence": "This video camera is very\nnice. Whose is it?"
+        },
+        {
+            "sentence": "Where are my new tennis\nshoes, %N_PARENT_CALL%?"
+        },
+        {
+            "sentence": "Do you want milk or apple juice? Milk, please.."
+        },
+        {
+            "sentence": "What time is the next bus? Ten o’clock."
+        },
+        {
+            "sentence": "Do you know this song, %NAME%?"
+        },
+        {
+            "sentence": "%NAME% sometimes cooks\ndinner for her family."
+        },
+        {
+            "sentence": "I’m sorry I’m late, %NAME_HON%."
+        },
+        {
+            "sentence": "It’s too cold, %NAME%.\nPlease close the window."
+        },
+        {
+            "sentence": "I have three children,\ntwo sons and one daughter."
+        },
+        {
+            "sentence": "January is the first month of the year."
+        },
+        {
+            "sentence": "%NAME%, come on! It’s time for dinner."
+        },
+        {
+            "sentence": "How many CDs do you have, %NAME%?"
+        },
+        {
+            "sentence": "Let’s go shopping at the\ndepartment store, %NAME%."
+        },
+        {
+            "sentence": "I always listen to music on the bus."
+        },
+        {
+            "sentence": "My sister plays computer\ngames every night."
+        },
+        {
+            "sentence": "look at that cat. It’s really cute."
+        },
+        {
+            "sentence": "does %NAME_HON% teach math?"
+        },
+        {
+            "sentence": "I have three dogs. I\nlike them very much."
+        },
+        {
+            "sentence": "My mother plays the piano very well."
+        },
+        {
+            "sentence": "She lives in Hokkaido."
+        },
+        {
+            "sentence": "September is the ninth month of the year."
+        },
+        {
+            "sentence": "Our school’s baseball game\nis tomorrow morning."
+        },
+        {
+            "sentence": "Her hair is really long."
+        },
+        {
+            "sentence": "I have two dogs."
+        },
+        {
+            "sentence": "Do you often write letters to\nyour grandmother, %NAME%?"
+        },
+        {
+            "sentence": "%NAME%, get up! It’s eight o’clock."
+        },
+        {
+            "sentence": "My name is %NAME%. I’m\nfrom %N_COUNTRY%."
+        },
+        {
+            "sentence": "%NAME% has a lot of postcards."
+        },
+        {
+            "sentence": "when is your birthday?"
+        },
+        {
+            "sentence": "I didn’t hear you. Can you\nrepeat your question, please?"
+        },
+        {
+            "sentence": "Excuse me. What time will this\nbus arrive at Tokyo Station?"
+        },
+        {
+            "sentence": "My favorite sport is volleyball.\nIt’s really fun."
+        },
+        {
+            "sentence": "Do you want butter or jam on your toast?"
+        },
+        {
+            "sentence": "Mrs. Mason is very rich.\nShe has a lot of\nmoney and a big house."
+        },
+        {
+            "sentence": "Ted, don’t be late for school again!"
+        },
+        {
+            "sentence": "She didn’t know anyone\nat first, but she soon\nmade many new friends."
+        },
+        {
+            "sentence": "I will send you a postcard."
+        },
+        {
+            "sentence": "I like watching movies on weekends."
+        },
+        {
+            "sentence": "The Shinano River is\nthe longest in Japan."
+        },
+        {
+            "sentence": "Jane, I need your help. Can you go to my\nbedroom and get my glasses?"
+        },
+        {
+            "sentence": "Yuji started writing to\nhim two months ago."
+        },
+        {
+            "sentence": "I’ll wait at the station."
+        },
+        {
+            "sentence": "Excuse me. You dropped some money."
+        },
+        {
+            "sentence": "At night, we can sit on the beach\nand see fireworks in the sky."
+        },
+        {
+            "sentence": "What language are you studying at school?"
+        },
+        {
+            "sentence": "Dinner will be ready soon."
+        },
+        {
+            "sentence": "We have a large library in our school."
+        },
+        {
+            "sentence": "Eat your carrots. They’re\ngood for you."
+        },
+        {
+            "sentence": "My family and I went\non a trip to Kyoto."
+        },
+        {
+            "sentence": "I have a good idea. Let’s\nride our bikes to the river."
+        },
+        {
+            "sentence": "Bob really looks like George."
+        },
+        {
+            "sentence": "It’s a beautiful day. Let’s\ntake a walk this afternoon."
+        },
+        {
+            "sentence": "Please be quiet, Paul. Your\ngrandmother is sleeping."
+        },
+        {
+            "sentence": "why did you get up\nso early today, Ellie?"
+        },
+        {
+            "sentence": "We went to the park for\nart class today. We\ndrew pictures there."
+        },
+        {
+            "sentence": "Linda lives near her school,\nso she can walk there easily."
+        },
+        {
+            "sentence": "I watch a cooking program\non TV every Wednesday."
+        },
+        {
+            "sentence": "Mr. Jones is a very famoussinger."
+        },
+        {
+            "sentence": "Jason often goes fishing\non the weekend and usually\ncatches lots of fish."
+        },
+        {
+            "sentence": "I don’t like my hairstyle\nnow, so I want to change."
+        },
+        {
+            "sentence": "Where can I buy tickets for the concert?"
+        },
+        {
+            "sentence": "It’s snowing a lot today,\nso please drive slowly."
+        },
+        {
+            "sentence": "Grace, I was looking for\nyou. Where were you?"
+        },
+        {
+            "sentence": "How long was the movie,\nMickey? About two hours."
+        },
+        {
+            "sentence": "I really want to hear about\nyour trip to Canada, Jenny."
+        },
+        {
+            "sentence": "Brian, it’s late. Go to bed at once."
+        },
+        {
+            "sentence": "How was the party, Mary?\nDid you have a good time?"
+        },
+        {
+            "sentence": "When I got to the movie theater,\nit was already full,\nso I went back home."
+        },
+        {
+            "sentence": "Please play quietly in your room."
+        },
+        {
+            "sentence": "I need a stamp so I can send\nthis letter to Emily."
+        },
+        {
+            "sentence": "Last week, the school\nband performed in a concert\nat the city hall."
+        },
+        {
+            "sentence": "Jack went to bed late\nlast night because he\nstudied until 1:00 a.m."
+        },
+        {
+            "sentence": "Now I can relax and enjoy myself."
+        },
+        {
+            "sentence": "My aunt loves traveling\nto foreign countries\nbecause she likes to\nlearn about other cultures."
+        },
+        {
+            "sentence": "No, I don’t like it at all."
+        },
+        {
+            "sentence": "My hometown is famous\nfor its lovely beaches\nand warm weather."
+        },
+        {
+            "sentence": "Please knock on the door before\nyou come in, Daniel."
+        },
+        {
+            "sentence": "Would you like to leave\na message for her?"
+        },
+        {
+            "sentence": "I bought him a pair of jogging shoes."
+        },
+        {
+            "sentence": "I have a friend whose\nfather is a TV star."
+        },
+        {
+            "sentence": "Excuse me. does this\nbus go to the airport?"
+        },
+        {
+            "sentence": "Let’s get him a present."
+        },
+        {
+            "sentence": "He’s brushing his teeth in the bathroom."
+        },
+        {
+            "sentence": "Did you hear about Tony’s car accident?"
+        },
+        {
+            "sentence": "Can you lend me your dictionary?"
+        },
+        {
+            "sentence": "We’ll eat lunch now,\nand continue the meeting\nin the afternoon."
+        },
+        {
+            "sentence": "I think fishing is boring."
+        },
+        {
+            "sentence": "Some people believe that\nthere is a monster in\nthat lake, but I don’t."
+        },
+        {
+            "sentence": "This necklace is really\nbeautiful, Alice. Did\nyou make it by yourself?"
+        },
+        {
+            "sentence": "When Ellie and Pam have\ndifficult homework, they\noften help each other."
+        },
+        {
+            "sentence": "This jacket is a little\nbig for me. Can I\ntry on a smaller one?"
+        },
+        {
+            "sentence": "Susan and Nancy talked\non the phone until\n11:30 p.m. last night"
+        },
+        {
+            "sentence": "James, why don’t we go\nout for dinner tonight?"
+        },
+        {
+            "sentence": "Kathy’s father bought a new\ncar last month. It’s much\nbigger than the old one."
+        },
+        {
+            "sentence": "The little dog fell into\nthe river. Luckily, he\nwas saved by a policeman."
+        },
+        {
+            "sentence": "Satoshi, have you ever written\na letter in English?"
+        },
+        {
+            "sentence": "No, I won’t. I have baseball practice."
+        },
+        {
+            "sentence": "You can use my umbrella.\nI have another one."
+        },
+        {
+            "sentence": "When people meet for\nthe first time, they\noften shake hands."
+        },
+        {
+            "sentence": "I have to speak in front\nof the whole school this\nafternoon. I’m very nervous."
+        },
+        {
+            "sentence": "Are there any activities at school\nthis weekend, Jane?"
+        },
+        {
+            "sentence": "At last, I found it among\nsome books on the floor."
+        },
+        {
+            "sentence": "If you win the art contest,\nyou will receive a prize."
+        },
+        {
+            "sentence": "I agree with you. Let’s\ncome here again."
+        },
+        {
+            "sentence": "If you don’t clean it\nup, I won’t take\nyou to the movies."
+        },
+        {
+            "sentence": "Please turn down the radio."
+        },
+        {
+            "sentence": "Can I have one more slice of bread?"
         }
     ],
 
@@ -34,14 +367,103 @@
             "name": "adjective",
             "keyword": "ADJ",
             "words":[
-                "red"
+                "afraid",
+                "bad",
+                "beautiful",
+                "best",
+                "better",
+                "black",
+                "blue",
+                "boring",
+                "boring",
+                "busy",
+                "cheap",
+                "clean",
+                "close",
+                "closed",
+                "cloudy",
+                "cold (weather)",
+                "cute",
+                "dangerous",
+                "deep",
+                "delicious",
+                "difficult",
+                "early",
+                "easy",
+                "kind",
+                "enjoyable",
+                "exciting",
+                "expensive",
+                "expensive",
+                "famous",
+                "fast",
+                "fast",
+                "favorite",
+                "fine",
+                "fine",
+                "free",
+                "free",
+                "fresh",
+                "frightening",
+                "full",
+                "fun",
+                "funny",
+                "glad",
+                "good",
+                "good at",
+                "good–looking",
+                "green",
+                "heavy",
+                "hot",
+                "important",
+                "interesting",
+                "interesting",
+                "Italian",
+                "kind",
+                "large",
+                "late",
+                "less",
+                "loud",
+                "lucky",
+                "main",
+                "nervous",
+                "new",
+                "not busy, to have a lot of free time",
+                "old (things)",
+                "orange",
+                "perfect",
+                "poor",
+                "popular",
+                "possible",
+                "purple",
+                "quiet",
+                "rainy",
+                "red",
+                "right",
+                "sad",
+                "short",
+                "shy",
+                "small",
+                "smart",
+                "Spanish",
+                "special",
+                "sunny",
+                "sure",
+                "tired",
+                "to like",
+                "well",
+                "white",
+                "wide",
+                "wonderful",
+                "wrong",
+                "yellow"
             ]
         },
         {
             "name": "adverb",
             "keyword": "ADV",
             "words":[
-                "quickly"
+                ""
             ]
         },
         {
@@ -55,10 +477,10 @@
             "name": "nounAnimalSingular",
             "keyword": "N_ANIMAL",
             "words":[
-                "pet",
-                "rabbit",
                 "animal",
-                "monkey"
+                "monkey",
+                "pet",
+                "rabbit"
             ]
         },
         {
@@ -95,13 +517,13 @@
                 "bread",
                 "carrot",
                 "cookie",
+                "cooking",
                 "dessert",
                 "hamburger",
                 "meat",
                 "potato",
                 "pumpkin",
-                "rice",
-                "cooking"
+                "rice"
             ]
         },
         {
@@ -118,7 +540,7 @@
             "name": "nounInanimatePlural",
             "keyword": "NS_INANI",
             "words":[
-                "potatoes"
+                ""
             ]
         },
         {
@@ -168,7 +590,93 @@
                 "%N_ANI%",
                 "%N_INANI%",
                 "%N_SPORT%",
-                "%N_FOOD%"
+                "%N_FOOD%",
+                "actor",
+                "area",
+                "aunt",
+                "band",
+                "beach",
+                "bike",
+                "boat",
+                "bookstore",
+                "bridge",
+                "building",
+                "cafeteria",
+                "camera",
+                "camp",
+                "children",
+                "chimpanzee",
+                "chocolate",
+                "class",
+                "clothes",
+                "college",
+                "color",
+                "company",
+                "computer",
+                "country",
+                "cousin",
+                "culture",
+                "date",
+                "daughter",
+                "dictionary",
+                "dish",
+                "doctor",
+                "doghouse",
+                "door",
+                "e–mail",
+                "elephant",
+                "event",
+                "factory",
+                "farm",
+                "farmer",
+                "festival",
+                "floor",
+                "floor",
+                "food",
+                "forest",
+                "fruit",
+                "gift",
+                "homework",
+                "information",
+                "job",
+                "job",
+                "juice",
+                "kitten",
+                "letter",
+                "member",
+                "money",
+                "mountain",
+                "movie",
+                "notebook",
+                "parent",
+                "party",
+                "people",
+                "piano",
+                "place",
+                "plant",
+                "program",
+                "quiz",
+                "restaurant",
+                "singer",
+                "snow",
+                "son",
+                "sound",
+                "sound",
+                "soup",
+                "stadium",
+                "store",
+                "store",
+                "subject",
+                "supermarket",
+                "test",
+                "toy",
+                "train",
+                "trip",
+                "uniform",
+                "university",
+                "weekend",
+                "window",
+                "zoo"
             ]
         },
         {
@@ -184,9 +692,9 @@
             "keyword": "PRO_123P_NOM",
             "words":[
                 "I",
+                "they",
                 "we",
-                "you",
-                "they"
+                "you"
             ]
         },
         {
@@ -203,7 +711,74 @@
             "words":[
                 "%VERB_IN%",
                 "%VERB_TR%",
-                "do the dishes"
+                "attack",
+                "become",
+                "begin",
+                "believe",
+                "borrow",
+                "break",
+                "brush",
+                "call",
+                "change",
+                "check",
+                "choose",
+                "come",
+                "cross",
+                "cry",
+                "decide",
+                "do the dishes",
+                "feel",
+                "find",
+                "forget",
+                "give",
+                "go",
+                "graduate",
+                "grow",
+                "hold",
+                "hurry",
+                "introduce",
+                "invent",
+                "jog",
+                "join",
+                "know",
+                "learn",
+                "learn",
+                "listen",
+                "live",
+                "look",
+                "love",
+                "make",
+                "mean",
+                "meet",
+                "move",
+                "need",
+                "open",
+                "order",
+                "pass",
+                "pay",
+                "plant",
+                "put",
+                "receive",
+                "return",
+                "save",
+                "say",
+                "see",
+                "sell",
+                "show",
+                "sleep",
+                "stay",
+                "take",
+                "take",
+                "talk",
+                "teach",
+                "tell",
+                "thank",
+                "travel",
+                "understand",
+                "wait",
+                "watch",
+                "wear",
+                "worry"
             ]
         },
         {
@@ -228,50 +803,40 @@
             "name": "verbGerundIntransitive",
             "keyword": "VERBING_IN",
             "words":[
+                "arriving",
+                "asking",
+                "cycling",
+                "dancing",
+                "diving",
+                "fishing",
+                "flying",
+                "hiking",
+                "jumping",
+                "living",
                 "running",
                 "shopping",
                 "singing",
+                "sitting",
                 "skating",
                 "skiing",
-                "sitting",
                 "standing",
                 "stopping",
                 "studying",
                 "swimming",
                 "thinking",
-                "working",
-                "cycling",
-                "diving",
-                "fishing",
-                "hiking",
-                "arriving",
-                "asking",
-                "dancing",
-                "flying",
-                "jumping",
-                "living"
+                "working"
             ]
         },
         {
             "name": "verbGerundTransitive",
             "keyword": "VERBING_TR",
             "words":[
-                "cleaning",
-                "riding",
-                "starting",
-                "trying",
-                "using",
-                "visiting",
-                "wanting",
-                "washing",
-                "watching",
-                "writing",
                 "answering",
                 "bringing",
                 "buying",
                 "catching",
+                "cleaning",
                 "closing",
-                "cooking",
                 "cutting",
                 "doing",
                 "drinking",
@@ -281,63 +846,72 @@
                 "having",
                 "hearing",
                 "helping",
-                "reading"
+                "reading",
+                "riding",
+                "starting",
+                "trying",
+                "using",
+                "visiting",
+                "wanting",
+                "washing",
+                "watching",
+                "writing"
             ]
         },
         {
             "name": "verbIntransitive",
             "keyword": "VERB_IN",
             "words":[
+                "arrive",
+                "ask",
+                "cycle",
+                "dance",
+                "dive",
+                "fish",
+                "fly",
+                "hike",
+                "jump",
+                "live",
                 "run",
                 "shop",
                 "sing",
+                "sit",
                 "skate",
                 "ski",
-                "sit",
                 "stand",
                 "stop",
                 "study",
                 "swim",
                 "think",
-                "work",
-                "cycle",
-                "dive",
-                "fish",
-                "hike",
-                "arrive",
-                "ask",
-                "dance",
-                "fly",
-                "jump",
-                "live"
+                "work"
             ]
         },
         {
             "name": "verbIntransitive3PS",
             "keyword": "VERBS_IN",
             "words":[
+                "arrives",
+                "asks",
+                "cycles",
+                "dances",
+                "dives",
+                "fishes",
+                "flys",
+                "hikes",
+                "jumps",
+                "lives",
                 "runs",
                 "shops",
                 "sings",
+                "sits",
                 "skates",
                 "skis",
-                "sits",
                 "stands",
                 "stops",
                 "studies",
                 "swims",
                 "thinks",
-                "works",
-                "cycles",
-                "dives",
-                "fishes",
-                "hikes",
-                "arrives",
-                "asks",
-                "dances",
-                "flys",
-                "jumps",
-                "lives"
+                "works"
             ]
         },
         {
@@ -351,20 +925,11 @@
             "name": "verbTransitive",
             "keyword": "VERB_TR",
             "words":[
-                "clean",
-                "ride",
-                "start",
-                "try",
-                "use",
-                "visit",
-                "want",
-                "wash",
-                "watch",
-                "write",
                 "answer",
                 "bring",
                 "buy",
                 "catch",
+                "clean",
                 "close",
                 "cook",
                 "cut",
@@ -376,27 +941,27 @@
                 "have",
                 "hear",
                 "help",
-                "read"
+                "read",
+                "ride",
+                "start",
+                "try",
+                "use",
+                "visit",
+                "want",
+                "wash",
+                "watch",
+                "write"
             ]
         },
         {
             "name": "verbTransitive3PS",
             "keyword": "VERBS_TR",
             "words":[
-                "cleans",
-                "rides",
-                "starts",
-                "tries",
-                "uses",
-                "visits",
-                "wants",
-                "washes",
-                "watches",
-                "writes",
                 "answers",
                 "brings",
                 "buys",
                 "catches",
+                "cleans",
                 "closes",
                 "cooks",
                 "cuts",
@@ -408,7 +973,72 @@
                 "has",
                 "hears",
                 "helps",
-                "reads"
+                "reads",
+                "rides",
+                "starts",
+                "tries",
+                "uses",
+                "visits",
+                "wants",
+                "washes",
+                "watches",
+                "writes"
+            ]
+        },
+        {
+            "name": "name",
+            "keyword": "NAME",
+            "words":[
+                "%NAME_F%",
+                "%NAME_M%"
+            ]
+        },
+        {
+            "name": "nameFemale",
+            "keyword": "NAME_F",
+            "words":[
+                "Mary",
+                "Jane",
+                "Kazuko",
+                "Lucy",
+                "Jill",
+                "Alice"
+            ]
+        },
+        {
+            "name": "nameMale",
+            "keyword": "NAME_M",
+            "words":[
+                "Paul",
+                "Frank",
+                "Jack",
+                "Mike",
+                "Tom",
+                "Bill"
+            ]
+        },
+        {
+            "name": "parentCall",
+            "keyword": "PARENT_CALL",
+            "words":[
+                "mom",
+                "dad"
+            ]
+        },
+        {
+            "name": "parent",
+            "keyword": "PARENT",
+            "words":[
+                "mother",
+                "father"
+            ]
+        },
+        {
+            "name": "nameHonorific",
+            "keyword": "NAME_HON",
+            "words":[
+                "Ms. Sasaki",
+                "Mr. Parker"
             ]
         }
     ]
