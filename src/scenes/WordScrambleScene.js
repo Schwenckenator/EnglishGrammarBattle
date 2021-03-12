@@ -14,8 +14,8 @@ const ANSWER_POS = {x: X_CENTRE, y:500}
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
 
-const DATA_KEY = 'DATA'
-const UI_KEY = 'UI'
+const DATA_KEY = 'DATA-WordScramble'
+const UI_KEY = 'UI-WordScramble'
 
 const THIS_GAME = 'Word-Scramble'
 const BOTTOM_Y = 540

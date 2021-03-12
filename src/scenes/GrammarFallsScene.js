@@ -4,7 +4,8 @@ import EnglishGame from './EnglishGame'
 const FONT_MED = '24px Arial'
 const FONT_BIG = '48px Arial'
 
-const UI_KEY = 'ui-cross'
+const UI_KEY = 'UI-Grammar'
+const DATA_KEY = 'DATA-Grammar'
 
 const LEVEL_DY = 5
 const DY = 30 - LEVEL_DY
@@ -34,15 +35,15 @@ export default class GrammarFallsScene extends EnglishGame
     {
         super.preload()
         console.log("Preload Grammar Falls")
-        this.load.json('sentences', 'assets/GrammarFallsData.json')
-        this.load.image(UI_KEY, 'assets/UI-4-section.png')
+        this.load.json(DATA_KEY, 'assets/GrammarFallsData.json')
+        this.load.image(UI_KEY, 'assets/Ui-4-section.png')
     }
 
     create()
     {
         super.create()
         console.log("Create Grammar Falls")
-        this.gameData = this.cache.json.get('sentences')
+        this.gameData = this.cache.json.get(DATA_KEY)
 
         let rect = this.add.rectangle(240, 640, 480, 100)
         rect.isFilled = true
@@ -57,8 +58,8 @@ export default class GrammarFallsScene extends EnglishGame
             correctAnswerText: this.createCorrectAnswerText(FONT_MED)
         }
 
-        let uiY = Y_MAX - 150 / 2
-        this.add.image(X_CENTRE, uiY, UI_KEY)
+        let UI_Y = Y_MAX - 150 / 2
+        this.add.image(X_CENTRE, UI_Y, UI_KEY)
 
         this.selectedAnswer = -1
         this.isAnswerSelected = false
