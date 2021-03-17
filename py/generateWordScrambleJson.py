@@ -108,11 +108,11 @@ def OrganiseData(data):
             print("Length Per Line: " +str(newLength))
             indices = []
             for i in range(1, lines):
-                # When we replace the space with \n, it shifts the rest of the letters
+                # When we replace the space with \n, it shifts the rest of the letters by 3
                 # so we need (+ i - 1)
-                indices.append(sentence.find(" ", newLength * i - 1) + i - 1)
+                indices.append(sentence.find(" ", newLength * i - 1) + i*3 - 3)
             for i in indices:
-                sentence = sentence[0:i] + "\\n" + sentence[i+1:]
+                sentence = sentence[0:i] + " \\n " + sentence[i+1:]
 
         print("Editing Finished!")
         print(sentence)

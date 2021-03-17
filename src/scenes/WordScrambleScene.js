@@ -1,3 +1,4 @@
+import SFXManager from "../classes/SFXManager";
 import EnglishGame from "./EnglishGame";
 
 
@@ -33,7 +34,7 @@ export default class WordScrambleScene extends EnglishGame{
     preload(){
         super.preload()
 
-        this.load.json(DATA_KEY, 'assets/WordScrambleData.json')
+        this.load.json(DATA_KEY, 'assets/WordScrambleTEST.json')
         this.load.image(UI_KEY, 'assets/Ui-4-section.png')
     }
 
@@ -235,20 +236,34 @@ export default class WordScrambleScene extends EnglishGame{
         let words = text.split(' ')
         let shuffled = this.shuffle(words)
         let clozeWords = []
+        let wordsToRemove = []
 
         console.log(`Shuffled Array...`)
         console.log(shuffled)
         console.log(`^^^^^^^^^^^^`)
-
-        for(let i = 0; i < 4; i++){
-            console.log(`Pushing ${shuffled[i]} into clozed words.`)
-            clozeWords.push(shuffled[i])
+        {
+            let numPushed = 0;
+            let i = 0;
+            while(numPushed < 4){
+                if(shuffled[i] !== '\n'){
+                    console.log(`Pushing ${shuffled[i]} into clozed words.`)
+                    clozeWords.push(shuffled[i])
+                    numPushed++
+                }
+                i++;
+            }
         }
+
+        wordsToRemove = clozeWords.slice()
+
         for(let i=0; i< words.length; i++){
             console.log(`Checking ${words[i]}`)
-            if(clozeWords.includes(words[i])){
+            if(wordsToRemove.includes(words[i])){
                 console.log(`It includes ${words[i]}!`)
+                let index = wordsToRemove.findIndex(x => x === words[i])
+                wordsToRemove.splice(index, 1)
                 words[i] = this.BLANK
+                
             }
         }
 
@@ -262,6 +277,8 @@ export default class WordScrambleScene extends EnglishGame{
         if(this.quiz.isWordUsed[index]){
             return
         }
+
+        SFXManager.playBeep()
 
         this.quiz.indicesInAnswer.push(index)
         this.quiz.isWordUsed[index] = true
@@ -291,6 +308,8 @@ export default class WordScrambleScene extends EnglishGame{
     removeWord(){
 
         if(this.quiz.indicesInAnswer.length === 0) return
+
+        SFXManager.playTone()
 
         //Pop the last word in flight, if it exists
         let e = this.timerEvents.pop()
