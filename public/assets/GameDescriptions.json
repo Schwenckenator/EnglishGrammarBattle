@@ -1,0 +1,17 @@
+{
+    "Grammar-Falls":
+    {
+        "title": "Grammar Falls",
+        "desc": "A sentence with a missing word \nwill float down. Hit the number key, \nor click or tap on the correct answer \nto destroy the sentence. \nIf it's wrong, or if you take too long, \nyou will lose a life."
+    },
+    "Spelling-Spin":
+    {
+        "title": "Spelling Spin",
+        "desc": "A Japanese word will float down.\nUse the keyboard, or click or tap on the \nletters to spell the word in English. \nIf it's wrong, or if you take too long, \nyou will lose a life."
+    },
+    "Word-Scramble":
+    {
+        "title": "Word Scramble",
+        "desc": "A sentence with many blanks \nwill float down. Hit the number keys, \nor click or tap the english words in the \ncorrect order to destroy the sentence. \nIf it's wrong, or if you take too long, \nyou will lose a life."
+    }
+}

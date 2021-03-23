@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import GameDescriptionScene from './scenes/GameDescriptionScene'
 import GameOverScreen from './scenes/GameOverScreen'
 import GameSelectScreen from './scenes/GameSelectScene'
 import GrammarFallsScene from './scenes/GrammarFallsScene'
@@ -18,7 +19,7 @@ const config = {
 			gravity: { y: 350 }
 		}
 	},
-	scene: [MainTitleScreen, GameSelectScreen, GrammarFallsScene, SpellingSpinScene, WordScrambleScene, PauseScreen, GameOverScreen, NextLevelScreen]
+	scene: [MainTitleScreen, GameSelectScreen, GrammarFallsScene, SpellingSpinScene, WordScrambleScene, PauseScreen, GameOverScreen, NextLevelScreen, GameDescriptionScene]
 }
 
 export default new Phaser.Game(config)

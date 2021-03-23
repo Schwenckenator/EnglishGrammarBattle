@@ -33,8 +33,8 @@ export default class WordScrambleScene extends EnglishGame{
 
     preload(){
         super.preload()
-
-        this.load.json(DATA_KEY, 'assets/WordScrambleTEST.json')
+        this.log(`Preload ${THIS_GAME} CLASS`)
+        this.load.json(DATA_KEY, 'assets/WordScrambleData.json')
         this.load.image(UI_KEY, 'assets/Ui-4-section.png')
     }
 
