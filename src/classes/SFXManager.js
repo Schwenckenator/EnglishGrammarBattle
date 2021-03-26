@@ -7,12 +7,12 @@ const SFX_BEEP = 'sfxBeep'
 const SFX_TONE = 'sfxTone'
 const SFX_ALERT = 'sfxAlert'
 
-const HOVER_PATH = 'assets/SFX/Quick Medium Beep.mp3'
-const SELECT_PATH = 'assets/SFX/Quick High Beep 2.mp3'
-const RETURN_PATH = 'assets/SFX/Desending Beeps 2.mp3';
-const BEEP_PATH = 'assets/SFX/Quick High Beep.mp3';
-const TONE_PATH = 'assets/SFX/Falling Beep.mp3'
-const ALERT_PATH = 'assets/SFX/Alert Long.mp3'
+const HOVER_PATH = 'assets/SFX/Quick_Medium_Beep.mp3'
+const SELECT_PATH = 'assets/SFX/Quick_High_Beep_2.mp3'
+const RETURN_PATH = 'assets/SFX/Desending_Beeps_2.mp3';
+const BEEP_PATH = 'assets/SFX/Quick_High_Beep.mp3';
+const TONE_PATH = 'assets/SFX/Falling_Beep.mp3'
+const ALERT_PATH = 'assets/SFX/Alert_Long.mp3'
 
 class SFXManager {
     constructor() {

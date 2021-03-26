@@ -23,7 +23,7 @@ export default class MainTitleScreen extends Phaser.Scene
 	preload()
     {
         console.log("Preload Main Title")
-        this.load.image(SKY_KEY, 'assets/night-sky.png')
+        this.load.image(SKY_KEY, 'assets/night_sky.png')
         SFXManager.loadSFX(this)
     }
 
